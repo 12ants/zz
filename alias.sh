@@ -1,5 +1,6 @@
 #!/bin/bash
 # alaaaaais
+alias zz='cd $HOME/zz'; 
 c2='\e[96m --\e[0m'; re='\e[0m'; gt=""; 
 [ -z "$PREFIX" ] && sudo=sudo; 
 alias kk='fmt -g 66|col -xb|bat -pfljava --theme DarkNeon'; 
