@@ -12,3 +12,6 @@ figlet -f 3d "$mm" | grep --color=always -e '.░.' -C5;
 
 printf %b "\n\n\n\n\e[4A\e[?25l"; for i in {1..22}; do grope:read "$*"; printf %b "\n\e[9A"; read -sr -n1 -t 0.05 "kk"; [ "$kk" ] && break; done; printf %b "\e[9B\e[?25h\n";
 }; 
+##
+alias tajm='grope "$(date +\ \ %a\ \ \ %H\ :\ %M)"'; 
+##
