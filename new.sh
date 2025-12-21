@@ -2,9 +2,9 @@
 # very good bash enviorment 
 [ -z "$TMUX" ] && tmux; 
 shopt -s histappend; shopt -s histverify; 
-. $HOME/88/c/lfcolors.sh; 
+. $HOME/zz/c/lfcolors.sh; 
 ####
-export IFS=$'\n\t '; 
+# export IFS=$'\n\t '; 
 export HISTCONTROL="ignoreboth"; 
 export PROMPT_COMMAND="history -a; history -n; "; 
 export EDITOR="micro"; 
@@ -27,10 +27,10 @@ export GREP_COLORS="mt=91:ms=95:fn=32:ln=32:bn=32:se=35:sl=38;5;207:cx=38;5;121:
 mkdir $HOME/logs/b $HOME/tmp $HOME/gh $HOME/dl $HOME/bin -m 775 -p 2>/dev/null; 
 ########
 # [[ "$OS" != "Debian" ]] && \
-. $HOME/88/f/dfree.sh; 
+. $HOME/zz/f/dfree.sh; 
 dfree > $logs/dfree.log & disown; 
 ########
-. $HOME/88/i/coala.log; 
+. $HOME/zz/i/coala.log; 
 ########
 alias k='col -xb|tr -s "\n" "\n"|bat -pfljava'; 
 alias re='reset -Q; exec bash;'; 
@@ -53,19 +53,19 @@ export FZF_DEFAULT_OPTS="${tmuxprefix} -i -m --cycle --ansi --height '~99%' --bi
 [ -x $HOME/.config/gemini_api_id.conf ] && . $HOME/.config/gemini_api_id.conf 2>/dev/null; 
 [ -x $HOME/.config/cloudflare_id.conf ] && . $HOME/.config/cloudflare_id.conf 2>/dev/null; 
 ########
-[ -e $HOME/.config/lesskey ] || ln -s $HOME/88/c/lesskey $HOME/.config/lesskey; 
+[ -e $HOME/.config/lesskey ] || ln -s $HOME/zz/c/lesskey $HOME/.config/lesskey; 
 [ -e $HOME/.config/path.sh ] && export PATH=$(cat $HOME/.config/path.sh);
 ########
 # [ -z $TMUX ] && tmux; 
 ########
 new() { 
 ########
-local IFS=$'\n\t '; 
+# local IFS=$'\n\t '; 
 ########
-. $HOME/88/f/12calendar.sh; 
-. $HOME/88/f/memram.sh; 
-. $HOME/88/i/colors.sh; 
-# clear; . $HOME/88/crons/hour.sh; printf %b "\e[9B";
+. $HOME/zz/f/12calendar.sh; 
+. $HOME/zz/f/memram.sh; 
+. $HOME/zz/i/colors.sh; 
+# clear; . $HOME/zz/crons/hour.sh; printf %b "\e[9B";
 ## export HISTTIMEFORMAT="%b-%d-%H:%M:%S "; 
 #############################
 #############################
@@ -89,7 +89,7 @@ videocard="$(lspci|grep -e 'VGA'|cut -f5- -d" "|sed -e "s/\ (rev.*//g")";
 osa1="$(printf %b "${osx1[*]}"|uniq|tr -s "\n" " "; printf %b "\b"|col -xb)"; 
 osa2="$(printf %b "${osx2[*]}"|uniq|tr -s "\n" " "; printf %b "\b"|col -xb)"; 
 os1="$(printf %b "${osa1}\b"|col -xb|tr -d "\n")"; os2="$(printf %b "${osa2}\b"|col -xb|tr -d "\n")";
-local IFS=$'\n\t '; 
+# local IFS=$'\n\t '; 
 ## __ CPU __ GET _____ ##########
 cpu=($(lscpu |grep -E 'Model name'|tr -s "\t" " "|cut -f3- -d" ")); 
 cpus=($(lscpu|grep -e 'CPU(s):' -m1|cut -f2 -d":"|tr -d " ")); 
@@ -102,7 +102,7 @@ cpus=($(lscpu|grep -e 'CPU(s):' -m1|cut -f2 -d":"|tr -d " "));
 ########
 wlan="$(cat $HOME/logs/wlan.log)"; 
 idn="${wlan:(-2)}"; 
-. $HOME/88/i/colors/coala.sh; 
+. $HOME/zz/i/colors/coala.sh; 
 idc=(${co[idn]}); 
 tmux set-option -g status-style bg=colour$(printf %b "$idc";); 
 ########
@@ -159,11 +159,11 @@ echo;
 [ "$(cat ${logs}/dfree.log|wc -c)" -gt 4 ] && cat "${logs}/dfree.log" || dfree; 
 dott; echo;
 ####
-# . ${HOME}/88/alias.sh; 
-# . $HOME/88/_ps1.sh; 
+# . ${HOME}/zz/alias.sh; 
+# . $HOME/zz/_ps1.sh; 
 ####
-# for i in $HOME/88/f/*.sh; do . $i; done; 
-# source "$HOME/88/c/tmuxcompletions.sh"; 
+# for i in $HOME/zz/f/*.sh; do . $i; done; 
+# source "$HOME/zz/c/tmuxcompletions.sh"; 
 ####
 # sshd 2>/dev/null; command ps -A|cut -c25-|grep -e 'crond' &>/dev/null || crond 2>/dev/null; 
 [ -z "$PREFIX" ] && alias fzf='fzf-tmux -h 95% -w 98%'; 
@@ -187,17 +187,17 @@ do cat /sys/devices/virtual/dmi/id/${bb} 2>/dev/null|tr -s "\n" " "; done));
 moda="$(printf %b "${modo}"|tr -d "[]"|head -c14)"; model="${moda/%\ /}"; 
 #############################
 ##
-. $HOME/88/_ps1.sh; 
-. ${HOME}/88/alias.sh; 
+. $HOME/zz/_ps1.sh; 
+. ${HOME}/zz/alias.sh; 
 . $HOME/.config/tmux/tmuxcompletions.sh; 
 ####
 printf '\e]11;#001420\e\\';
-printf '\e]12;#ff4a88\e\\';
+printf '\e]12;#ff4azz\e\\';
 ####
 [ "$TMUX" ] && new; 
-for i in $HOME/88/f/*.sh; do . $i; done; 
+for i in $HOME/zz/f/*.sh; do . $i; done; 
 # [ "$TMUX_PANE" = "%0" ] && dfree; 
-# source "$HOME/88/c/tmuxcompletions.sh"; 
+# source "$HOME/zz/c/tmuxcompletions.sh"; 
 ####
 sshd 2>/dev/null; command ps -A|cut -c25-|grep -e 'crond' &>/dev/null || crond 2>/dev/null; 
 # [ -z "$PREFIX" ] && 

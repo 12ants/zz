@@ -1,7 +1,7 @@
 #!/bin/bash 
 ################
 mkdir $HOME/logs/b -p -m 775 2>/dev/null; 
-[ "$PREFIX" ] && . "${HOME}"/88/crons/bat.sh & disown; 
+[ "$PREFIX" ] && . "${HOME}"/zz/crons/bat.sh & disown; 
 # [ "$PREFIX" ] &&
 touch $HOME/logs/b/battery.log; 
 touch $HOME/logs/b/bp.log; 
@@ -47,7 +47,7 @@ ee() { [ $? = 130 ] && echo gg; };
 #alias gitstat='git status --short 2>/dev/null|tr "\n\t " " | "|bat -ppfld --theme Coldark-Dark'; 
 # (printf %b "${gitst}\t
 ################
-# . "$HOME/88/i/colors.sh"; 
+# . "$HOME//i/colors.sh"; 
 ################
 # \e[0;2m'${wlan%.*}'.\e[0;1m'${w[${wlan/*./}]}'${wlan/*./}
 # st() { st=$?; [ $st = 130 ] && printf %b "\e[2A\r"; return $st; }; 

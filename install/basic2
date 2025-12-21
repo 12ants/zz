@@ -1,5 +1,5 @@
 #!/bin/bash
-## install basic apts etc
+## install extra basic apts etc
 [ -z "$start" ] && start="${HOME}/zz"; 
 ##
 hash sudo 2>/dev/null && sudo="sudo"; 
@@ -11,7 +11,7 @@ printf %b "\ec\e[0m -- \e[48;5;${rr}m upgrading \e[0m --\n\e[38;5;${rr}m ";
 $sudo apt upgrade -y; 
 
 unset IFS; 
-appa=($(command ls -p1 $start/install/ap|grep -v "*/")); 
+appa=($(command ls -p1 $start/install/ap/ex|grep -v "*/")); 
 
 $sudo apt install -y cronie --assume-yes;  
 
