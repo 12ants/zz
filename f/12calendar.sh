@@ -27,8 +27,8 @@ dott; printf %b " getting cal ·· ";
 ## \get
 ####
 ####
-[ -e $HOME/logs/calendar.json ] || 12calendarget; 
-cat  $HOME/logs/calendar.json|grep -e "EPOCH" --quiet||12calendarget; 
+[ -e $HOME/logs/calendar.json ] || 12getcal; 
+cat  $HOME/logs/calendar.json|grep -e "EPOCH" --quiet||12getcal; 
 ###
 ####
 # [[ "$epmin" -gt "55" ]] && 12calendarget; 
