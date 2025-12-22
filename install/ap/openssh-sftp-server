@@ -1,0 +1,13 @@
+Package: openssh-sftp-server
+Version: 10.2p1
+Maintainer: Joshua Kahn @TomJo2000
+Installed-Size: 188 kB
+Depends: libandroid-support
+Breaks: openssh (<= 9.9p2-1)
+Replaces: openssh (<= 9.9p2-1)
+Homepage: https://www.openssh.com/
+Download-Size: 57.3 kB
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: OpenSSH SFTP server subsystem
+

@@ -2,7 +2,6 @@
 # very good bash enviorment 
 [ -z "$TMUX" ] && tmux; 
 shopt -s histappend; shopt -s histverify; 
-. $HOME/zz/c/lfcolors.sh; 
 ####
 # export IFS=$'\n\t '; 
 export HISTCONTROL="ignoreboth"; 
@@ -65,6 +64,7 @@ new() {
 . $HOME/zz/f/12calendar.sh; 
 . $HOME/zz/f/memram.sh; 
 . $HOME/zz/i/colors.sh; 
+. $HOME/zz/c/lfcolors.sh; 
 # clear; . $HOME/zz/crons/hour.sh; printf %b "\e[9B";
 ## export HISTTIMEFORMAT="%b-%d-%H:%M:%S "; 
 #############################
@@ -171,7 +171,7 @@ dott; echo;
 ##
 printf %b "\x1b[1 q"; ## > cursor = block
 printf %b "\x1b]12;#ff44bb"; ## cursor = pink
-printf %b "\x1b]11;#04000f"; ## background = $arkblue 
+# printf %b "\x1b]11;#04000f"; ## background = darkblue 
 ####
 ####
 moda="$(printf %b "${modo}"|tr -d "[]"|head -c14)"; 
@@ -180,9 +180,10 @@ printf %b "${modo[*]}" > $HOME/logs/model.log;
 }; 
 ##
 ##
-[ $PREFIX ] && modo=($(getprop|grep -E "vendor.manufacturer|product.manufacturer" -m1 -A1 --group-separator=""|cut -f2- -d" "|tr -s "\n[]" " "; )); 
-[ -z $PREFIX ] && [ -e /sys/devices/virtual/dmi/id/product_family ] && modo=($(for bb in product_sku board_vendor board_name bios_vendor sys_vendor; 
-do cat /sys/devices/virtual/dmi/id/${bb} 2>/dev/null|tr -s "\n" " "; done)); 
+if [ $PREFIX ]; then modo=($(getprop|grep -E "vendor.manufacturer|product.manufacturer" -m1 -A1 --group-separator=""|cut -f2- -d" "|tr -s "\n[]" " "; )); 
+else 
+[ -e /sys/devices/virtual/dmi/id/product_family ] && modo=($(for bb in product_sku board_vendor board_name bios_vendor sys_vendor; 
+do cat /sys/devices/virtual/dmi/id/${bb} 2>/dev/null|tr -s "\n" " "; done)); fi; 
 ####
 moda="$(printf %b "${modo}"|tr -d "[]"|head -c14)"; model="${moda/%\ /}"; 
 #############################
@@ -191,8 +192,8 @@ moda="$(printf %b "${modo}"|tr -d "[]"|head -c14)"; model="${moda/%\ /}";
 . ${HOME}/zz/alias.sh; 
 . $HOME/.config/tmux/tmuxcompletions.sh; 
 ####
-printf '\e]11;#001420\e\\';
-printf '\e]12;#ff4azz\e\\';
+# printf '\e]11;#001420\e\\';
+# printf '\e]12;#ff4azz\e\\';
 ####
 [ "$TMUX" ] && new; 
 for i in $HOME/zz/f/*.sh; do . $i; done; 

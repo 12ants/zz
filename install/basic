@@ -9,16 +9,18 @@ $sudo apt update;
 rr="$((RANDOM%222))"; 
 printf %b "\ec\e[0m -- \e[48;5;${rr}m upgrading \e[0m --\n\e[38;5;${rr}m "; 
 $sudo apt upgrade -y; 
-
-unset IFS; 
+####
+unset IFS; [ -z $start ] && start="$HOME/zz"; 
 appa=($(command ls -p1 $start/install/ap|grep -v "*/")); 
-
+####
 $sudo apt install -y cronie --assume-yes;  
-
-for i in ${appa[*]}; 
-do rr="$((RANDOM%222))"; 
+$sudo apt install openssh-sftp-server --assume-yes; 
+[ -e "$HOME/.ssh/id_ed25519.pub" ] || ssh-keygen; 
+####
+for i in ${appa[*]}; do rr="$((RANDOM%222))"; 
 printf %b "\ec\e[0m -- \e[48;5;${rr}m ${i} \e[0m -\e[555b\b\n\e[38;5;${rr}m "; 
-$sudo apt install -y $i --assume-yes; done; 
+if hash $i 2>/dev/null; then printf %b "\n$i \e[0malready exists!\n"; 
+else $sudo apt install -y $i --assume-yes; fi; done; 
 printf %b "\ec\e[0m -- \e[48;5;${rr}m installed \e[0m --\n\e[38;5;${rr}m \n\e[0m"; 
 printf %b "${appa[*]}\n\n\e[0m -- \e[48;5;82m\e[1;90m DONE \e[0m --\n\n"; 
 ####
