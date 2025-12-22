@@ -15,12 +15,12 @@ for i in {1..18}; do printf %b "·"; done;
 printf %b " $(date +%a\ %b\ %d\ %Y\ \|\ %T)\n"|bat -ppfljava --theme DarkNeon; 
 ##
 ##
-12calendarget() { 
+12getcal() { 
 
-dott; printf %b "  getting cal ·· "; 
+dott; printf %b " getting cal ·· "; 
 (curl -sL "https://script.google.com/macros/s/AKfycbye8O0u3we9g5Xt3HilbKzLdjlC94OwSj7QPprmzc0pWI5dZ_ORE5YSaFmlyCJ-JqBQ/exec" && printf %b "\nEPOCH_${EPOCHSECONDS}") > $HOME/logs/calendar.json && printf %b "\e[G\e[K"; 
 ####
-( cat $HOME/logs/calendar.json | tr -s "," "\n" | grep -vE 'EPOCH_|h_|description|end_date' | sed '/start_date_time/{s/.[0-9]*[-T]//g}' | cut -f1 -d "+" | sed -e "s/{\"summary/€\n/g"| cut -f 2- -d":" | tr -s "\n€[]" " \n"|sed -e 's/\ \"//g' -e 's/\"\ /\"/g' | col -xb | column --separator "\"" --table --output-separator " | " --table-columns "1234567890123456" --table-right 1 | tail -n+2 | bat -ppflr --theme Visual\ Studio\ Dark+ ) > $HOME/logs/cal.log; 
+( cat $HOME/logs/calendar.json | tr -s "," "\n" | grep -vE 'EPOCH_|h_|description|end_date' | sed '/start_date_time/{s/.[0-9]*[-T]//g}' | cut -f1 -d "+" | sed -e "s/{\"summary/€\n/g"| cut -f 2- -d":" | tr -s "\n€[]" " \n"|sed -e 's/\ \"//g' -e 's/\"\ /\"/g' | col -xb | column --separator "\"" --table --output-separator " | " --table-columns "1234567890123456" --table-right 1 | tail -n+2 | bat -ppflr --theme Visual\ Studio\ Dark+ ) | tee $HOME/logs/cal.log; 
 ####
 # (cat $HOME/logs/calendar.json | tr -s "," "\n" | grep -vE 'EPOCH_|h_|description|end_date' | sed '/start_date_time/{s/.[0-9]*[-T]//g}' | cut -f1 -d "+" | cut -f 2- -d":" | sed 's/"/\n/' | tr -s "\n\"}" "%%\n" | cut -f2-4 -d"%"|col -xb|column --separator "%" --table --output-separator " | " --table-columns "1234567890123456" --table-right 1|tail -n+2 |bat -ppflr --theme Visual\ Studio\ Dark+ ) > $HOME/logs/cal.log; 
 }; 
@@ -42,7 +42,7 @@ cat $HOME/logs/cal.log;
 dott; 
 ####
 printf %b " ${epmin} mins ago"|bat -ppfld --theme Coldark-Cold; 
-calcomp; [[ "$epmin" -gt "55" ]] && printf %b " >\e[2m run \e[0m\e[1;97;4m12calendarget\e[0m\e[2m to update\e[0m\n" || echo; 
+calcomp; [[ "$epmin" -gt "55" ]] && printf %b " >\e[2m run \e[0m\e[1;97;4m12getcal\e[0m\n" || echo; 
 # printf %b " ${epmin} mins ago\n"|bat -ppflc --theme DarkNeon; 
 # head -n-1 $HOME/logs/calendar.json|sed -e "s/\ \ //g"|grep -vE 'description|end_date|call'|cut -f1 -d+|tr -d '"{}[],\t'|sed -e "s/summary\:\ /\n\ %/g"|tr -d "\n"|tr -s "%" "\n"|sed -e "s/start_date_time............./\ \%\ /g" -e "s/start_date\:/\ \%/g" -e s/start_date_time\:/\%\ /g|tr -s " " " "|column --separator "%" --table --output-width "$COLUMNS" --output-separator '|' --table|bat -ppflr --theme Visual\ Studio\ Dark+; 
 }; 
