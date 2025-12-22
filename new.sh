@@ -167,6 +167,7 @@ dott; echo;
 ####
 # sshd 2>/dev/null; command ps -A|cut -c25-|grep -e 'crond' &>/dev/null || crond 2>/dev/null; 
 [ -z "$PREFIX" ] && alias fzf='fzf-tmux -h 95% -w 98%'; 
+[ "$TMUX" ] && tmux source-file $HOME/zz/c/tmux/tmux.conf; 
 ##
 ##
 printf %b "\x1b[1 q"; ## > cursor = block
