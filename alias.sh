@@ -154,11 +154,11 @@ alias path='$EDITOR ~/.config/path.sh';
 alias 12paint='pa=($(pastel list|sed -n $((RANDOM%139))p)); pan=$(pastel format ansi-8bit $pa;); printf %b "\n$pan\n"; figlet -tWXc -f 3d $pa; printf %b "\n  "; ph=$(pastel format hex $pa;); phs=$(pastel format hsl $pa;); pac=$(pastel complement $pa;); 
 printf %b "\e[0m\n  $pa \n  $phs \n  $ph \n";printf %q "  $pan"|tr -d "\\\\";printf %b "\n\n"'
 # alias 12install_cloudpanel.io='echo; (echo; curl -sL https://cloudpanel.io/docs/v2/getting-started/other|html2text|grep -e "curl -sS" -A3 -m1; echo; )|tee $HOME/cloudpanel_installer.sh; chmod 775 $HOME/cloudpanel_installer.sh; printf %b "\n\n\n\n\e[2A"; read -e -n1 -sp "continue? [Y/n] " "ny"; [ $ny ]||. $HOME/cloudpanel_installer.sh; echo "gg"; '; 
-
-
+# alias tmk='tmux display-popup -w 99% -h 99% -E "echo loading; tmux list-keys|grep -v "copy-mode-vi"|col -xb|tr -s "\n" "\n"|tr -s "\t " " "|pr --omit-header|column --table --table-columns-limit 5 --table-hide 1|sed -e "a--------"|bat -pfljs; "'; 
 # alias l='cd $(lf -config $HOME/.config/lf/lfrc -print-last-dir); grep -e "/" \
 # "$HOME/.local/share/lf/files" 2>/dev/null'; 
-
+alias tmuxkeys='tmux list-keys|grep -v "copy-mode-vi"|col -xb|tr -s "\n" "\n"|tr -s "\t " " "|pr --omit-header --page-width $((COLUMNS))|column --table --table-columns-limit 5 --table-hide 1|sed -e "a\\\x1b[0m-\x1b[222b"'; 
+########
 alias hellllo='printf %b "\n\n\n\n\n\n\e[6A\e[?25l"; for i in {1..28}; do printf %b "\e[s\e[38;5;$((RANDOM%229))m \e[s\e[98;5;$((RANDOM%22))m\n"; figlet -o -f sub-zero "hello"; sleep .12; printf %b "\e[u"; done; printf %b "\e[?25h"; printf %b "\n\n" '; 
 alias toppo="top -b -n1 -s2 -H -o s,%mem,%cpu,args" 
 ghclone() { 
