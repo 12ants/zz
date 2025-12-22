@@ -134,7 +134,8 @@ dott; echo;
 # printf %b "\e[${calength}A"; 
 ############
 12calendar; 
-[ -e "$HOME/logs/wtr.log" ] && dott && echo && cat $HOME/logs/wtr.log && dott && echo; 
+[ -e "$HOME/logs/wtr.log" ] && dott && printf %b "\e[G···· $(cat /data/data/com.termux/files/home/logs/wtr.log | col -xb | tr -s " \t" " " |column --table --output-separator " | " | bat -ppfljava --theme OneHalfDark) \n" && dott && echo; 
+# dott && printf %b "\e[G \t " && cat $HOME/logs/wtr.log | tr -s " \n" "\t"| col -xb && 
 # dots; dots; dots; dots; dots; 
 # printf %b "${w[idn]}\e[7m $idn \e[27m $EPOCHSECONDS \e[0m \e[38;5;${idn}m idn: $idn  \e[0m"; echo;
 # printf %b "\e[48;5;${c[$((${wlan: -2}))]} ";
