@@ -48,6 +48,7 @@ map <delete> delete
 map d trash
 map zu unzip
 map zz zip
+map Z :cd ~/zz
 map c copy
 map ss :search 
 map sp :set preview! 
@@ -122,6 +123,7 @@ map R !read -ep ' ' -i '192.168.0.' 'ipa' && read -ep ' port: ' -i '8022' 'pp' &
 map <space> :toggle; down
 map <enter> :open $f 
 map b bopen 
+map B bboo
 map bb $batcat -pf $f
 map bg $glow -p $f
 map bq $return 0
@@ -216,7 +218,24 @@ printf "\e[35;5m\e[$((lf_width/2-2))G >_<\n\e[25m\e[0m";
 
 
 cmd lenk ${{ 
-read -rep "ln from: $(printf "\e[96m")" -i "$fx" "kk"; read -rep "$(printf "\e[0m")to: $(printf "\e[92m")" -i "$PWD" "kt"; printf "\e[0m"; ln -s "${kk}" "${kt}"; ls $kt; sleep 1; 
+echo; 
+unset kk kt 2>/dev/null; 
+printf %b "\e[0m__\n\n\n\n\n\n\e[6A"; 
+if [ $(echo $fx|wc -w) -gt 1 ]; then 
+printf %b "\e[0mto folder: \e[92m\n"; 
+read -rei "$HOME/" "kt"; 
+printf %b "\e[0m\n -- \e[2m[\e[0m\e[1;96my\e[0m/\e[1;91mn\e[0;2m]\e[0m\e[97m --\n\e[45m"; 
+ln --interactive --symbolic --backup --suffix "$(date +%m%d%H%M%S)" ${fx} -t ${kt}; 
+else 
+printf %b "\e[0mfile to link from: \e[92m\n"; 
+read -rei "$fx" "kk"; 
+printf "\e[0mto file:\e[92m"; 
+read -rei "$HOME/" "kt"; 
+# printf %b "\n\n\e[A -- \e[2m[\e[0m\e[1;96my\e[0m/\e[1;91mn\e[0;2m] \e[0m\e[97m"; 
+ln --interactive --symbolic --backup --suffix "$(date +%m%d%H%M%S)" "${kk}" "${kt}"; 
+fi; 
+printf %b "\e[0m__\n\n\n\n\n\n\e[5A"; 
+ls $kt; echo; sleep 1; 
 }} 
 
 
@@ -510,10 +529,10 @@ set cursorparentfmt "\033[92m"
 set cursorpreviewfmt "\033[1m" 
 set cursoractivefmt "\033[4;7m"
 set drawbox false
-set drawbox off
+set nodrawbox
 set mouse on 
-set icons true 
-set icons off 
+set icons false 
+set noicons
 set shell bash 
 set info size:time
 set sortby time
