@@ -31,8 +31,7 @@ dott; printf %b "  getting cal ·· ";
 cat  $HOME/logs/calendar.json|grep -e "EPOCH" --quiet||12calendarget; 
 ###
 ####
-calcomp; 
-[[ "$epmin" -gt "55" ]] && 12calendarget; 
+# [[ "$epmin" -gt "55" ]] && 12calendarget; 
 calcomp; 
 # [ $((_epoch_h - _epoch_h_cal)) -gt 222 ] 
 # _epoch_h="$((EPOCHSECONDS / 3600))"; _epoch_h_cal="$(($(tail -c10 $HOME/logs/calendar.json) / 3600))"; 
@@ -42,7 +41,8 @@ cat $HOME/logs/cal.log;
 ####
 dott; 
 ####
-printf %b " ${epmin} mins ago\n"|bat -ppfld --theme Coldark-Cold
+printf %b " ${epmin} mins ago"|bat -ppfld --theme Coldark-Cold; 
+calcomp; [[ "$epmin" -gt "55" ]] && printf %b " >\e[2m run \e[0m\e[1;97;4m12calendarget\e[0m\e[2m to update\e[0m\n" || echo; 
 # printf %b " ${epmin} mins ago\n"|bat -ppflc --theme DarkNeon; 
 # head -n-1 $HOME/logs/calendar.json|sed -e "s/\ \ //g"|grep -vE 'description|end_date|call'|cut -f1 -d+|tr -d '"{}[],\t'|sed -e "s/summary\:\ /\n\ %/g"|tr -d "\n"|tr -s "%" "\n"|sed -e "s/start_date_time............./\ \%\ /g" -e "s/start_date\:/\ \%/g" -e s/start_date_time\:/\%\ /g|tr -s " " " "|column --separator "%" --table --output-width "$COLUMNS" --output-separator '|' --table|bat -ppflr --theme Visual\ Studio\ Dark+; 
 }; 
