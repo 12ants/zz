@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 apa() { 
-local IFS=$' \n\t'; 
+local IFS=$'\n\t '; 
 hash sudo 2>/dev/null && sudo=sudo; [ $PREFIX ] && unset sudo; [ $UID = 0 ] && unset sudo; 
 ####
 FZF_DEFAULT_OPTS='-m -i --ansi --bind "0:change-preview-window(right,50%|top,20%|top,55%|right,20%|hidden),q:abort" --info inline --inline-info --preview-window "wrap,noborder" --preview "bat -ppf {} 2>/dev/null||ls --color always -pm {}"'; 
@@ -26,12 +26,12 @@ esac;
 ####
 ####
 apupdate() { printf %b "\e[96m --\e[0m Updating \e7"; 
-apt update &>/dev/null & disown; 
+$sudo apt update &>/dev/null & disown; 
 printf %b "\e8\e[K"; ae="$!"; (for i in {1..55}; 
 do printf %b "\e[38;5;$((RANDOM%222 + 22))m\u25$((RANDOM%99)) "; 
 read -t .2 -srn1 "yu"; [ $yu ] && printf %b "\e[?25l\e[0m gg" && return 1 && break; 
 ps|grep -e "$ae" --quiet 2>/dev/null||break; done) 2>/dev/null || return 2; 
-printf %b "\e[0m\e[?25h \e[42G\e[42m done \e[0m\n"; };
+printf %b "\e[0m\e[?25h \e[42G\e[42m done \e[0m\n"; }; 
 # apupdate; 
 ####
 ####\n\n\n\n\n\n\e[5A
@@ -61,8 +61,9 @@ printf %b "\e[96m ----------\e[0m\n\n\e[2A"
 read -rs -n1 "ny"; if [ -z "$ny" ]; then printf %b " \t\t [\e[92mOK\e[0m] \n"; 
 # IFS=$'"' \n\t'"'; 
 
-tmux display-popup -E -e "apap=${aapp[*]}" -e "instremove=$instremove" -e "sudo=$sudo" -w "82%" -h "82%" \
-'ap=(${apap}); for i in ${!ap[*]}; do printf %b "\n\e[0m${instremove}ing: \e[48;5;$((RANDOM%222 + 22))m ${ap[i]} \e[0m\n-\e[222m\n\e[38;5;$((RANDOM%222 + 22))m"; $sudo apt ${instremove} -y ${ap[i]}; done; printf %b "\n-\e[222b\ndone\n"; read -t2 -n1;'
+# tmux display-popup -E -e "apap=${aapp[*]}" -e "instremove=$instremove" -e "sudo=$sudo" -w "82%" -h "82%" '
+ap=(${apap}); 
+for i in ${!aapp[*]}; do printf %b "\n\e[0m${instremove}ing: \e[48;5;$((RANDOM%222 + 22))m ${ap[i]} \e[0m\n-\e[222m\n\e[38;5;$((RANDOM%222 + 22))m"; $sudo apt ${instremove} -y ${aapp[i]}; done; printf %b "\n-\e[222b\ndone\n"; read -t2 -n1; 
 
 # for i in {1..55}; do printf %b "\e[48;5;1$(shuf -i 1-9 -z -n1; shuf -i 1-9 -z -n1)m  "; sleep .4; done & disown; printf %b "\e[A\e[K"; 
 # for aa in ${ap[*]}; do printf %b "\n $aa \n"; sleep .5; 
