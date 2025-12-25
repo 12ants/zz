@@ -1,0 +1,1 @@
+weather() { curl -sL https://wttr.in/sthlm?format="(%t/%f/%C)+(%w_%p)+in+%l"|tr -s "[:upper:]" "[:lower:]" > ~/logs/weather.log && date +\ @\ %H:%M\ %y/%m/%d >> ~/logs/weather.log; bat ~/logs/weather.log -ppflgo --theme Catppuccin\ Macchiato 2>/dev/null; }; 

@@ -3,6 +3,7 @@
 [ -z "$TMUX" ] && tmux; 
 shopt -s histappend; shopt -s histverify; 
 ####
+new() { 
 # export IFS=$'\n\t '; 
 export HISTCONTROL="ignoreboth"; 
 export PROMPT_COMMAND="history -a; history -n; "; 
@@ -57,7 +58,6 @@ export FZF_DEFAULT_OPTS="${tmuxprefix} -i -m --cycle --ansi --height '~99%' --bi
 ########
 # [ -z $TMUX ] && tmux; 
 ########
-new() { 
 ########
 # local IFS=$'\n\t '; 
 ########
@@ -134,7 +134,7 @@ dott; echo;
 # printf %b "\e[${calength}A"; 
 ############
 12calendar; 
-[ -e "$HOME/logs/wtr.log" ] && dott && printf %b "\e[G···· $(cat /data/data/com.termux/files/home/logs/wtr.log | col -xb | tr -s " \t" " " |column --table --output-separator " | " | bat -ppfljava --theme OneHalfDark) \n" && dott && echo; 
+[ -e "$HOME/logs/weather.log" ] && dott && printf %b "\e[G$(cat $HOME/logs/weather.log | bat -ppfljava --theme Catppuccin\ Macchiato 2>/dev/null) \n" && dott && echo; 
 # dott && printf %b "\e[G \t " && cat $HOME/logs/wtr.log | tr -s " \n" "\t"| col -xb && 
 # dots; dots; dots; dots; dots; 
 # printf %b "${w[idn]}\e[7m $idn \e[27m $EPOCHSECONDS \e[0m \e[38;5;${idn}m idn: $idn  \e[0m"; echo;
@@ -180,7 +180,7 @@ printf %b "\x1b]12;#ff44bb"; ## cursor = pink
 moda="$(printf %b "${modo}"|tr -d "[]"|head -c14)"; 
 model="${moda/%\ /}"; 
 printf %b "${modo[*]}" > $HOME/logs/model.log; 
-}; 
+
 ##
 ##
 if [ $PREFIX ]; then modo=($(getprop|grep -E "vendor.manufacturer|product.manufacturer" -m1 -A1 --group-separator=""|cut -f2- -d" "|tr -s "\n[]" " "; )); 
@@ -198,15 +198,18 @@ moda="$(printf %b "${modo}"|tr -d "[]"|head -c14)"; model="${moda/%\ /}";
 # printf '\e]11;#001420\e\\';
 # printf '\e]12;#ff4azz\e\\';
 ####
-[ "$TMUX" ] && new; 
 for i in $HOME/zz/f/*.sh; do . $i; done; 
 # [ "$TMUX_PANE" = "%0" ] && dfree; 
 # source "$HOME/zz/c/tmuxcompletions.sh"; 
 ####
-sshd 2>/dev/null; command ps -A|cut -c25-|grep -e 'crond' &>/dev/null || crond 2>/dev/null; 
+[ $PREFIX ] && sshd 2>/dev/null; 
+# command ps -A|cut -c25-|grep -e 'crond' &>/dev/null || 
+[ $PREFIX ] && crond 2>/dev/null; 
 # [ -z "$PREFIX" ] && 
 # alias fzf='fzf-tmux -h 95% -w 98%'; 
 [ $PREFIX ] && (sleep 2; termux-api-start &>/dev/null) & disown; 
 [ $PREFIX ] && (sleep 4; termux-wake-lock &>/dev/null) & disown; 
+}; 
+[ "$TMUX" ] && new; 
 # [ $TMUX ] && [ -z "$new" ] && new || unset new; 
 

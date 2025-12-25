@@ -26,7 +26,7 @@ g) sudo systemctl set-default graphical.target;;
 t) sudo systemctl set-default multi-user.target;; 
 *) return 1;; esac; 
 '
-alias weather='curl -L "wttr.in/stockholm?format=4"'; 
+# alias weather='curl -L "wttr.in/stockholm?format=4"'; 
 alias wtr='gum style --border normal --border-foreground "#25554b" --padding "1 2" --margin "1 2" "$(weather -s)"'; 
 alias fig='figfonts'; 
 alias la='lsd -l --icon never --group-directories-first --classify --total-size -a --blocks user,size,date,name --date +%H:%M:%S'
