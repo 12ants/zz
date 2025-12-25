@@ -180,7 +180,6 @@ printf %b "\x1b]12;#ff44bb"; ## cursor = pink
 moda="$(printf %b "${modo}"|tr -d "[]"|head -c14)"; 
 model="${moda/%\ /}"; 
 printf %b "${modo[*]}" > $HOME/logs/model.log; 
-
 ##
 ##
 if [ $PREFIX ]; then modo=($(getprop|grep -E "vendor.manufacturer|product.manufacturer" -m1 -A1 --group-separator=""|cut -f2- -d" "|tr -s "\n[]" " "; )); 
@@ -210,6 +209,6 @@ for i in $HOME/zz/f/*.sh; do . $i; done;
 [ $PREFIX ] && (sleep 2; termux-api-start &>/dev/null) & disown; 
 [ $PREFIX ] && (sleep 4; termux-wake-lock &>/dev/null) & disown; 
 }; 
-[ "$TMUX" ] && new; 
+[ "$TMUX" ] && new || echo; 
 # [ $TMUX ] && [ -z "$new" ] && new || unset new; 
 
