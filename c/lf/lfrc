@@ -11,10 +11,6 @@ set icons false
 set globfilter true
 set globsearch true
 set mouse true
-cmap 8
-map 8
-cmap 8 :cd ~/88
-map 8 :cd ~/88
 map f
 map . set hidden! 
 map <esc> quit

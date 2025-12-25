@@ -1,2 +1,2 @@
-LS_COLORS="$(cat $HOME/88/c/lsc/${vt-nord}.sh)";
+LS_COLORS="$(cat $HOME/zz/c/lsc/${vt-nord}.sh)";
 export LS_COLORS; 
