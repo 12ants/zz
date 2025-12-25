@@ -1,0 +1,45 @@
+#!/bin/bash
+## log in to github
+[ -z $start ] && start="$HOME/zz"; 
+hash sudo 2>/dev/null && sudo="sudo"; c2='    \e[0m\e[36m--\e[0m'; 
+printf %b "\n\n\n\n\n\e[4A"; 
+printf %b "\n$c2 password for aeniks\e[2m@\e[0mgithub: "; read -sre "pwgh_aeniks"; 
+printf %b "\n$c2 password for 12ants\e[2m@\e[0mgithub: "; read -sre "pwgh_12ants"; 
+printf %b "\n$c2 logging in to github ...\n"; 
+##
+gh_aeniks="$start/c/gpg/gh_aeniks.gpg"; 
+gh_12ants="$start/c/gpg/gh_12ants.gpg"; 
+## ibstall ssh
+gh_user="$(id -nu)"; gh_mail="$(id -nu)@$(hostname)"; 
+git config --global user.name $gh_user; 
+git config --global user.email $gh_mail; 
+git config --global init.defaultBranch main; 
+####
+# for ss in {openssh-server,gh,git,gnupg} ; do hash $ss 2>/dev/null || "$sudo" apt install -y "${ss}" && printf %b "\e[2J\e[H"; done; 
+##
+gpg --quiet --passphrase "${pwgh_aeniks}" -o "$HOME/.safe/gh_aeniks.log" -d "$gh_aeniks" 2>/dev/null; 
+####
+gpg --quiet --passphrase "${pwgh_12ants}" -o "$HOME/.safe/gh_12ants.log" -d "$gh_12ants" 2>/dev/null; 
+##
+##
+# sleep .2; _ok; 
+#[ -r "$(ls -1 $HOME/.ssh/*.pub 2>/dev/null|head -n1)" ] || 
+for ghlog in 12ants aeniks; do 
+gh auth login --with-token < "${HOME}/.safe/gh_${ghlog}.log"; echo; 
+gh auth switch -u ${ghlog}; 
+echo; 
+# gh auth status; 
+ssh-keygen -N '' -f $HOME/.ssh/gh_${ghlog}; 
+gh ssh-key add $HOME/.ssh/gh_${ghlog}.pub; 
+gh config set git_protocol ssh; 
+ssh -T git@github.com -i ~/.ssh/gh_${ghlog}; 
+printf %b "\n$c2 logged in to github! \n\n"; 
+done; 
+# chmod 600 $HOME/.ssh/*; chmod 644 $HOME/.ssh/*.pub; 
+##
+printf %b "\n$c2 done! \n\n"; 
+##
+# cd $start; git config remote.origin.url git@github.com:12ants/zz.git 2>/dev/null; 
+# cd $OLDPWD; 
+##
+##

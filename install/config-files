@@ -1,0 +1,26 @@
+#!/bin/bash
+## install config-files 
+start="$HOME/zz"; 
+c2='    \e[0m\e[36m--\e[0m'; qq="55"; 
+####
+p1() { p2=" ${@}"; for i in $(seq ${#p2}); do sleep ${sl-.1}; printf %b "${p2:${i}:1}"; done; }; 
+####
+printf %b "\n$c2 installing config files ...\n"; 
+$sudo ln -s ${PREFIX}/bin/bat ${PREFIX}/bin/batcat &>/dev/null; 
+$sudo ln -s ${PREFIX}/bin/batcat ${PREFIX}/bin/bat &>/dev/null; 
+##
+ln -s $start/c/inputrc $HOME/.inputrc --backup --suffix=_bu$(date +%y%m%d_%H%M%S); 
+##
+confolders=($(command ls -1p $start/c|grep "/")); 
+for q in ${confolders[*]}; do 
+mkdir -p $HOME/.config/$q 2>/dev/null; 
+ln -s $start/c/$q/* -t $HOME/.config/$q/ --backup --suffix="_bu$(date +%y%m%d_%H%M%S)"; 
+sleep .1; 
+printf %b "\n\e[0m"; p1 "updated"; 
+printf %b "\e[38;5;$(qq++)m $q"; 
+done; 
+printf %b "${PATH}:${HOME}/.local/bin" > $HOME/.config/path.sh; 
+chmod 775 $HOME/.config/path.sh; 
+printf %b "\n\e[0m\n"; 
+p1 'added PATH to ~/.config/path.sh '; 
+printf %b "\n\n$c2 config files installed! \n\n"; 
