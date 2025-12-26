@@ -1,0 +1,1 @@
+img() { tmux display-popup -w 100% -h 100% -E -b none -e fo="$PWD/$1" 'bash -c "chafa -f symbols --scale max --align right $fo; printf %b '"'^[[6A'"'; mediainfo $fo|grep -E '"'Width|Height|File\ size|Complete|depth'"'|tr -s '"' '"' '"' '"'|column --table --separator :|bat -ppfljava --theme Nord; read -n1 aa"'; }; 
