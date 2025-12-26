@@ -145,7 +145,7 @@ tmux display-popup -w 100% -h 100% -E -b none -e fo="$f" 'bash -c "mediainfo $fo
 cmd bopen ${{ 
 case "${f/*./}" in 
 md) tmux display-popup -w 100% -h 100% -E -b none -e fo="$f" 'bash -c "glow -p ${fo}"';; 
-jpg|png|svg) tmux display-popup -w 100% -h 100% -E -b none -e fo="$f" 'bash -c "chafa -f symbols --scale max $fo; printf %b '"'\e[6A'"'; mediainfo $fo|grep -E '"'Width|Height|File\ size|Complete|depth'"'|tr -s '"' '"' '"' '"'|column --table --separator :|bat -ppfljava --theme Nord; read -n1 aa"';; 
+jpg|png|svg) tmux display-popup -w 100% -h 100% -E -b none -e fo="$f" 'bash -c "chafa -f symbols --scale max --align right $fo; printf %b '"'\e[6A'"'; mediainfo $fo|grep -E '"'Width|Height|File\ size|Complete|depth'"'|tr -s '"' '"' '"' '"'|column --table --separator :|bat -ppfljava --theme Nord; read -n1 aa"';; 
 sh|*) tmux display-popup -w 100% -h 100% -E -b none -e fo="$f" 'bash -c "bat -pf ${fo}"';; 
 # *) bat -pfljava ${f};; 
 esac; 
