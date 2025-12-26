@@ -1,0 +1,1 @@
+words() { [ $1 ] && w=$1 || read -rep 'word:' "w"; printf %b "\n-\e[22b\n"; curl -sL "https://api.dictionaryapi.dev/api/v2/entries/en/${w}"|jq|grep -we "definition" -m1 -B42|grep -vE '"audio"|"sourceUrl"|"license"|"url"|"name"|"phonetic"|"meanings"|"definitions"'|sed -e '/[][}{]/d' -e 's/^[ \t]*//g'; printf %b "-\e[22b\n"; };
