@@ -1,6 +1,6 @@
 #!/bin/bash
 ## log in to github
-[ -z $start ] && start="$HOME/zz"; 
+[ -z $start ] && start="$HOME/zz"; mkdir $HOME/.safe 2>/dev/null; 
 hash sudo 2>/dev/null && sudo="sudo"; c2='    \e[0m\e[36m--\e[0m'; 
 printf %b "\n\n\n\n\n\e[4A"; 
 printf %b "\n$c2 password for aeniks\e[2m@\e[0mgithub: "; read -sre "pwgh_aeniks"; 
@@ -18,8 +18,8 @@ git config --global init.defaultBranch main;
 # for ss in {openssh-server,gh,git,gnupg} ; do hash $ss 2>/dev/null || "$sudo" apt install -y "${ss}" && printf %b "\e[2J\e[H"; done; 
 ##
 gpg --quiet --passphrase "${pwgh_aeniks}" -o "$HOME/.safe/gh_aeniks.log" -d "$gh_aeniks" 2>/dev/null; 
-####
 gpg --quiet --passphrase "${pwgh_12ants}" -o "$HOME/.safe/gh_12ants.log" -d "$gh_12ants" 2>/dev/null; 
+####
 ##
 ##
 # sleep .2; _ok; 
