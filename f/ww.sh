@@ -1,0 +1,2 @@
+#!/bin/bash
+ww() { mkdir ~/logs/ww -p 2>/dev/null; w="$@"; [ -z $w ] && printf %b "\n\n\e[Aword:" && read -rep ' ' "w"; echo; curl -sL "https://api.dictionaryapi.dev/api/v2/entries/en/${w}"|command jq|command grep -e '"definition"' -m1 -B55|sed -e 's/^[ \t]*//'|grep -vwE '"audio|"sourceUrl"|"url"|"name"|"license"|"meanings"|"text"|"phonetics"|"definitions"'|sed -e 's/\"\,/\n/g' -e '/[][}{]/d' -e 's/"//g'|tr -s "\n" "\n"|sed -e 's/partOfSpeech/type/'|tee ~/logs/ww/${w}.log|bat -ppflgo; echo; }; 
