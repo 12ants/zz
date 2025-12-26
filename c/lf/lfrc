@@ -84,7 +84,7 @@ cmap o
 map o
 map O $mimeopen --ask $f
 map oj !jp2a --color-depth=8 --fill $f
-map oc !chafa $f
+map oc chaff
 map ok !cacaview $f
 map ox !printf "\n\n\n\n\n\n\n\n\n\n"; exiftool $f|batcat -pl c++
 map oo openwith $f
@@ -120,6 +120,7 @@ map <space> :toggle; down
 map <enter> :open $f 
 map b bopen 
 map B bboo
+map C chaff
 map bb $batcat -pf $f
 map bg $glow -p $f
 map bq $return 0
@@ -127,9 +128,12 @@ map bq $return 0
 ####
 cmd bboo ${{ 
 IFS=$'\n\t '; popo=(chafa bat micro xgd-open); 
-po=($(printf %b "${popo[*]}"|fzf-tmux -h --no-preview -i --cycle --bind 'q:abort' --border 'top')); 
-case $po in chafa) pp="$po -f symbols"; pv="printf %b '\e[4A'$f'\n'; mediainfo $f|tr -d ' '|grep -E -m4 'Width|Height|File'|bat -ppfljava; ";; bat) pp="$po -p";; *) pp="$po";; esac; 
-tmux display-popup -E -w "99%" -h "95%" "${pp} $f; ${pv} read -e -n 1 kk"; 
+po=($(printf %b "${popo[*]}"|fzf-tmux -h 88% -w 88% --no-preview -i --cycle --bind 'q:abort' --border 'top')); 
+case $po in chafa) pp="$po -f symbols $f"; pv="printf %b '\e[4A'$f'\n'; mediainfo $f|tr -d ' '|grep -E -m4 'Width|Height|File'|bat -ppfljava";; bat) pp="$po -p";; *) pp="$po";; esac; 
+tmux display-popup -E -w "100%" -h "100%" -b none -e pp="$pp" -e pv="$pv" 'bash -c "${pp} $f; ${pv}; read -n1 kk"'; 
+}} 
+cmd chaff ${{ 
+tmux display-popup -w 100% -h 100% -E -b none -e fo="$f" 'bash -c "mediainfo $fo|grep -E '"'Width|Height|File\ size|Complete|depth'"'|tr -s '"' '"' '"' '"'|column --table --separator :|bat -ppfljava --theme Nord; chafa -f symbols --scale max $fo; read -n1 aa"'; 
 }} 
 
 # mediainfo oi_heyday.jpg|tr -d " "|grep -E -m4 "Width|Height|size|name"
@@ -139,10 +143,19 @@ tmux display-popup -E -w "99%" -h "95%" "${pp} $f; ${pv} read -e -n 1 kk";
 # printf %b "${popo[*]} $f"; 
 
 cmd bopen ${{ 
-if [[ ${f/*./} = md ]]; then glow -p ${f}; 
-elif [[ ${f/*./} = sh ]]; then bat -pf ${f}; 
-else bat -pfljava ${f}; 
-fi; }}
+case "${f/*./}" in 
+md) tmux display-popup -w 100% -h 100% -E -b none -e fo="$f" 'bash -c "glow -p ${fo}"';; 
+jpg|png|svg) tmux display-popup -w 100% -h 100% -E -b none -e fo="$f" 'bash -c "chafa -f symbols --scale max $fo; printf %b '"'\e[6A'"'; mediainfo $fo|grep -E '"'Width|Height|File\ size|Complete|depth'"'|tr -s '"' '"' '"' '"'|column --table --separator :|bat -ppfljava --theme Nord; read -n1 aa"';; 
+sh|*) tmux display-popup -w 100% -h 100% -E -b none -e fo="$f" 'bash -c "bat -pf ${fo}"';; 
+# *) bat -pfljava ${f};; 
+esac; 
+}} 
+
+# if [[ ${f/*./} = 
+# elif [[ ${f/*./} = 
+# elif [[ ${f/*./} = png|jpg) ]]; then 
+# # elif [[ ${f/*./} = jpg ]]; then chafa -f symbols ${f}; read -n1 aa; 
+# else fi; }}
     # case $(file --mime-type -Lb $f) in
     #     text/*) vi $fx;;
     #     *) for f in $fx; do xdg-open $f > /dev/null 2> /dev/null & done;;
