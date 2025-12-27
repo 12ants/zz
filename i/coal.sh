@@ -34,3 +34,4 @@ done > "${colorf}/c.log";
 chmod 775 "${colorf}/c.log"; 
 . "${colorf}/c.log"; 
 }; 
+coal; 

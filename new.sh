@@ -100,11 +100,13 @@ cpus=($(lscpu|grep -e 'CPU(s):' -m1|cut -f2 -d":"|tr -d " "));
 [ -z $PREFIX ] && mac=($(ip a show dynamic 2>/dev/null| grep --color=no -e 'ether' -B1|tr -s " " " "|cut -f2-3 -d" "|sed -e "s/\: <.*//g" -e "s/link\/ether\ //g"|tac));
 [ "$wlan" ] && printf %b "${wlan[*]}" > $HOME/logs/wlan.log || wlan="$(cat $HOME/logs/wlan.log)"; printf %b "$wlan" > $HOME/logs/iploc.log;  
 ########
-wlan="$(cat $HOME/logs/wlan.log)"; 
-idn="${wlan/*./}"; 
+wlan="$(cat $HOME/logs/wlan.log)"; idn="${wlan/*./}"; 
 . $HOME/zz/i/colors/coala.sh; 
 idc=(${co[idn]}); 
-tmux set-option -g status-style bg=colour$(printf %b "$idc";); 
+printf %b "${idc[*]}" > $HOME/logs/idc.log; 
+####
+####
+# tmux set-option -g status-style bg=colour$(printf %b "$idc";); 
 ########
 ####
 ########
