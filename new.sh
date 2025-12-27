@@ -101,7 +101,7 @@ cpus=($(lscpu|grep -e 'CPU(s):' -m1|cut -f2 -d":"|tr -d " "));
 [ "$wlan" ] && printf %b "${wlan[*]}" > $HOME/logs/wlan.log || wlan="$(cat $HOME/logs/wlan.log)"; printf %b "$wlan" > $HOME/logs/iploc.log;  
 ########
 wlan="$(cat $HOME/logs/wlan.log)"; 
-idn="${wlan:(-2)}"; 
+idn="${wlan/*./}"; 
 . $HOME/zz/i/colors/coala.sh; 
 idc=(${co[idn]}); 
 tmux set-option -g status-style bg=colour$(printf %b "$idc";); 
