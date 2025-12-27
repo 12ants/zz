@@ -43,8 +43,9 @@ if echo $HOME|grep -w "termux" -q; then alias sudo='command'; else sudo=sudo; fi
 [ -x $HOME/.config/fzf_completions_bash.sh ] || (fzf --bash &> $HOME/.config/fzf_completions_bash.sh; chmod 775 $HOME/.config/fzf_completions_bash.sh); 
 if fzf --bash &>/dev/null; then . $HOME/.config/fzf_completions_bash.sh; fi; 
 ########
-unset tmuxprefix; 
-if [ "$PREFIX" ]; then tmuxprefix=" --tmux 'center,99%,95%' "; alias fzf='fzf-tmux -h 98% -w 98%'; fi; 
+unset tmuxprefix 2>/dev/null;  
+if [ $PREFIX ]; then tmuxprefix=" --tmux 'center,99%,95%' "; 
+else alias fzf='fzf-tmux -h 98% -w 98%'; fi; 
 #########
 export FZF_DEFAULT_OPTS="${tmuxprefix} -i -m --cycle --ansi --height '~99%' --bind '0:change-preview-window(right,50%|top,20%|top,55%|right,20%|hidden),q:abort' --info inline --inline-info --preview-window 'hidden,wrap,noborder' --preview 'bat -ppf {} 2>/dev/null||ls -pm {}' --scroll-off 22 --color 'bg:234,bg+:24,fg+:15,info:6,preview-bg:-1,gutter:233,bg:233,scrollbar:magenta,hl:red' --scrollbar '▉' --pointer '▉' --marker '▉' --border 'top' --border-label 'C-a:select-all | 0: change orientation | q:uit ' --border-label-pos 'top' "$([ $PREFIX ] && printf %b "--wrap-sign '""'")""; 
 ########
@@ -70,11 +71,14 @@ export FZF_DEFAULT_OPTS="${tmuxprefix} -i -m --cycle --ansi --height '~99%' --bi
 #############################
 #############################
 ## ____ MODEL _ GET ____ ####
-[ "$PREFIX" ] && modo=($([ "$PREFIX" ] && getprop|grep -E "vendor.manufacturer|product.manufacturer" -m1 -A1 --group-separator=""|cut -f2- -d" "|tr -s "\n[]" " "; )); 
+[ $PREFIX ] && modo=($(getprop|grep -E 'vendor.manufacturer|product.manufacturer' -m1 -A1 --group-separator=''|cut -f2- -d' '|tr -s "\n[]" " "; )); 
 #############################
 [ -z $PREFIX ] && [ -e /sys/devices/virtual/dmi/id/product_family ] && \
 modo=($(for bb in product_family board_vendor board_name bios_vendor sys_vendor; 
-do cat /sys/devices/virtual/dmi/id/${bb} 2>/dev/null|grep -v "O.E.M."|tr -s "\n" " "; done)); 
+do cat /sys/devices/virtual/dmi/id/${bb} 2>/dev/null|grep -v "O.E.M."|tr -s "\n" " "; done)); ##
+moda="$(printf %b "${modo}"|tr -d "[]"|head -c14)"; model="${moda/%\ /}"; 
+printf %b "${modo[*]}" > $HOME/logs/model.log; 
+########
 #################################
 ## ____ VIDEOCARD _ GET ____ ####
 [ -z $PREFIX ] && \
@@ -115,8 +119,8 @@ memram="$(memram)"; [ -z "$ssh" ] && ssh=(${SSH_CONNECTION});
 dots() { printf %b "${re}·········${re}"; }; 
 dott() { printf %b "\e[0m"; for i in $(seq ${1-45}); do printf %b "·"; done; printf %b "\e[0m"; }; 
 dott; echo; 
-dott; printf %b "\e[G"; 
-printf %b "[${modo[*]:0:7}] "|uniq -u|tr -s "\n" " "|bat -ppfljava --theme DarkNeon; echo; 
+# dott; printf %b "\e[G"; 
+# printf %b "[${modo[*]:0:7}] "|uniq -u|tr -s "\n" " "|bat -ppfljava --theme DarkNeon; echo; 
 dott; printf %b "\e[G"; 
 ####
 printf %b "[${cpu[*]} x ${cpus}] "|tr -s "\n" " "|bat -ppfljava --theme Dracula; echo; 
@@ -125,15 +129,11 @@ dott && printf %b "\e[G" && \
 printf %b "[${videocard}] "|tr -s "\n" " "|bat -ppfljava --theme DarkNeon && echo && 
 dott && printf %b "\e[G"; 
 ####
-printf %b "[${memram}] "|bat -ppfljava --theme DarkNeon; echo; 
-dott; printf %b "\e[G"; 
-printf %b "[${os1} | ${os2}] "|tr -s "\n" " "|bat -ppfljava --theme zenburn; echo; 
-dott; echo; 
+printf %b "[${memram}] "|bat -ppfljava --theme DarkNeon; 
+echo; dott; printf %b "\e[G"; 
+printf %b "[${os1} | ${os2}] "|tr -s "\n" " "|bat -ppfljava --theme zenburn; 
+echo; dott; echo; 
 ########## DATE // CALENDAR ########
-############
-# calength="$(cat $HOME/logs/cal.log|wc -l)";
-# for i in $(seq $calength); do dott && echo; done; 
-# printf %b "\e[${calength}A"; 
 ############
 12calendar; 
 [ -e "$HOME/logs/weather.log" ] && dott && printf %b "\e[G$(cat $HOME/logs/weather.log | bat -ppfljava --theme Catppuccin\ Macchiato 2>/dev/null) \n" && dott && echo; 
@@ -149,17 +149,26 @@ ii="$(ip -c -brief -4 a 2>/dev/null|grep -vE "lo |DOWN"|cut -f1 -d"/"|column --t
 ####
 [ -z "$ii" ] && ii=($(ifconfig 2>/dev/null|grep -vE "unspec|lo: |127.0.0.1" |cut -f1,10 -d" "|tr -d "\n"|bat -ppf --language Idris)); 
 ####
-gum style --padding "0 1 0 1" --border-foreground 250 --border normal \
-"$(printf %b "${ii[*]}"; 
-[ "$wlan" ] && printf %b " - ${wlan}"|bat -ppflsyslog --theme TwoDark; [ "$ssh" ] && printf %b " << ${ssh}:${ssh[-1]}"|tr "\n " "\t "| bat -ppflsyslog --theme zenburn; )"; 
+# gum style --padding "0 1 0 1" --border-foreground 250 --border normal "$()"; 
+printf %b "${ii[*]}"; 
+[ "$wlan" ] && printf %b " - ${wlan}"|bat -ppflsyslog --theme TwoDark; [ "$ssh" ] && printf %b " << ${ssh}:${ssh[-1]}"|tr "\n " "\t "| bat -ppflsyslog --theme zenburn; 
+echo; dott; echo; 
 # [ "$mac" ] && printf %b "| ${mac[1]} | ${mac}" |tr -d "\n"| bat -ppflsyslog --theme zenburn; 
-dott; 
-echo; 
-printf %b "\e[48;5;${idc}m\e[3${idc[2]}m ${idc[3]} \e[4${idc[2]}m \e[38;5;${idc}m${idc[1]} \e[40;1m ${idc} \e[0m"; 
-# printf %b "\e[3${c[idn]:13:1};48;5;${c[idn]:0:13}\e[0m \\${c[idn]:0:5}\e[3${c[idn]:13:1};48;5;${c[idn]:0:4}${c[idn]: -9: 9} \e[0m"; 
-echo; 
-dott; 
-echo;
+#########################
+######## COLOR - ID #####
+export id="$(id -un)"; 
+dim='\e[2m'; bold='\e[1m'; 
+re='\e[0m'; rev='\e[7m'; 
+bg='\e[48;5;'; 
+fg='\e[38;5;'; 
+idc_bg_me='\e[48;5;${idc}m'; 
+idc_fg_me='\e[38;5;${idc}m'; 
+idc_fg_='\e[3${idc[2]}m'; 
+idc_bg_='\e[4${idc[2]}m'; 
+printf %b "\e[0m\e[48;5;${idc};3${idc[2]}m ${modo[*]:0:7} \e[7m ${id} \e[0m\n"; 
+printf %b "$idc_fg_me$idc_bg_ ${idc[3]} $rev ${idc[4]} \e[0m"; 
+# \e[0m\e[3${idc[2]}m\e[4${idc[2]};38;5;${idc}m"; #########################
+echo; dott; echo; 
 [ "$(cat ${logs}/dfree.log|wc -c)" -gt 4 ] && cat "${logs}/dfree.log" || dfree; 
 dott; echo;
 ####
@@ -171,17 +180,15 @@ dott; echo;
 ####
 # sshd 2>/dev/null; command ps -A|cut -c25-|grep -e 'crond' &>/dev/null || crond 2>/dev/null; 
 [ -z "$PREFIX" ] && alias fzf='fzf-tmux -h 95% -w 98%'; 
-[ "$TMUX" ] && tmux source-file $HOME/zz/c/tmux/tmux.conf; 
+[ "$TMUX" ] && tmux source-file $HOME/.config/tmux/tmux.conf; 
 ##
 ##
-printf %b "\x1b[1 q"; ## > cursor = block
-printf %b "\x1b]12;#ff44bb"; ## cursor = pink
+printf %b "\x1b[1 q"; ########### cursor = block
+printf %b "\x1b]12;#ff44bb"; #### cursor = pink
+####
 # printf %b "\x1b]11;#04000f"; ## background = darkblue 
 ####
 ####
-moda="$(printf %b "${modo}"|tr -d "[]"|head -c14)"; 
-model="${moda/%\ /}"; 
-printf %b "${modo[*]}" > $HOME/logs/model.log; 
 ##
 ##
 # if [ $PREFIX ]; then modo=($(getprop|grep -E "vendor.manufacturer|product.manufacturer" -m1 -A1 --group-separator=""|cut -f2- -d" "|tr -s "\n[]" " "; )); 
@@ -192,24 +199,31 @@ printf %b "${modo[*]}" > $HOME/logs/model.log;
 #############################
 ##
 . $HOME/zz/_ps1.sh; 
-. ${HOME}/zz/alias.sh; 
+. $HOME/zz/alias.sh; 
 . $HOME/.config/tmux/tmuxcompletions.sh; 
+####
+# [ "$TMUX_PANE" = "%0" ] && dfree; 
+# source "$HOME/zz/c/tmuxcompletions.sh"; 
+for i in $HOME/zz/f/*.sh; do . $i; done; 
+####
+[ $PREFIX ] && sshd 2>/dev/null; 
+[ $PREFIX ] && crond 2>/dev/null; 
+[ $PREFIX ] && (sleep 2; termux-api-start &>/dev/null) & disown; 
+[ $PREFIX ] && (sleep 4; termux-wake-lock &>/dev/null) & disown; 
+}; 
+####
+[ "$TMUX" ] && new || echo; 
+# [ $TMUX ] && [ -z "$new" ] && new || unset new; 
+# command ps -A|cut -c25-|grep -e 'crond' &>/dev/null || 
 ####
 # printf '\e]11;#001420\e\\';
 # printf '\e]12;#ff4azz\e\\';
 ####
-for i in $HOME/zz/f/*.sh; do . $i; done; 
-# [ "$TMUX_PANE" = "%0" ] && dfree; 
-# source "$HOME/zz/c/tmuxcompletions.sh"; 
-####
-[ $PREFIX ] && sshd 2>/dev/null; 
-# command ps -A|cut -c25-|grep -e 'crond' &>/dev/null || 
-[ $PREFIX ] && crond 2>/dev/null; 
 # [ -z "$PREFIX" ] && 
+# printf %b "\e[3${c[idn]:13:1};48;5;${c[idn]:0:13}\e[0m \\${c[idn]:0:5}\e[3${c[idn]:13:1};48;5;${c[idn]:0:4}${c[idn]: -9: 9} \e[0m"; 
 # alias fzf='fzf-tmux -h 95% -w 98%'; 
-[ $PREFIX ] && (sleep 2; termux-api-start &>/dev/null) & disown; 
-[ $PREFIX ] && (sleep 4; termux-wake-lock &>/dev/null) & disown; 
-}; 
-[ "$TMUX" ] && new || echo; 
-# [ $TMUX ] && [ -z "$new" ] && new || unset new; 
 
+# calength="$(cat $HOME/logs/cal.log|wc -l)";
+# for i in $(seq $calength); do dott && echo; done; 
+# printf %b "\e[${calength}A"; 
+############

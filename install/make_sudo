@@ -1,0 +1,38 @@
+#!/bin/bash
+## create super user froom root
+hash sudo 2>/dev/null && sudo="sudo"; 
+####
+read -rep " $c2 Add as sudo-user: " -i "newsudo"; 
+####
+$sudo printf %b "
+${newsudo} ALL=(ALL) NOPASSWD:ALL
+%${newsudo} ALL=(ALL) NOPASSWD:ALL 
+" >> "/etc/sudoers.d/sudos" && \
+$sudo chmod 775 /etc/sudoers.d/sudos; 
+####
+####
+
+
+# _be_sudo() { 
+# us="$(id -un)"; [ $(id -u) = 0 ] && us="${SUDO_USER}";
+# 
+# printf %b "\n\n\e[A \e[96m--\e[0m sudo user:";
+# read -rep ' ' -ri "${us}" "us"; 
+# 
+# $sudo printf %b "${us} ALL=(ALL) NOPASSWD: ALL\n"|tee -a /etc/sudoers.d/sudo.sh 2>/dev/null;
+# 
+# printf %b "\e[0m"; 
+# printf %b "\e[2m?\e[0m\e[96m\e[1m ";
+
+# _ok;
+
+
+
+
+# _newcolor; printf %b "\e[u";
+
+# p2 " $c2 "; p1 "$us is now in $(printf %b "${bold}${green}")GOD$(printf %b "${re}") mode . . . ."; 
+# _newcolor;
+# fi;
+# printf %b "\e[0m\n";
+# }; 
