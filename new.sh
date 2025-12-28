@@ -104,13 +104,10 @@ cpus=($(lscpu|grep -e 'CPU(s):' -m1|cut -f2 -d":"|tr -d " "));
 [ -z $PREFIX ] && mac=($(ip a show dynamic 2>/dev/null| grep --color=no -e 'ether' -B1|tr -s " " " "|cut -f2-3 -d" "|sed -e "s/\: <.*//g" -e "s/link\/ether\ //g"|tac));
 [ "$wlan" ] && printf %b "${wlan[*]}" > $HOME/logs/wlan.log || wlan="$(cat $HOME/logs/wlan.log)"; printf %b "$wlan" > $HOME/logs/iploc.log;  
 ########
-wlan="$(cat $HOME/logs/wlan.log)"; idn="${wlan/*./}"; 
-. $HOME/zz/i/colors/coala.sh; 
-idc=(${co[idn]}); 
-printf %b "${idc[*]}" > $HOME/logs/idc.log; 
 ####
 ####
 # tmux set-option -g status-style bg=colour$(printf %b "$idc";); 
+# dott; printf %b "\e[G"; # printf %b "[${modo[*]:0:7}] "|uniq -u|tr -s "\n" " "|bat -ppfljava --theme DarkNeon; echo; 
 ########
 ####
 ########
@@ -119,8 +116,6 @@ memram="$(memram)"; [ -z "$ssh" ] && ssh=(${SSH_CONNECTION});
 dots() { printf %b "${re}·········${re}"; }; 
 dott() { printf %b "\e[0m"; for i in $(seq ${1-45}); do printf %b "·"; done; printf %b "\e[0m"; }; 
 dott; echo; 
-# dott; printf %b "\e[G"; 
-# printf %b "[${modo[*]:0:7}] "|uniq -u|tr -s "\n" " "|bat -ppfljava --theme DarkNeon; echo; 
 dott; printf %b "\e[G"; 
 ####
 printf %b "[${cpu[*]} x ${cpus}] "|tr -s "\n" " "|bat -ppfljava --theme Dracula; echo; 
@@ -156,17 +151,21 @@ echo; dott; echo;
 # [ "$mac" ] && printf %b "| ${mac[1]} | ${mac}" |tr -d "\n"| bat -ppflsyslog --theme zenburn; 
 #########################
 ######## COLOR - ID #####
+wlan="$(cat $HOME/logs/wlan.log)"; idn="${wlan/*./}"; 
+. $HOME/zz/i/colors/coala.sh; 
+unset -v idc; declare -a idc; 
+export idc=(${co[idn]}); 
+printf %b "${idc[*]}" > $HOME/logs/idc.log; 
+####
 export id="$(id -un)"; 
 dim='\e[2m'; bold='\e[1m'; 
-re='\e[0m'; rev='\e[7m'; 
-bg='\e[48;5;'; 
-fg='\e[38;5;'; 
-idc_bg_me='\e[48;5;${idc}m'; 
-idc_fg_me='\e[38;5;${idc}m'; 
-idc_fg_='\e[3${idc[2]}m'; 
-idc_bg_='\e[4${idc[2]}m'; 
-printf %b "\e[0m\e[48;5;${idc};3${idc[2]}m ${modo[*]:0:7} \e[7m ${id} \e[0m\n"; 
-printf %b "$idc_fg_me$idc_bg_ ${idc[3]} $rev ${idc[4]} \e[0m"; 
+re='\e[0m'; rev='\e[7m'; ver='\e[27m'; 
+bg='\e[48;5;'; fg='\e[38;5;'; 
+idcbg="${bg}${idc}m"; 
+idcfg="${fg}${idc}m"; 
+idt="\e[3${idc[2]}m"; 
+printf %b "\e[0m\e[48;5;${idc};3${idc[2]}m ${modo[*]:0:7} \e[0m\n"; 
+printf %b "${idcbg}${idt} ${id} $rev ${idc[3]} $ver \x23${idc[1]} $rev ${idc[0]} \e[0m"; 
 # \e[0m\e[3${idc[2]}m\e[4${idc[2]};38;5;${idc}m"; #########################
 echo; dott; echo; 
 [ "$(cat ${logs}/dfree.log|wc -c)" -gt 4 ] && cat "${logs}/dfree.log" || dfree; 
