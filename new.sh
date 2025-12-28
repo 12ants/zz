@@ -145,6 +145,7 @@ ii="$(ip -c -brief -4 a 2>/dev/null|grep -vE "lo |DOWN"|cut -f1 -d"/"|column --t
 [ -z "$ii" ] && ii=($(ifconfig 2>/dev/null|grep -vE "unspec|lo: |127.0.0.1" |cut -f1,10 -d" "|tr -d "\n"|bat -ppf --language Idris)); 
 ####
 # gum style --padding "0 1 0 1" --border-foreground 250 --border normal "$()"; 
+dott && printf %b "\e[G"; 
 printf %b "${ii[*]}"; 
 [ "$wlan" ] && printf %b " - ${wlan}"|bat -ppflsyslog --theme TwoDark; [ "$ssh" ] && printf %b " << ${ssh}:${ssh[-1]}"|tr "\n " "\t "| bat -ppflsyslog --theme zenburn; 
 echo; dott; echo; 
@@ -161,10 +162,11 @@ export id="$(id -un)";
 dim='\e[2m'; bold='\e[1m'; 
 re='\e[0m'; rev='\e[7m'; ver='\e[27m'; 
 bg='\e[48;5;'; fg='\e[38;5;'; 
-idcbg="${bg}${idc}m"; 
-idcfg="${fg}${idc}m"; 
-idt="\e[3${idc[2]}m"; 
-printf %b "\e[0m\e[48;5;${idc};3${idc[2]}m ${modo[*]:0:7} \e[0m\n"; 
+idcbg="${bg}${idc}m"; idcfg="${fg}${idc}m"; idt="\e[3${idc[2]}m"; 
+####
+dott; printf %b "\e[G"; (printf %b "[${modo[*]:0:7}"|head -c44; printf %b "]\n")|batcat -ppfljava --theme gruvbox-dark; 
+dott; echo; 
+dott && printf %b "\e[G"; 
 printf %b "${idcbg}${idt} ${id} $rev ${idc[3]} $ver \x23${idc[1]} $rev ${idc[0]} \e[0m"; 
 # \e[0m\e[3${idc[2]}m\e[4${idc[2]};38;5;${idc}m"; #########################
 echo; dott; echo; 
