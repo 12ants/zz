@@ -5,10 +5,10 @@
 ##
 #grub
 
-
+start="$HOME/zz"; 
 mkdir -p -m 775 /boot/grub 2>/dev/null; 
 if (($UID==0)); then chown $SUDO_USER: /boot/grub -R; fi
-sudo cp $ants/media/tard.jpg /boot/grub/tard.jpg; chmod 775 /boot/grub/tard.jpg;
+sudo cp $start/m/tard.jpg /boot/grub/tard.jpg; sudo chmod 775 /boot/grub/tard.jpg;
 echo '
 GRUB_BACKGROUND="/boot/grub/tard.jpg"
 GRUB_GFXMODE=auto
