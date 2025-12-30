@@ -8,6 +8,7 @@ new() {
 export HISTCONTROL="ignoreboth"; 
 export PROMPT_COMMAND="history -a; history -n; "; 
 export EDITOR="micro"; 
+export email='leonel@ik.me'; 
 export BAT_THEME="Coldark-Dark"; 
 export logs="$HOME/logs"; 
 export tmp="$HOME/tmp"; [ -z $TMPDIR ] && export TMPDIR="$HOME/tmp"; 
