@@ -13,6 +13,7 @@ export BAT_THEME="Coldark-Dark";
 export logs="$HOME/logs"; 
 export tmp="$HOME/tmp"; [ -z $TMPDIR ] && export TMPDIR="$HOME/tmp"; 
 unset HISTTIMEFORMAT; 
+hash sudo 2>/dev/null && [ "$UID" != 0 ] && export sudo="sudo"; 
 ########
 re='\e[0m'; cyan='\e[96m'; logs="$HOME/logs"; c2="\e[96m -- \e[0m"; 
 ssh=(${SSH_CONNECTION}); [ -z $ssh ] && ssh=($SSH_CLIENT); 
@@ -25,7 +26,7 @@ export LESS=''${lessprefix}' -R --file-size --use-color --incsearch --mouse --pr
 export GREP_COLORS="mt=91:ms=95:fn=32:ln=32:bn=32:se=35:sl=38;5;207:cx=38;5;121:ne"; 
 ########
 ######## make som basic folders ######## 
-mkdir $HOME/logs/b $HOME/tmp $HOME/gh $HOME/dl $HOME/bin -m 775 -p 2>/dev/null; 
+mkdir $HOME/logs/b $HOME/tmp $HOME/gh $HOME/dl $HOME/bin $HOME/img $HOME/.config -m 775 -p 2>/dev/null; 
 ########
 # [[ "$OS" != "Debian" ]] && \
 . $HOME/zz/f/dfree.sh; 
@@ -56,7 +57,7 @@ export FZF_DEFAULT_OPTS="${tmuxprefix} -i -m --cycle --ansi --height '~99%' --bi
 [ -x $HOME/.config/cloudflare_id.conf ] && . $HOME/.config/cloudflare_id.conf 2>/dev/null; 
 ########
 [ -e $HOME/.config/lesskey ] || ln -s $HOME/zz/c/lesskey $HOME/.config/lesskey; 
-[ -e $HOME/.config/path.sh ] && export PATH=$(cat $HOME/.config/path.sh);
+[ -e $HOME/.config/path.sh ] && export PATH=$(cat $HOME/.config/path.sh); 
 ########
 # [ -z $TMUX ] && tmux; 
 ########
@@ -100,10 +101,11 @@ cpu=($(lscpu |grep -E 'Model name'|tr -s "\t" " "|cut -f3- -d" "));
 cpus=($(lscpu|grep -e 'CPU(s):' -m1|cut -f2 -d":"|tr -d " ")); 
 ## ____ IP _ GET _____ ##########
 [ $PREFIX ] && wlan="$(getprop|grep -v "gateway"|grep -E "ipv4" -m1|tr -d "[]"|cut -f2 -d" ")"; 
-[ -z $wlan ] && wlan="$(ip -brief a 2>/dev/null|grep -v "127.0.0.1"|tr -s "/\t " "\n"|grep -E "UP" -A1 -m1|tail -n1)"; 
+[ -z $wlan ] && wlan="$(ip -brief -4 a 2>/dev/null|grep -v "127.0.0.1"|tr -s "/\t " "\n"|grep -E "UP" -A1 -m1|tail -n1)"; 
 [ -z $wlan ] && wlan="$($sudo ifconfig 2>/dev/null|grep -e "wlan" -A1|sed -e 1d|tr -s "a-z " "\n"|sed -e 1d -e 3,4d)"; 
-[ -z $PREFIX ] && mac=($(ip a show dynamic 2>/dev/null| grep --color=no -e 'ether' -B1|tr -s " " " "|cut -f2-3 -d" "|sed -e "s/\: <.*//g" -e "s/link\/ether\ //g"|tac));
-[ "$wlan" ] && printf %b "${wlan[*]}" > $HOME/logs/wlan.log || wlan="$(cat $HOME/logs/wlan.log)"; printf %b "$wlan" > $HOME/logs/iploc.log;  
+# [ -z $PREFIX ] && mac=($(ip a show dynamic 2>/dev/null| grep --color=no -e 'ether' -B1|tr -s " " " "|cut -f2-3 -d" "|sed -e "s/\: <.*//g" -e "s/link\/ether\ //g"|tac));
+[ "$wlan" ] && printf %b "${wlan[*]}" > $HOME/logs/wlan.log || wlan="$(cat $HOME/logs/wlan.log)"; 
+# printf %b "$wlan" > $HOME/logs/iploc.log;  
 ########
 ####
 ####
@@ -147,8 +149,8 @@ ii="$(ip -c -brief -4 a 2>/dev/null|grep -vE "lo |DOWN"|cut -f1 -d"/"|column --t
 ####
 # gum style --padding "0 1 0 1" --border-foreground 250 --border normal "$()"; 
 dott && printf %b "\e[G"; 
-printf %b "${ii[*]}"; 
-[ "$wlan" ] && printf %b " - ${wlan}"|bat -ppflsyslog --theme TwoDark; [ "$ssh" ] && printf %b " << ${ssh}:${ssh[-1]}"|tr "\n " "\t "| bat -ppflsyslog --theme zenburn; 
+printf %b "${ii[*]} "; 
+[ "$wlan" ] && printf %b "- ${wlan} "|bat -ppflsyslog --theme TwoDark; [ "$ssh" ] && printf %b "<< ${ssh}:${ssh[-1]} "|tr "\n " "\t "| bat -ppflsyslog --theme zenburn; 
 echo; dott; echo; 
 # [ "$mac" ] && printf %b "| ${mac[1]} | ${mac}" |tr -d "\n"| bat -ppflsyslog --theme zenburn; 
 #########################
@@ -172,9 +174,9 @@ printf %b "${idcbg}${idt} ${id} $rev ${idc[3]} $ver \x23${idc[1]} $rev ${idc[0]}
 # \e[0m\e[3${idc[2]}m\e[4${idc[2]};38;5;${idc}m"; #########################
 echo; dott; echo; 
 [ "$(cat ${logs}/dfree.log|wc -c)" -gt 4 ] && cat "${logs}/dfree.log" || dfree; 
-dott; echo; 
-dott && printf %b "\e[G"; (uptime -p|tr "\n" "|"; tty)|bat -ppflgo --theme zenburn; 
-dott; echo; 
+dott; echo; dott; 
+printf %b "\e[G$((uptime -p|tr "\n" "|"; tty)|bat -ppflgo --theme zenburn) "; 
+echo; dott; echo; 
 ####
 # . ${HOME}/zz/alias.sh; 
 # . $HOME/zz/_ps1.sh; 
