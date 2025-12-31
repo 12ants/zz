@@ -26,7 +26,7 @@ export LESS=''${lessprefix}' -R --file-size --use-color --incsearch --mouse --pr
 ########
 export GREP_COLORS="mt=91:ms=95:fn=32:ln=32:bn=32:se=35:sl=38;5;207:cx=38;5;121:ne"; 
 ########
-gh auth status|grep -e "true" -B1 --color=auto|col -xb|cut -f9 -d" "|tr -d "\n" > ~/logs/gh_log.log & disown; 
+gh auth status 2>&1|grep -e "true" -B1 --color=auto|col -xb|cut -f9 -d" "|tr -d "\n" > ~/logs/gh_log.log & disown; 
 ######## make som basic folders ######## 
 mkdir $HOME/logs/b $HOME/tmp $HOME/gh $HOME/dl $HOME/bin $HOME/img $HOME/.config -m 775 -p 2>/dev/null; 
 ########
@@ -157,7 +157,8 @@ echo; dott; echo;
 # [ "$mac" ] && printf %b "| ${mac[1]} | ${mac}" |tr -d "\n"| bat -ppflsyslog --theme zenburn; 
 #########################
 ######## COLOR - ID #####
-wlan="$(cat $HOME/logs/wlan.log)"; idn="${wlan/*./}"; 
+wlan="$(cat $HOME/logs/wlan.log)"; 
+idn1="${wlan/*./}"; idn="$((${idn1:(-2)} + 0))"; 
 . $HOME/zz/i/colors/coala.sh; 
 unset -v idc; declare -a idc; 
 export idc=(${co[idn]}); 
