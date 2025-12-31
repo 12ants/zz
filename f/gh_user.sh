@@ -1,5 +1,5 @@
 #!/bin/bash
-function git_user () { 
+function gh_user () { 
 ####
 IFS=$'\n\t '; 
 ghusers=($(gh auth status|col -xb|grep -e "Logged in"|cut -f9 -d" ")); 
