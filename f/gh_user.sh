@@ -12,6 +12,10 @@ printf %b "\n";
 gh auth switch -u "${ghuser1}"; 
 printf %b "\n"; 
 ####
+if [ -e ~/.ssh/gh_$ghuser1 ]; then :; 
+else ssh-keygen -N '' -f ~/.ssh/gh_$ghuser1; 
+gh ssh-key add ~/.ssh/gh_${ghuser1}.pub; fi; 
+####
 git config --global core.sshCommand "ssh -i ~/.ssh/gh_$ghuser1"; 
 git config --list --global|bat -ppflc; 
 ####
