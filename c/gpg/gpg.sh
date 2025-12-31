@@ -8,7 +8,7 @@ gpgs=($(command ls -1 ${start}/c/gpg));
 ####
 printf %b "\n\e[A -- pw: "; 
 ####
-read -res "pw"; 
+read -r "pw"; 
 ####
 for i in ${gpgs[*]}; do 
 echo $i; 

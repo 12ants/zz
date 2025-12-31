@@ -1,17 +1,16 @@
 #!/bin/bash
 ######## webmin
-
-
-## About: Webmin Installer.
-##
-echo -e "\n\n  $green #######################$re "
-echo -e "  $green ##$re WEBMINSTALLER$green ######$re "
-echo -e "  $green #######################$re "
-echo -e "  $green ##$re "
-echo -e "$c2 Installing Webmin . . ."\n\n ; tput dim;
-apt install -y perl libnet-ssleay-perl openssl \
-libauthen-pam-perl libpam-runtime libio-pty-perl 2>/dev/null ; 
-tput indn 22; tput cuu 8;
+hash sudo 2>/dev/null && [ -z $SUDO_USER ] && sudo="sudo"; mkdir $HOME/tmp 2>/dev/null; 
+########
+echo -e "   ####################### "; 
+echo -e "   ## WEBMINSTALLER ###### "; 
+echo -e "   ####################### \n\n"; 
+########
+curl -o $HOME/tmp/webmin-setup-repo.sh "https://raw.githubusercontent.com/webmin/webmin/master/webmin-setup-repo.sh"; 
+$sudo sh $HOME/tmp/webmin-setup-repo.sh; 
+$sudo apt update; $sudo apt upgrade -y; 
+$sudo apt install -y webmin --install-recommends; 
+########
 ##
 # cd $ghh; curl -o setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/# master/setup-repos.sh; chmod +x setup-repos.sh; sh setup-repos.sh;
 # apt update; apt -y install webmin --install-recommends;
@@ -23,11 +22,11 @@ tput indn 22; tput cuu 8;
 # echo -e "\t $green#######################$re"
 # echo -e "\n\n\t $green##$re \n\n"
 ##
-cd /tmp; 
-wget -OO.tar.gz https://download.webmin.com/devel/tarballs/webmin-current.tar.gz; 
-tar -xf O.tar.gz --strip-components=1;
-# cp $ghh/0000/conf/webminsetup.sh ./setup.sh -b;
-./setup.sh /usr/local/webmin 
-echo gg
+# cd /tmp; 
+# wget -OO.tar.gz https://download.webmin.com/devel/tarballs/webmin-current.tar.gz; 
+# tar -xf O.tar.gz --strip-components=1;
+# # cp $ghh/0000/conf/webminsetup.sh ./setup.sh -b;
+# ./setup.sh /usr/local/webmin 
+# echo gg
 ##
 ##
