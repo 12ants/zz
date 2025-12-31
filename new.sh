@@ -216,6 +216,7 @@ for i in $HOME/zz/f/*.sh; do . $i; done;
 [ $PREFIX ] && crond 2>/dev/null; 
 [ $PREFIX ] && (sleep 2; termux-api-start &>/dev/null) & disown; 
 [ $PREFIX ] && (sleep 4; termux-wake-lock &>/dev/null) & disown; 
+export IFS=$'\n\t '; 
 }; 
 ####
 [ "$TMUX" ] && new || echo; 
