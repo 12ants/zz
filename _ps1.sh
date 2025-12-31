@@ -44,7 +44,7 @@ _dtime() { hh=1$(date +%H;); mm=1$(date +%M;); ss=1$(date +%S);
 printf %b "\e[38;5;$((hh + 22))m${hh:1:2}$re:\e[38;5;$((mm + 22))m${mm:1:2}$re:\e[38;5;${ss/0/1}m${ss:1:2}\e[0m" 2>/dev/null; }; 
 # _etime() { printf %b "\e[38;5;${EPOCHSECONDS:8:2}m${EPOCHSECONDS:6:4}\e[0m";  }; 
 ################
-alias gits='[ -e $PWD/.git ] && ggii="$(git status --short 2>/dev/null|grep "" --quiet && printf %b "41"|| printf %b "44"; )" && printf %b "\e[0m\e[${ggii}m git \e[0m"'; 
+alias gits='[ -e $PWD/.git ] && ggii="$(git status --short 2>/dev/null|grep "" --quiet && printf %b "41"||printf %b "44"; )" && printf %b "\e[0m\e[${ggii}m git \e[0;2m"'; 
 ee() { [ $? = 130 ] && echo gg; }; 
 
 alias gitsu='[ -s "$HOME/logs/gh_log.log" ] && printf %b "[\e[92m$(cat $HOME/logs/gh_log.log)\e[0;2m]"'; 
@@ -63,8 +63,8 @@ cc3="$(cat $HOME/logs/idc.log|cut -f3 -d" ")";
 ##
 # ['$re'$(_etime)'$re']\
 # ['$re${w[${wlan/*./}]}'\e[3${c[idn]:13:1}m\e[48;5;${c[idn]:0:4}${model:0:12}'$re']\
-PS1='\e[0m[\e[0;1;38;5;$((2 + $?))m$?'$re']\
-$(gits||printf " ")\
+PS1='\e[0m\e[2m[\e[0;1;38;5;$((2 + $?))m$?'$re']\
+$(gits||printf "")\
 ['$re'$(_dtime 2>/dev/null)'$re']\
 '$re'$(_bat)\
 '$re'$(gitsu)\

@@ -12,6 +12,8 @@ printf %b "\n";
 gh auth switch -u "${ghuser1}"; 
 printf %b "\n"; 
 ####
+gh auth status|grep -e "true" -B1 --color=auto|col -xb|cut -f9 -d" "|tr -d "\n" > ~/logs/gh_log.log & disown; 
+####
 if [ -e ~/.ssh/gh_$ghuser1 ]; then :; 
 else ssh-keygen -N '' -f ~/.ssh/gh_$ghuser1; 
 gh ssh-key add ~/.ssh/gh_${ghuser1}.pub; fi; 
