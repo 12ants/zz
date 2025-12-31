@@ -1,1 +1,7 @@
-mnu() { local IFS=$' \n\t'; unset FZF_DEFAULT_OPTS; printf %b "${*:-$(ls -p --color=always --group-directories-first -tr|tac)}"|fzf-tmux -i -m --ansi --cycle --border top --border-label 'gg dd {}' --border-label-pos top -h85% -w95% --height "~88%" --delimiter " " --preview-window "0,wrap,border-left" --scrollbar "█" --wrap-sign "" --bind "q:abort,0:change-preview-window(right,66%|top,66%|0)" --preview "file {} 2>/dev/null; ls {} 2>/dev/null; bat -ppf {} 2>/dev/null" --inline-info --wrap --color bg:232,preview-bg:-1,gutter:6,bg+:89 --highlight-line; }; 
+#!/bin/bash
+function mnu () { 
+local IFS=$'\n\t '; unset -v uhl uhw mm; 
+mnu=(${@}); [ -z "$1" ] && mnu=($(command ls -1p|head -n $((LINES - 4)))); 
+uhl="${#mnu[*]}"; uhw=$(printf %b "${mnu[*]}"|wc --max-line-length); 
+mm=($(printf %b "${mnu[*]}"|command fzf-tmux -w "$((uhw + 6))" -h "$((uhl + 3))" -m --cycle --ansi --bind 'enter:print-query' --disabled --info inline:"" --bind 'focus:replace-query,q:abort')); 
+printf %b "${mm[*]}\n"; }; 
