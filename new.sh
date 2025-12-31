@@ -170,7 +170,7 @@ re='\e[0m'; rev='\e[7m'; ver='\e[27m';
 bg='\e[48;5;'; fg='\e[38;5;'; 
 idcbg="${bg}${idc}m"; idcfg="${fg}${idc}m"; idt="\e[3${idc[2]}m"; 
 ####
-dott; printf %b "\e[G"; (printf %b "[${modo[*]:0:7}"|head -c44; printf %b "]")|batcat -ppfljava --theme gruvbox-dark; 
+dott; printf %b "\e[G"; (printf %b "[${modo[*]:0:7}"|head -c44; printf %b "] ")|batcat -ppfljava --theme gruvbox-dark; 
 echo; dott; echo; 
 dott && printf %b "\e[G"; 
 printf %b "${idcbg}${idt} ${id} $rev ${idc[3]} $ver \x23${idc[1]} $rev ${idc[0]} \e[0m "; 
