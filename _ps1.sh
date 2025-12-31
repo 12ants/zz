@@ -50,7 +50,7 @@ ee() { [ $? = 130 ] && echo gg; };
 alias gitsu='[ -s "$HOME/logs/gh_log.log" ] && printf %b "[\e[92m$(cat $HOME/logs/gh_log.log)\e[0;2m]"'; 
 alias wip='[ -s "$HOME/logs/idc.log" ] && printf %b "[\e[96m$(cat $HOME/logs/idc.log|cut -f1 -d" ")$\e[0;2m]"'; 
 cc1="$(cat $HOME/logs/idc.log|cut -f1 -d" ")"; 
-cc3="$(cat $HOME/logs/idc.log|cut -f3 -d" ")"; 
+cc2="$(cat $HOME/logs/idc.log|cut -f3 -d" ")"; 
 #alias gitstat='git status --short 2>/dev/null|tr "\n\t " " | "|bat -ppfld --theme Coldark-Dark'; 
 # (printf %b "${gitst}\t
 ################
@@ -63,11 +63,11 @@ cc3="$(cat $HOME/logs/idc.log|cut -f3 -d" ")";
 ##
 # ['$re'$(_etime)'$re']\
 # ['$re${w[${wlan/*./}]}'\e[3${c[idn]:13:1}m\e[48;5;${c[idn]:0:4}${model:0:12}'$re']\
+# ['$re'\e[38;5;${cc1}m${wlan}'$re']\
 PS1='\e[0m\e[2m[\e[0;1;38;5;$((2 + $?))m$?'$re']\
 $(gits||printf "")\
 ['$re'$(_dtime 2>/dev/null)'$re']\
 '$re'$(_bat)\
 '$re'$(gitsu)\
-['$re'\e[38;5;${cc1}m${wlan}'$re']\
 ['$re'\e[0;48;5;${cc1};38;5;${cc2}m${model:0:12}'$re']\
 ['$re$cyan'\u'$re']'$re''${_host}'['$re$yellow'\w'${re}]'\e[?25h\e[0m \n'; 

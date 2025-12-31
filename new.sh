@@ -158,7 +158,7 @@ echo; dott; echo;
 #########################
 ######## COLOR - ID #####
 wlan="$(cat $HOME/logs/wlan.log)"; 
-idn1="${wlan/*./}"; idn="$((${idn1:(-2)} + 0))"; 
+idn1="${wlan/*./}"; idn="$(($(printf %b "${idn1}"|tail -c2) + 0))"; 
 . $HOME/zz/i/colors/coala.sh; 
 unset -v idc; declare -a idc; 
 export idc=(${co[idn]}); 
@@ -170,10 +170,10 @@ re='\e[0m'; rev='\e[7m'; ver='\e[27m';
 bg='\e[48;5;'; fg='\e[38;5;'; 
 idcbg="${bg}${idc}m"; idcfg="${fg}${idc}m"; idt="\e[3${idc[2]}m"; 
 ####
-dott; printf %b "\e[G"; (printf %b "[${modo[*]:0:7}"|head -c44; printf %b "]\n")|batcat -ppfljava --theme gruvbox-dark; 
-dott; echo; 
+dott; printf %b "\e[G"; (printf %b "[${modo[*]:0:7}"|head -c44; printf %b "]")|batcat -ppfljava --theme gruvbox-dark; 
+echo; dott; echo; 
 dott && printf %b "\e[G"; 
-printf %b "${idcbg}${idt} ${id} $rev ${idc[3]} $ver \x23${idc[1]} $rev ${idc[0]} \e[0m"; 
+printf %b "${idcbg}${idt} ${id} $rev ${idc[3]} $ver \x23${idc[1]} $rev ${idc[0]} \e[0m "; 
 # \e[0m\e[3${idc[2]}m\e[4${idc[2]};38;5;${idc}m"; #########################
 echo; dott; echo; 
 [ "$(cat ${logs}/dfree.log|wc -c)" -gt 4 ] && cat "${logs}/dfree.log" || dfree; 
