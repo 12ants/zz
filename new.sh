@@ -2,6 +2,7 @@
 # very good bash enviorment 
 [ -z "$TMUX" ] && tmux; 
 shopt -s histappend; shopt -s histverify; 
+export IFS=$' \n\t'; 
 ####
 new() { 
 # export IFS=$'\n\t '; 
@@ -25,6 +26,7 @@ export LESS=''${lessprefix}' -R --file-size --use-color --incsearch --mouse --pr
 ########
 export GREP_COLORS="mt=91:ms=95:fn=32:ln=32:bn=32:se=35:sl=38;5;207:cx=38;5;121:ne"; 
 ########
+gh auth status|grep -e "true" -B1 --color=auto|col -xb|cut -f9 -d" "|tr -d "\n" > ~/logs/gh_log.log & disown; 
 ######## make som basic folders ######## 
 mkdir $HOME/logs/b $HOME/tmp $HOME/gh $HOME/dl $HOME/bin $HOME/img $HOME/.config -m 775 -p 2>/dev/null; 
 ########
@@ -216,7 +218,6 @@ for i in $HOME/zz/f/*.sh; do . $i; done;
 [ $PREFIX ] && crond 2>/dev/null; 
 [ $PREFIX ] && (sleep 2; termux-api-start &>/dev/null) & disown; 
 [ $PREFIX ] && (sleep 4; termux-wake-lock &>/dev/null) & disown; 
-export IFS=$'\n\t '; 
 }; 
 ####
 [ "$TMUX" ] && new || echo; 
