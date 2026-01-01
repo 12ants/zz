@@ -178,8 +178,8 @@ printf %b "${idcbg}${idt} ${id} $rev ${idc[3]} $ver \x23${idc[1]} $rev ${idc[0]}
 echo; dott; echo; 
 [ "$(cat ${logs}/dfree.log|wc -c)" -gt 4 ] && cat "${logs}/dfree.log" || dfree; 
 dott; echo; dott; 
-printf %b "\e[G$((uptime -p|tr "\n" "|"; tty)|bat -ppflgo --theme zenburn) "; 
-echo; dott; echo; 
+printf %b "\e[G$((uptime -p|tr "\n" "|"; tty)|bat -ppflgo --theme zenburn) ";
+echo; dott; echo;
 ####
 # . ${HOME}/zz/alias.sh; 
 # . $HOME/zz/_ps1.sh; 
