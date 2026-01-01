@@ -9,6 +9,7 @@ alias cccc='crontab -e';
 alias xxxx='ssh -p 8022 aa@192.168.0.19 "mpv $HOME/88/m/money.mp3"'
 alias gh_release_dl='gh release download "$(gh release list --limit 1|tail -n1|tr -s " \t" " "|cut -f1 -d" ")"'; 
 alias 12alias='$EDITOR ~/88/alias.sh'; 
+alias env='env|sort|k'; 
 alias antsup='ssh aa@ants.ftp.sh "sudo apt update; sudo apt upgrade; sudo reboot"'; 
 alias s='ssss -sl4|grep -vE "UNCONN"|tr -s " " " "|cut -f1,2,5 -d" "|column --table --output-separator " : "|bat -ppfld'; 
 alias neew='clear; . crons/hour.sh; printf %b "\e[12B"; new'; 

@@ -13,6 +13,7 @@ export email='leonel@ik.me';
 export BAT_THEME="Coldark-Dark"; 
 export logs="$HOME/logs"; 
 export tmp="$HOME/tmp"; [ -z $TMPDIR ] && export TMPDIR="$HOME/tmp"; 
+export PKG_CONFIG_PATH="$HOME/.config"; 
 unset HISTTIMEFORMAT; 
 hash sudo 2>/dev/null && [ "$UID" != 0 ] && export sudo="sudo"; 
 ########
@@ -68,8 +69,8 @@ export FZF_DEFAULT_OPTS="${tmuxprefix} -i -m --cycle --ansi --height '~99%' --bi
 ########
 . $HOME/zz/f/12calendar.sh; 
 . $HOME/zz/f/memram.sh; 
-. $HOME/zz/i/colors.sh; 
-. $HOME/zz/c/lfcolors.sh; 
+# . $HOME/zz/i/colors.sh; 
+# . $HOME/zz/c/lfcolors.sh; 
 # clear; . $HOME/zz/crons/hour.sh; printf %b "\e[9B";
 ## export HISTTIMEFORMAT="%b-%d-%H:%M:%S "; 
 #############################
