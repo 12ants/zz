@@ -1,4 +1,3 @@
-printf %b '
 \e[1;4;96mCharacter classes\e[0m
 .	any character except newline
 \w\d\s	word, digit, whitespace
@@ -24,4 +23,3 @@ a{5}a{2,}	exactly five, two or more
 a{1,3}	between one & three
 a+?a{2,}?	match as few as possible
 ab|cd	match ab or cd
-'; 
