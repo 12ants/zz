@@ -1,38 +1,40 @@
 #!/bin/bash
 ## create super user froom root
-hash sudo 2>/dev/null && sudo="sudo"; 
+# sus() { sudo $@; }; 
+IFS=$'\n\t '; c2='\e[96m--\e[0m'; 
+unalias sudo 2>/dev/null; unset sudo; # 2>/dev/null; 
+sudo mkdir -pm 775 /home/${SUDO_USER:-$USER}/tmp; # 2>/dev/null; 
+sudo chown ${SUDO_USER:-$USER}: /home/${SUDO_USER:-$USER}/tmp; # 2>/dev/null; 
+# hash sudo 2>/dev/null && 
+if ((UID > 1)); then printf %b "\n $c2 \e[2m[\e[0m $0 \e[0m]\n $c2 run this as sudo\n\n\n\n"; 
+echo; [[ $0 =~ /*/ ]] && exit 1; 
+[[ $0 =~ -bash ]]||return 5 2>/dev/null; else 
+printf %b "\n\n\n\n\e[2A $c2 Add as sudo-user: "; 
+read -ep ' ' -i "${SUDO_USER:-$USER}" "newsudo"; 
 ####
-read -rep " $c2 Add as sudo-user: " -i "newsudo"; 
+touch /etc/sudoers.d/$newsudo; 
+chmod 775 /etc/sudoers.d/$newsudo; 
 ####
-$sudo printf %b "
-${newsudo} ALL=(ALL) NOPASSWD:ALL
-%${newsudo} ALL=(ALL) NOPASSWD:ALL 
-" >> "/etc/sudoers.d/sudos" && \
-$sudo chmod 775 /etc/sudoers.d/sudos; 
+sds=($(touch /etc/sudoers.d/$newsudo 2>&1|sed -n "/\(error\|empty\)/p"|cut -f2 -d":")); 
+[ $sds ] && sed $(for ss in ${sds[*]}; do printf %b "-e ${ss}d "; done) /etc/sudoers.d/$newsudo > /home/$SUDO_USER/tmp/$newsudo; 
+####
+[ -s /home/${SUDO_USER:-$USER}/tmp/$newsudo ] || cp /home/${SUDO_USER:-$USER}/tmp/$newsudo /etc/sudoers.d/$newsudo -b; 
+####
+echo;echo;echo;echo;
+echo "${newsudo} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$newsudo; 
+echo "%${newsudo} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/$newsudo; 
+cat /etc/sudoers.d/$newsudo; 
+echo;echo;echo;echo;
 ####
 ####
-
-
-# _be_sudo() { 
-# us="$(id -un)"; [ $(id -u) = 0 ] && us="${SUDO_USER}";
-# 
-# printf %b "\n\n\e[A \e[96m--\e[0m sudo user:";
-# read -rep ' ' -ri "${us}" "us"; 
-# 
-# $sudo printf %b "${us} ALL=(ALL) NOPASSWD: ALL\n"|tee -a /etc/sudoers.d/sudo.sh 2>/dev/null;
-# 
-# printf %b "\e[0m"; 
-# printf %b "\e[2m?\e[0m\e[96m\e[1m ";
-
-# _ok;
-
-
-
-
-# _newcolor; printf %b "\e[u";
-
-# p2 " $c2 "; p1 "$us is now in $(printf %b "${bold}${green}")GOD$(printf %b "${re}") mode . . . ."; 
-# _newcolor;
-# fi;
-# printf %b "\e[0m\n";
-# }; 
+# sds=($(sudo touch /etc/sudoers.d/sudos.sh 2>&1|sed -n "/\(error\|empty\)/p"|cut -f2 -d":")); 
+# [ $sds ] && sed $(for ss in ${sds[*]}; do 
+# printf %b "-e ${ss}d "; done) /etc/sudoers.d/sudos.sh > $HOME/sudos.sh; 
+# sudo cp $HOME/sudos.sh /etc/sudoers.d/sudos.sh -b; 
+####
+####
+printf %b "\n----\n\n $c2 DONE\n\n"; fi||return 6 2>/dev/null; 
+# sudo=""; 
+####
+####
+####
