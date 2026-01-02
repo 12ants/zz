@@ -13,7 +13,7 @@ export email='leonel@ik.me';
 export BAT_THEME="Coldark-Dark"; 
 export logs="$HOME/logs"; 
 export tmp="$HOME/tmp"; [ -z $TMPDIR ] && export TMPDIR="$HOME/tmp"; 
-export PKG_CONFIG_PATH="$HOME/.config"; 
+# export PKG_CONFIG_PATH="$HOME/gh/ffmpeg"; 
 unset HISTTIMEFORMAT; 
 hash sudo 2>/dev/null && [ "$UID" != 0 ] && export sudo="sudo"; 
 ########
