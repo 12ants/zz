@@ -5,6 +5,7 @@ c2='\e[96m --\e[0m'; re='\e[0m'; gt="";
 [ -z "$PREFIX" ] && sudo=sudo; 
 alias kk='fmt -g 66|col -xb|bat -pfljava --theme DarkNeon'; 
 alias kkkk='col -xb|fmt --split-only --width=$((COLUMNS - 2)) --goal=66 --uniform-spacing --tagged-paragraph|bat -pfljava --theme TwoDark'; 
+alias rep="reset -Q; IFS=$'\n\t '; . $PREFIX/share/bash-completion/bash_completion"; 
 alias cccc='crontab -e'; 
 alias xxxx='ssh -p 8022 aa@192.168.0.19 "mpv $HOME/88/m/money.mp3"'
 alias gh_release_dl='gh release download "$(gh release list --limit 1|tail -n1|tr -s " \t" " "|cut -f1 -d" ")"'; 

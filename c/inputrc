@@ -19,7 +19,7 @@ $if mode=emacs
 "\e[5D": backward-word
 "\e[8~": end-of-line
 "\ek": backward-kill-line
-C-t: '\e4klock\n'
+# C-t: '\e4klock\n'
 C-o: '\ek\ncd $(lf -print-last-dir); \n'
 C-p: 'printf %b "";\C-b\C-b' 
 "\e[v": '\ek\nsed -n l;\n' 
