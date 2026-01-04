@@ -229,9 +229,9 @@ printf %b "\x1b]12;#ff44bb"; #### cursor = pink
 [ $PREFIX ] && (sleep 4; termux-wake-lock &>/dev/null) & disown; 
 }; 
 ####
-if [ -e "~/.kk" ]; 
-then uname -a; 
-else [ "$TMUX" ] && new || echo; fi; 
+
+
+if [ $TMUX ]; then [ -s ~/.kk ] || new; fi; 
 . $HOME/zz/_ps1.sh; 
 . $HOME/zz/alias.sh; 
 . $HOME/.config/tmux/tmuxcompletions.sh; 
