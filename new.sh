@@ -37,8 +37,6 @@ dfree > $logs/dfree.log & disown;
 ########
 . $HOME/zz/i/coala.log; 
 ########
-alias k='col -xb|tr -s "\n" "\n"|bat -pfljava'; 
-alias re='reset -Q; exec bash;'; 
 ########
 if echo $HOME|grep -w "termux" -q; then alias sudo='command'; else sudo=sudo; fi; 
 ########
@@ -229,13 +227,15 @@ printf %b "\x1b]12;#ff44bb"; #### cursor = pink
 [ $PREFIX ] && (sleep 4; termux-wake-lock &>/dev/null) & disown; 
 }; 
 ####
-
-
+####
 if [ $TMUX ]; then [ -s ~/.kk ] || new; fi; 
-. $HOME/zz/_ps1.sh; 
+####
 . $HOME/zz/alias.sh; 
-. $HOME/.config/tmux/tmuxcompletions.sh; 
+####
 for i in $HOME/zz/f/*.sh; do . $i; done; 
+####
+. $HOME/zz/_ps1.sh; 
+. $HOME/.config/tmux/tmuxcompletions.sh; 
 ################################
 ################################
 ####

@@ -66,6 +66,8 @@ alias sd='cd /sdcard';
 alias mm='$EDITOR '
 alias qq='cd .. ';
 alias rr='sudo -s';
+alias k='col -xb|tr -s "\n" "\n"|bat -pfljava'; 
+alias re='reset -Q; exec bash;'; 
 # alias ll='ls -l --group-directories-first -tr'; 
 # alias ll='lsd -l --extensionsort --group-directories-first -tr'; 
 alias ll='ls -hk -Gltr --color=always'; 
