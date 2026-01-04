@@ -3,7 +3,7 @@
 alias zz='cd $HOME/zz'; 
 c2='\e[96m --\e[0m'; re='\e[0m'; gt=""; 
 [ -z "$PREFIX" ] && sudo=sudo; 
-alias kk='fmt -g 66|col -xb|bat -pfljava --theme DarkNeon'; 
+# alias kk='fmt -g 66|col -xb|bat -pfljava --theme DarkNeon'; 
 alias kkkk='col -xb|fmt --split-only --width=$((COLUMNS - 2)) --goal=66 --uniform-spacing --tagged-paragraph|bat -pfljava --theme TwoDark'; 
 alias rep="reset -Q; IFS=$'\n\t '; . $PREFIX/share/bash-completion/bash_completion"; 
 alias cccc='crontab -e'; 
@@ -83,7 +83,7 @@ alias no='printf "\e[?25h\e[0m"; tmux set mouse on 2>/dev/null; reset -I 2>/dev/
 alias r='ranger --choosedir=$HOME/logs/path; cd $(cat $HOME/logs/path)'; 
 alias l='lf -config $HOME/.config/lf/lfrc -last-dir-path $HOME/logs/ll.log; cd $(cat $HOME/logs/ll.log); '; 
 alias kat='bat -pfld|less'; 
-alias kk='bat -pflzig'; 
+# alias kk='bat -pflzig'; 
 # alias kk='bat -ppflzig $(tmux set-option mouse off; )|less; tmux set-option mouse on; '; 
 alias iiii='$EDITOR $HOME/.inputrc; echo gg; exec bash; '
 alias speed='speedtest --bytes --no-upload 2>/dev/null || speedtest-go --unit=decimal-bits \

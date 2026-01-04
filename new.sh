@@ -4,7 +4,7 @@
 shopt -s histappend; shopt -s histverify; 
 export IFS=$' \n\t'; 
 ####
-new() { 
+kk() { 
 # export IFS=$'\n\t '; 
 export HISTCONTROL="ignoreboth"; 
 export PROMPT_COMMAND="history -a; history -n; "; 
@@ -225,17 +225,23 @@ printf %b "\x1b]12;#ff44bb"; #### cursor = pink
 [ $PREFIX ] && crond 2>/dev/null; 
 [ $PREFIX ] && (sleep 2; termux-api-start &>/dev/null) & disown; 
 [ $PREFIX ] && (sleep 4; termux-wake-lock &>/dev/null) & disown; 
+########################
+########################
 }; 
+########################
+########################
 ####
+#### [ -s ~/.kk ] || new; 
+# alias kk='new'; 
 ####
-if [ $TMUX ]; then [ -s ~/.kk ] || new; fi; 
-####
-. $HOME/zz/alias.sh; 
+if [ -z $TMUX ]; then tmux; fi; 
 ####
 for i in $HOME/zz/f/*.sh; do . $i; done; 
 ####
 . $HOME/zz/_ps1.sh; 
+. $HOME/zz/alias.sh; 
 . $HOME/.config/tmux/tmuxcompletions.sh; 
+# . $PREFIX/share/bash
 ################################
 ################################
 ####
