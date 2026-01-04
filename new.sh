@@ -220,14 +220,8 @@ printf %b "\x1b]12;#ff44bb"; #### cursor = pink
 ####
 # moda="$(printf %b "${modo}"|tr -d "[]"|head -c14)"; model="${moda/%\ /}"; 
 #############################
-##
-. $HOME/zz/_ps1.sh; 
-. $HOME/zz/alias.sh; 
-. $HOME/.config/tmux/tmuxcompletions.sh; 
-####
 # [ "$TMUX_PANE" = "%0" ] && dfree; 
 # source "$HOME/zz/c/tmuxcompletions.sh"; 
-for i in $HOME/zz/f/*.sh; do . $i; done; 
 ####
 [ $PREFIX ] && sshd 2>/dev/null; 
 [ $PREFIX ] && crond 2>/dev/null; 
@@ -235,7 +229,20 @@ for i in $HOME/zz/f/*.sh; do . $i; done;
 [ $PREFIX ] && (sleep 4; termux-wake-lock &>/dev/null) & disown; 
 }; 
 ####
-[ "$TMUX" ] && new || echo; 
+if [ -e "~/.kk" ]; 
+then uname -a; 
+else [ "$TMUX" ] && new || echo; fi; 
+. $HOME/zz/_ps1.sh; 
+. $HOME/zz/alias.sh; 
+. $HOME/.config/tmux/tmuxcompletions.sh; 
+for i in $HOME/zz/f/*.sh; do . $i; done; 
+################################
+################################
+####
+####
+#################################
+#################################
+
 # [ $TMUX ] && [ -z "$new" ] && new || unset new; 
 # command ps -A|cut -c25-|grep -e 'crond' &>/dev/null || 
 ####
