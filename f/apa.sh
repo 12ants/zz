@@ -15,8 +15,11 @@ printf %b "\e[?25l\n\n\n\n\n\n\e[5A\e[96m --\e[0;2m [\e[0;92mI\e[0;2m]\e[0mnstal
 read -srn1 "irir"; printf %b "\e[0m\e[?25h \e[42G\e[42m  ok  \e[0m\n"; 
 ########
 case "$irir" in 
-i|I|"") instremove="install"; 
+u) instremove="update"
 apagetlist() { apt list 2>/dev/null|tail -n +2|cut -f1 -d"/" > "$HOME/logs/apts.log" & disown; };; 
+####
+i|I|"") instremove="install"; 
+apagetlist() { stat $HOME/logs/apts.log; };; 
 ####
 r|R) instremove="remove"; 
 apagetlist() { apt list --installed 2>/dev/null|tail -n +2|cut -f1 -d"/" > "$HOME/logs/apts.log" & disown; };; 
@@ -77,7 +80,8 @@ tmux split-window -l 5 '$sudo apt remove -y ${aapp[*]}|bat -ppfljava --theme Dar
 
 # printf %b "\n\n -- \${aapp[*]}\n\n"|bat -ppflc --theme Nord; 
 fi; 
-case $ny in ""|r) printf %b " \e[96m--\e[0m ${instremove}ed: \n\e[96m ----------\e[0m\n"; printf %b "${aapp[*]}\n"|bat -ppflc --theme Nord;; esac; 
+case $ny in ""|r) printf %b " \e[96m--\e[0m ${instremove}ed: \n\e[96m ----------\e[0m\n"; 
+printf %b "${aapp[*]}\n"|bat -ppflc --theme Nord;; esac; 
 echo; echo; return 0; 
 }; 
 
