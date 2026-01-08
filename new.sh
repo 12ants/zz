@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # very good bash enviorment 
-[ -z "$TMUX" ] && tmux; 
-shopt -s histappend; shopt -s histverify; 
+shopt -s histappend; 
+shopt -s histverify; 
 export IFS=$' \n\t'; 
 ####
-kk() { 
+[ -z "$TMUX" ] && tmux && tmux source $HOME/.config/tmux/tmux.conf;  
 # export IFS=$'\n\t '; 
 export HISTCONTROL="ignoreboth"; 
 export PROMPT_COMMAND="history -a; history -n; "; 
@@ -12,7 +12,7 @@ export EDITOR="micro";
 export email='leonel@ik.me'; 
 export BAT_THEME="Coldark-Dark"; 
 export logs="$HOME/logs"; 
-export tmp="$HOME/tmp"; [ -z $TMPDIR ] && export TMPDIR="$HOME/tmp"; 
+export tmp="$HOME/tmp"; [ -z "$TMPDIR" ] && export TMPDIR="$HOME/tmp"; 
 # export PKG_CONFIG_PATH="$HOME/gh/ffmpeg"; 
 unset HISTTIMEFORMAT; 
 hash sudo 2>/dev/null && [ "$UID" != 0 ] && export sudo="sudo"; 
@@ -20,7 +20,7 @@ hash sudo 2>/dev/null && [ "$UID" != 0 ] && export sudo="sudo";
 re='\e[0m'; cyan='\e[96m'; logs="$HOME/logs"; c2="\e[96m -- \e[0m"; 
 ssh=(${SSH_CONNECTION}); [ -z $ssh ] && ssh=($SSH_CLIENT); 
 ########
-unset lessprefix; [ $PREFIX ] && lessprefix='--redraw-on-quit'; 
+unset lessprefix; [ "$PREFIX" ] && lessprefix='--redraw-on-quit'; 
 ########
 export LESS=''${lessprefix}' -R --file-size --use-color --incsearch --mouse --prompt=%F(%T) [/]search [n]ext [p]rev ?f%f .?n?m(%T %i of %m) ..?lt %lt-%lb?L/%L. :byte %bB?s/%s.  .?e(END)  ?x-  Next\:   %x.:?pB  %pB\%..%t '; 
 ########
@@ -47,7 +47,7 @@ if echo $HOME|grep -w "termux" -q; then alias sudo='command'; else sudo=sudo; fi
 if fzf --bash &>/dev/null; then . $HOME/.config/fzf_completions_bash.sh; fi; 
 ########
 unset tmuxprefix 2>/dev/null;  
-if [ $PREFIX ]; then tmuxprefix=" --tmux 'center,99%,95%' "; 
+if [ "$PREFIX" ]; then tmuxprefix=" --tmux 'center,99%,95%' "; 
 else alias fzf='fzf-tmux -h 98% -w 98%'; 
 fi; 
 #########
@@ -70,31 +70,37 @@ export FZF_DEFAULT_OPTS="${tmuxprefix} -i -m --cycle --ansi --bind 'q:abort'";
 [ -x $HOME/.config/gemini_api_id.conf ] && . $HOME/.config/gemini_api_id.conf 2>/dev/null; 
 [ -x $HOME/.config/cloudflare_id.conf ] && . $HOME/.config/cloudflare_id.conf 2>/dev/null; 
 ########
-[ -e $HOME/.config/lesskey ] || ln -s $HOME/zz/c/lesskey $HOME/.config/lesskey; 
-[ -e $HOME/.config/path.sh ] && export PATH=$(cat $HOME/.config/path.sh); 
+[ -s $HOME/.config/lesskey ] || ln -s $HOME/zz/c/lesskey $HOME/.config/lesskey; 
+[ -s $HOME/.config/path.sh ] && export PATH=$(cat $HOME/.config/path.sh); 
 ########
 # [ -z $TMUX ] && tmux; 
 ########
 ########
 # local IFS=$'\n\t '; 
 ########
-. $HOME/zz/f/12calendar.sh; 
-. $HOME/zz/f/memram.sh; 
 # . $HOME/zz/i/colors.sh; 
 # . $HOME/zz/c/lfcolors.sh; 
 # clear; . $HOME/zz/crons/hour.sh; printf %b "\e[9B";
 ## export HISTTIMEFORMAT="%b-%d-%H:%M:%S "; 
 #############################
 #############################
+_model() { 
 ## ____ MODEL _ GET ____ ####
 [ $PREFIX ] && modo=($(getprop|grep -E 'vendor.manufacturer|product.manufacturer' -m1 -A1 --group-separator=''|cut -f2- -d' '|tr -s "\n[]" " "; )); 
 #############################
 [ -z $PREFIX ] && [ -e /sys/devices/virtual/dmi/id/product_family ] && \
 modo=($(for bb in product_family board_vendor board_name bios_vendor sys_vendor; 
-do cat /sys/devices/virtual/dmi/id/${bb} 2>/dev/null|grep -v "O.E.M."|tr -s "\n" " "; done)); ##
-moda="$(printf %b "${modo}"|tr -d "[]"|head -c14)"; model="${moda/%\ /}"; 
-printf %b "${modo[*]}" > $HOME/logs/model.log; 
+do cat /sys/devices/virtual/dmi/id/${bb} 2>/dev/null|grep -v "O.E.M."|tr -s "\n" " "; done)); 
 ########
+#############################
+moda="$(printf %b "${modo}"|tr -d "[]"|head -c14)"; 
+model="${moda/%\ /}"; 
+printf %b "${modo[*]}" > $HOME/logs/model.log; 
+}; 
+########
+kk() { 
+. $HOME/zz/f/12calendar.sh; 
+. $HOME/zz/f/memram.sh; 
 #################################
 ## ____ VIDEOCARD _ GET ____ ####
 [ -z $PREFIX ] && \
@@ -234,7 +240,7 @@ printf %b "\x1b]12;#ff44bb"; #### cursor = pink
 #### [ -s ~/.kk ] || new; 
 # alias kk='new'; 
 ####
-if [ -z $TMUX ]; then tmux; fi; 
+# if [ -z $TMUX ]; then tmux; fi; 
 ####
 for i in $HOME/zz/f/*.sh; do . $i; done; 
 ####
