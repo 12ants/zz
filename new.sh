@@ -4,7 +4,7 @@ shopt -s histappend;
 shopt -s histverify; 
 export IFS=$' \n\t'; 
 ####
-[ -z "$TMUX" ] && tmux && tmux source $HOME/.config/tmux/tmux.conf;  
+[ -z "$TMUX" ] && tmux || tmux source $HOME/.config/tmux/tmux.conf;  
 # export IFS=$'\n\t '; 
 export HISTCONTROL="ignoreboth"; 
 export PROMPT_COMMAND="history -a; history -n; "; 
@@ -47,8 +47,8 @@ if echo $HOME|grep -w "termux" -q; then alias sudo='command'; else sudo=sudo; fi
 if fzf --bash &>/dev/null; then . $HOME/.config/fzf_completions_bash.sh; fi; 
 ########
 unset tmuxprefix 2>/dev/null;  
-if [ "$PREFIX" ]; then tmuxprefix=" --tmux 'center,99%,95%' "; 
-else alias fzf='fzf-tmux -h 98% -w 98%'; 
+if [ "$PREFIX" ]; then tmuxprefix=" --tmux 'center,100%,100%' "; 
+else alias fzf='fzf-tmux -h 100% -w 100%'; 
 fi; 
 #########
 export FZF_DEFAULT_OPTS="${tmuxprefix} -i -m --cycle --ansi --bind 'q:abort'"; 
@@ -97,6 +97,7 @@ moda="$(printf %b "${modo}"|tr -d "[]"|head -c14)";
 model="${moda/%\ /}"; 
 printf %b "${modo[*]}" > $HOME/logs/model.log; 
 }; 
+_model; 
 ########
 kk() { 
 . $HOME/zz/f/12calendar.sh; 
@@ -206,8 +207,7 @@ echo; dott; echo;
 # source "$HOME/zz/c/tmuxcompletions.sh"; 
 ####
 # sshd 2>/dev/null; command ps -A|cut -c25-|grep -e 'crond' &>/dev/null || crond 2>/dev/null; 
-[ -z "$PREFIX" ] && alias fzf='fzf-tmux -h 95% -w 98%'; 
-[ "$TMUX" ] && tmux source-file $HOME/.config/tmux/tmux.conf; 
+# [ "$TMUX" ] && tmux source-file $HOME/.config/tmux/tmux.conf; 
 ##
 ##
 printf %b "\x1b[1 q"; ########### cursor = block
@@ -229,7 +229,7 @@ printf %b "\x1b]12;#ff44bb"; #### cursor = pink
 ####
 [ $PREFIX ] && sshd 2>/dev/null; 
 [ $PREFIX ] && crond 2>/dev/null; 
-[ $PREFIX ] && (sleep 2; termux-api-start &>/dev/null) & disown; 
+[ $PREFIX ] && (sleep 2; termux-api-start &>/dev/null; printf %b "\e[A\e[K") & disown; 
 [ $PREFIX ] && (sleep 4; termux-wake-lock &>/dev/null) & disown; 
 ########################
 ########################
