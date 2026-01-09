@@ -30,7 +30,7 @@ fi; fi;
 ####
 if [ -e "$batcap" ]; then 
 [ -z "$PREFIX" ] && cat $batcap > "$HOME/logs/b/bp.log"; 
-[ -z "$PREFIX" ] && cat $batstat > "$HOME/b/battery.log"; 
+[ -z "$PREFIX" ] && cat $batstat > "$HOME/logs/b/battery.log"; 
 batp="$(cat $batcap)" && grep -wqi "Charging" "$batstat" && \
 bcharge="\e[0m\e[38;5;42;1m" || bcharge="\e[0m\e[2m"; 
 bcolor="$(printf %b "$((batp / 10 * 4 + 124 - 4))"|tee ~/logs/b/bcolor.log)"; 
