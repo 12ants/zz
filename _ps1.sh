@@ -29,6 +29,8 @@ else unset -v batcap batstat;
 fi; fi; 
 ####
 if [ -e "$batcap" ]; then 
+[ -z "$PREFIX" ] && cat $batcap > "$HOME/logs/b/bp.log"; 
+[ -z "$PREFIX" ] && cat $batstat > "$HOME/b/battery.log"; 
 batp="$(cat $batcap)" && grep -wqi "Charging" "$batstat" && \
 bcharge="\e[0m\e[38;5;42;1m" || bcharge="\e[0m\e[2m"; 
 bcolor="$(printf %b "$((batp / 10 * 4 + 124 - 4))"|tee ~/logs/b/bcolor.log)"; 
@@ -64,10 +66,11 @@ cc2="$(cat $HOME/logs/idc.log|cut -f3 -d" ")";
 # ['$re'$(_etime)'$re']\
 # ['$re${w[${wlan/*./}]}'\e[3${c[idn]:13:1}m\e[48;5;${c[idn]:0:4}${model:0:12}'$re']\
 # ['$re'\e[38;5;${cc1}m${wlan}'$re']\
+((UID == 0)) && id='\e[1;42;97mmROOT\e[0m'||id='\e[96m\u\e[0m'
 PS1='\e[0m\e[2m[\e[0;1;38;5;$((2 + $?))m$?'$re']\
 $(gits||printf "")\
 ['$re'$(_dtime 2>/dev/null)'$re']\
 '$re'$(_bat)\
 '$re'$(gitsu)\
 ['$re'\e[0;48;5;${cc1};38;5;${cc2}m${model:0:12}'$re']\
-['$re$cyan'\u'$re']'$re''${_host}'['$re$yellow'\w'${re}]'\e[?25h\e[0m \n'; 
+['$id']'$re''${_host}'['$re$yellow'\w'${re}]'\e[?25h\e[0m \n'; 
