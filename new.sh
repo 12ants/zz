@@ -67,6 +67,7 @@ export FZF_DEFAULT_OPTS="${tmuxprefix} -i -m --cycle --ansi --bind 'q:abort'";
 ####
 
 
+[ -x $HOME/.config/openai_api_id.conf ] && . $HOME/.config/openai_api_id.conf 2>/dev/null; 
 [ -x $HOME/.config/gemini_api_id.conf ] && . $HOME/.config/gemini_api_id.conf 2>/dev/null; 
 [ -x $HOME/.config/cloudflare_id.conf ] && . $HOME/.config/cloudflare_id.conf 2>/dev/null; 
 ########
