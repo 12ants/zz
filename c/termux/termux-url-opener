@@ -39,7 +39,7 @@ elif [ "$key" == B ]; then (( cur++ )); (( cur >= count )) && (( cur = count - 1
 elif [[ $key == C ]]; then mark+=(${ops[$cur]});
 printf %b "\e[s\e[6;22H\e[K${mark[@]}\e[K\e[u";
 elif [[ $key == "" ]]; then break;
-elif [[ $key == "q" ]]; then break; fi; # enter
+elif [[ $key == "q" ]]; then exit; fi; # enter
 echo -en "\e[${count}A"; done; # go up to the beginning to re-render
 ##
 ##
