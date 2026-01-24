@@ -2,7 +2,11 @@
 url="$1"; 
 ##
 mkdir $HOME/logs 2>/dev/null; 
-(printf %b "\n--------\n"; date +%X%t%x; printf %b "\n$url") >> $HOME/logs/urlinks.url;
+(
+printf %b "\n-------------------\n"; 
+date +%x\ -\ %X; 
+printf %b "$url"; 
+) >> $HOME/logs/urlinks.url;
 dl_insta() { 
 printf %b "\ninstagram \nyt $dir / $url \n\ndownloading...\n.\e[222b\n"|bat -ppflc; 
 yt-dlp --restrict-filenames -P "$dir" "$url"; echo "----";
