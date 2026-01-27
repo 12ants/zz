@@ -2,6 +2,7 @@
     "autoclose": false,
     "clipboard": "terminal",
     "fakecursor": true,
+    "linter": false,
     "mkparents": true,
     "paste": true,
     "ruler": false,
