@@ -4,6 +4,7 @@
 #[ -e "/data/data/com.termux/files/usr/etc/lf/previewer"]&&PREFIX="/data/data/com.termux/files/usr"; 
 # set previewer $PREFIX/etc/lf/previewer
 # IFS=$""; 
+EDITOR=micro
 set locale sv-SE 
 set shellopts '+eu'
 set drawbox false
@@ -116,6 +117,7 @@ map D :set dironly!
 map R !read -ep ' ' -i '192.168.0.' 'ipa' && read -ep ' port: ' -i '8022' 'pp' && read -ep ' user: ' -i 'aa' 'uu' && read -ep 'folder: ' -i './' ipf; echo; rsync -avPe "ssh -p $pp" $fx $uu@$ipa:$ipf; echo
 map <space> :toggle; down
 map <enter> :open $f 
+map A visual
 map b bopen 
 map B bboo
 map C chaff
@@ -143,7 +145,7 @@ tmux display-popup -w 100% -h 100% -E -b none -e fo="$f" 'bash -c "mediainfo $fo
 
 cmd bopen ${{ 
 case "${f/*./}" in 
-md) tmux display-popup -w 100% -h 100% -E -b none -e fo="$f" 'bash -c "glow -p ${fo}"';; 
+md) tmux display-popup -w 100% -h 100% -E -b none -e fo="$f" 'bash -c "bat -p ${fo}"';; 
 jpg|png|svg) tmux display-popup -w 100% -h 100% -E -b none -e fo="$f" 'bash -c "chafa -f symbols --scale max --align right $fo; printf %b '"'\e[6A'"'; mediainfo $fo|grep -E '"'Width|Height|File\ size'"'|tr -s '"' '"' '"' '"'|cut -f2- -d'"':'"'|bat -ppfljava --theme Nord; read -n1 aa"';; 
 sh|*) tmux display-popup -w 100% -h 100% -E -b none -e fo="$f" 'bash -c "bat -pf ${fo}"';; 
 # *) bat -pfljava ${f};; 
@@ -325,7 +327,7 @@ set scrolloff 20
 ## cmds
 cmd open &{{
 case $(file --mime-type -Lb $f) in
-text/*) lf -remote "send $id \$$EDITOR \$f";;
+text/*) lf -remote "send $id \$micro \$f";;
 *) for f in $f; do ! $OPENER $f > /dev/null 2> /dev/null & done;;
 esac
 }}

@@ -6,9 +6,10 @@ mkdir $HOME/logs 2>/dev/null;
 printf %b "\n-------------------\n"; 
 date +%x\ -\ %X; 
 printf %b "$url"; 
-) >> $HOME/logs/urlinks.url;
+) | tee -a $HOME/logs/urlinks.url;
 dl_insta() { 
-printf %b "\ninstagram \nyt $dir / $url \n\ndownloading...\n.\e[222b\n"|bat -ppflc; 
+printf %b "\ninstagram \nyt $dir / $url \n\ndownloading...\n"|bat -ppflc; 
+printf %b ".\e[222b\n"; 
 yt-dlp --restrict-filenames -P "$dir" "$url"; echo "----";
 ##
 nyt="$dir/$(ls -1tr $dir|tail -n1)"; 
@@ -53,14 +54,20 @@ printf -v sel "${ops[$cur]}"; printf  "\e[?25h\n \e[7m $sel \e[0m\n\n"; };
 ####################
 printf %b "$url"|bat -ppfld; printf %b "\n-\e[$((COLUMNS - 1))b\n\n"; 
 ####################
-qqmenu "what to do?" "yt-dlp save-link-url aria2c"; 
+qqmenu "what to do?" "yt-dlp xdg-open aria2c"; 
 ####################
 printf %b "\n whereto? 
- -- [c]hoose - lf
- -- [f]hoose - $HOME/
- -- [H]ere >> $dir\n"|bat -ppflgo;  
+ ------------------------------
+ -- [E]xternal - alarms
+ -- [L]ocal    - downloads
+ -- [C]hoose   - lf
+ -- [F]hoose   - read
+ -- [H]ere     - $dir\n
+ ------------------------------\n"|bat -ppflgo;  
 read -srn1 "wt"; 
 case $wt in 
+e) dir="$HOME/external/Alarms";;
+l) dir="$HOME/sdcard/Downloads";;
 c) dir="$(command lf -print-last-dir)";; 
 f) read -ri "$HOME/" dir;; 
 h|*) printf %b "ok\n";; 

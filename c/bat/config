@@ -19,7 +19,7 @@
 # disable text selection, unless you press shift.
 
 
---pager='less --mouse -R --file-size --tilde --squeeze-blank-lines --clear-screen --use-color --incsearch --prompt="%F[/]search [n]ext-match [p]rev-match ?f%f .?n?m(%T %i of %m) ..?lt %lt-%lb?L/%L. :byte %bB?s/%s.  .?e(END)  ?x-  Next\:   %x.:?pB  %pB\%..%t"'
+--pager="less --mouse -R --file-size --tilde --squeeze-blank-lines --use-color -DPmk --clear-screen --incsearch --prompt="'"%F[/]search [n]ext-match [p]rev-match ?f%f .?n?m(%T %i of %m) ..?lt %lt-%lb?L/%L. :byte %bB?s/%s.  .?e(END)  ?x-  Next\:   %x.:?pB  %pB\%..%t"'""
 
 
 
@@ -34,3 +34,5 @@
 #   Example 2: Use ".gitignore"-style highlighting for ".ignore" files
 #--map-syntax "*.ino:C++"
 #--map-syntax ".ignore:Git Ignore"
+# --pager='--mouse -R --file-size --tilde --squeeze-blank-lines --clear-screen --use-color --color="Pkb" 
+# --incsearch --prompt="gk[/]search [n]ext-match [p]rev-match ?f%f .?n?m(%T %i of %m) ..?lt %lt-%lb?L/%L. :byte %bB?s/%s.  .?e(END)  ?x-  Next\:   %x.:?pB  %pB\%..%t"'
