@@ -33,6 +33,7 @@ C-z: undo
 "\e[q": insert-comment
 "\e3": insert-comment
 \C-q: insert-comment
+# "\e[A": insert comment'\necho "$(hhup)"\n'
 # "£": insert-insert
 "\eU": upcase-word
 "\eu": upcase-word
@@ -52,7 +53,7 @@ C-y: yank
 "\e[p": "export PATH=${PATH}\e\C-e\"\C-a\ef\ef\C-f:\C-b\""
 "\e[6~": kill-whole-line
 "\e[6": kill-whole-line
-"\e[5~": '\e[6~\ hh\n'
+"\e[5~": '\e[6~\ hhup\n'
 "\e[1;2A": '\e[6~\ hh\n'
 "°": '\e4\l\n'
 "⁰": '\e[6~'
