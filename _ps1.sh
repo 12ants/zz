@@ -46,11 +46,11 @@ _dtime() { hh=1$(date +%H;); mm=1$(date +%M;); ss=1$(date +%S);
 printf %b "\e[38;5;$((hh + 22))m${hh:1:2}$re:\e[38;5;$((mm + 22))m${mm:1:2}$re:\e[38;5;${ss/0/1}m${ss:1:2}\e[0m" 2>/dev/null; }; 
 # _etime() { printf %b "\e[38;5;${EPOCHSECONDS:8:2}m${EPOCHSECONDS:6:4}\e[0m";  }; 
 ################
-alias gits='[ -e $PWD/.git ] && ggii="$(git status --short 2>/dev/null|grep "" --quiet && printf %b "41"||printf %b "44"; )" && printf %b "\e[0m\e[${ggii}m git \e[0;2m"'; 
+_gits() { [ -e $PWD/.git ] && ggii="$(git status --short 2>/dev/null|grep "" --quiet && printf %b "41"||printf %b "44"; )" && printf %b "\e[0m\e[${ggii}m git \e[0;2m"; }; 
 ee() { [ $? = 130 ] && echo gg; }; 
 
-alias gitsu='[ -s "$HOME/logs/gh_log.log" ] && printf %b "[\e[92m$(cat $HOME/logs/gh_log.log)\e[0;2m]"'; 
-alias wip='[ -s "$HOME/logs/idc.log" ] && printf %b "[\e[96m$(cat $HOME/logs/idc.log|cut -f1 -d" ")$\e[0;2m]"'; 
+_gitsu() { [ -s "$HOME/logs/gh_log.log" ] && printf %b "[\e[92m$(cat $HOME/logs/gh_log.log)\e[0;2m]"; }; 
+wip() { [ -s "$HOME/logs/idc.log" ] && printf %b "[\e[96m$(cat $HOME/logs/idc.log|cut -f1 -d" ")$\e[0;2m]"; }; 
 cc1="$(cat $HOME/logs/idc.log|cut -f1 -d" ")"; 
 cc2="$(cat $HOME/logs/idc.log|cut -f3 -d" ")"; 
 #alias gitstat='git status --short 2>/dev/null|tr "\n\t " " | "|bat -ppfld --theme Coldark-Dark'; 
@@ -68,9 +68,9 @@ cc2="$(cat $HOME/logs/idc.log|cut -f3 -d" ")";
 # ['$re'\e[38;5;${cc1}m${wlan}'$re']\
 ((UID == 0)) && id='\e[1;42;97mmROOT\e[0m'||id='\e[96m\u\e[0m'
 PS1='\e[0m\e[2m[\e[0;1;38;5;$((2 + $?))m$?'$re']\
-$(gits||printf "")\
+$(_gits||printf "")\
 ['$re'$(_dtime 2>/dev/null)'$re']\
 '$re'$(_bat)\
-'$re'$(gitsu)\
+'$re'$(_gitsu)\
 ['$re'\e[0;48;5;${cc1};38;5;${cc2}m${model:0:12}'$re']\
 ['$id']'$re''${_host}'['$re$yellow'\w'${re}]'\e[?25h\e[0m \n'; 
