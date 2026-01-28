@@ -230,7 +230,8 @@ printf %b "\x1b]12;#ff44bb"; #### cursor = pink
 ####
 [ $PREFIX ] && sshd 2>/dev/null; 
 [ $PREFIX ] && crond 2>/dev/null; 
-[ $PREFIX ] && (sleep 2; termux-api-start &>/dev/null; printf %b "\e[A\e[K") & disown; 
+[ $PREFIX ] && (sleep 2; termux-api-start &>/dev/null) & disown; 
+# printf %b "\e[A\e[K"
 [ $PREFIX ] && (sleep 4; termux-wake-lock &>/dev/null) & disown; 
 ########################
 ########################
