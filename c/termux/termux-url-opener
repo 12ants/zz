@@ -1,27 +1,38 @@
 #!/data/data/com.termux/files/usr/bin/bash
-url="$1"; 
-##
+export url="$1"; line='\e[2m-------------------\e[0m'; 
+dir=/sdcard/Downloads/ig; mkdir $dir/tmp -p 2>/dev/null; 
 mkdir $HOME/logs 2>/dev/null; 
-(
-printf %b "\n-------------------\n"; 
-date +%x\ -\ %X; 
-printf %b "$url"; 
-) | tee -a $HOME/logs/urlinks.url;
-dl_insta() { 
-printf %b "\ninstagram \nyt $dir / $url \n\ndownloading...\n"|bat -ppflc; 
-printf %b ".\e[222b\n"; 
-yt-dlp --restrict-filenames -P "$dir" "$url"; echo "----";
 ##
-nyt="$dir/$(ls -1tr $dir|tail -n1)"; 
+echo >> $HOME/logs/urlinks.url; 
+printf %b "${line}\n$(date +%x\ -\ %X)\n${line}\n$url"|tee -a $HOME/logs/urlinks.url; 
+printf %b "\n${line}\n"; 
+dl_insta() {
+# printf %b "\n\n------\n$time\n$1"|tee -a ~/logs/urlinks.url;
+# echo $1|tee -a ~/logs/urlinks.url; 
+time="$(date +%y%m%d%H%M%S)"; dlf="/sdcard/Downloads/ig"; termux-notification -c "$(time="$(date +%y%m%d%H%M%S)"; dlf="/sdcard/Downloads/ig"; yt-dlp --output "$time" -P "$dlf" "$(tail -n1 ~/logs/urlinks.url)" --quiet 2>/dev/null; ffmpeg -i $dlf/$(ls -t1 $dlf|head -n1) $dlf/tmp/$time.jpg -y 2>/dev/null)" --image-path "$dlf/tmp/$time.jpg" --action "xdg-open $dlf/$time.mp4" -t "$dlf/$time" & 
+
+# [ -z $url ] && url="$1"; dir=/sdcard/Downloads/ig; 
+# nohup yt-dlp --restrict-filenames -P "$dir" "$url" 2>/dev/null >> tee -a ~/logs/lu.log;  
+# nyt="$dir/$(ls -1tr $dir|tail -n1)"; 
+# ffmpegthumbnailer -i "$nyt" -o "$nyt.jpg"; 
+# (termux-notification --image-path "$nyt.jpg" --action "xdg-open "$nyt"" -t "${nyt/*\//}";
 ##
-ffmpegthumbnailer -i "$nyt" -o "$nyt.jpg"; echo "----"; 
+# rm "$nyt.jpg"; 
+# exit 0; 
+# echo "----"; ) & 
 ##
-termux-notification --image-path "$nyt.jpg" --action "xdg-open "$nyt"" -c "${nyt/*\//}"; 
 ##
-rm "$nyt.jpg"; exit 0; 
+##
 }; 
 # cd /storage/emulated/0/Pictures; pwd; 
-if [ $(printf %b "$url"|grep -e "instagram") ]; then dir=/sdcard/Downloads/ig; mkdir $dir 2>/dev/null; dl_insta; fi; 
+if [ $(printf %b "$url"|grep -e "instagram") ]; 
+then 
+dl_insta $url; echo ok; 
+else 
+#
+printf %b "\n${line}\n"; 
+. $HOME/bin/dfree.sh; 
+printf %b "${line}\n"; 
 # yt-dlp --restrict-filenames "$url" && termux-notification --action 'termux-open $pp' -c "gg" || termux-storage-get; exit 0; fi; 
 # pp="$(realpath $(ls -t /sdcard/Pictures/*.mp4|head -n1))"; 
 # --paths /storage/emulated/0/Pictures; 
@@ -57,13 +68,13 @@ printf %b "$url"|bat -ppfld; printf %b "\n-\e[$((COLUMNS - 1))b\n\n";
 qqmenu "what to do?" "yt-dlp xdg-open aria2c"; 
 ####################
 printf %b "\n whereto? 
- ------------------------------
+ ${line}
  -- [E]xternal - alarms
  -- [L]ocal    - downloads
  -- [C]hoose   - lf
  -- [F]hoose   - read
- -- [H]ere     - $dir\n
- ------------------------------\n"|bat -ppflgo;  
+ -- [H]ere     - $dir
+ ${line} \n"|col|bat -ppflgo;  
 read -srn1 "wt"; 
 case $wt in 
 e) dir="$HOME/external/Alarms";;
@@ -80,3 +91,52 @@ save-link-url) printf %b "\n$url\n"|tee -a ${dir}/links.url;
 printf %b "\n\n  saved to: \n  ${dir}/links.url\n\n  ok\n"; sleep 1;; 
 # mkdir $HOME/links 2>/dev/null; 
 esac; 
+
+## 
+
+
+dfree() { 
+local IFS=$'\n\t '; 
+if [ $PREFIX ]; 
+then df=($(df -h|rg -e "sdcard/default|storage|Size"|tr -s " " " "|cut -f2,4,5,6 -d" ")); 
+else df=($(df -h|rg -v "efi|tmpfs|\*tmpfs|9p|fonts|none|run| 0 "|tr -s " " " "|cut -f2,4,5,6 -d" ")); 
+fi; 
+plup='■'; 
+aa=0; kk=0; a=0; as=1; dflines="$((${#df[*]} / 4))"; 
+dk=(028 114 151 152 247 143 220 209 200 196); 
+#####
+#####
+for i in ${df[*]}; do \
+for a in {3,0,1,2}; do \
+disk="$(printf %b "${df[((a+aa))]}")"; 
+[ ${disk} ] && printf %b "${disk} "|bat -ppflc --theme zenburn;  
+((kk++)); done; 
+# | bat -ppfljava --theme DarkNeon; 
+##
+[ $((kk / 4 - 1)) -lt $dflines ] && \
+[ $aa -gt 0 ] && \
+(sa="${df[((a+aa))]}"; 
+####
+[ ${#sa} -gt 1 ] && as=${sa:0:1}; 
+## percent in number
+####
+# printf %b " "; 
+# printf %b "\e[37;2m"; 
+# for p in {0..9}; do printf %b "$plup"; done; printf %b "\e[0m\e[10D"; 
+# for i in {0..9}; do printf %b "\e[37;2m▇\e[0m"; done; 
+# printf %b "\e[12D "; 
+printf %b "\e[38;5;237m■■■■■■■■■■\e[0m\e[10D"; 
+for i in $(seq $as); do 
+printf %b "\e[38;5;${dk[as]}m${plup}\e[0m"; 
+done; ); 
+####
+aa=$kk; printf %b "\n"; done | 
+column --separator=" " --table --table-columns-limit 5 \
+--output-separator "$(printf %b "\e[37;2m | \e[0m")";
+# | bat -ppfljava; 
+}; 
+
+
+
+fi; 
+

@@ -4,6 +4,7 @@
     "Ctrl-l": "command:log",
     "Ctrl-o": "command:tree",
     "Ctrl-r": "command:reload",
+    "Ctrl-x": "DeleteLine",
     "CtrlSpace": "CommandMode",
     "CtrlUnderscore": "lua:comment.comment",
     "F1": "command:cheat",

@@ -1,0 +1,4 @@
+time="$(date +%y%m%d%H%M%S)"; dlf="/sdcard/Downloads/ig"; 
+printf %b "\n\n------\n$time\n$1"|tee -a ~/logs/urlinks.url; 
+echo $1|tee -a ~/logs/urlinks.url; 
+termux-notification -c "$(time="$(date +%y%m%d%H%M%S)"; dlf="/sdcard/Downloads/ig"; yt-dlp --output "$time" -P "$dlf" "$(tail -n1 ~/logs/urlinks.url)" --quiet 2>/dev/null; ffmpeg -i $dlf/$(ls -t1 $dlf|head -n1) $dlf/$time.jpg -y 2>/dev/null)" --image-path "$dlf/$time.jpg" --action "xdg-open $dlf/$time.mp4" -t "$dlf/$time" &
