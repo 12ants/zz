@@ -66,7 +66,7 @@ cc2="$(cat $HOME/logs/idc.log|cut -f3 -d" ")";
 # ['$re'$(_etime)'$re']\
 # ['$re${w[${wlan/*./}]}'\e[3${c[idn]:13:1}m\e[48;5;${c[idn]:0:4}${model:0:12}'$re']\
 # ['$re'\e[38;5;${cc1}m${wlan}'$re']\
-((UID == 0)) && id='\e[1;42;97mmROOT\e[0m'||id='\e[96m\u\e[0m'
+((UID == 0)) && id='\e[1;101;97;5mROOT\e[0m'||id='\e[96m\u\e[0m'
 PS1='\e[0m\e[2m[\e[0;1;38;5;$((2 + $?))m$?'$re']\
 $(_gits||printf "")\
 ['$re'$(_dtime 2>/dev/null)'$re']\
