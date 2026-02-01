@@ -128,10 +128,8 @@ map x $printf %b "\e[95m\n--------\n\e[93m$f\e[96m\n--------\n\e[0m"; $f; printf
 # map f :push F<backspace><right><backspace><right><backspace>**<left>
 ####
 cmd bboo ${{ 
-IFS=$'\n\t '; popo=(chafa bat micro xgd-open); 
-po=($(printf %b "${popo[*]}"|fzf-tmux -h 88% -w 88% --no-preview -i --cycle --bind 'q:abort' --border 'top')); 
-case $po in chafa) pp="$po -f symbols $f"; pv="printf %b '\e[4A'$f'\n'; mediainfo $f|tr -d ' '|grep -E -m4 'Width|Height|File'|bat -ppfljava";; bat) pp="$po -p";; *) pp="$po";; esac; 
-tmux display-popup -E -w "100%" -h "100%" -b none -e pp="$pp" -e pv="$pv" 'bash -c "${pp} $f; ${pv}; read -n1 kk"'; 
+IFS=$'\n\t '; popo=(chafa bat micro xgd-open); po=($(printf %b "${popo[*]}"|fzf-tmux -h 88% -w 88% --no-preview -i --cycle --bind 'q:abort' --border 'top')); 
+case $po in chafa) pp="$po -f symbols $f"; pv="printf %b '\e[4A'$f'\n'; mediainfo $f|tr -d ' '|grep -E -m4 'Width|Height|File'|bat -ppfljava";; bat) pp="$po -p";; *) pp="$po";; esac; [ $TMUX ]&& tmux display-popup -E -w "100%" -h "100%" -b none -e pp="$pp" -e pv="$pv" 'bash -c "${pp} $f; ${pv}; read -n1 kk"'||${po}; 
 }} 
 cmd chaff ${{ 
 tmux display-popup -w 100% -h 100% -E -b none -e fo="$f" 'bash -c "mediainfo $fo|grep -E '"'Width|Height|File\ size|Complete|depth'"'|tr -s '"' '"' '"' '"'|column --table --separator :|bat -ppfljava --theme Nord; chafa -f symbols --scale max $fo; read -n1 aa"'; 
