@@ -99,7 +99,6 @@ map j :tajm
 # map b !printf "\n\n\n\n\n\n\n\n\n\n"; exiftool $f|batcat -pl c++
 # map o :push !<space>$f<left><left><left>
 # map <enter>c !chafa $f 
-# map b $batcat --paging always --decorations never $f 
 map l :lenk
 # map <enter> pger
 map - maps
@@ -118,7 +117,8 @@ map R !read -ep ' ' -i '192.168.0.' 'ipa' && read -ep ' port: ' -i '8022' 'pp' &
 map <space> :toggle; down
 map <enter> :open $f 
 map A visual
-map b bopen 
+# map b bopen 
+map b $batcat --paging always --decorations never --pager "less --tilde -k $HOME/.config/lesskey" $f 
 map B bboo
 map C chaff
 map bb $batcat -pf $f

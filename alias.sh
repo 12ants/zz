@@ -167,3 +167,4 @@ alias toppo="top -b -n1 -s2 -H -o s,%mem,%cpu,args"
 ghclone() { 
 [ -z "$1" ] && echo && read -rep ' -- repo: ' 'ghc' || ghc="$1"; gh repo clone "$ghc" $HOME/gh/"$ghc"; cd "$HOME"/gh/"$ghc"; ls -lGgp --color=always; }; 
 alias fafa='fastfetch -c ~/zz/c/fastfetch/fastfetch66.json'; 
+alias ko='kk=$(for i in $(seq $(stty size|cut -f2 -d" ")); do printf %b "-"; done); man lesskey|col -xb|sed -e "s/^[ ]*//g" -e "s/^$/$kk/g"|bat -pfljava --theme DarkNeon'
