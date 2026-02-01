@@ -168,3 +168,4 @@ ghclone() {
 [ -z "$1" ] && echo && read -rep ' -- repo: ' 'ghc' || ghc="$1"; gh repo clone "$ghc" $HOME/gh/"$ghc"; cd "$HOME"/gh/"$ghc"; ls -lGgp --color=always; }; 
 alias fafa='fastfetch -c ~/zz/c/fastfetch/fastfetch66.json'; 
 alias ko='kk=$(for i in $(seq $(stty size|cut -f2 -d" ")); do printf %b "-"; done); man lesskey|col -xb|sed -e "s/^[ ]*//g" -e "s/^$/$kk/g"|bat -pfljava --theme DarkNeon'
+appa() { $sudo apt list --verbose 2>/dev/null|tail -n+2|sed -e 's/\/.*\ \[installed.*/\__/g' -e 's/$*\/.*//g' -e '/^$/c#'|tr -d "\n"|tr -s "#" "\n"|sed -e 's/__/\ \x1b[42;1;30minstalled/' -e '/^lib*/d' -e "s/[\']//g"|sed -e 's/$/\x1b[96m/g' -e 's/\ \ /\x1b[0m\ /g'|fzf --wrap --preview 'apt show {1} 2>/dev/null|grep -vE "Download-Size|Version|Maintainer|APT-Sources"|sed -e "s/Description\:\ /------\n/"' --preview-window 'wrap,top,noborder,12' --no-border --color 'bg:18,preview-bg:232' --info inline --highlight-line; }; 
