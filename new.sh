@@ -20,10 +20,10 @@ hash sudo 2>/dev/null && [ "$UID" != 0 ] && export sudo="sudo";
 re='\e[0m'; cyan='\e[96m'; logs="$HOME/logs"; c2="\e[96m -- \e[0m"; 
 ssh=(${SSH_CONNECTION}); [ -z $ssh ] && ssh=($SSH_CLIENT); 
 ########
-unset lessprefix; [ "$PREFIX" ] && lessprefix='--redraw-on-quit'; 
+unset lessprefix; [ "$PREFIX" ] && lessprefix='--redraw-on-quit '; 
 ########
-export LESS=''${lessprefix}' -R --file-size --use-color -DP7.197$ --incsearch --mouse --prompt=%F [/]/[n]/[p]/[m] ?n?m(%T %i of %m) ..?lt %lt-%lb?L/%L. :byte %bB?s/%s.  .?e(END)  ?x-  Next\:   %x.:?pB  %pB\%..%t '; 
-export LESSKEYIN="$HOME/.config/lesskey"
+export LESSKEYIN=$HOME/.config/lesskey
+export LESS=''${lessprefix}'-R --tilde --file-size --use-color -DP7.197$ --incsearch --mouse --prompt=%F [/]/[n]/[p]/[m] ?n?m(%T %i of %m) ..?lt %lt-%lb?L/%L. :byte %bB?s/%s.  .?e(END)  ?x-  Next\:   %x.:?pB  %pB\%..%t '; 
 ########
 ########
 export GREP_COLORS="mt=91:ms=95:fn=32:ln=32:bn=32:se=35:sl=38;5;207:cx=38;5;121:ne"; 
