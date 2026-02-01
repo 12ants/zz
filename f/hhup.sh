@@ -1,4 +1,4 @@
-hhup() { mt=$(mktemp); tail -n 88 $HISTFILE|bat -ppfljava|fzf --ansi --tac --height "~5%" --border none --info inline-right --preview-window "hidden" --no-separator --no-scrollbar --color "bg:234,bg+:29" --no-unicode --freeze-left $((COLUMNS/12)) --freeze-right $((COLUMNS/18)) --pointer "" --ellipsis "" > $mt; chmod +x $mt; 
+hhup() { mt=$(mktemp); tail -n 288 $HISTFILE|bat -ppfljava|command fzf --ansi --tac --height "~5%" --border none --info inline-right --preview-window "hidden" --no-separator --no-scrollbar --color "bg:234,bg+:29" --no-unicode --pointer "#" --ellipsis "" > $mt; chmod +x $mt; 
 history -s "$(cat $mt)"; 
 history -w; 
 
