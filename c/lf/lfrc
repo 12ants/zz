@@ -118,7 +118,7 @@ map <space> :toggle; down
 map <enter> :open $f 
 map A visual
 # map b bopen 
-map b $batcat --paging always --decorations never $f 
+map b $[ $TMUX ] && tmux resize-pane -Z; batcat --paging always --decorations never $f; [ $TMUX ] && tmux resize-pane -Z; 
 map B bboo
 map C chaff
 map bb $batcat -pf $f
