@@ -9,8 +9,8 @@ alias rep="reset -Q; IFS=$'\n\t '; . $PREFIX/share/bash-completion/bash_completi
 alias cccc='crontab -e'; 
 alias xxxx='ssh -p 8022 aa@192.168.0.19 "mpv $HOME/88/m/money.mp3"'
 alias gh_release_dl='gh release download "$(gh release list --limit 1|tail -n1|tr -s " \t" " "|cut -f1 -d" ")"'; 
-alias 12alias='$EDITOR ~/88/alias.sh'; 
-alias 12disk='$sudo fdisk -lL=always|grep -vwE "sectors|Sector|I/O"|cut -f2- -d'; 
+alias zz.alias='$EDITOR ~/88/alias.sh'; 
+alias zz.disk='$sudo fdisk -lL=always|grep -vwE "sectors|Sector|I/O"|cut -f2- -d'; 
 alias env='env|sort|k'; 
 alias antsup='ssh aa@ants.ftp.sh "sudo apt update; sudo apt upgrade; sudo reboot"'; 
 alias s='ssss -sl4|grep -vE "UNCONN"|tr -s " " " "|cut -f1,2,5 -d" "|column --table --output-separator " : "|bat -ppfld'; 
@@ -20,7 +20,7 @@ alias 88='cd ~/88; echo; realpath ~/88|bat -ppfljava; echo; ls --color=always -G
 alias 88pullpush='git add ./; git commit -a -m "${USER}_${mod//\ /}_$(date)" -v; git pull; git push; ls --color=always -trAmp --group-directories-first'; 
 # li=$(($(ps -A|wc -l)+6)); [ ${li} -gt ${LINES} ] && li=${LINES}; 
 alias gitstats='[ -e $PWD/.git ] && (printf %b "$(git status --short| bat -ppfld --theme Coldark-Dark)\n");';
-alias 12_choose_logins_screen='
+alias zz.choose_logins_screen='
 printf %b "$re\n\n\n\n\n\e[4A"; 
 systemctl get-default; 
 printf %b "\n $c2 [\e[94mg\e[0m]raphical / [\e[95mt\e[0m]erminal "; 
@@ -57,8 +57,8 @@ alias zz='cd $HOME/zz';
 alias f='[ -e $PREFIX/bin/fastfetch ] && fastfetch || neofetch || return 0'; 
 # alias f='fff; cd $(cat $HOME/.cache/fff/.fff_d)'; 
 alias sshaa='mosh aa@ants.ftp.sh||ssh aa@ants.ftp.sh'; 
-alias 12moshants='sshaa'; 
-alias 12path='$EDITOR $HOME/.config/path.sh; '; 
+alias zz.moshants='sshaa'; 
+alias zz.path='$EDITOR $HOME/.config/path.sh; '; 
 alias path_change='$EDITOR $HOME/.config/path.sh; '; 
 alias patchshow='echo $PATH |tr ":" "\n"|batcat -ppf --language perl --theme OneHalfDark'; 
 # export LESS='-R --file-size --use-color  --incsearch --prompt="(%T) [/]search [n]ext-match [p]rev-match ?f%f .?n?m(%T %i of %m) ..?lt %lt-%lb?L/%L. :byte %bB?s/%s.  .?e(END)  ?x-  Next\:   %x.:?pB  %pB\%..%t "'; 
@@ -90,11 +90,11 @@ alias iiii='$EDITOR $HOME/.inputrc; echo gg; exec bash; '
 alias speed='speedtest --bytes --no-upload 2>/dev/null || speedtest-go --unit=decimal-bits \
 --no-upload || speedtest-cli 2>/dev/null; '
 ########
-alias 12install_nvm='. $start/config/nvm.sh'
-alias 12nvm_init='export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" \
+alias zz.install_nvm='. $start/config/nvm.sh'
+alias zz.nvm_init='export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" \
 || printf %s "${XDG_CONFIG_HOME}/nvm")"; [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"; ';
 alias logs='cd $HOME/logs'; 
-alias 12nvm_init2='[ -s "$NVM_DIR/nvm.sh" ]&& . "$NVM_DIR/nvm.sh";
+alias zz.nvm_init2='[ -s "$NVM_DIR/nvm.sh" ]&& . "$NVM_DIR/nvm.sh";
 [ -s "$NVM_DIR/bash_completion" ]&& . "$NVM_DIR/bash_completion"'
 NVM_DIR="$HOME/.nvm"; 
 #######
@@ -102,7 +102,7 @@ NVM_DIR="$HOME/.nvm";
 # alias dfree2='printf %b "\e[0;2m$(df -h|head -n1|tr -s " " "\t"|batcat --theme=Nord -ppflc++; )\e[0;1m\n"; df="/dev"; [ $PREFIX ]&& df="/dev/fuse"; df -h|tr -s " " "\t"|grep -v "100%"|grep -v "tmpfs"|grep -v "none"|grep -v "run"|grep -v "efivars"|grep -v "boot"|grep -v loop|grep -e "$df"|batcat --theme=Dracula -ppflc++';
 ########
 alias tldr='man -s tldr'; 
-# unalias 12info 2>/dev/null; 
+# unalias zz.info 2>/dev/null; 
 
 #
 # 12info() { local FZF_DEFAULT_OPTS="-m -i --cycle --ansi --inline-info --bind "q:abort" --height "~99%" --color "list-bg:233" --highlight-line"; lsw="$((COLUMNS - $(ls -w2 $HOME/88/i|wc --max-line-length) - 4))";in12=$HOME/88/i/$(ls -w2 $HOME/88/i|fzf --preview "bat -ppfljava $HOME/88/i/{}" --preview-window "noborder,right,${lsw},wrap" --wrap-sign "" --bind "o:execute(tmux display-popup -w 98% -h 98% -E 'micro $HOME/88/i/{}')";) && case ${in12:(-2)} in md) glow $in12;; *) bat -pf $in12;; esac || echo gg; }; 
@@ -121,19 +121,20 @@ fzf --bind "change:reload:$RG_PREFIX {q} || true" --ansi --disabled --query "$IN
                   
 
 
-alias 12info_tput='batcat -pf "$start/info/tput.nfo"; ';
-alias 12info_ansi='batcat -pf "$start/info/ansi.md"; ';
-alias 12info_bash='batcat -pf "$start/info/bash.md"; '; 
-alias 12tmux_on='chmod 775 $HOME/.config/tmux_state; echo "on!"';
-alias 12tmux_off='chmod 600 $HOME/.config/tmux_state; echo "off!"';
-alias 12edit-alias='$EDITOR ~/start/alias.sh'
-alias 12edit-termux='$EDITOR ~/.termux/termux.properties'
-alias 12edit-input='$EDITOR ~/.inputrc'
-alias 12edit-lf='$EDITOR ~/.config/lf/lfrc'
-alias 12edit-bashrc='$EDITOR ~/.bashrc'
-alias 12edit-tmuxlocal='$EDITOR ~/.tmux.conf.local'
-alias 12edit-anews_start='$EDITOR ~/start/anew.sh'
-alias 12mems='gum style --border normal --border-foreground 24 --padding "0 1" "$(free -h|sed -e "1s/\ \ \ \ \ /RAM: /" -e "2,3s/i/b/g"|column --table --table-right 2-9 --output-separator "   "|batcat -ppflc++ --theme Visual\ Studio\ Dark+ )"'; 
+alias zz.info_tput='batcat -pf "$start/info/tput.nfo"; ';
+alias zz.info_ansi='batcat -pf "$start/info/ansi.md"; ';
+alias zz.info_bash='batcat -pf "$start/info/bash.md"; '; 
+alias zz.tmux_on='chmod 775 $HOME/.config/tmux_state; echo "on!"';
+alias zz.tmux_off='chmod 600 $HOME/.config/tmux_state; echo "off!"';
+alias zz.edit-alias='$EDITOR ~/start/alias.sh'
+alias zz.edit-termux='$EDITOR ~/.termux/termux.properties'
+alias zz.edit-input='$EDITOR ~/.inputrc'
+alias zz.edit-lf='$EDITOR ~/.config/lf/lfrc'
+alias zz.edit-bashrc='$EDITOR ~/.bashrc'
+alias zz.edit-tmuxlocal='$EDITOR ~/.tmux.conf.local'
+alias zz.edit-anews_start='$EDITOR ~/start/anew.sh'
+alias zz.mems='gum style --border normal --border-foreground 24 --padding "0 1" "$(free -h|sed -e "1s/\ \ \ \ \ /RAM: /" -e "2,3s/i/b/g"|column --table --table-right 2-9 --output-separator "   "|batcat -ppflc++ --theme Visual\ Studio\ Dark+ )"'; 
+
 ####
 alias coolors='echo; for i in $(seq --equal-width 255); do printf "\e[48;5;${i}m ${i} \e[7m\e[30m ${i} \e[0m"; done; '; 
 ####
@@ -155,9 +156,10 @@ alias open-url='termux-open-url';
 alias path='$EDITOR ~/.config/path.sh'; 
 # alias ff='fastfetch -l small --logo-position top --logo-padding-right 1||neofetch';
 
-alias 12paint='pa=($(pastel list|sed -n $((RANDOM%139))p)); pan=$(pastel format ansi-8bit $pa;); printf %b "\n$pan\n"; figlet -tWXc -f 3d $pa; printf %b "\n  "; ph=$(pastel format hex $pa;); phs=$(pastel format hsl $pa;); pac=$(pastel complement $pa;); 
+alias zz.paint='pa=($(pastel list|sed -n $((RANDOM%139))p)); pan=$(pastel format ansi-8bit $pa;); printf %b "\n$pan\n"; figlet -tWXc -f 3d $pa; printf %b "\n  "; ph=$(pastel format hex $pa;); phs=$(pastel format hsl $pa;); pac=$(pastel complement $pa;); 
 printf %b "\e[0m\n  $pa \n  $phs \n  $ph \n";printf %q "  $pan"|tr -d "\\\\";printf %b "\n\n"'
-# alias 12install_cloudpanel.io='echo; (echo; curl -sL https://cloudpanel.io/docs/v2/getting-started/other|html2text|grep -e "curl -sS" -A3 -m1; echo; )|tee $HOME/cloudpanel_installer.sh; chmod 775 $HOME/cloudpanel_installer.sh; printf %b "\n\n\n\n\e[2A"; read -e -n1 -sp "continue? [Y/n] " "ny"; [ $ny ]||. $HOME/cloudpanel_installer.sh; echo "gg"; '; 
+
+# alias zz.install_cloudpanel.io='echo; (echo; curl -sL https://cloudpanel.io/docs/v2/getting-started/other|html2text|grep -e "curl -sS" -A3 -m1; echo; )|tee $HOME/cloudpanel_installer.sh; chmod 775 $HOME/cloudpanel_installer.sh; printf %b "\n\n\n\n\e[2A"; read -e -n1 -sp "continue? [Y/n] " "ny"; [ $ny ]||. $HOME/cloudpanel_installer.sh; echo "gg"; '; 
 # alias tmk='tmux display-popup -w 99% -h 99% -E "echo loading; tmux list-keys|grep -v "copy-mode-vi"|col -xb|tr -s "\n" "\n"|tr -s "\t " " "|pr --omit-header|column --table --table-columns-limit 5 --table-hide 1|sed -e "a--------"|bat -pfljs; "'; 
 # alias l='cd $(lf -config $HOME/.config/lf/lfrc -print-last-dir); grep -e "/" \
 # "$HOME/.local/share/lf/files" 2>/dev/null'; 
@@ -165,8 +167,41 @@ alias tmuxkeys='tmux list-keys|grep -v "copy-mode-vi"|col -xb|tr -s "\n" "\n"|tr
 ########
 alias hellllo='printf %b "\n\n\n\n\n\n\e[6A\e[?25l"; for i in {1..28}; do printf %b "\e[s\e[38;5;$((RANDOM%229))m \e[s\e[98;5;$((RANDOM%22))m\n"; figlet -o -f sub-zero "hello"; sleep .12; printf %b "\e[u"; done; printf %b "\e[?25h"; printf %b "\n\n" '; 
 alias toppo="top -b -n1 -s2 -H -o s,%mem,%cpu,args" 
-ghclone() { 
+zz.gh.clone() { 
 [ -z "$1" ] && echo && read -rep ' -- repo: ' 'ghc' || ghc="$1"; gh repo clone "$ghc" $HOME/gh/"$ghc"; cd "$HOME"/gh/"$ghc"; ls -lGgp --color=always; }; 
-alias fafa='fastfetch -c ~/zz/c/fastfetch/fastfetch66.json'; 
-alias ko='kk=$(for i in $(seq $(stty size|cut -f2 -d" ")); do printf %b "-"; done); man lesskey|col -xb|sed -e "s/^[ ]*//g" -e "s/^$/$kk/g"|bat -pfljava --theme DarkNeon'
-appa() { $sudo apt list --verbose 2>/dev/null|tail -n+2|sed -e 's/\/.*\ \[installed.*/\__/g' -e 's/$*\/.*//g' -e '/^$/c#'|tr -d "\n"|tr -s "#" "\n"|sed -e 's/__/\ \x1b[42;1;30minstalled/' -e '/^lib*/d' -e "s/[\']//g"|sed -e 's/$/\x1b[96m/g' -e 's/\ \ /\x1b[0m\ /g'|fzf --wrap --preview 'apt show {1} 2>/dev/null|grep -vE "Download-Size|Version|Maintainer|APT-Sources"|sed -e "s/Description\:\ /------\n/"' --preview-window 'wrap,top,noborder,12' --no-border --color 'bg:18,preview-bg:232' --info inline --highlight-line; }; 
+alias zz.sysinfo='fastfetch -c ~/zz/c/fastfetch/fastfetch66.json'; 
+
+nam() { kk=$(for i in $(seq $(stty size|cut -f2 -d" ")); do printf %b "-"; done); man $@|col -xb|sed -e "s/^[ ]*//g" -e "s/^$/$kk/g"|bat -pfljava --theme DarkNeon; }; 
+
+zz.appa() { 
+
+zz.appa.get() { printf %b "\n\n\e[A -- getting list ... \n"; $sudo apt list --verbose 2>/dev/null|tail -n+2|sed -e 's/\/.*\ \[installed.*/\__/g' -e 's/$*\/.*//g' -e '/^$/c#'|tr -d "\n"|tr -s "#" "\n"|sed -e 's/__/\ \x1b[42;1;30minstalled/' -e '/^lib*/d' -e "s/[\']//g"|sed -e 's/$/\x1b[96m/g' -e 's/\ \ /\x1b[0m\ /g' | tee $HOME/logs/appa.log; }; 
+
+
+[ -e $HOME/logs/appa.log ] || zz.appa.get; 
+(($(date +%s) + 80000 < $(stat -tc%W $HOME/logs/appa.log))) && \
+printf %b "\n -- old apt list ... getting a new one \n\n" && \
+zz.appa.get; 
+
+appa=($(cat $HOME/logs/appa.log | command fzf --ansi -i --preview \
+'apt show {1} 2>/dev/null|grep -vE "Download-Size|Version|Maintainer|APT-Sources"|sed -e "s/Description\:\ /------\n/"' \
+--preview-window 'wrap,top,noborder,12' \
+--no-border \
+--bind 'change:first' \
+--color 'bg:59,preview-bg:232' --info inline | \
+sed -e "s/\s.*//")); 
+####
+[ "${appa}" ] && \
+printf %b "\n\n\e[A\e[0m 
+\e[96m----\e[0m
+${appa[*]}
+\e[96m----\e[0m
+\e[2m[\e[0mI\e[2m]\e[0mnstall :: \e[2m[\e[0mR\e[2m]\e[0memove :: \e[2m[\e[0mQ\e[2m]\e[0muit \n\n" && \
+read -rsn1 "nn"; 
+case $nn in i|I) $sudo apt install -y ${appa[*]} && \
+$sudo apt -y autoremove;; 
+r|R) $sudo apt remove -y ${appa[*]} && $sudo apt -y autoremove;; 
+*) printf %b "\n\n\e[A -- ok\n\n"; return 0;; esac; 
+echo; 
+####
+}; 
