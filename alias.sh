@@ -1,13 +1,13 @@
 #!/bin/bash
 # alaaaaais
-alias zz='cd $HOME/zz'; 
+alias zz.='cd $HOME/zz; pwd; ls --color=always -pugl'; 
 c2='\e[96m --\e[0m'; re='\e[0m'; gt=""; 
 [ -z "$PREFIX" ] && sudo=sudo; 
 # alias kk='fmt -g 66|col -xb|bat -pfljava --theme DarkNeon'; 
 alias kkkk='col -xb|fmt --split-only --width=$((COLUMNS - 2)) --goal=66 --uniform-spacing --tagged-paragraph|bat -pfljava --theme TwoDark'; 
 alias rep="reset -Q; IFS=$'\n\t '; . $PREFIX/share/bash-completion/bash_completion"; 
 alias cccc='crontab -e'; 
-alias xxxx='ssh -p 8022 aa@192.168.0.19 "mpv $HOME/88/m/money.mp3"'
+alias zz.find.phone='ssh -p 8022 aa@192.168.0.19 "mpv $HOME/zz/m/money.mp3"'
 alias gh_release_dl='gh release download "$(gh release list --limit 1|tail -n1|tr -s " \t" " "|cut -f1 -d" ")"'; 
 alias zz.alias='$EDITOR ~/88/alias.sh'; 
 alias zz.disk='$sudo fdisk -lL=always|grep -vwE "sectors|Sector|I/O"|cut -f2- -d'; 
@@ -16,9 +16,6 @@ alias antsup='ssh aa@ants.ftp.sh "sudo apt update; sudo apt upgrade; sudo reboot
 alias s='ssss -sl4|grep -vE "UNCONN"|tr -s " " " "|cut -f1,2,5 -d" "|column --table --output-separator " : "|bat -ppfld'; 
 alias neew='clear; . crons/hour.sh; printf %b "\e[12B"; new'; 
 alias ss='history -s "$(printf %b "sudo "; tail -n1 "$HISTFILE")"; history -w; read -ei "$(tail -n1 "$HISTFILE")" "ssss" && ${ssss} || echo ok; '; 
-alias 88='cd ~/88; echo; realpath ~/88|bat -ppfljava; echo; ls --color=always -GghtrAp --group-directories-first; echo; git status'; 
-alias 88pullpush='git add ./; git commit -a -m "${USER}_${mod//\ /}_$(date)" -v; git pull; git push; ls --color=always -trAmp --group-directories-first'; 
-# li=$(($(ps -A|wc -l)+6)); [ ${li} -gt ${LINES} ] && li=${LINES}; 
 alias gitstats='[ -e $PWD/.git ] && (printf %b "$(git status --short| bat -ppfld --theme Coldark-Dark)\n");';
 alias zz.choose_logins_screen='
 printf %b "$re\n\n\n\n\n\e[4A"; 
