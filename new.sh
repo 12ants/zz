@@ -37,6 +37,7 @@ mkdir $HOME/logs/b $HOME/tmp $HOME/gh $HOME/dl $HOME/bin $HOME/img $HOME/.config
 dfree > $logs/dfree.log & disown; 
 ########
 . $HOME/zz/i/coala.log; 
+# . $HOME/zz/_ps1.sh; 
 ########
 ########
 if echo $HOME|grep -w "termux" -q; then alias sudo='command'; else sudo=sudo; fi; 
@@ -247,8 +248,9 @@ printf %b "\x1b]12;#ff44bb"; #### cursor = pink
 ####
 for i in $HOME/zz/f/*.sh; do . $i; done; 
 ####
-. $HOME/zz/_ps1.sh; 
 . $HOME/zz/alias.sh; 
+# . ~/zz/_ps1.sh; 
+# . $HOME/zz/_ps1.sh; 
 . $HOME/.config/tmux/tmuxcompletions.sh; 
 # . $PREFIX/share/bash
 ################################
