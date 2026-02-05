@@ -1,4 +1,6 @@
 #!/bin/bash
 ## install nvm; 
-curl -sL https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash; 
+curl -sL https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh -o ~/nvm_install.sh; 
+chmod +x ~/nvm_install.sh; 
+# bash; 
 # source ~/.profile; 
