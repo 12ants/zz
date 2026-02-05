@@ -38,7 +38,7 @@ C-z: undo
 "\eU": upcase-word
 "\eu": upcase-word
 # "\e1": dump-functions
-"\e2": '2>/dev/null'
+# "\e2": '2>/dev/null'
 "\e4": insert-comment
 # 'kk' insert-comment 'kk'
 "\e0": 'tmux split-window -v\n'
@@ -53,13 +53,14 @@ C-y: yank
 "\e[p": "export PATH=${PATH}\e\C-e\"\C-a\ef\ef\C-f:\C-b\""
 "\e[6~": kill-whole-line
 "\e[6": kill-whole-line
-"\e[5~": '\e[6~\ hhup\n'
+"\e[5~": '\e[6~\hhup\n'
 "\e[1;2A": '\e[6~\ hh\n'
 "°": '\e4\l\n'
 "⁰": '\e[6~'
 "\eq": '\e[q'
 "⁹": '\e[612_inputrc\n'
-
+"\x1b[1;5A": '\e[q\hhup\n'
+# "\x1b[A": '\e[q\hhup\n'
 
 $endif
 
