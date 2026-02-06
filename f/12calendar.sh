@@ -22,10 +22,10 @@ printf %b "\e[34G getting cal ";
 ####
 # (cat $HOME/logs/calendar.json | tr -s "," "\n" | grep -vE 'EPOCH_|h_|description|end_date' | sed '/start_date_time/{s/.[0-9]*[-T]//g}' | cut -f1 -d "+" | cut -f 2- -d":" | sed 's/"/\n/' | tr -s "\n\"}" "%%\n" | cut -f2-4 -d"%"|col -xb|column --separator "%" --table --output-separator " | " --table-columns "1234567890123456" --table-right 1|tail -n+2 |bat -ppflr --theme Visual\ Studio\ Dark+ ) > $HOME/logs/cal.log; 
 }; 
-dott; 
-calcomp; printf %b "\e[G\e[2m${epmin} mins ago \e[0m"; 
+calcomp; 
+dott; printf %b "\e[G\e[2m${epmin} mins ago \e[0m"; 
 [[ "$epmin" -gt "1" ]] && 12getcal; 
-for i in {1..8}; do printf %b "·"; done; 
+for i in {1..28}; do printf %b "·"; done; 
 printf %b "\e[19G"; printf %b " $(date +%a\ %b\ %d\ %Y\ \|\ %T)"|bat -ppfljava --theme DarkNeon; 
 
 echo; 
