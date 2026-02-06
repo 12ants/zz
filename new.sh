@@ -2,11 +2,10 @@
 # very good bash enviorment 
 shopt -s histappend; 
 shopt -s histverify; 
-export IFS=$' \n\t'; 
 ####
+export IFS=$' \n\t'; 
 [ -z "$TMUX" ] && tmux || tmux source $HOME/.config/tmux/tmux.conf; 
 [ $TMUX ] && . $HOME/zz/_ps1.sh; 
-# export IFS=$'\n\t '; 
 export HISTCONTROL="ignoreboth"; 
 export PROMPT_COMMAND="history -a; history -n; "; 
 export EDITOR="micro"; 
@@ -14,104 +13,70 @@ export email='leonel@ik.me';
 export BAT_THEME="Coldark-Dark"; 
 export logs="$HOME/logs"; 
 export tmp="$HOME/tmp"; [ -z "$TMPDIR" ] && export TMPDIR="$HOME/tmp"; 
-# export PKG_CONFIG_PATH="$HOME/gh/ffmpeg"; 
 unset HISTTIMEFORMAT; 
 hash sudo 2>/dev/null && [ "$UID" != 0 ] && export sudo="sudo"; 
-########
+####
 re='\e[0m'; cyan='\e[96m'; logs="$HOME/logs"; c2="\e[96m -- \e[0m"; 
 ssh=(${SSH_CONNECTION}); [ -z $ssh ] && ssh=($SSH_CLIENT); 
-########
+####
 unset lessprefix; [ "$PREFIX" ] && lessprefix='--redraw-on-quit '; 
-########
+####
 export LESSKEYIN=$HOME/.config/lesskey
 export LESS=''${lessprefix}'-R --tilde --file-size --use-color -DP7.197$ --incsearch --mouse --prompt=%F [/]/[n]/[p]/[m] ?n?m(%T %i of %m) ..?lt %lt-%lb?L/%L. :byte %bB?s/%s.  .?e(END)  ?x-  Next\:   %x.:?pB  %pB\%..%t '; 
-########
-########
+####
 export GREP_COLORS="mt=91:ms=95:fn=32:ln=32:bn=32:se=35:sl=38;5;207:cx=38;5;121:ne"; 
-########
+####
 gh auth status 2>&1|grep -e "true" -B1 --color=auto|col -xb|cut -f9 -d" "|tr -d "\n" > ~/logs/gh_log.log & disown; 
-######## make som basic folders ######## 
+#### make som basic folders ######## 
 mkdir $HOME/logs/b $HOME/tmp $HOME/gh $HOME/dl $HOME/bin $HOME/img $HOME/.config -m 775 -p 2>/dev/null; 
-########
-# [[ "$OS" != "Debian" ]] && \
+####
 . $HOME/zz/f/dfree.sh; 
 dfree > $logs/dfree.log & disown; 
-########
+####
 . $HOME/zz/i/coala.log; 
-# . $HOME/zz/_ps1.sh; 
-########
-########
+####
 if echo $HOME|grep -w "termux" -q; then alias sudo='command'; else sudo=sudo; fi; 
-########
-########
-########
-########
+####
 [ -x $HOME/.config/fzf_completions_bash.sh ] || (fzf --bash &> $HOME/.config/fzf_completions_bash.sh; chmod 775 $HOME/.config/fzf_completions_bash.sh); 
 if fzf --bash &>/dev/null; then . $HOME/.config/fzf_completions_bash.sh; fi; 
-########
+####
 unset tmuxprefix 2>/dev/null;  
 if [ "$PREFIX" ]; then tmuxprefix=" --tmux 'center,100%,100%' "; 
 else alias fzf='fzf-tmux -h 100% -w 100%'; 
 fi; 
-#########
+####
 export FZF_DEFAULT_OPTS="${tmuxprefix} -i -m --cycle --ansi --bind 'q:abort'"; 
-########
-# [ -z $PREFIX ] && export FZF_DEFAULT_OPTS='-i -m --cycle --ansi --bind "q:abort"';  
-########
-########
-######## fzf opts - no prefix
-# "0:change-preview-window(right,50%|top,20%|top,55%|right,20%|hidden),q:abort" --info inline --inline-info --preview-window "wrap,noborder" --scroll-off 22 --color "bg:0,preview-bg:16,bg+:24,fg+:15,info:6"'; 
 ####
-####
-######## fzf opts - ye prefix
-# --height '~99%' --bind '0:change-preview-window(right,50%|top,20%|top,55%|right,20%|hidden),q:abort' --info inline --inline-info --preview-window 'hidden,wrap,noborder' --preview 'bat -ppf {} 2>/dev/null||ls -pm {}' --scroll-off 22 --color 'bg:234,bg+:24,fg+:15,info:6,preview-bg:-1,gutter:233,bg:233,scrollbar:magenta,hl:red' --scrollbar '▉' --pointer '▉' --marker '▉' --border 'top' --border-label 'C-a:select-all | 0: change orientation | q:uit ' --border-label-pos 'top' "$([ $PREFIX ] && printf %b "--wrap-sign '""'")""; 
-####
-####
-####
-
-
 [ -x $HOME/.config/openai_api_id.conf ] && . $HOME/.config/openai_api_id.conf 2>/dev/null; 
 [ -x $HOME/.config/gemini_api_id.conf ] && . $HOME/.config/gemini_api_id.conf 2>/dev/null; 
 [ -x $HOME/.config/cloudflare_id.conf ] && . $HOME/.config/cloudflare_id.conf 2>/dev/null; 
-########
+####
 [ -s $HOME/.config/lesskey ] || ln -s $HOME/zz/c/lesskey $HOME/.config/lesskey; 
 [ -s $HOME/.config/path.sh ] && export PATH=$(cat $HOME/.config/path.sh); 
-########
-# [ -z $TMUX ] && tmux; 
-########
-########
-# local IFS=$'\n\t '; 
-########
-# . $HOME/zz/i/colors.sh; 
-# . $HOME/zz/c/lfcolors.sh; 
-# clear; . $HOME/zz/crons/hour.sh; printf %b "\e[9B";
-## export HISTTIMEFORMAT="%b-%d-%H:%M:%S "; 
-#############################
-#############################
+####
 _model() { 
-## ____ MODEL _ GET ____ ####
+#### ____ MODEL _ GET ____ ####
 [ $PREFIX ] && modo=($(getprop|grep -E 'vendor.manufacturer|product.manufacturer' -m1 -A1 --group-separator=''|cut -f2- -d' '|tr -s "\n[]" " "; )); 
-#############################
+####
 [ -z $PREFIX ] && [ -e /sys/devices/virtual/dmi/id/product_family ] && \
 modo=($(for bb in product_family board_vendor board_name bios_vendor sys_vendor; 
 do cat /sys/devices/virtual/dmi/id/${bb} 2>/dev/null|grep -v "O.E.M."|tr -s "\n" " "; done)); 
-########
-#############################
+####
 moda="$(printf %b "${modo}"|tr -d "[]"|head -c14)"; 
 model="${moda/%\ /}"; 
 printf %b "${modo[*]}" > $HOME/logs/model.log; 
 }; 
 _model; 
-########
+####
 kk() { 
 . $HOME/zz/f/12calendar.sh; 
 . $HOME/zz/f/memram.sh; 
-#################################
-## ____ VIDEOCARD _ GET ____ ####
+###################################
+#### ____ VIDEOCARD _ GET ____ ####
 [ -z $PREFIX ] && \
 videocard="$(lspci|grep -e 'VGA'|cut -f5- -d" "|sed -e "s/\ (rev.*//g")"; 
-#################################
-## ____ OS __ GET _____ #########
+###################################
+#### ____ OS __ GET _____ #########
 [ $PREFIX ] && osx1=($(uname --operating-system; [ $PREFIX ] && getprop ro.build.version.release && getprop ro.build.version.codename)); 
 ####
 [ "$PREFIX" ] && osx2=($((uname --kernel-name; uname --kernel-release|cut -f1 -d"-"|uniq -u; uname --machine)|tr -s "\n" " "; )); 
@@ -128,19 +93,11 @@ cpus=($(lscpu|grep -e 'CPU(s):' -m1|cut -f2 -d":"|tr -d " "));
 [ $PREFIX ] && wlan="$(getprop|grep -v "gateway"|grep -E "ipv4" -m1|tr -d "[]"|cut -f2 -d" ")"; 
 [ -z $wlan ] && wlan="$(ip -brief -4 a 2>/dev/null|grep -v "127.0.0.1"|tr -s "/\t " "\n"|grep -E "UP" -A1 -m1|tail -n1)"; 
 [ -z $wlan ] && wlan="$($sudo ifconfig 2>/dev/null|grep -e "wlan" -A1|sed -e 1d|tr -s "a-z " "\n"|sed -e 1d -e 3,4d)"; 
-# [ -z $PREFIX ] && mac=($(ip a show dynamic 2>/dev/null| grep --color=no -e 'ether' -B1|tr -s " " " "|cut -f2-3 -d" "|sed -e "s/\: <.*//g" -e "s/link\/ether\ //g"|tac));
+####
 [ "$wlan" ] && printf %b "${wlan[*]}" > $HOME/logs/wlan.log || wlan="$(cat $HOME/logs/wlan.log)"; 
-# printf %b "$wlan" > $HOME/logs/iploc.log;  
-########
 ####
-####
-# tmux set-option -g status-style bg=colour$(printf %b "$idc";); 
-# dott; printf %b "\e[G"; # printf %b "[${modo[*]:0:7}] "|uniq -u|tr -s "\n" " "|bat -ppfljava --theme DarkNeon; echo; 
-########
-####
-########
 memram="$(memram)"; [ -z "$ssh" ] && ssh=(${SSH_CONNECTION}); 
-########
+####
 dots() { printf %b "${re}·········${re}"; }; 
 dott() { printf %b "\e[0m"; for i in $(seq ${1-45}); do printf %b "·"; done; printf %b "\e[0m"; }; 
 dott; echo; 
@@ -157,29 +114,17 @@ echo; dott; printf %b "\e[G";
 printf %b "[${os1} | ${os2}] "|tr -s "\n" " "|bat -ppfljava --theme zenburn; 
 echo; dott; echo; 
 ########## DATE // CALENDAR ########
-############
 12calendar; 
-[ -e "$HOME/logs/weather.log" ] && dott && printf %b "\e[G$(cat $HOME/logs/weather.log | bat -ppfljava --theme Catppuccin\ Macchiato 2>/dev/null) \n" && dott && echo; 
-# dott && printf %b "\e[G \t " && cat $HOME/logs/wtr.log | tr -s " \n" "\t"| col -xb && 
-# dots; dots; dots; dots; dots; 
-# printf %b "${w[idn]}\e[7m $idn \e[27m $EPOCHSECONDS \e[0m \e[38;5;${idn}m idn: $idn  \e[0m"; echo;
-# printf %b "\e[48;5;${c[$((${wlan: -2}))]} ";
-# printf %b "${c[$((${wlan: -2}))]}";
-# printf %b " ${c[idn]} ";
-# dots; echo;
-######### IP##########################
+#### IP ####
 ii="$(ip -c -brief -4 a 2>/dev/null|grep -vE "lo |DOWN"|cut -f1 -d"/"|column --table --output-separator "$(printf %b "\e[0;2m") | ")"; 
 ####
 [ -z "$ii" ] && ii=($(ifconfig 2>/dev/null|grep -vE "unspec|lo: |127.0.0.1" |cut -f1,10 -d" "|tr -d "\n"|bat -ppf --language Idris)); 
 ####
-# gum style --padding "0 1 0 1" --border-foreground 250 --border normal "$()"; 
 dott && printf %b "\e[G"; 
 printf %b "${ii[*]} "; 
 [ "$wlan" ] && printf %b "- ${wlan} "|bat -ppflsyslog --theme TwoDark; [ "$ssh" ] && printf %b "<< ${ssh}:${ssh[-1]} "|tr "\n " "\t "| bat -ppflsyslog --theme zenburn; 
 echo; dott; echo; 
-# [ "$mac" ] && printf %b "| ${mac[1]} | ${mac}" |tr -d "\n"| bat -ppflsyslog --theme zenburn; 
-#########################
-######## COLOR - ID #####
+#### COLOR - ID #####
 wlan="$(cat $HOME/logs/wlan.log)"; 
 idn1="${wlan/*./}"; idn="$(($(printf %b "${idn1}"|tail -c2) + 0))"; 
 . $HOME/zz/i/colors/coala.sh; 
@@ -197,81 +142,24 @@ dott; printf %b "\e[G"; (printf %b "[${modo[*]:0:7}"|head -c44; printf %b "] ")|
 echo; dott; echo; 
 dott && printf %b "\e[G"; 
 printf %b "${idcbg}${idt} ${id} $rev ${idc[3]} $ver \x23${idc[1]} $rev ${idc[0]} \e[0m "; 
-# \e[0m\e[3${idc[2]}m\e[4${idc[2]};38;5;${idc}m"; #########################
+####
 echo; dott; echo; 
 [ "$(cat ${logs}/dfree.log|wc -c)" -gt 4 ] && cat "${logs}/dfree.log" || dfree; 
 dott; echo; dott; 
 printf %b "\e[G$((uptime -p|tr "\n" "|"; tty)|bat -ppflgo --theme zenburn) ";
 echo; dott; echo;
 ####
-# . ${HOME}/zz/alias.sh; 
-# . $HOME/zz/_ps1.sh; 
-####
-# for i in $HOME/zz/f/*.sh; do . $i; done; 
-# source "$HOME/zz/c/tmuxcompletions.sh"; 
-####
-# sshd 2>/dev/null; command ps -A|cut -c25-|grep -e 'crond' &>/dev/null || crond 2>/dev/null; 
-# [ "$TMUX" ] && tmux source-file $HOME/.config/tmux/tmux.conf; 
-##
-##
 printf %b "\x1b[1 q"; ########### cursor = block
 printf %b "\x1b]12;#ff44bb"; #### cursor = pink
-####
-# printf %b "\x1b]11;#04000f"; ## background = darkblue 
-####
-####
-##
-##
-# if [ $PREFIX ]; then modo=($(getprop|grep -E "vendor.manufacturer|product.manufacturer" -m1 -A1 --group-separator=""|cut -f2- -d" "|tr -s "\n[]" " "; )); 
-# else [ -e /sys/devices/virtual/dmi/id/product_family ] && modo=($(for bb in product_sku board_vendor board_name bios_vendor sys_vendor; 
-# do cat /sys/devices/virtual/dmi/id/${bb} 2>/dev/null|tr -s "\n" " "; done)); fi; 
-####
-# moda="$(printf %b "${modo}"|tr -d "[]"|head -c14)"; model="${moda/%\ /}"; 
-#############################
-# [ "$TMUX_PANE" = "%0" ] && dfree; 
-# source "$HOME/zz/c/tmuxcompletions.sh"; 
 ####
 [ $PREFIX ] && sshd 2>/dev/null; 
 [ $PREFIX ] && crond 2>/dev/null; 
 [ $PREFIX ] && (sleep 2; termux-api-start &>/dev/null) & disown; 
-# printf %b "\e[A\e[K"
 [ $PREFIX ] && (sleep 4; termux-wake-lock &>/dev/null) & disown; 
-########################
-########################
+####
 }; 
-########################
-########################
-####
-#### [ -s ~/.kk ] || new; 
-# alias kk='new'; 
-####
-# if [ -z $TMUX ]; then tmux; fi; 
 ####
 for i in $HOME/zz/f/*.sh; do . $i; done; 
 ####
 . $HOME/zz/alias.sh; 
-# . ~/zz/_ps1.sh; 
-# . $HOME/zz/_ps1.sh; 
 . $HOME/.config/tmux/tmuxcompletions.sh; 
-# . $PREFIX/share/bash
-################################
-################################
-####
-####
-#################################
-#################################
-
-# [ $TMUX ] && [ -z "$new" ] && new || unset new; 
-# command ps -A|cut -c25-|grep -e 'crond' &>/dev/null || 
-####
-# printf '\e]11;#001420\e\\';
-# printf '\e]12;#ff4azz\e\\';
-####
-# [ -z "$PREFIX" ] && 
-# printf %b "\e[3${c[idn]:13:1};48;5;${c[idn]:0:13}\e[0m \\${c[idn]:0:5}\e[3${c[idn]:13:1};48;5;${c[idn]:0:4}${c[idn]: -9: 9} \e[0m"; 
-# alias fzf='fzf-tmux -h 95% -w 98%'; 
-
-# calength="$(cat $HOME/logs/cal.log|wc -l)";
-# for i in $(seq $calength); do dott && echo; done; 
-# printf %b "\e[${calength}A"; 
-############
