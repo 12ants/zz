@@ -59,7 +59,7 @@ C-y: yank
 "⁰": '\e[6~'
 "\eq": '\e[q'
 "⁹": '\e[612_inputrc\n'
-"\x1b[1;5A": '\e[q\hhup\n'
+"\x1b[1;5A": '\e[q\hihi\n'
 # "\x1b[A": '\e[q\hhup\n'
 
 $endif
