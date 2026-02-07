@@ -171,15 +171,13 @@ alias zz.sysinfo='fastfetch -c ~/zz/c/fastfetch/fastfetch66.json';
 nam() { kk=$(for i in $(seq $(stty size|cut -f2 -d" ")); do printf %b "-"; done); man $@|col -xb|sed -e "s/^[ ]*//g" -e "s/^$/$kk/g"|bat -pfljava --theme DarkNeon; }; 
 
 zz.appa() { 
-
 zz.appa.get() { printf %b "\n\n\e[A -- getting list ... \n"; $sudo apt list --verbose 2>/dev/null|tail -n+2|sed -e 's/\/.*\ \[installed.*/\__/g' -e 's/$*\/.*//g' -e '/^$/c#'|tr -d "\n"|tr -s "#" "\n"|sed -e 's/__/\ \x1b[42;1;30minstalled/' -e '/^lib*/d' -e "s/[\']//g"|sed -e 's/$/\x1b[96m/g' -e 's/\ \ /\x1b[0m\ /g' | tee $HOME/logs/appa.log; }; 
-
-
+####
 [ -e $HOME/logs/appa.log ] || zz.appa.get; 
 (($(date +%s) + 80000 < $(stat -tc%W $HOME/logs/appa.log))) && \
 printf %b "\n -- old apt list ... getting a new one \n\n" && \
 zz.appa.get; 
-
+####
 appa=($(cat $HOME/logs/appa.log | command fzf --ansi -i --preview \
 'apt show {1} 2>/dev/null|grep -vE "Download-Size|Version|Maintainer|APT-Sources"|sed -e "s/Description\:\ /------\n/"' \
 --preview-window 'wrap,top,noborder,12' \
@@ -195,10 +193,12 @@ ${appa[*]}
 \e[96m----\e[0m
 \e[2m[\e[0mI\e[2m]\e[0mnstall :: \e[2m[\e[0mR\e[2m]\e[0memove :: \e[2m[\e[0mQ\e[2m]\e[0muit \n\n" && \
 read -rsn1 "nn"; 
-case $nn in i|I) $sudo apt install -y ${appa[*]} && \
+case $nn in *|i|I) $sudo apt install -y ${appa[*]} && \
 $sudo apt -y autoremove;; 
 r|R) $sudo apt remove -y ${appa[*]} && $sudo apt -y autoremove;; 
-*) printf %b "\n\n\e[A -- ok\n\n"; return 0;; esac; 
+esac; 
 echo; 
 ####
 }; 
+alias appa='zz.appa'; 
+. $HOME/zz/zzalias.sh; 

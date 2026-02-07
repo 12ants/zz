@@ -53,7 +53,7 @@ C-y: yank
 "\e[p": "export PATH=${PATH}\e\C-e\"\C-a\ef\ef\C-f:\C-b\""
 "\e[6~": kill-whole-line
 "\e[6": kill-whole-line
-"\e[5~": '\e[6~\hhup\n'
+"\e[5~": '\e[6~\hihi\n'
 "\e[1;2A": '\e[6~\ hh\n'
 "°": '\e4\l\n'
 "⁰": '\e[6~'
