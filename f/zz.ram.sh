@@ -1,0 +1,1 @@
+zz.ram() { free -h|sed -e "1s/\ \ \ \ \ /RAM: /" -e "2,3s/i/b/g" -e "s/buff\///g"|column --table --table-right 2-9 --output-separator "   " --table-hide 5,7 --table-order 1,2,3,6|batcat -ppflc++ --theme Visual\ Studio\ Dark+; }; 

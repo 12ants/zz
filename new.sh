@@ -70,7 +70,7 @@ _model;
 ####
 kk() { 
 . $HOME/zz/f/12calendar.sh; 
-. $HOME/zz/f/memram.sh; 
+. $HOME/zz/f/zz.ram.sh; 
 ###################################
 #### ____ VIDEOCARD _ GET ____ ####
 [ -z $PREFIX ] && \
@@ -96,7 +96,8 @@ cpus=($(lscpu|grep -e 'CPU(s):' -m1|cut -f2 -d":"|tr -d " "));
 ####
 [ "$wlan" ] && printf %b "${wlan[*]}" > $HOME/logs/wlan.log || wlan="$(cat $HOME/logs/wlan.log)"; 
 ####
-memram="$(memram)"; [ -z "$ssh" ] && ssh=(${SSH_CONNECTION}); 
+memram="$(zz.ram)"; 
+[ -z "$ssh" ] && ssh=(${SSH_CONNECTION}); 
 ####
 dots() { printf %b "${re}·········${re}"; }; 
 dott() { printf %b "\e[0m"; for i in $(seq ${1-45}); do printf %b "·"; done; printf %b "\e[0m"; }; 
@@ -107,10 +108,13 @@ printf %b "[${cpu[*]} x ${cpus}] "|tr -s "\n" " "|bat -ppfljava --theme Dracula;
 [ "$videocard" ] && \
 dott && printf %b "\e[G" && \
 printf %b "[${videocard}] "|tr -s "\n" " "|bat -ppfljava --theme DarkNeon && echo && 
-dott && printf %b "\e[G"; 
+dott; echo; 
+dott; echo; 
+dott; echo; dott; printf %b "\e[2A\e[G"; 
 ####
-printf %b "[${memram}] "|bat -ppfljava --theme DarkNeon; 
-echo; dott; printf %b "\e[G"; 
+printf %b "${memram}\n"
+dott; echo; 
+dott; printf %b "\e[G"; 
 printf %b "[${os1} | ${os2}] "|tr -s "\n" " "|bat -ppfljava --theme zenburn; 
 echo; dott; echo; 
 ########## DATE // CALENDAR ########
