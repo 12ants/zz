@@ -15,10 +15,12 @@ IFS=$'\n' wttr=($(cat $HOME/logs/wc.json |tr -s "[]{}, " "\n"|tail -n+10|grep -v
 ##
 # eval $(kk=0; for i in ${!wttr[*]}; do kk=$((kk+3600)); date --date=@$(($(date +%s)+$kk)) +%h\|%d\ %R; printf %b "${wttr[i]}\n__\n"; done|tr -s "\n" " "|tr -s "_" "\n"|sed -e 's/^\ //g')|bat -ppflnim --theme Nord; 
 
-eval $(kk=0; for i in ${!wttr[*]}; do kk=$((kk+3600)); date --date=@$(($(date +%s)+$kk)) +%h\|%d\ %R; printf %b "${wttr[i]}\n__\n"; done|tr -s "\n" " "|tr -s "_" "\n"|sed -e 's/^\ //g'|sed -e 's/^/echo\ \-e\ \"/g' -e 's/\ /\ \[/4' -e 's/\ /c\]\ /5' -e 's/.$/\";\ \n\n/g')|sedtee $HOME/logs/wc.log|bat -ppflnim --theme Nord; 
+eval $(kk=0; for i in ${!wttr[*]}; do kk=$((kk+3600)); date --date=@$(($(date +%s)+$kk)) +%h\|%d\ %R; printf %b "${wttr[i]}\n__\n"; done|tr -s "\n" " "|tr -s "_" "\n"|sed -e 's/^\ //g'|sed -e 's/^/echo\ \-e\ \"/g' -e 's/\ /\ \[/4' -e 's/\ /c\]\ /5' -e 's/.$/\";\ \n\n/g')|tee $HOME/logs/wc.log|bat -ppflnim --theme Nord; 
 # |tee $HOME/logs/weather.log; 
 
-alias wettr='gum style --border normal --padding "1 2" --margin 2 "$(head -n23  wc.log|cut -f 1- -d" "|sed -n "1~3s/$/\n/p"|bat -ppflnim --theme Nord)"'; 
+alias wettr='\
+gum style --border normal --padding "1 2" --margin 2 \
+"$(head -n23 $HOME/logs/wc.log|cut -f 1- -d" "|sed -n "1~3s/$/\n/p"|bat -ppflnim --theme Nord)"'; 
 
 ##
 };
