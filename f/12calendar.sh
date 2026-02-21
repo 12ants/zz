@@ -13,6 +13,8 @@ printf %b "\e[34G getting cal ";
 ####
 (cat $HOME/logs/calendar.json | tr -s "," "\n" | grep -vE 'EPOCH_|h_|description|end_date' | sed '/start_date_time/{s/.[0-9]*[-T]//g}' | cut -f1 -d "+" | sed -e "s/{\"summary/€\n/g"| cut -f 2- -d":" | tr -s "\n€[]" " \n"|sed -e 's/\ \"//g' -e 's/\"\ /\"/g' | col -xb | column --separator "\"" --table --output-separator " | " --table-columns "1234567890123456" --table-right 1 | tail -n+2 | bat -ppflr --theme Visual\ Studio\ Dark+ ) > $HOME/logs/cal.log; }; 
 ####
+[ -e "$HOME/logs/calendar.json" ]||12getcal; 
+####
 calcomp; dott; printf %b "\e[G\e[2m${epmin} mins ago \e[0m"; 
 [[ "$epmin" -gt "88" ]] && 12getcal; 
 for i in {1..28}; do printf %b "·"; done; 

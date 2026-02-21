@@ -33,8 +33,18 @@ mkdir $HOME/logs/b $HOME/tmp $HOME/gh $HOME/dl $HOME/bin $HOME/img $HOME/.config
 . $HOME/zz/f/dfree.sh; 
 dfree > $logs/dfree.log & disown; 
 ####
-. $HOME/zz/i/coala.log; 
+. $HOME/zz/i/colors/coala.sh; 
 ####
+[ $PREFIX ] && wlan="$(getprop|grep -v "gateway"|grep -E "ipv4" -m1|tr -d "[]"|cut -f2 -d" ")"; [ -z $wlan ] && wlan="$(ip -brief -4 a 2>/dev/null|grep -v "127.0.0.1"|tr -s "/\t " "\n"|grep -E "UP" -A1 -m1|tail -n1)"; [ -z $wlan ] && wlan="$($sudo ifconfig 2>/dev/null|grep -e "wlan" -A1|sed -e 1d|tr -s "a-z " "\n"|sed -e 1d -e 3,4d)"; [ "$wlan" ] && printf %b "${wlan[*]}" > $HOME/logs/wlan.log || wlan="$(cat $HOME/logs/wlan.log)"; 
+####
+[ -z $PREFIX ] && ii="$(ip -c -brief -4 a 2>/dev/null|grep -vE "lo |DOWN"|cut -f1 -d"/"|column --table --output-separator "$(printf %b "\e[0;2m") | ")"; [ -z "$ii" ] && ii=($(ifconfig 2>/dev/null|grep -vE "unspec|lo: |127.0.0.1" |cut -f1,10 -d" "|tr -d "\n"|bat -ppf --language Idris)); 
+####
+wlan="$(cat $HOME/logs/wlan.log)"; idn1="${wlan/*./}"; idn="$(($(printf %b "${idn1}"|tail -c2) + 0))"; 
+. $HOME/zz/i/colors/coala.sh; unset -v idc; declare -a idc; export idc=(${co[idn]}); printf %b "${idc[*]}" > $HOME/logs/idc.log; 
+####
+####
+
+
 if echo $HOME|grep -w "termux" -q; then alias sudo='command'; else sudo=sudo; fi; 
 ####
 [ -x $HOME/.config/fzf_completions_bash.sh ] || (fzf --bash &> $HOME/.config/fzf_completions_bash.sh; chmod 775 $HOME/.config/fzf_completions_bash.sh); 
@@ -90,11 +100,7 @@ os1="$(printf %b "${osa1}\b"|col -xb|tr -d "\n")"; os2="$(printf %b "${osa2}\b"|
 cpu=($(lscpu |grep -E 'Model name'|tr -s "\t" " "|cut -f3- -d" ")); 
 cpus=($(lscpu|grep -e 'CPU(s):' -m1|cut -f2 -d":"|tr -d " ")); 
 ## ____ IP _ GET _____ ##########
-[ $PREFIX ] && wlan="$(getprop|grep -v "gateway"|grep -E "ipv4" -m1|tr -d "[]"|cut -f2 -d" ")"; 
-[ -z $wlan ] && wlan="$(ip -brief -4 a 2>/dev/null|grep -v "127.0.0.1"|tr -s "/\t " "\n"|grep -E "UP" -A1 -m1|tail -n1)"; 
-[ -z $wlan ] && wlan="$($sudo ifconfig 2>/dev/null|grep -e "wlan" -A1|sed -e 1d|tr -s "a-z " "\n"|sed -e 1d -e 3,4d)"; 
 ####
-[ "$wlan" ] && printf %b "${wlan[*]}" > $HOME/logs/wlan.log || wlan="$(cat $HOME/logs/wlan.log)"; 
 ####
 memram="$(zz.ram)"; 
 [ -z "$ssh" ] && ssh=(${SSH_CONNECTION}); 
@@ -120,21 +126,13 @@ echo; dott; echo;
 ########## DATE // CALENDAR ########
 12calendar; 
 #### IP ####
-ii="$(ip -c -brief -4 a 2>/dev/null|grep -vE "lo |DOWN"|cut -f1 -d"/"|column --table --output-separator "$(printf %b "\e[0;2m") | ")"; 
 ####
-[ -z "$ii" ] && ii=($(ifconfig 2>/dev/null|grep -vE "unspec|lo: |127.0.0.1" |cut -f1,10 -d" "|tr -d "\n"|bat -ppf --language Idris)); 
 ####
 dott && printf %b "\e[G"; 
 printf %b "${ii[*]} "; 
 [ "$wlan" ] && printf %b "- ${wlan} "|bat -ppflsyslog --theme TwoDark; [ "$ssh" ] && printf %b "<< ${ssh}:${ssh[-1]} "|tr "\n " "\t "| bat -ppflsyslog --theme zenburn; 
 echo; dott; echo; 
 #### COLOR - ID #####
-wlan="$(cat $HOME/logs/wlan.log)"; 
-idn1="${wlan/*./}"; idn="$(($(printf %b "${idn1}"|tail -c2) + 0))"; 
-. $HOME/zz/i/colors/coala.sh; 
-unset -v idc; declare -a idc; 
-export idc=(${co[idn]}); 
-printf %b "${idc[*]}" > $HOME/logs/idc.log; 
 ####
 export id="$(id -un)"; 
 dim='\e[2m'; bold='\e[1m'; 
