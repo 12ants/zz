@@ -74,6 +74,6 @@ hash sudo 2>/dev/null && sudo="sudo";
 [ $UID = 0 ] && unset sudo; zz="${zz-$HOME/zz}"; 
 hash git || $sudo apt install -y git &>/dev/null; 
 printf %b "\n $o downloading ... \n"; 
-cd $zz; . menu.sh; menu "./install"; 
+cd $zz; . $zz/f/menu.sh; menu "./setup"; 
 ################
 else echo;echo; fi; echo -e "\n\e[1;5m\t>_<\n\n\e[0m"; 
