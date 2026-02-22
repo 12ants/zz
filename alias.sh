@@ -204,4 +204,4 @@ echo;
 ####
 }; 
 alias appa='zz.appa'; 
-. $HOME/zz/zzalias.sh; 
+# . $HOME/zz/zzalias.sh; 
