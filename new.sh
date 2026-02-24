@@ -45,10 +45,12 @@ wlan="$(cat $HOME/logs/wlan.log)"; idn1="${wlan/*./}"; idn="$(($(printf %b "${id
 ####
 
 
-if echo $HOME|grep -w "termux" -q; then alias sudo='command'; else sudo=sudo; fi; 
+if echo $HOME|grep -w "termux" -q; then unalias sudo 2>/dev/null; else sudo=sudo; fi; 
 ####
-[ -x $HOME/.config/fzf_completions_bash.sh ] || (fzf --bash &> $HOME/.config/fzf_completions_bash.sh; chmod 775 $HOME/.config/fzf_completions_bash.sh); 
-if fzf --bash &>/dev/null; then . $HOME/.config/fzf_completions_bash.sh; fi; 
+# [ -x $HOME/.config/fzf_completions_bash.sh ] || (fzf --bash &> $HOME/.config/fzf_completions_bash.sh; 
+# chmod 775 $HOME/.config/fzf_completions_bash.sh); 
+# if fzf --bash &>/dev/null; then 
+# . $HOME/.config/fzf_completions_bash.sh; fi; 
 ####
 unset tmuxprefix 2>/dev/null;  
 if [ "$PREFIX" ]; then tmuxprefix=" --tmux 'center,100%,100%' "; 
@@ -73,8 +75,7 @@ modo=($(for bb in product_family board_vendor board_name bios_vendor sys_vendor;
 do cat /sys/devices/virtual/dmi/id/${bb} 2>/dev/null|grep -v "O.E.M."|tr -s "\n" " "; done)); 
 ####
 moda="$(printf %b "${modo}"|tr -d "[]"|head -c14)"; 
-model="${moda/%\ /}"; 
-printf %b "${modo[*]}" > $HOME/logs/model.log; 
+model="${moda/%\ /}"; printf %b "${modo[*]}" > $HOME/logs/model.log; 
 }; 
 _model; 
 ####
