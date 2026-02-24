@@ -2,9 +2,12 @@
 ## /ants/functions.sh - functions for bash shell
 ###################
 ## multiselection menu for bash
-menu() { 
-olpwd="$PWD"; size=($(stty size)); for i in $(seq $size); do echo; done; 
-echo -ne '\e[s\e[H\e[J'; green='\e[92m'; cyan='\e[36m'; re='\e[0m'; 
+menu_setup() { 
+hash sudo 2>/dev/null&&sudo=sudo||unset sudo; 
+hash file 2>/dev/null||$sudo apt install -y file &>/dev/null; 
+olpwd="$PWD"; size=($(stty size)); 
+for i in $(seq $size); do echo; done; printf %b "\e[0m\e[s\e[H\e[J"; 
+green='\e[92m'; cyan='\e[36m'; re='\e[0m'; 
 dim='\e[2m'; bold='\e[1m'; c2='\e[36m--\e[0m';
 command=bash; [ "$2" ]&& command="$2"; hello=hello; [ $3 ]&& hello=$3; 
 dots="$(for i in $(seq $(($(stty size|tail -c4) - 11))); do echo -ne .; done;)"; 
@@ -28,7 +31,7 @@ OPTIONS_STRING+="\e[1K\n\e[6G\e[1m${cyan} Confirm";
 ####################
 checkbox () {
 ## little helpers for terminal print control and key input
-ESC=$( printf "\x1B")
+ESC=$(printf "\x1B")
 cursor_blink_on()   { printf "$ESC[?25h"; }
 cursor_blink_off()  { printf "$ESC[?25l"; }
 cursor_to()         { printf "$ESC[$1;${2:-1}H"; }
@@ -98,15 +101,15 @@ echo -ne "\n $c2 Try again? \e[2m[\e[0my\e[2m/\e[0mN\e[2m]\e[0m ";
 read -n1 -ep "" "yn"; 
 if [ "$yn" != "${yn#[Yy]}" ]; 
 then menu "$1" "$2" "$3" "$4"; return 0; 
-else cd "$olpwd"; echo -e "\e[?25h\n Nope\n"; return 0; fi
+else cd "$olpwd"; echo -e "\e[?25h\n Nope\n"; IFS=$' \n\t'; return 0; fi
 else
 echo -e "\n \e[4;32mYou chose:\e[0m${CHECKED[@]/#/\\n" "}";
 #echo -ne "\n $c2 Current command to execute is: $cyan$command$re "
 echo -ne "\n $c2 Do you wish to proceed? \e[2m[\e[0mY\e[2m/\e[0mn\e[2m]\e[0m "; 
 read -n1 -ep "" "yn"; if [ "$yn" != "${yn#[Nn]}" ]; then 
-cd "$olpwd"; echo -e "\e[?25h\n Nope\n"; 
+IFS=$' \n\t'; cd "$olpwd"; echo -e "\e[?25h\n Nope\n"; 
 return 0; else 
-echo -e "\n $c2 OK"; 
+echo -e "\n $c2 OK"; IFS=$' \n\t'; 
 ## after ############
 ## EXECUTE ##########
 printf " $c2 Command to execute:"; read -rep " " -i "$command" "command";
@@ -114,7 +117,7 @@ for i in "${CHECKED[@]}"; do echo -e "\e[0m $c2 Installing $i \e[2m"; sleep 0.1;
 #[ "$2" ]|| bash $i; [ "$2" ]&& 
 $command $i; 
 echo -e "\e[0m $c2 $i$green Installed$re \e[2m"; done; cd $olpwd; echo -e "\n Done"; fi; 
-echo -e "\e[0m"; fi; 
+echo -e "\e[0m"; fi; IFS=$' \n\t'; 
 }; ## END MENU ##
 #################
 ## 12_ menu #####

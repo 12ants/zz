@@ -1,27 +1,25 @@
 #!/bin/bash
 ## install basic apts etc
-[ -z "$start" ] && start="${HOME}/zz"; 
+IFS=$' \n\t'; [ -z "$start" ] && start="${HOME}/zz"; 
 ##
-hash sudo 2>/dev/null && sudo="sudo"; 
-rr="$((RANDOM%222))"; 
+hash sudo 2>/dev/null && sudo="sudo"; rr="$((RANDOM%222))"; 
 printf %b "\ec\e[0m -- \e[48;5;${rr}m updating \e[0m --\n\e[38;5;${rr}m "; 
-$sudo apt update; 
-rr="$((RANDOM%222))"; 
+$sudo apt update; rr="$((RANDOM%222))"; 
 printf %b "\ec\e[0m -- \e[48;5;${rr}m upgrading \e[0m --\n\e[38;5;${rr}m "; 
 $sudo apt upgrade -y; 
 ####
-IFS=$'\n\t '; 
 [ -z $start ] && start="$HOME/zz"; 
-appa=($(command ls -p1 $start/install/ap|grep -v "*/")); 
+appa=($(command ls -p1 $start/setup/ap|grep -v "*/")); 
 ####
-$sudo apt install openssh-sftp-server --assume-yes; 
-$sudo apt install -y cronie --assume-yes;  
+# $sudo apt update; $sudo apt upgrade -y; 
+$sudo apt install -y openssh-server; 
+[ $PREFIX ] && apt install -y cronie || $sudo apt install -y cron; 
 [ -e "$HOME/.ssh/id_ed25519.pub" ] || ssh-keygen; 
 ####
 for i in ${appa[*]}; do rr="$((RANDOM%222))"; 
 printf %b "\ec\e[0m -- \e[48;5;${rr}m ${i} \e[0m -\e[555b\b\n\e[38;5;${rr}m "; 
 if hash $i 2>/dev/null; then printf %b "\n$i \e[0malready exists!\n"; 
-else $sudo apt install -y $i --assume-yes; fi; done; 
+else $sudo apt install -y $i; fi; done; 
 printf %b "\ec\e[0m -- \e[48;5;${rr}m installed \e[0m --\n\e[38;5;${rr}m \n\e[0m"; 
 printf %b "${appa[*]}\n\n\e[0m -- \e[48;5;82m\e[1;90m DONE \e[0m --\n\n"; 
 ####

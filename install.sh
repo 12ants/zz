@@ -45,7 +45,7 @@ seq $LINES;
 o='\e[96;1m --\e[0m'; 
 printf %b "\e[?25l"; 
 for i in {1..6}; do 
-hello="\e[95;1mhello\e[0m\e[9${i}m"; 
+hello="\e[95;1mh€llø\e[0m\e[9${i}m"; 
 printf %b "\e[1J\e[H\e[9${i}m
 
                ▒▓█▓▓▒▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░                   
@@ -74,6 +74,6 @@ hash sudo 2>/dev/null && sudo="sudo";
 [ $UID = 0 ] && unset sudo; zz="${zz-$HOME/zz}"; 
 hash git || $sudo apt install -y git &>/dev/null; 
 printf %b "\n $o downloading ... \n"; 
-cd $zz; . $zz/f/menu.sh; menu "./setup"; 
+cd $zz; . $zz/setup/.menu.sh; menu "./setup"; 
 ################
-else echo;echo; fi; echo -e "\n\e[1;5m\t>_<\n\n\e[0m"; 
+else echo;echo; fi; printf %b "\n\e[1;5m\t>_<\n\n\e[0m"; 

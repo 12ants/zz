@@ -1,6 +1,6 @@
 #!/bin/bash
 ## install grub
-sudo cp $HOME/88/m/tard.jpg /boot/grub/tard.jpg; 
+sudo cp $HOME/zz/m/tard.jpg /boot/grub/tard.jpg; 
 sudo mv /etc/default/grub /etc/default/grub_$(date +%y%m%d_%H%M)
 printf '
 GRUB_BACKGROUND="/boot/grub/tard.jpg"
@@ -11,7 +11,7 @@ GRUB_GFXMODE="auto"
 GRUB_DEFAULT="saved"
 GRUB_SAVEDEFAULT="true"
 GRUB_TIMEOUT_STYLE="menu"
-GRUB_TIMEOUT="2"
+GRUB_TIMEOUT="4"
 GRUB_DISTRIBUTOR="`lsb_release -dcs|tail -n2|tr "\n" " " 2>/dev/null || echo Debian`"
 GRUB_DISABLE_OS_PROBER="false"
 GRUB_HIDDEN_TIMEOUT="0"

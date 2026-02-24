@@ -3,51 +3,35 @@
 IFS=$' \n\t'; 
 [ -z $zz ] && zz="$HOME/zz"; 
 mkdir $HOME/.safe 2>/dev/null; 
-hash sudo 2>/dev/null && sudo="sudo"; c2='    \e[0m\e[36m--\e[0m'; # gh_12ants="$HOME/zz/c/gpg/gh_12ants.gpg"; 
-printf %b "\n\n\n\n\n\n\e[5A"; 
-printf %b "\n$c2 password for 12ants\e[2m@\e[0mgithub: "; 
+hash sudo 2>/dev/null && sudo="sudo"; 
+hash gh 2>/dev/null || $sudo apt install gh; 
+hash git 2>/dev/null || $sudo apt install git; 
+hash openssl 2>/dev/null || $sudo apt install openssl; 
+hash gpg 2>/dev/null || $sudo apt install gnupg; 
+gh_login="12ants"; 
+c2='    \e[0m\e[36m--\e[0m'; # gh_12ants="$HOME/zz/c/gpg/gh_12ants.gpg"; 
+printf %b "\n\n\n\n\n\e[5A
+    ------------ github login ------------ 
+$c2 password for 12ants\e[2m@\e[0mgithub: "; 
 read -sre "pwgh_12ants"; 
 printf %b "$c2 logging in to github ...\n  "; 
 printf %b "$pwgh_12ants" > $HOME/.safe/pw12.txt; 
-
-# printf %b "\n$c2 password for aeniks\e[2m@\e[0mgithub: "; read -sre "pwgh_aeniks"; 
-##
-# gh_aeniks="$start/c/gpg/gh_aeniks.gpg"; 
-## ibstall ssh
-gh_user="$(id -nu)"; gh_mail="$(id -nu)@$(hostname)"; 
+####
+gh_user="$(id -nu)"; 
+gh_mail="$(id -nu)@$(hostname)"; 
 git config --global user.name $gh_user; 
 git config --global user.email $gh_mail; 
 git config --global init.defaultBranch main; 
 ####
-# for ss in {openssh-server,gh,git,gnupg} ; do hash $ss 2>/dev/null || "$sudo" apt install -y "${ss}" && printf %b "\e[2J\e[H"; done; 
-##
-# --passphrase "${pwgh_12ants}" 
-# --pinetry-mode loopback 
-# gpg --quiet --passphrase "${pwgh_aeniks}" -o "$HOME/.safe/gh_aeniks.log" -d "$gh_aeniks" 2>/dev/null; 
-gpg --pinentry-mode loopback --quiet --passphrase-file $HOME/.safe/pw12.txt -o $HOME/.safe/gh_12ants.log -d $HOME/zz/c/gpg/gh_12ants.gpg; 
- # 2>/dev/null; 
+gpg --pinentry-mode loopback --passphrase-file $HOME/.safe/pw12.txt -qd $HOME/zz/c/gpg/gh_12ants.gpg > $HOME/.safe/gh_12ants.log; 
 ####
-##
-##
-# sleep .2; _ok; 
-#[ -r "$(ls -1 $HOME/.ssh/*.pub 2>/dev/null|head -n1)" ] || 
-ghlog="12ants"; 
-gh auth login --with-token < $HOME/.safe/gh_12ants.log; 
-printf %b "\n    "; 
+gh auth login --with-token < $HOME/.safe/gh_12ants.log; printf %b "\n    "; 
 gh auth switch -u 12ants; 
-echo; 
-[ -e "$HOME/.ssh/gh_${ghlog}" ] || ssh-keygen -N '' -f $HOME/.ssh/gh_${ghlog}; 
-[ -e "$HOME/.ssh/gh_${ghlog}.pub" ] && printf %b "\n    "; gh ssh-key add $HOME/.ssh/gh_${ghlog}.pub; 
-# gh auth status; 
+printf %b "\n    "; 
+if [ -e "$HOME/.ssh/gh_${gh_login}" ]; then :; else ssh-keygen -N '' -f $HOME/.ssh/gh_${gh_login}; 
+[ -e "$HOME/.ssh/gh_${gh_login}.pub" ] && gh ssh-key add $HOME/.ssh/gh_${gh_login}.pub; fi; 
+####
 gh config set git_protocol ssh; 
 printf %b "\n$c2 "; 
-ssh -T git@github.com -i ~/.ssh/gh_${ghlog}; 
-printf %b "\n$c2 logged in to github. "; 
-printf %b "\n$c2 done! \n\n"; 
-# chmod 600 $HOME/.ssh/*; chmod 644 $HOME/.ssh/*.pub; 
-##
-##
-# cd $start; git config remote.origin.url git@github.com:12ants/zz.git 2>/dev/null; 
-# cd $OLDPWD; 
-##
-##
+ssh -T git@github.com -i ~/.ssh/gh_${gh_login} && printf %b "\n$c2 logged in to github. \n$c2 done! \n\n"; 
+####
