@@ -3,6 +3,7 @@
 IFS=$' \n\t'; 
 [ -z $zz ] && zz="$HOME/zz"; 
 mkdir $HOME/.safe 2>/dev/null; 
+chmod 700 $HOME/.safe 2>/dev/null; 
 hash sudo 2>/dev/null && sudo="sudo"; 
 hash gh 2>/dev/null || $sudo apt install gh; 
 hash git 2>/dev/null || $sudo apt install git; 

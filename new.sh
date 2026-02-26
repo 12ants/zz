@@ -81,7 +81,6 @@ _model;
 ####
 kk() { 
 . $HOME/zz/f/12calendar.sh; 
-. $HOME/zz/f/zz.ram.sh; 
 ###################################
 #### ____ VIDEOCARD _ GET ____ ####
 [ -z $PREFIX ] && \
@@ -103,23 +102,24 @@ cpus=($(lscpu|grep -e 'CPU(s):' -m1|cut -f2 -d":"|tr -d " "));
 ## ____ IP _ GET _____ ##########
 ####
 ####
-memram="$(zz.ram)"; 
 [ -z "$ssh" ] && ssh=(${SSH_CONNECTION}); 
 ####
-dots() { printf %b "${re}·········${re}"; }; 
+# dots() { printf %b "${re}·········${re}"; }; 
 dott() { printf %b "\e[0m"; for i in $(seq ${1-45}); do printf %b "·"; done; printf %b "\e[0m"; }; 
 dott; echo; 
-dott; printf %b "\e[G"; 
+dott; 
+printf %b "\e[G$((uptime -p|tr "\n" "|"; tty)|bat -ppflgo --theme zenburn) \e[0m\n"; dott; echo; dott; 
+
 ####
-printf %b "[${cpu[*]} x ${cpus}] "|tr -s "\n" " "|bat -ppfljava --theme Dracula; echo; 
-[ "$videocard" ] && \
-dott && printf %b "\e[G" && \
-printf %b "[${videocard}] "|tr -s "\n" " "|bat -ppfljava --theme DarkNeon && echo && 
-dott; echo; 
-dott; echo; 
-dott; echo; dott; printf %b "\e[2A\e[G"; 
+printf %b "\e[G["; printf %b "${cpu[*]} x ${cpus}"|tr -s "\n" " "|bat -ppfljava --theme Dracula; printf %b "] \n"; 
 ####
-printf %b "${memram}\n"
+[ "$videocard" ] && dott && printf %b "\e[G[" && printf %b "${videocard} "|tr -s "\n" " "|bat -ppfljava --theme DarkNeon && printf %b "] \n" && dott && echo; 
+
+
+
+
+####
+####
 dott; echo; 
 dott; printf %b "\e[G"; 
 printf %b "[${os1} | ${os2}] "|tr -s "\n" " "|bat -ppfljava --theme zenburn; 
@@ -141,22 +141,37 @@ re='\e[0m'; rev='\e[7m'; ver='\e[27m';
 bg='\e[48;5;'; fg='\e[38;5;'; 
 idcbg="${bg}${idc}m"; idcfg="${fg}${idc}m"; idt="\e[3${idc[2]}m"; 
 ####
-dott; printf %b "\e[G"; (printf %b "[${modo[*]:0:7}"|head -c44; printf %b "] ")|batcat -ppfljava --theme gruvbox-dark; 
-echo; dott; echo; 
-dott && printf %b "\e[G"; 
-printf %b "${idcbg}${idt} ${id} $rev ${idc[3]} $ver \x23${idc[1]} $rev ${idc[0]} \e[0m "; 
+modol() { 
+modol="$(printf %b "${modo[*]:0:7}"|head -c44|batcat -ppfljava --theme gruvbox-dark)"; 
+moc="$(printf %b "${modo[*]:0:7}"|head -c44|wc -c)"; 
 ####
-echo; dott; echo; 
-[ "$(cat ${logs}/dfree.log|wc -c)" -gt 4 ] && cat "${logs}/dfree.log" || dfree; 
-dott; echo; dott; 
-printf %b "\e[G$((uptime -p|tr "\n" "|"; tty)|bat -ppflgo --theme zenburn) ";
-echo; dott; echo;
+dott; printf %b "\e[1m\e[$((20-moc/2))G [${modol}\e[1m] \n"; 
+}; 
+####
+memoram() { memram="$(free -h|sed -e "1s/\ \ \ \ \ /RAM: /" -e "2,3s/i/b/g" -e "s/buff\///g"|column --table --table-right 2-9 --output-separator "   " --table-hide 5,7 --table-order 1,2,3,6|sed -e "s/$/\ ·/g"|batcat -ppflc++ --theme Visual\ Studio\ Dark+)"; dott() { printf %b "\e[0m"; for i in $(seq ${1-45}); do printf %b "·"; done; printf %b "\e[0m"; }; mw="$(printf %b "$memram\n\n"|wc -l)"; for i in $(seq $mw); do dott; printf %b "\n"; done; printf %b "\e[${mw}A\n"; printf %b "${memram}\n"; }; 
+####
+unicolor() { printf %b "\e[G${idcbg}${idt} ${id} $rev ${idc[3]} $ver \x23${idc[1]} $rev ${idc[0]} \e[0m \n"; }; 
+####
+#### COLOR 
+#### MODEL
+
+dott; 
+unicolor; 
+dott; echo; 
+modol; 
+memoram; 
+dott; echo; 
+####
+####
+[ "$(cat ${logs}/dfree.log|wc -c)" -gt 4 ] && cat "${logs}/dfree.log" || dfree; dott; echo; 
+#### RAM
+#### DISK
 ####
 printf %b "\x1b[1 q"; ########### cursor = block
 printf %b "\x1b]12;#ff44bb"; #### cursor = pink
 ####
-[ $PREFIX ] && sshd 2>/dev/null; 
-[ $PREFIX ] && crond 2>/dev/null; 
+[ $PREFIX ] && sshd & disown 2>/dev/null; 
+[ $PREFIX ] && crond & disown 2>/dev/null; 
 [ $PREFIX ] && (sleep 2; termux-api-start &>/dev/null) & disown; 
 [ $PREFIX ] && (sleep 4; termux-wake-lock &>/dev/null) & disown; 
 ####

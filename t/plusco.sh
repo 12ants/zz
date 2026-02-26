@@ -1,6 +1,6 @@
 #!/bin/bash
 function plusco () { 
-local IFS=$'\n\t '; 
+local IFS=$' \n\t'; 
 tty=$(tty); 
 ls=($(command ls -1p)); 
 uhl="$(printf %b "${ls[*]}"|wc -l)"; 
