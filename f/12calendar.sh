@@ -2,7 +2,7 @@
 ####
 12calendar() { 
 #### 
-dott() { printf %b "\e[0m"; for i in $(seq ${1-45}); do printf %b "·"; done; printf %b "\e[0m"; }; 
+# dott() { printf %b "\e[0m"; for i in $(seq ${1-45}); do printf %b "·"; done; printf %b "\e[0m"; }; 
 ####
 calcomp() { printf -v "epoch" %b "$(($(date +%s) / 60))"; printf -v "epcal" %b "$(($(tail -c10 $HOME/logs/calendar.json) / 60))"; printf -v "epmin" %b "$((epoch - epcal))"; }; 
 ####
@@ -18,7 +18,7 @@ printf %b "\e[34G getting cal ";
 calcomp; dott; printf %b "\e[G\e[2m${epmin} mins ago \e[0m"; 
 [[ "$epmin" -gt "88" ]] && 12getcal; 
 for i in {1..28}; do printf %b "·"; done; 
-printf %b "\e[19G"; printf %b " $(date +%a\ %b\ %d\ %Y\ \|\ %T)"|bat -ppfljava --theme DarkNeon; echo; calcomp; 
+printf %b "\e[19G"; printf %b " $(date +%a\ %b\ %d\ %Y\ \|\ %T) "|bat -ppfljava --theme DarkNeon; echo; calcomp; 
 ####
 [ -e $HOME/logs/calendar.json ] || 12getcal; cat  $HOME/logs/calendar.json|grep -e "EPOCH" --quiet || 12getcal; 
 ####
