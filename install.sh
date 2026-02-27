@@ -27,7 +27,7 @@ printf %b "\e[1J\e[H\e[9${i}m
                                                                  ░▒▒░  "; 
 sleep .2; done; printf %b "\e[?25l"; 
 printf %b "\n\e[A\e[0m $o dl 12ants/zz git? [\e[2mY\e[0m/\e[2mn\e[0m] "; 
-read -n1 -sre "ny"; 
+read -n1 -sr "ny"; 
 if [ -z "$ny" ]; then 
 printf %b " $o ok\n $o whereto? "; 
 read -rei "$PWD" "aa"; zz="$aa/zz"; 
@@ -75,7 +75,7 @@ printf %b "\e[1J\e[H\e[9${i}m
 "; 
 sleep .2; done; printf %b "\e[?25l"; 
 printf %b "\n\tinstall some cool shit\e[0m? [\e[2mY\e[0m/\e[2mn\e[0m] "; 
-read -n1 -sre "ny"; if [ -z "$ny" ]; then 
+read -n1 -sr "ny"; if [ -z "$ny" ]; then 
 ###
 hash sudo 2>/dev/null && sudo="sudo"; 
 [ $UID = 0 ] && unset sudo; zz="${zz-$HOME/zz}"; 
