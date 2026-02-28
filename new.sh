@@ -139,7 +139,7 @@ modol() {
 moc="$(printf %b "[${modo[*]:0:7}]"|head -c44|wc -c)"; 
 modol="\e[1m[$(printf %b "${modo[*]:0:7}"|head -c44|bat -ppfljava --theme gruvbox-dark)\e[1m]"; 
 dott; printf %b "\e[G"; 
-printf %b "\e[$((24 - moc / 2))G ${modol} \n"; 
+printf %b "\e[$((25 - moc / 2))G ${modol} \n"; 
 }; 
 ####
 modo() { gum style --border normal --align center --width 43 --bold --foreground ${idc[2]} --border-background $idc --background $idc --padding "0 1" --margin "0" "$(printf %b "${modo[*]:0:7}"|head -c41)"; };
