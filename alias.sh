@@ -8,15 +8,16 @@ alias kkkk='col -xb|fmt --split-only --width=$((COLUMNS - 2)) --goal=66 --unifor
 alias rep="reset -Q; IFS=$'\n\t '; . $PREFIX/share/bash-completion/bash_completion"; 
 alias cccc='crontab -e'; 
 alias zz.find.phone='ssh -p 8022 aa@192.168.0.19 "mpv $HOME/zz/m/money.mp3"'
-alias gh_release_dl='gh release download "$(gh release list --limit 1|tail -n1|tr -s " \t" " "|cut -f1 -d" ")"'; 
+alias zz.gh_release_dl='gh release download "$(gh release list --limit 1|tail -n1|tr -s " \t" " "|cut -f1 -d" ")"'; 
 alias zz.alias='$EDITOR ~/88/alias.sh'; 
 alias zz.disk='$sudo fdisk -lL=always|grep -vwE "sectors|Sector|I/O"|cut -f2- -d'; 
 alias env='env|sort|k'; 
 alias antsup='ssh aa@ants.ftp.sh "sudo apt update; sudo apt upgrade; sudo reboot"'; 
-alias s='ssss -sl4|grep -vE "UNCONN"|tr -s " " " "|cut -f1,2,5 -d" "|column --table --output-separator " : "|bat -ppfld'; 
+alias ssss='ssss.sh -sl4|grep -vE "UNCONN"|tr -s " " " "|cut -f1,2,5 -d" "|column --table --output-separator " : "|bat -ppfld'; 
 alias neew='clear; . crons/hour.sh; printf %b "\e[12B"; new'; 
-alias ss='history -s "$(printf %b "sudo "; tail -n1 "$HISTFILE")"; history -w; read -ei "$(tail -n1 "$HISTFILE")" "ssss" && ${ssss} || echo ok; '; 
-alias gitstats='[ -e $PWD/.git ] && (printf %b "$(git status --short| bat -ppfld --theme Coldark-Dark)\n");';
+alias ss='sudo'
+alias ssup='history -s "$(printf %b "sudo "; tail -n1 "$HISTFILE")"; history -w; read -ei "$(tail -n1 "$HISTFILE")" "ssss" && ${ssss} || echo ok; '; 
+alias zz.gitstats='[ -e $PWD/.git ] && (printf %b "$(git status --short| bat -ppfld --theme Coldark-Dark)\n");';
 alias zz.choose_logins_screen='
 printf %b "$re\n\n\n\n\n\e[4A"; 
 systemctl get-default; 
@@ -33,13 +34,12 @@ alias fig='figfonts';
 alias la='lsd -l --icon never --group-directories-first --classify --total-size -a --blocks user,size,date,name --date +%H:%M:%S'
 alias bb='if [ "$PREFIX" ]; then \
 tmux display-popup -E -w 99% -h 98% "htop"; else \
-tmux display-popup -E -w 99% -h 98% "btop"; fi '
+tmux display-popup -E -w 99% -h 98% "sudo btop"; fi '
 alias qb='ssh aa@ants.ftp.sh "qbittorrent-nox -d" && xdg-open https://qb.aeniks.com'; 
 alias l='lf -last-dir-path $HOME/logs/ll.log; cd $(cat $HOME/logs/ll.log); '
 alias jacketts='/home/aa/gh/jackett/jackett &'
-alias uu="tmux split-window -l 44% -e sudo='$sudo' 'hash nala||$sudo apt install nala -y &>/dev/null; $sudo nala update; $sudo nala upgrade -y; '"; 
+#alias uu="tmux split-window -l 44% -e sudo='$sudo' 'hash nala||$sudo apt install nala -y &>/dev/null; $sudo nala update; $sudo nala upgrade -y; '"; 
 alias upup='$sudo apt update; $sudo apt upgrade -y'; 
-alias wtr='curl -sL "https://wttr.in/sthlm?format=4"';
 # alias u2='tmux split-window -l "44%" -e "sudo=$sudo" -v '$sudo apt update 2>/dev/null|bat -ppflzig --theme=DarkNeon; printf %b "\n\n\n\n\e[96m"; $sudo apt upgrade -y; $sudo apt autoremove -y; printf %b "\n\e[0;46m\n\n\n\n -- done\n\n\n\n\e[0m\n"; read -n1 "kk"; ';'; 
 
 
@@ -49,7 +49,7 @@ alias mm='micro';
 ## aaaaaa
 alias upwords='rsync aa@ants.ftp.sh:/home/aa/logs/words/up -avP --mkpath ~/'; 
 # alias yno='nyo'; 
-alias zz='cd $HOME/zz'; 
+alias zz='cd $HOME/zz; git status'; 
 # alias zz='col -b|tr -s "\n\t " "\n\t "|bat -pfljava --pager "more"'; 
 alias f='[ -e $PREFIX/bin/fastfetch ] && fastfetch || neofetch || return 0'; 
 # alias f='fff; cd $(cat $HOME/.cache/fff/.fff_d)'; 

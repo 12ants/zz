@@ -1,4 +1,5 @@
 hihi() { 
+IFS=$' \n\t'; 
 tmp=$HOME/tmp; mkdir $tmp 2>/dev/null; 
 h1="$tmp/$(id -nu|tr -d "\n"; date +__%__y%m%d_%H_%M_%S).sh"; touch $h1;
 ####
@@ -6,7 +7,7 @@ h1="$tmp/$(id -nu|tr -d "\n"; date +__%__y%m%d_%H_%M_%S).sh"; touch $h1;
 ####
 #history -s "$(FZF_DEFAULT_OPTS= bat -ppfljava $HISTFILE | tr -s "\n" "\n" | uniq -u | fzf --tac -i -m --cycle --bind "q:abort" --style="minimal" --info inline --preview-window "hidden"; if [ $? != 0 ]; then $(return 1); echo; else history -a; history -n; fi; )"||return 1 | tee -a $HISTFILE; if [ $? != 0 ]; then echo okok; return 1; else history -a; history -n; fi;
 ####
-hists="$(unset FZF_DEFAULT_OPTS; bat -ppfljava $HISTFILE|command fzf --tac -i -m --cycle --ansi --bind "q:abort,backward-eof:abort" --info inline --no-border --height "~25%" --border none --preview-window hidden --no-scrollbar --color "bg:234,bg+:29" --pointer "#" --ellipsis "" --scroll-off "50" --unicode)"; 
+hists="$(unset FZF_DEFAULT_OPTS; bat -ppfljava $HISTFILE|command fzf --tac -i -m --cycle --ansi --bind "q:abort,backward-eof:abort" --info inline --no-border --height "~55%" --border none --preview-window hidden --no-scrollbar --color "bg:234,bg+:29" --pointer "#" --ellipsis "" --scroll-off "50" --unicode)"; 
 ####
 if [ "${hists}" ]; then history -s "$(printf %b "${hists}")"; history -a; history -n;
 linedash() { printf %b "\e[96m-\e[222b\e[0m\n"; }; 
