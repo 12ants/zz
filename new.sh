@@ -80,6 +80,7 @@ model="${moda/%\ /}"; printf %b "${modo[*]}" > $HOME/logs/model.log;
 _model; 
 ####
 kk() { 
+IFS=$' \n\t'; 
 . $HOME/zz/f/12calendar.sh; 
 ###################################
 ###################################
