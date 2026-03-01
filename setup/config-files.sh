@@ -25,7 +25,7 @@ mv $HOME/.config/$q/* -t $HOME/tmp -b --suffix="_bu__$(date +%y%m%d_%H%M%S)" 2>/
 ln -s $start/c/$q/* -t $HOME/.config/$q/ --backup --suffix="_bu__$(date +%y%m%d_%H%M%S)"; 
 sleep .05; printf %b "\n\e[0m"; p1 "updated"; printf %b "\e[38;5;$((qq++))m $q"; 
 done; 
-[ $PREFIX ] && linksf="$HOME/links" || linksf="$HOME/links2"; 
+[ $PREFIX ] && linksf="$HOME/.links" || linksf="$HOME/.links2"; 
 mkdir $linksf 2>/dev/null; 
 ln -s $start/c/links2/* -t $linksf --backup; 
 
