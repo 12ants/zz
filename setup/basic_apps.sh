@@ -17,6 +17,10 @@ printf %b "\e[H\e[J ";
 $sudo apt install -y openssh-server; 
 $sudo apt install -y micro;  
 $sudo apt install -y cron; 
+$sudo apt install -y gh; 
+$sudo apt install -y git; 
+
+
 ##
 unset appa done; appa=($(ls -1p $HOME/zz/setup/ap|grep -v '/')); for i in ${appa[*]}; do rr="\e[38;5;$((RANDOM%222+22))m"; hash $i && printf %b "\n$i -- installed \n" || $sudo apt install -y $i && done+=("$rr$i"); printf %b "\ec\e[0m\e[96m --\e[0m installed: ${done[*]} \n\n"; done; printf %b "\ec\n\n\e[0m\e[96m --\e[0m installed: \n\e[7m${done[*]}\e[0m\n\n";
 #$
