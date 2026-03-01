@@ -36,6 +36,7 @@ hash sudo 2>/dev/null && sudo="sudo";
 hash git || $sudo apt install -y git &>/dev/null; 
 printf %b "\n $o downloading ... \n"; 
 git clone https://github.com/12ants/zz 2>/dev/null; 
+git config remote.origin.url=git@github.com:12ants/zz.git; 
 # cd zz; . menu.sh; menu "./install"; 
 ################
 else echo;echo; fi; echo -e "\n\e[1;5m\t>_<\n\n\e[0m"; 
