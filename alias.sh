@@ -31,6 +31,7 @@ t) sudo systemctl set-default multi-user.target;;
 # alias weather='curl -L "wttr.in/stockholm?format=4"'; 
 # alias wtr='gum style --border normal --border-foreground "#25554b" --padding "1 2" --margin "1 2" "$(weather -s)"'; 
 alias fig='figfonts'; 
+alias start='sudo lightdm'; 
 alias la='lsd -l --icon never --group-directories-first --classify --total-size -a --blocks user,size,date,name --date +%H:%M:%S'
 alias bb='if [ "$PREFIX" ]; then \
 tmux display-popup -E -w 99% -h 98% "htop"; else \
