@@ -4,7 +4,7 @@ mkdir ~/.config/gpg 2>/dev/null;
 ####
 [ -z "$start" ] && start="${HOME}/zz"; 
 ####
-gpgs=($(command ls -1 ${start}/c/gpg)); 
+gpgs=($(command ls -1 ${start}/c/.gpg/*)); 
 ####
 printf %b "\n\e[A -- pw: "; 
 ####
@@ -12,6 +12,7 @@ read -r "pw";
 ####
 for i in ${gpgs[*]}; do 
 echo $i; 
-gpg -q --batch --pinentry-mode loopback --passphrase "$pw" -d $i | tee ~/.config/gpg/${i/.*/}.txt; 
+out="$(printf %b $HOME/.config/gpg/${i/*\//}|sed -e "s/\.gpg//")"; 
+gpg -q --batch --pinentry-mode loopback --passphrase "$pw" -d $i | tee "$out"; 
 done; 
 ####

@@ -7,7 +7,9 @@ h1="$tmp/$(id -nu|tr -d "\n"; date +__%__y%m%d_%H_%M_%S).sh"; touch $h1;
 ####
 #history -s "$(FZF_DEFAULT_OPTS= bat -ppfljava $HISTFILE | tr -s "\n" "\n" | uniq -u | fzf --tac -i -m --cycle --bind "q:abort" --style="minimal" --info inline --preview-window "hidden"; if [ $? != 0 ]; then $(return 1); echo; else history -a; history -n; fi; )"||return 1 | tee -a $HISTFILE; if [ $? != 0 ]; then echo okok; return 1; else history -a; history -n; fi;
 ####
-hists="$(unset FZF_DEFAULT_OPTS; bat -ppfljava $HISTFILE|command fzf --tac -i -m --cycle --ansi --bind "q:abort,backward-eof:abort" --info inline --no-border --height "~55%" --border none --preview-window hidden --no-scrollbar --color "bg:234,bg+:29" --pointer "#" --ellipsis "" --scroll-off "50" --unicode)"; 
+hists="$(unset FZF_DEFAULT_OPTS; tail -n2888 $HISTFILE|tac|bat -ppflc++ --theme Dracula|command fzf -i -m --cycle --ansi --bind "q:abort,backward-eof:abort,0:toggle-preview,change:first,focus:transform-prompt:printf %b '{n} > '" --preview 'bat -ppfljava {}' --preview-window 'top,5,wrap,hidden,border-bottom' --wrap --info inline --no-border --height "85%" --border none --no-scrollbar --color "bg:234,bg+:125" --pointer "0" --ellipsis "" --scroll-off "50" --unicode --wrap-sign "" --prompt '0 > ')";
+
+# hists="$(unset FZF_DEFAULT_OPTS; tail -n2888 $HISTFILE|tac|bat -ppflc++ --theme Dracula|command fzf -i -m --cycle --ansi --bind "q:abort,backward-eof:abort,change:toggle-wrap" --info inline --no-border --height "~55%" --border none --preview-window hidden --no-scrollbar --color "bg:234,bg+:125" --pointer "0" --ellipsis "" --scroll-off "50" --unicode)"; 
 ####
 if [ "${hists}" ]; then history -s "$(printf %b "${hists}")"; history -a; history -n;
 linedash() { printf %b "\e[96m-\e[222b\e[0m\n"; }; 
@@ -32,7 +34,7 @@ case $ny in
 2) read -ep "cp to: " -i "$HOME/" "hhto"; cp -b $h1 $hhto;;
 4) read -ep "name: " -i "$h1" h2; mv $h1 $h2; gh gist create $h2;;
 5) read -ep "cmd: " -i "$PREFIX/bin/" "h2"; $h2 $h1;;
-*) printf %b "ok \n"; return;; esac; 
+*) printf %b "ok \n"; read -rei "$hists" kk; eval "$kk"; return;; esac; 
 ####
 else printf %b "ok \n"; fi; 
 ####

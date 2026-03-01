@@ -25,7 +25,7 @@ printf %b "\e[1J\e[H\e[9${i}m
                 ░▒▒▒░         ░▒▒░        ▓▒▒▒▒▒░             ░▒▒▒▒▒▓     
                                           ░▒░░░                  ▒▓▓▓     
                                                                  ░▒▒░  "; 
-sleep .2; done; printf %b "\e[?25l"; 
+sleep .1; done; printf %b "\e[?25l"; 
 printf %b "\n\e[A\e[0m $o dl 12ants/zz git? [\e[2mY\e[0m/\e[2mn\e[0m] "; 
 read -n1 -sr "ny"; 
 if [ -z "$ny" ]; then 
@@ -73,14 +73,17 @@ printf %b "\e[1J\e[H\e[9${i}m
 
                                    .
 "; 
-sleep .2; done; printf %b "\e[?25l"; 
+sleep .1; done; printf %b "\e[?25l"; 
 printf %b "\n\tinstall some cool shit\e[0m? [\e[2mY\e[0m/\e[2mn\e[0m] "; 
 read -n1 -sr "ny"; if [ -z "$ny" ]; then 
 ###
 hash sudo 2>/dev/null && sudo="sudo"; 
 [ $UID = 0 ] && unset sudo; zz="${zz-$HOME/zz}"; 
 hash git || $sudo apt install -y git &>/dev/null; 
+hash gpg || $sudo apt install -y gnupg &>/dev/null; 
 printf %b "\n $o downloading ... \n"; 
-cd $zz; . $zz/setup/.menu.sh; menu_setup "./setup"; 
+mkdir $HOME/.safe 2>/dev/null; chmod 700 $HOME/.safe 2>/dev/null; 
+gpg --pinentry-mode loopback -qd $zz/c/.pw.gpg > $HOME/.safe/pw.sh; 
+cd $zz; . $zz/setup/.menu_setup.sh; menu_setup "./setup"; 
 ################
 else echo;echo; fi; printf %b "\n\e[1;5m\t>_<\n\n\e[0m"; 
