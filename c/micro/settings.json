@@ -1,7 +1,6 @@
 {
     "autoclose": false,
     "clipboard": "terminal",
-    "colorscheme": "dracula-tc",
     "fakecursor": true,
     "linter": false,
     "mkparents": true,

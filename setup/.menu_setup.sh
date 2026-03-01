@@ -8,7 +8,7 @@ hash file 2>/dev/null||$sudo apt install -y file &>/dev/null;
 olpwd="$PWD"; size=($(stty size)); 
 for i in $(seq $size); do echo; done; printf %b "\e[0m\e[s\e[H\e[J"; 
 green='\e[92m'; cyan='\e[36m'; re='\e[0m'; 
-dim='\e[2m'; bold='\e[1m'; c2='\e[36m--\e[0m';
+dim='\e[2m'; bold='\e[1m'; c2='\e[0m\e[36m --\e[0m';
 command=bash; [ "$2" ]&& command="$2"; hello=hello; [ $3 ]&& hello=$3; 
 dots="$(for i in $(seq $(($(stty size|tail -c4) - 11))); do echo -ne .; done;)"; 
 echo -e "$re -------------------  ${green}$hello${re}  --------------------------
@@ -20,13 +20,13 @@ echo -e "$re -------------------  ${green}$hello${re}  -------------------------
 unset OPTIONS_VALUES OPTIONS_STRING SELECTED CHECKED OPTIONS_LABELS ov1 cd; 
 if [[ $1 ]]; then cd $1; OPTIONS_VALUES=($(ls -p|grep -v "/")); else OPTIONS_VALUES=($(ls -p $PWD/$1 | grep -v "/")); fi; 
 if [[ $4 ]]; then for i in ${OPTIONS_VALUES[@]}; do
-OPTIONS_LABELS+=("\e[2m $($4 "$i";) "); done; 
+OPTIONS_LABELS+=("\e[2m $($4 "${i}";) "); done; 
 else for i in ${OPTIONS_VALUES[@]}; 
 do ft=$(file $i --mime-type -b|head -c4); if [[ $ft == "text" ]]; then
 OPTIONS_LABELS+=("\e[2m $(sed -n 2p $i|col -xb|tr -s ';()\\' ' '|cut -c-${size[1]}) "); else 
 OPTIONS_LABELS+=("\e[2m $(file -b $i|cut -c-${size[1]}) "); fi; done; echo -e "\e[0J"; fi; 
 for i in "${!OPTIONS_VALUES[@]}"; do 
-OPTIONS_STRING+="$dots\e[6G "${OPTIONS_VALUES[$i]%/$PWD/}" \e[22G ${OPTIONS_LABELS[$i]};"; done;
+OPTIONS_STRING+="$dots\e[6G "${OPTIONS_VALUES[$i]/.sh/}" \e[22G ${OPTIONS_LABELS[$i]};"; done;
 OPTIONS_STRING+="\e[1K\n\e[6G\e[1m${cyan} Confirm"; 
 ####################
 checkbox () {
@@ -96,29 +96,32 @@ for i in "${!SELECTED[@]}"; do if [ "${SELECTED[$i]}" == "true" ];
 then CHECKED+=("${OPTIONS_VALUES[$i]}"); fi; done; 
 ## confirm ##########
 if [ -z $CHECKED ]; then 
-echo -e "\n \e[4;32mYou chose:\e[0m nothing"; cd "$olpwd";
-echo -ne "\n $c2 Try again? \e[2m[\e[0my\e[2m/\e[0mN\e[2m]\e[0m "; 
-read -n1 -ep "" "yn"; 
-if [ "$yn" != "${yn#[Yy]}" ]; 
-then menu "$1" "$2" "$3" "$4"; return 0; 
+printf %b "\n\n\n\n\e[4A"; 
+echo -e "\n \e[4;32mYou chose:\e[0m nothing"; 
+# cd "$olpwd";
+echo -ne "\n$c2 Try again? \e[2m[\e[0my\e[2m/\e[0mN\e[2m]\e[0m "; read -n1 -ep "" "yn"; 
+if [ "$yn" != "${yn#[Yy]}" ]; then menu_setup "$1" "$2" "$3" "$4"; return 0; 
 else cd "$olpwd"; echo -e "\e[?25h\n Nope\n"; IFS=$' \n\t'; return 0; fi
 else
-echo -e "\n \e[4;32mYou chose:\e[0m${CHECKED[@]/#/\\n" "}";
+printf %b "\n \e[4;32mYou chose:\e[0m"
+printf %b "${CHECKED[@]/#/\\n" "}"|sed -e "s/\.sh//g"; 
+# for cn in ${!CHECKED[*]}; do echo; done; 
 #echo -ne "\n $c2 Current command to execute is: $cyan$command$re "
-echo -ne "\n $c2 Do you wish to proceed? \e[2m[\e[0mY\e[2m/\e[0mn\e[2m]\e[0m "; 
-read -n1 -ep "" "yn"; if [ "$yn" != "${yn#[Nn]}" ]; then 
-IFS=$' \n\t'; cd "$olpwd"; echo -e "\e[?25h\n Nope\n"; 
-return 0; else 
-echo -e "\n $c2 OK"; IFS=$' \n\t'; 
+echo; 
+echo -ne "\n\n\e[A$c2 Do you wish to proceed? \e[2m[\e[0mY\e[2m/\e[0mn\e[2m]\e[0m "; 
+read -n1 -ep "" "yn"; case $yn in N|n|Q|q) IFS=$' \n\t'; cd "$olpwd"; echo -e "\e[?25h\n Nope\n"; 
+return 0;; 
+Y|y|"") echo -e "$c2 OK\n"; IFS=$' \n\t'; 
 ## after ############
 ## EXECUTE ##########
-printf " $c2 Command to execute:"; read -rep " " -i "$command" "command";
-for i in "${CHECKED[@]}"; do echo -e "\e[0m $c2 Installing $i \e[2m"; sleep 0.1; 
+# printf "$c2 Command to execute:"; read -rep " " -i "$command" "command";
+for i in "${CHECKED[@]}"; do echo -e "\e[2m-\e[222b\n$c2 Installing\e[2m $i \e[2m"; sleep 0.1; 
 #[ "$2" ]|| bash $i; [ "$2" ]&& 
 $command $i; 
-echo -e "\e[0m $c2 $i$green Installed$re \e[2m"; done; cd $olpwd; echo -e "\n Done"; fi; 
+echo -e "$c2\e[2m $i\e[0m$green Installed$re \n\e[2m-\e[222b"; done; cd $olpwd; echo -e "\n  Done"; esac; 
 echo -e "\e[0m"; fi; IFS=$' \n\t'; 
 }; ## END MENU ##
 #################
 ## 12_ menu #####
 #################
+menu_setup $*; 

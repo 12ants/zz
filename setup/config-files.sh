@@ -2,7 +2,7 @@
 ## install config-files 
 [ -z "$start" ] && start="$HOME/zz"; 
 hash sudo 2>/dev/null && [ "$UID" != "0" ] && sudo="sudo"; 
-c2='    \e[0m\e[36m--\e[0m'; qq="160"; mkdir ~/.config 2>/dev/null; 
+c2='\e[0m\e[36m  --\e[0m'; qq="160"; mkdir ~/.config 2>/dev/null; 
 ####
 p1() { p2=" ${@}"; for i in $(seq ${#p2}); do sleep ${sl-.05}; printf %b "${p2:${i}:1}"; done; }; 
 ####
