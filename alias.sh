@@ -88,7 +88,7 @@ alias iiii='$EDITOR $HOME/.inputrc; echo gg; exec bash; '
 alias speed='speedtest --bytes --no-upload 2>/dev/null || speedtest-go --unit=decimal-bits \
 --no-upload || speedtest-cli 2>/dev/null; '
 ########
-alias zz.install_nvm='. $start/config/nvm.sh'
+alias zz.setup_nvm='. $start/config/nvm.sh'
 alias zz.nvm_init='export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" \
 || printf %s "${XDG_CONFIG_HOME}/nvm")"; [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"; ';
 alias logs='cd $HOME/logs'; 
@@ -119,9 +119,11 @@ fzf --bind "change:reload:$RG_PREFIX {q} || true" --ansi --disabled --query "$IN
                   
 
 
-alias zz.info_tput='batcat -pf "$start/info/tput.nfo"; ';
-alias zz.info_ansi='batcat -pf "$start/info/ansi.md"; ';
-alias zz.info_bash='batcat -pf "$start/info/bash.md"; '; 
+
+alias zz.info='bbbb="$(ls="$(ls $zz/i -1|col|wc --max-line-length)"; ls -1 $zz/i|fzf --preview "bat -pf $zz/i/{} 2>/dev/null||ls $zz/i/{}" --preview-window "right,$((COLUMNS-ls-8))" --border none --marker="|" -i -m --cycle --ansi --no-unicode --color "bg:0,bg+:12")"; [ $bbbb ]&& bat -pf $zz/i/$bbbb'; 
+alias zz.info_tput='batcat -pf "$zz/i/tput.nfo"; ';
+alias zz.info_ansi='batcat -pf "$zz/i/ansi.md"; ';
+alias zz.info_bash='batcat -pf "$zz/i/bash.md"; '; 
 alias zz.tmux_on='chmod 775 $HOME/.config/tmux_state; echo "on!"';
 alias zz.tmux_off='chmod 600 $HOME/.config/tmux_state; echo "off!"';
 alias zz.edit-alias='$EDITOR ~/start/alias.sh'

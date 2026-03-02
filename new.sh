@@ -6,13 +6,11 @@ shopt -s histverify;
 export IFS=$' \n\t'; 
 [ -z "$TMUX" ] && tmux || tmux source $HOME/.config/tmux/tmux.conf; 
 [ $TMUX ] && . $HOME/zz/_ps1.sh || return 0;  
-export HISTCONTROL="ignoreboth"; 
-export PROMPT_COMMAND="history -a; history -n; "; 
-export EDITOR="micro"; 
-export email='leonel@ik.me'; 
-export BAT_THEME="Coldark-Dark"; 
-export logs="$HOME/logs"; 
+export HISTCONTROL="ignoreboth"; export PROMPT_COMMAND="history -a; history -n; "; 
+export EDITOR="micro"; export email='leonel@ik.me'; 
+export BAT_THEME="Coldark-Dark"; export logs="$HOME/logs"; 
 export tmp="$HOME/tmp"; [ -z "$TMPDIR" ] && export TMPDIR="$HOME/tmp"; 
+export zz="$HOME/zz"; export start="$HOME/zz"; 
 unset HISTTIMEFORMAT; 
 hash sudo 2>/dev/null && [ "$UID" != 0 ] && export sudo="sudo"; 
 ####
@@ -30,8 +28,7 @@ gh auth status 2>&1|grep -e "true" -B1 --color=auto|col -xb|cut -f9 -d" "|tr -d 
 #### make som basic folders ######## 
 mkdir $HOME/logs/b $HOME/tmp $HOME/gh $HOME/dl $HOME/bin $HOME/img $HOME/.config -m 775 -p 2>/dev/null; 
 ####
-. $HOME/zz/f/dfree.sh; 
-dfree > $logs/dfree.log & disown; 
+. $HOME/zz/f/dfree.sh; dfree > $logs/dfree.log & disown; 
 ####
 . $HOME/zz/i/colors/coala.sh; 
 ####
