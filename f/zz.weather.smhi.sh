@@ -24,7 +24,7 @@ IFS$' \n\t';
 ##
 };
 
-alias wettr='zz.weather'; 
+alias wettr='zz.weather.smhi'; 
 # weather.paramaters() { 
 #### 
 # declare -a wcp[0]='No precipitation' wcp[1]='Rain' wcp[2]='Thunderstorm' wcp[3]='Freezing rain (i.e. supercooled raindrops which freeze on contact with the ground and other surfaces)' wcp[4]='Mixed/ice' wcp[5]='Snow' wcp[6]='Wet snow (i.e. snow particles which are starting to melt)' wcp[7]='Mixture of rain and snow' wcp[8]='Ice pellets' wcp[9]='Graupel' wcp[10]='Hail' wcp[11]='Drizzle' wcp[12]='Freezing drizzle (i.e. supercooled drizzle which freezes on contact with the ground and other surfaces)'; 
