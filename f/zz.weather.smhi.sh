@@ -20,7 +20,7 @@ eval $(kk=0; for i in ${!wttr[*]}; do kk=$((kk+3600)); date --date=@$(($(date +%
 
 gum style --border normal --padding "1 2" --margin 2 "$(head -n23 $HOME/logs/wc.log|cut -f 1- -d" "|sed -n "1~3s/$/\n/p"|bat -ppflnim --theme Nord)"; 
 
-IFS$' \n\t'; 
+IFS=$' \n\t'; 
 ##
 };
 
