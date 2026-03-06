@@ -26,6 +26,7 @@ read -sn1 "aptget"; printf %b "\e[92mok";
 ####
 [ $PREFIX ]&& ph="bottom,14" || ph="bottom,25"; 
 ####
+
 appa=($(cat $HOME/logs/appa.log|FZF_DEFAULT_OPTIONS= command fzf --ansi --cycle -m -i -e --preview \
 'printf %b '"'\e[96;1m{1}\e[0;2m |\e[0m '"'; apt show {1} 2>/dev/null|grep -wvE "Priority|Download-Size|Origin|Bugs|Section|APT-Manual|Essential|Status|Version|Maintainer|APT-Sources|Package"|sed -e "s/Description:\ /\n----\n----\n/g" -e "s/Installed\-/\n/g"|tac --separator "----"|sed -e "/^$/d"|bat -ppfljava --theme Nord' \
 --preview-window "wrap,border-none,$ph" \
@@ -36,7 +37,8 @@ appa=($(cat $HOME/logs/appa.log|FZF_DEFAULT_OPTIONS= command fzf --ansi --cycle 
 --highlight-line \
 --ellipsis "-" \
 --no-border \
---bind 'change:first' \
+--bind 'change:first,q:abort,0:change-preview-window(right,50%|bottom,40%|hidden),tab:toggle+down+transform-header:[ "$FZF_SELECT_COUNT" -gt 0 ] && colight=(110 209 143 103 205 77 150 194 77 131 194 110 152 149 188 146 189 146 218 188 78 181); fl=($(cat {+f}|cut -f1 -d" ")); for i in ${!fl[*]}; do printf %b "\e[38;5;${colight[i]}m${fl[i]} "; done|tr -s "\n" " "|fmt -w $((FZF_COLUMNS*2-5))' \
+--info inline \
 --color 'bg:236,preview-bg:232,border:12,bg+:197,hl+:0' --info inline --no-unicode \
 --accept-nth 1)); if [ $? = 130 ]; then 
 printf %b "\e[92mok\e[0;2m ... \e[0m\n\n"; return 0; fi; 
