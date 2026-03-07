@@ -174,3 +174,4 @@ alias zz.info.system='fastfetch -c ~/zz/c/fastfetch/fastfetch66.json';
 nam() { kk=$(for i in $(seq $(stty size|cut -f2 -d" ")); do printf %b "-"; done); man $@|col -xb|sed -e "s/^[ ]*//g" -e "s/^$/$kk/g"|bat -pfljava --theme DarkNeon; }; 
 
 
+alias tmux_new_server='$sudo rm -rf $sudo $PREFIX/tmp/tmux.* 2>/dev/new || $sudo rm rf $PREFIX/var/run/tmux.* 2>/dev/null; tmux'; 

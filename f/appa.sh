@@ -25,24 +25,27 @@ read -sn1 "aptget"; printf %b "\x1b[92mok";
 #### 
 ####
 [ $PREFIX ]&& ph="bottom,14%" || ph="bottom,~25"; 
-####
-
+################
+################
+################ ____ FZF ____
 appa=($(local FZF_DEFAULT_OPTIONS=""; cat $HOME/logs/appa.log|command fzf --ansi --cycle -m -i -e --preview \
-'printf %b '"'\x1b[96;1m{1}\x1b[0;2m |\x1b[0m '"'; apt show {1} 2>/dev/null|grep -wvE "Priority|Download-Size|Origin|Bugs|Section|APT-Manual|Essential|Status|Version|Maintainer|APT-Sources|Package"|sed -e "s/Description:\ /\n----\n----\n/g" -e "s/Installed\-/\n/g"|tac --separator "----"|sed -e "/^$/d"|bat -ppfljava --theme Nord' \
+'printf %b '"'\x1b[96;1m{1}\x1b[0;2m |\x1b[0m '"'; apt show {1} 2>/dev/null|grep -wvE "Priority|Download-Size|Origin|Bugs|Section|APT-Manual|Essential|Status|Version|Maintainer|APT-Sources|Package"|sed -e "s/Description:\ /\n----\n----\n/g" -e "s/Installed\-/\n/g"|tac --separator='----'|sed -e "/^$/d"|bat -ppfljava --theme Nord' \
 --preview-window "wrap,border-none,$ph" \
 --preview-wrap-sign "" \
 --wrap \
 --wrap-sign "" \
---pointer ":" \
+--pointer "" \
 --highlight-line \
 --ellipsis "-" \
 --no-border \
 --unicode \
 --ghost "0:toggle_preview " \
---bind 'change:first,q:abort,0:change-preview-window(right,50%|bottom,40%|hidden),tab:toggle+down+transform-header:[ "$FZF_SELECT_COUNT" -gt 0 ] && colight=(110 209 143 103 205 77 150 194 77 131 194 110 152 149 188 146 189 146 218 188 78 181); fl=($(cat {+f}|cut -f1 -d" ")); for i in ${!fl[*]}; do printf %b "\x1b[38;5;${colight[i]}m${fl[i]} "; done|tr -s "\n" " "|fmt -w $((FZF_COLUMNS*2-5))' \
+--bind 'change:first,q:abort,0:change-preview-window(right,50%|bottom,40%|hidden),tab:toggle+down+transform-header:[ "$FZF_SELECT_COUNT" -gt 0 ] && colight=(110 209 143 103 205 77 150 194 77 131 194 110 152 149 188 146 189 146 218 188 78 181); fl=($(cat {+f}|cut -f1 -d" ")); for i in ${!fl[*]}; do printf %b "\x1b[48;5;${colight[i]}m\x1b[7m${fl[i]} "; done|tr -s "\n" " "|fmt -w $((FZF_COLUMNS*2-5))' \
 --info inline \
 --color 'bg:236,preview-bg:234,border:12,bg+:16,fg+:212,hl+:0' \
---info inline --no-unicode \
+--info inline \
+--highlight-line \
+--no-unicode \
 --accept-nth 1)); if [ $? = 130 ]; then 
 printf %b "\x1b[92mok\x1b[0;2m ... \x1b[0m\n\n"; return 0; fi; 
 # |sed -e "s/\s.*//"
@@ -59,26 +62,27 @@ printf %b "\x1b[2m --\x1b[0m\n";
 printf %b "\x1b[96m-\x1b[222b\x1b[0m\n\n\n\n\n\x1b[4A"; 
 printf %b "\n \x1b[96m::\x1b[0m \x1b[2m[\x1b[0mI\x1b[2m]\x1b[0mnstall\x1b[96m :: \x1b[0;2m[\x1b[0mR\x1b[2m]\x1b[0memove \x1b[96m:: \x1b[0;2m[\x1b[0mQ\x1b[2m]\x1b[0muit \x1b[96m:: \x1b[92m" && read -rsn1 "nn" || \
 printf %b "ok\n\n"; 
-case $nn in 
-q|x|Q|X) echo ok; echo; return 0;; 
-r|R) $sudo apt remove -y ${appa[*]} && printf %b " $c2 autoremove? [Y/n]? "; read -sn1 "nasd"; [ -z "$nasd" ] && $sudo apt -y autoremove; return 0;; 
-""|i|I) history -s "appa"; 
-
-history -s "$(printf %b "$sudo apt install -y ${appa[*]}")"; 
-history -a; 
-history -n; 
-$sudo apt install -y ${appa[*]}; 
-
-printf %b " $c2 autoremove? [Y/n]? "; 
-
-read -sn1 "nasd"; [ -z "$nasd" ] && $sudo apt -y autoremove;; esac; 
-
 ####
 ####
-$sudo apt update &>/dev/null & disown; printf %b "\x1b[A\x1b[K"; 
-appa.get 2>/dev/null & disown; printf %b "\x1b[A\x1b[K"; 
+case $nn in \
+"")  instrem=install;; 
+I|i) instrem=install;; 
+R|r) instrem=remove;; 
+Q|q) history -s "$(printf %b "${appa[*]}")"; printf %b "\n${appa[*]}\n"; return 0;; 
+################################
+esac; 
 ####
-echo; 
-echo; 
 ####
+history -s "$(printf %b "$sudo apt $instrem -y ${appa[*]}")"; 
+history -a; history -n; 
+####
+$sudo apt $instrem -y ${appa[*]}; 
+####
+####
+printf %b "\n $c2 update & autoremove? [Y/n]? "; 
+read -sn1 "nasd"; [ -z "$nasd" ] && \
+$sudo apt update 2>/dev/null; 
+$sudo apt -y autoremove; 
+printf %b "\n\n $c2 ${instrem}ed ${appa[*]} \n\n"; 
+################################################
 }; 

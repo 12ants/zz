@@ -40,8 +40,6 @@ wlan="$(cat $HOME/logs/wlan.log)"; idn1="${wlan/*./}"; idn="$(($(printf %b "${id
 . $HOME/zz/i/colors/coala.sh; unset -v idc; declare -a idc; export idc=(${co[idn]}); printf %b "${idc[*]}" > $HOME/logs/idc.log; 
 ####
 ####
-
-
 if echo $HOME|grep -w "termux" -q; then unalias sudo 2>/dev/null; else sudo=sudo; fi; 
 ####
 # [ -x $HOME/.config/fzf_completions_bash.sh ] || (fzf --bash &> $HOME/.config/fzf_completions_bash.sh; 
@@ -49,12 +47,12 @@ if echo $HOME|grep -w "termux" -q; then unalias sudo 2>/dev/null; else sudo=sudo
 # if fzf --bash &>/dev/null; then 
 # . $HOME/.config/fzf_completions_bash.sh; fi; 
 ####
-unset tmuxprefix 2>/dev/null;  
-if [ "$PREFIX" ]; then tmuxprefix=" --tmux 'center,100%,100%' "; 
-else alias fzf='fzf-tmux -h 100% -w 100%'; 
-fi; 
+#unset tmuxprefix 2>/dev/null;  
+#if [ "$PREFIX" ]; then tmuxprefix=" --tmux 'center,100%,100%' "; 
+#else alias fzf='fzf-tmux -h 100% -w 100%'; 
+#fi; 
 ####
-export FZF_DEFAULT_OPTS="${tmuxprefix} -i -m --cycle --ansi --bind 'q:abort'"; 
+#export FZF_DEFAULT_OPTS="${tmuxprefix} -i -m --cycle --ansi --bind 'q:abort'"; 
 ####
 [ -x $HOME/.config/openai_api_id.conf ] && . $HOME/.config/openai_api_id.conf 2>/dev/null; 
 [ -x $HOME/.config/gemini_api_id.conf ] && . $HOME/.config/gemini_api_id.conf 2>/dev/null; 
