@@ -1,7 +1,9 @@
 216303750450
 lipogram22
 
-
+ni som väntar på mitt skrik
+ska få se ett vackert lik
+jag gör allt för min publik
 
 
 
