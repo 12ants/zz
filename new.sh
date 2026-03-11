@@ -4,7 +4,7 @@ shopt -s histappend;
 shopt -s histverify; 
 ####
 export IFS=$' \n\t'; 
-[ -z "$TMUX" ] && tmux || tmux source $HOME/.config/tmux/tmux.conf; 
+[ -z "$TMUX" ] && exec tmux || tmux source $HOME/.config/tmux/tmux.conf; 
 [ $TMUX ] && . $HOME/zz/_ps1.sh || return 0;  
 export HISTCONTROL="ignoreboth"; export PROMPT_COMMAND="history -a; history -n; "; 
 export EDITOR="micro"; export email='leonel@ik.me'; 
@@ -18,7 +18,6 @@ re='\e[0m'; cyan='\e[96m'; logs="$HOME/logs"; c2="\e[96m -- \e[0m";
 ssh=(${SSH_CONNECTION}); [ -z $ssh ] && ssh=($SSH_CLIENT); 
 ####
 unset lessprefix; [ "$PREFIX" ] && lessprefix='--redraw-on-quit '; 
-####
 export LESSKEYIN=$HOME/.config/lesskey
 export LESS=''${lessprefix}'-R --tilde --file-size --use-color -DP7.197$ --incsearch --mouse --prompt=%F [/]/[n]/[p]/[m] ?n?m(%T %i of %m) ..?lt %lt-%lb?L/%L. :byte %bB?s/%s.  .?e(END)  ?x-  Next\:   %x.:?pB  %pB\%..%t '; 
 ####

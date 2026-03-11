@@ -40,15 +40,15 @@ appa=($(local FZF_DEFAULT_OPTIONS=""; cat $HOME/logs/appa.log|command fzf --ansi
 --no-border \
 --unicode \
 --ghost "0:toggle_preview " \
---bind 'change:first,q:abort,0:change-preview-window(right,50%|bottom,40%|hidden),tab:toggle+down+transform-header:[ "$FZF_SELECT_COUNT" -gt 0 ] && colight=(110 209 143 103 205 77 150 194 77 131 194 110 152 149 188 146 189 146 218 188 78 181); fl=($(cat {+f}|cut -f1 -d" ")); for i in ${!fl[*]}; do printf %b "\x1b[48;5;${colight[i]}m\x1b[7m${fl[i]} "; done|tr -s "\n" " "|fmt -w $((FZF_COLUMNS*2-5))' \
+--bind 'change:first,q:abort,0:change-preview-window(right,50%|bottom,40%|hidden),tab:toggle+down+transform-header:[ "$FZF_SELECT_COUNT" -gt 0 ] && colight=(110 209 143 103 205 77 150 194 77 131 194 110 152 149 188 146 189 146 218 188 78 181); fl=($(cat {+f}|cut -f1 -d" ")); for i in ${!fl[*]}; do printf %b "\x1b[1;38;5;${colight[i]}m\x1b[7m${fl[i]}"; done|tr -s "\n" " "|fmt -w $((FZF_COLUMNS*2-5))' \
 --info inline \
---color 'bg:236,preview-bg:234,border:12,bg+:16,fg+:212,hl+:0' \
+--color 'bg:234,preview-bg:236,border:12,bg+:125' \
 --info inline \
 --highlight-line \
 --no-unicode \
---accept-nth 1)); if [ $? = 130 ]; then 
-printf %b "\x1b[92mok\x1b[0;2m ... \x1b[0m\n\n"; return 0; fi; 
-# |sed -e "s/\s.*//"
+--accept-nth 1)); 
+####
+if [ $? = 130 ]; then printf %b "\x1b[92mok\x1b[0;2m ... \x1b[0m\n\n"; return 0; fi; 
 ####
 ####
 echo; 
