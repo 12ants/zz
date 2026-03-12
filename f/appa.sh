@@ -5,7 +5,7 @@ unalias appa 2>/dev/null;
 appa() { IFS=$' \n\t'; c2='\x1b[0m\x1b[96m --\x1b[0m'; 
 ####
 ####
-appa.get() { $sudo apt update &>/dev/null; $sudo apt list --verbose 2>/dev/null|tail -n+2|tr -s "\t " " "|sed -e "s/\/.*\[installed\]/\ \x1b[2m\ [\x1b[0m\x1b[1m\x1b[92mi\x1b[0m\x1b[2m]\ \x1b[92m/g" -e "s/.*\[i\]/\x1b[2m&\ /g" -e "1~3s/\/.*/ \x1b[31m>\x1b[0m\x1b[2m/" -e "s/^$/____/g"|tr -d "\n\t"|sed -e "s/____/\x1b[0m\n/g" -e "/^lib*/d"|sort > $HOME/logs/appa.log; apha="$(($(($(date +%s) - $(stat -tc %Z $HOME/logs/appa.log)))/3600))"; }; 
+appa.get() { $sudo apt update &>/dev/null; $sudo apt list --verbose 2>/dev/null|tail -n+2|tr -s "\t " " "|sed -e "s/\/.*\[installed\]/\ \x1b[2m\ [\x1b[0m\x1b[1m\x1b[92mi\x1b[0m\x1b[2m]\ \x1b[92m/g" -e "s/.*\[i\]/\x1b[2m&\ /g" -e "1~3s/\/.*/ \x1b[96m>\x1b[0m\x1b[37m/" -e "s/^$/____/g"|tr -d "\n\t"|sed -e "s/____/\x1b[0m\n/g" -e "/^lib*/d"|sort > $HOME/logs/appa.log; apha="$(($(($(date +%s) - $(stat -tc %Z $HOME/logs/appa.log)))/3600))"; }; 
 ####
 ####
 [ -e $HOME/logs/appa.log ] || (printf %b "\n\n\x1b[A$c2 getting list \x1b[2m...\x1b[0m \n"; appa.get); 
@@ -28,7 +28,7 @@ read -sn1 "aptget"; printf %b "\x1b[92mok";
 ################
 ################
 ################ ____ FZF ____
-appa=($(local FZF_DEFAULT_OPTIONS=""; cat $HOME/logs/appa.log|command fzf --ansi --cycle -m -i -e --preview \
+appa=($(local FZF_DEFAULT_OPTIONS=""; cat $HOME/logs/appa.log|command fzf --ansi --cycle -m -i --preview \
 'printf %b '"'\x1b[96;1m{1}\x1b[0;2m |\x1b[0m '"'; apt show {1} 2>/dev/null|grep -wvE "Priority|Download-Size|Origin|Bugs|Section|APT-Manual|Essential|Status|Version|Maintainer|APT-Sources|Package"|sed -e "s/Description:\ /\n----\n----\n/g" -e "s/Installed\-/\n/g"|tac --separator='----'|sed -e "/^$/d"|bat -ppfljava --theme Nord' \
 --preview-window "wrap,border-none,$ph" \
 --preview-wrap-sign "" \
