@@ -2,6 +2,13 @@
 ## /ants/functions.sh - functions for bash shell
 ###################
 ## multiselection menu for bash
+mkdir $HOME/tmp 2>/dev/null; 
+mkdir $HOME/bin 2>/dev/null; 
+mkdir $HOME/gh 2>/dev/null; 
+mkdir -p $HOME/logs/b 2>/dev/null; 
+####
+[ -e "$HOME/logs/idc.log" ] || printf %b "164 ff8866 0 temp" > $HOME/logs/idc.log || chmod 775 $HOME/logs/idc.log; 
+
 menu_setup() { 
 hash sudo 2>/dev/null&&sudo=sudo||unset sudo; 
 hash file 2>/dev/null||$sudo apt install -y file &>/dev/null; 

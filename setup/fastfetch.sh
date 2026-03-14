@@ -7,7 +7,7 @@ cd ~/gh/fastfetch;
 git config set remote.origin.url "git@github.com:fastfetch-cli/fastfetch.git"; 
 echo run; 
 . run.sh; 
-$sudo ln -s /home/$SUDO_USER/gh/build/fastfetch -t /bin/; 
+ln -s ${HOME}/gh/build/fastfetch -t /bin/; 
 echo gg; 
 cd $oldp; 
 ##
