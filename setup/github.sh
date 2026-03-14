@@ -10,29 +10,27 @@ hash git 2>/dev/null || $sudo apt install git;
 hash openssl 2>/dev/null || $sudo apt install openssl; 
 hash gpg 2>/dev/null || $sudo apt install gnupg; 
 gh_login="12ants"; 
+####
 c2='    \e[0m\e[36m--\e[0m'; # gh_12ants="$HOME/zz/c/gpg/gh_12ants.gpg"; 
+printf %b "$c2 logging in to github ...\n  "; gh_user="$(id -nu)"; gh_mail="$(id -nu)@$(hostname)"; git config --global user.name $gh_user; git config --global user.email $gh_mail; git config --global init.defaultBranch main; 
+####
+if [ -e "$HOME/.safe/pw.sh" ]; then gpg --pinentry-mode loopback --passphrase-file $HOME/.safe/pw.sh  -qd $HOME/zz/c/.gpg/gh_12ants.gpg > $HOME/.safe/gh_12ants.log; else 
 printf %b "\n\n\n\n\n\e[5A
     ------------ github login ------------ 
 $c2 password for 12ants\e[2m@\e[0mgithub: "; 
 read -sre "pwgh_12ants"; 
-printf %b "$c2 logging in to github ...\n  "; 
 printf %b "$pwgh_12ants" > $HOME/.safe/pw12.txt; 
+gpg --pinentry-mode loopback --passphrase-file $HOME/.safe/pw12.txt -qd $HOME/zz/c/.gpg/gh_12ants.gpg > $HOME/.safe/gh_12ants.log; 
+fi; 
 ####
-gh_user="$(id -nu)"; 
-gh_mail="$(id -nu)@$(hostname)"; 
-git config --global user.name $gh_user; 
-git config --global user.email $gh_mail; 
-git config --global init.defaultBranch main; 
-####
-gpg --pinentry-mode loopback --passphrase-file $HOME/.safe/pw12.txt -qd $HOME/zz/c/gpg/gh_12ants.gpg > $HOME/.safe/gh_12ants.log; 
-####
-gh auth login --with-token < $HOME/.safe/gh_12ants.log; printf %b "\n    "; 
-gh auth switch -u 12ants; 
+gh auth login --with-token < $HOME/.safe/gh_12ants.log; 
+printf %b "\n    "; gh auth switch -u 12ants; 
+########
 printf %b "\n    "; 
 if [ -e "$HOME/.ssh/gh_${gh_login}" ]; then :; else ssh-keygen -N '' -f $HOME/.ssh/gh_${gh_login}; 
 [ -e "$HOME/.ssh/gh_${gh_login}.pub" ] && gh ssh-key add $HOME/.ssh/gh_${gh_login}.pub; fi; 
 ####
-gh config set git_protocol ssh; 
+gh config set git_protocol ssh;  
 printf %b "\n$c2 "; 
 ssh -T git@github.com -i ~/.ssh/gh_${gh_login} && printf %b "\n$c2 logged in to github. \n$c2 done! \n\n"; 
 ####
