@@ -1,0 +1,12 @@
+[user]
+indicatorColorFromTheme=true
+indicatorStyle=3
+inactiveIndicatorStyle=1
+indicatorOrientation=0
+forceIconSize=true
+iconSize=24
+keyAloneActive=true
+keyComboActive=false
+noWindowsListIfSingle=false
+showPreviews=true
+showWindowCount=true

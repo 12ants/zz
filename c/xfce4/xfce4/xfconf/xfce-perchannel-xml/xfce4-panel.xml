@@ -1,0 +1,218 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<channel name="xfce4-panel" version="1.0">
+  <property name="configver" type="int" value="2"/>
+  <property name="panels" type="array">
+    <value type="int" value="2"/>
+    <property name="dark-mode" type="bool" value="true"/>
+    <property name="panel-2" type="empty">
+      <property name="autohide-behavior" type="uint" value="0"/>
+      <property name="border-width" type="uint" value="0"/>
+      <property name="enter-opacity" type="uint" value="87"/>
+      <property name="leave-opacity" type="uint" value="79"/>
+      <property name="length" type="double" value="100"/>
+      <property name="length-adjust" type="bool" value="true"/>
+      <property name="nrows" type="uint" value="1"/>
+      <property name="plugin-ids" type="array">
+        <value type="int" value="47"/>
+        <value type="int" value="37"/>
+        <value type="int" value="30"/>
+        <value type="int" value="16"/>
+        <value type="int" value="13"/>
+        <value type="int" value="2"/>
+        <value type="int" value="46"/>
+        <value type="int" value="44"/>
+        <value type="int" value="17"/>
+        <value type="int" value="1"/>
+        <value type="int" value="4"/>
+        <value type="int" value="54"/>
+        <value type="int" value="62"/>
+        <value type="int" value="52"/>
+        <value type="int" value="63"/>
+        <value type="int" value="3"/>
+        <value type="int" value="61"/>
+        <value type="int" value="15"/>
+        <value type="int" value="19"/>
+        <value type="int" value="58"/>
+        <value type="int" value="18"/>
+        <value type="int" value="50"/>
+        <value type="int" value="60"/>
+        <value type="int" value="59"/>
+      </property>
+      <property name="position" type="string" value="p=8;x=186;y=747"/>
+      <property name="position-locked" type="bool" value="true"/>
+      <property name="size" type="uint" value="29"/>
+      <property name="background-style" type="uint" value="1"/>
+      <property name="background-rgba" type="array">
+        <value type="double" value="0"/>
+        <value type="double" value="0"/>
+        <value type="double" value="0"/>
+        <value type="double" value="1"/>
+      </property>
+      <property name="background-image" type="string" value="file:///home/aa/lele44.jpg"/>
+      <property name="enable-struts" type="bool" value="true"/>
+    </property>
+  </property>
+  <property name="plugins" type="empty">
+    <property name="notes" type="empty">
+      <property name="global" type="empty">
+        <property name="version" type="string" value="1.11.1"/>
+      </property>
+    </property>
+    <property name="plugin-13" type="string" value="launcher">
+      <property name="items" type="array">
+        <value type="string" value="17728873011.desktop"/>
+      </property>
+    </property>
+    <property name="plugin-16" type="string" value="launcher">
+      <property name="items" type="array">
+        <value type="string" value="17728873014.desktop"/>
+      </property>
+    </property>
+    <property name="plugin-30" type="string" value="places">
+      <property name="mount-open-volumes" type="bool" value="true"/>
+      <property name="show-button-type" type="int" value="0"/>
+      <property name="show-recent-number" type="int" value="14"/>
+    </property>
+    <property name="plugin-37" type="string" value="separator">
+      <property name="expand" type="bool" value="false"/>
+      <property name="style" type="uint" value="1"/>
+    </property>
+    <property name="plugin-44" type="string" value="docklike"/>
+    <property name="plugin-46" type="string" value="separator">
+      <property name="expand" type="bool" value="false"/>
+      <property name="style" type="uint" value="1"/>
+    </property>
+    <property name="plugin-47" type="string" value="whiskermenu">
+      <property name="button-icon" type="string" value="vlc-xmas"/>
+      <property name="category-icon-size" type="int" value="0"/>
+      <property name="default-category" type="int" value="0"/>
+      <property name="launcher-icon-size" type="int" value="3"/>
+      <property name="launcher-show-name" type="bool" value="true"/>
+      <property name="menu-opacity" type="int" value="88"/>
+      <property name="menu-width" type="int" value="720"/>
+      <property name="position-categories-alternate" type="bool" value="true"/>
+      <property name="position-commands-alternate" type="bool" value="true"/>
+      <property name="show-button-title" type="bool" value="false"/>
+      <property name="view-mode" type="int" value="0"/>
+      <property name="menu-height" type="int" value="601"/>
+      <property name="recent" type="array">
+        <value type="string" value="firefox_firefox.desktop"/>
+        <value type="string" value="guake.desktop"/>
+        <value type="string" value="xfce-ui-settings.desktop"/>
+        <value type="string" value="xfce-settings-manager.desktop"/>
+        <value type="string" value="picom_conf.desktop"/>
+        <value type="string" value="pcmanfm-qt-desktop-pref.desktop"/>
+        <value type="string" value="xfce-backdrop-settings.desktop"/>
+        <value type="string" value="xfce4-taskmanager.desktop"/>
+        <value type="string" value="xfce4-appfinder.desktop"/>
+        <value type="string" value="xfce4-mime-settings.desktop"/>
+      </property>
+      <property name="favorites" type="array">
+        <value type="string" value="xfce4-web-browser.desktop"/>
+        <value type="string" value="xfce4-mail-reader.desktop"/>
+        <value type="string" value="xfce4-file-manager.desktop"/>
+        <value type="string" value="xfce4-terminal-emulator.desktop"/>
+        <value type="string" value="firefox_firefox.desktop"/>
+        <value type="string" value="gimp.desktop"/>
+        <value type="string" value="org.kde.falkon.desktop"/>
+        <value type="string" value="vlc.desktop"/>
+        <value type="string" value="guake.desktop"/>
+        <value type="string" value="org.xfce.mousepad.desktop"/>
+        <value type="string" value="featherpad.desktop"/>
+        <value type="string" value="thunar.desktop"/>
+        <value type="string" value="code.desktop"/>
+        <value type="string" value="xfce-settings-manager.desktop"/>
+      </property>
+    </property>
+    <property name="plugin-50" type="string" value="clock"/>
+    <property name="plugin-52" type="string" value="weather">
+      <property name="location" type="empty">
+        <property name="name" type="string" value="Stockholms kommun, Stockholms län"/>
+        <property name="latitude" type="string" value="59.333613"/>
+        <property name="longitude" type="string" value="18.027509"/>
+      </property>
+      <property name="msl" type="int" value="34"/>
+      <property name="timezone" type="string" value="Europe/Stockholm"/>
+      <property name="offset" type="string" value="+01:00"/>
+      <property name="cache-max-age" type="int" value="172800"/>
+      <property name="power-saving" type="bool" value="true"/>
+      <property name="units" type="empty">
+        <property name="temperature" type="int" value="0"/>
+        <property name="pressure" type="int" value="0"/>
+        <property name="windspeed" type="int" value="0"/>
+        <property name="precipitation" type="int" value="0"/>
+        <property name="altitude" type="int" value="0"/>
+        <property name="apparent-temperature" type="int" value="2"/>
+      </property>
+      <property name="round" type="bool" value="true"/>
+      <property name="single-row" type="bool" value="true"/>
+      <property name="tooltip-style" type="int" value="1"/>
+      <property name="forecast" type="empty">
+        <property name="layout" type="int" value="1"/>
+        <property name="days" type="int" value="5"/>
+      </property>
+      <property name="theme-dir" type="string" value="/usr/share/xfce4/weather/icons/simplistic"/>
+      <property name="scrollbox" type="empty">
+        <property name="show" type="bool" value="true"/>
+        <property name="animate" type="bool" value="true"/>
+        <property name="lines" type="int" value="1"/>
+        <property name="color" type="string" value="rgba(0,0,0,0)"/>
+        <property name="use-color" type="bool" value="false"/>
+      </property>
+    </property>
+    <property name="plugin-54" type="string" value="notification-plugin"/>
+    <property name="plugin-58" type="string" value="power-manager-plugin"/>
+    <property name="plugin-59" type="string" value="showdesktop"/>
+    <property name="plugin-60" type="string" value="separator"/>
+    <property name="plugin-61" type="string" value="separator"/>
+    <property name="plugin-62" type="string" value="separator">
+      <property name="style" type="uint" value="1"/>
+      <property name="expand" type="bool" value="false"/>
+    </property>
+    <property name="plugin-63" type="string" value="separator"/>
+    <property name="plugin-2" type="string" value="launcher">
+      <property name="items" type="array">
+        <value type="string" value="17728936531.desktop"/>
+      </property>
+    </property>
+    <property name="clipman" type="empty">
+      <property name="tweaks" type="empty">
+        <property name="popup-at-pointer" type="bool" value="true"/>
+        <property name="max-menu-items" type="uint" value="99"/>
+      </property>
+    </property>
+    <property name="plugin-3" type="string" value="xfce4-notes-plugin"/>
+    <property name="plugin-15" type="string" value="systray">
+      <property name="known-legacy-items" type="array">
+        <value type="string" value="guake"/>
+      </property>
+      <property name="known-items" type="array">
+        <value type="string" value="254048"/>
+        <value type="string" value="nm-tray"/>
+        <value type="string" value="blueman"/>
+        <value type="string" value="nm-applet"/>
+        <value type="string" value="254053"/>
+        <value type="string" value="254057"/>
+      </property>
+      <property name="icon-size" type="int" value="20"/>
+      <property name="hide-new-items" type="bool" value="true"/>
+      <property name="square-icons" type="bool" value="false"/>
+      <property name="hidden-items" type="array">
+      </property>
+      <property name="menu-is-primary" type="bool" value="false"/>
+      <property name="symbolic-icons" type="bool" value="false"/>
+      <property name="single-row" type="bool" value="false"/>
+      <property name="hidden-legacy-items" type="array">
+      </property>
+    </property>
+    <property name="plugin-17" type="string" value="separator">
+      <property name="expand" type="bool" value="true"/>
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-18" type="string" value="separator"/>
+    <property name="plugin-19" type="string" value="separator"/>
+    <property name="plugin-1" type="string" value="xfce4-clipman-plugin"/>
+    <property name="plugin-4" type="string" value="separator"/>
+  </property>
+</channel>
