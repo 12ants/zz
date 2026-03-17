@@ -154,8 +154,7 @@ unicolor;
 dott; echo; 
 modol; 
 memoram; 
-dott; echo; 
-$HOME/zz/s/bp.sh 2>/dev/null; echo; 
+# dott; echo; $HOME/zz/s/bp.sh 2>/dev/null; echo; 
 dott; echo; 
 ####
 ####
@@ -170,6 +169,7 @@ printf %b "\x1b]12;#ff44bb"; #### cursor = pink
 [ $PREFIX ] && crond & disown 2>/dev/null; 
 [ $PREFIX ] && (sleep 2; termux-api-start &>/dev/null) & disown; 
 [ $PREFIX ] && (sleep 4; termux-wake-lock &>/dev/null) & disown; 
+export IFS=$' \n\t'; 
 ####
 }; 
 ####
@@ -177,3 +177,4 @@ for i in $HOME/zz/f/*.sh; do . $i; done;
 ####
 . $HOME/zz/alias.sh; 
 . $HOME/.config/tmux/tmuxcompletions.sh; 
+export IFS=$' \n\t'; 

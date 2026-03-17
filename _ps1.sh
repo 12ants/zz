@@ -63,7 +63,7 @@ cc2="$(cat $HOME/logs/idc.log|cut -f3 -d" ")";
 ################
 # trap 'printf %b "\e[K\e[2A\e[K"' 2; 
 ##
-_bp() { "$HOME/zz/s/bp.sh"; }; 
+# _bp() { "$HOME/zz/s/bp.sh"; }; 
 # ['$re'$(_etime)'$re']\
 # ['$re${w[${wlan/*./}]}'\e[3${c[idn]:13:1}m\e[48;5;${c[idn]:0:4}${model:0:12}'$re']\
 # ['$re'\e[38;5;${cc1}m${wlan}'$re']\
