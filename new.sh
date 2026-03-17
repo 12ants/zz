@@ -155,6 +155,8 @@ dott; echo;
 modol; 
 memoram; 
 dott; echo; 
+$HOME/zz/s/bp.sh 2>/dev/null; echo; 
+dott; echo; 
 ####
 ####
 [ "$(cat ${logs}/dfree.log|wc -c)" -gt 4 ] && cat "${logs}/dfree.log" || dfree; dott; echo; 
