@@ -160,8 +160,7 @@ dott; echo;
 dott; echo; 
 ####
 ####
-cd $HOME/zz; git status --short; pwd; cd $OLDPWD; 
-dott; echo; 
+cd $HOME/zz; git status --short|grep -q "" && (dott; printf %b "\e[G\e[91mzz\e[0;2m -\e[0m"; git status --short|sed -e "s/$/\ /g"|bat -ppflc; dott; echo; ); cd $OLDPWD; 
 ####
 ####
 ####
