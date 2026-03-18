@@ -90,8 +90,7 @@ alias kat='bat -pfld|less';
 # alias kk='bat -pflzig'; 
 # alias kk='bat -ppflzig $(tmux set-option mouse off; )|less; tmux set-option mouse on; '; 
 alias iiii='$EDITOR $HOME/.inputrc; echo gg; exec bash; '
-alias speed='speedtest --bytes --no-upload 2>/dev/null || speedtest-go --unit=decimal-bits \
---no-upload || speedtest-cli 2>/dev/null; '
+# alias speed='speedtest --bytes --no-upload 2>/dev/null || speedtest-go --unit=decimal-bits --no-upload || speedtest-cli 2>/dev/null; '
 ########
 alias zz.setup_nvm='. $start/config/nvm.sh'
 alias zz.nvm_init='export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" \
