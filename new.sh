@@ -108,7 +108,7 @@ dott; echo; dott;
 ###################################
 #### UPTIME #######################
 printf %b "\e[G$((uptime -p|tr "\n" "|"; tty)|bat -ppflgo --theme zenburn) \e[0m\n"; dott; echo; 
-w -hos|bat -ppf --language js --theme Visual\ Studio\ Dark+; dott; echo; 
+[ -z PREFIX ] && w -hos|bat -ppf --language js --theme Visual\ Studio\ Dark+ && dott && echo; 
 ####
 printf %b "\e[G["; printf %b "${cpu[*]} x ${cpus}"|tr -s "\n" " "|bat -ppfljava --theme Dracula; printf %b "] \n"; 
 ####
