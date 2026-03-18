@@ -140,8 +140,6 @@ printf %b "\e[$((24 - moc / 2))G ${modol} \n";
 modo() { gum style --border normal --align center --width 43 --bold --foreground ${idc[2]} --border-background $idc --background $idc --padding "0 1" --margin "0" "$(printf %b "${modo[*]:0:7}"|head -c41)"; };
 ####
 memoram() { memram="$(free -h|sed -e "1s/\ \ \ \ \ /RAM: /" -e "2,3s/i/b/g" -e "s/buff\///g"|column --table --table-right 2-9 --output-separator "   " --table-hide 5,7 --table-order 1,2,3,6|sed -e "s/$/\ ·/g"|batcat -ppflc++ --theme Visual\ Studio\ Dark+)"; 
-# dott() { printf %b "\e[0m"; for i in $(seq ${1-45}); do printf %b "·"; done; printf %b "\e[0m"; }; 
-
 mw="$(printf %b "$memram\n\n"|wc -l)"; for i in $(seq $mw); do dott; printf %b "\n"; done; printf %b "\e[${mw}A\n"; printf %b "${memram}\n"; }; 
 ####
 unicolor() { printf %b "\e[G${idcbg}${idt} ${id} $rev ${idc[3]} $ver \x23${idc[1]} $rev ${idc[0]} \e[0m \n"; }; 
@@ -162,7 +160,7 @@ dott; echo;
 dott; echo; 
 ####
 ####
-cd $HOME/zz; git; pwd; cd $OLDPWD; 
+cd $HOME/zz; git status --short; pwd; cd $OLDPWD; 
 dott; echo; 
 ####
 ####
