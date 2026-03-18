@@ -1,8 +1,13 @@
 #!/bin/bash
 # alaaaaais
-alias zz.='cd $HOME/zz; pwd; ls --color=always -pugl'; 
-c2='\e[96m --\e[0m'; re='\e[0m'; gt=""; 
 [ -z "$PREFIX" ] && sudo=sudo; 
+c2='\e[96m --\e[0m'; re='\e[0m'; gt=""; 
+####
+####
+alias zz='cd $HOME/zz; pwd; ls --color=always -pugl'; 
+alias zzpp='cd $HOME/zz; git; pwd; ls --color=always -pugl; git add ./; git commit -a -m "${USER}_${modo//\ /}_$(date)" -v; git pull --verbose; git push --verbose; ls --color=always -trAp --group-directories-first; cd $OLDPWD'; 
+####
+####
 # alias kk='fmt -g 66|col -xb|bat -pfljava --theme DarkNeon'; 
 alias kkkk='col -xb|fmt --split-only --width=$((COLUMNS - 2)) --goal=66 --uniform-spacing --tagged-paragraph|bat -pfljava --theme TwoDark'; 
 alias rep="reset -Q; IFS=$'\n\t '; . $PREFIX/share/bash-completion/bash_completion"; 

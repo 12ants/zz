@@ -148,27 +148,29 @@ unicolor() { printf %b "\e[G${idcbg}${idt} ${id} $rev ${idc[3]} $ver \x23${idc[1
 ####
 #### COLOR 
 #### MODEL
-
 dott; 
 unicolor; 
 dott; echo; 
 modol; 
+#### RAM
 memoram; 
-# dott; echo; $HOME/zz/s/bp.sh 2>/dev/null; echo; 
 dott; echo; 
 ####
 ####
-[ "$(cat ${logs}/dfree.log|wc -c)" -gt 4 ] && cat "${logs}/dfree.log" || dfree; dott; echo; 
-#### RAM
 #### DISK
+[ "$(cat ${logs}/dfree.log|wc -c)" -gt 4 ] && cat "${logs}/dfree.log" || dfree; 
+dott; echo; 
+####
+####
+cd $HOME/zz; git; pwd; cd $OLDPWD; 
+dott; echo; 
+####
+####
+####
 ####
 printf %b "\x1b[1 q"; ########### cursor = block
 printf %b "\x1b]12;#ff44bb"; #### cursor = pink
 ####
-[ $PREFIX ] && sshd & disown 2>/dev/null; 
-[ $PREFIX ] && crond & disown 2>/dev/null; 
-[ $PREFIX ] && (sleep 2; termux-api-start &>/dev/null) & disown; 
-[ $PREFIX ] && (sleep 4; termux-wake-lock &>/dev/null) & disown; 
 export IFS=$' \n\t'; 
 ####
 }; 
@@ -177,4 +179,12 @@ for i in $HOME/zz/f/*.sh; do . $i; done;
 ####
 . $HOME/zz/alias.sh; 
 . $HOME/.config/tmux/tmuxcompletions.sh; 
+####
+####
+[ $PREFIX ] && sshd & disown 2>/dev/null; [ $PREFIX ] && crond & disown 2>/dev/null; [ $PREFIX ] && (sleep 2; termux-api-start &>/dev/null) & disown; [ $PREFIX ] && (sleep 4; termux-wake-lock &>/dev/null) & disown; 
+####
+####
 export IFS=$' \n\t'; 
+####
+####
+
