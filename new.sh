@@ -160,8 +160,8 @@ dott; echo;
 [ "$(cat ${logs}/dfree.log|wc -c)" -gt 4 ] && cat "${logs}/dfree.log" || dfree; 
 dott; echo; 
 ####
-####
-cd $HOME/zz; git status --short|grep -q "" && (dott; printf %b "\e[G\e[91mzz\e[0;2m -\e[0m"; git status --short|sed -e "s/$/\ /g"|bat -ppflc; dott; echo; ); cd $OLDPWD; 
+#### GIT ZZ
+cd $HOME/zz; git status --short|grep -q "" && (dott; printf %b "\e[G\e[91mzz\e[0;2m -\e[0m"; git status --short|tr -s "\n" "|"|sed -e "s/|/\ |/" -e "s/$/\ \n/g"|bat -ppflc; dott; echo; ); cd $OLDPWD; 
 ####
 ####
 ####
