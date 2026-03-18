@@ -31,10 +31,16 @@ mkdir $HOME/logs/b $HOME/tmp $HOME/gh $HOME/dl $HOME/bin $HOME/img $HOME/.config
 ####
 . $HOME/zz/i/colors/coala.sh; 
 ####
-[ $PREFIX ] && wlan="$(getprop|grep -v "gateway"|grep -E "ipv4" -m1|tr -d "[]"|cut -f2 -d" ")"; [ -z $wlan ] && wlan="$(ip -brief -4 a 2>/dev/null|grep -v "127.0.0.1"|sed -E 's/(packets|errors)//g'|tr -s "/\t " "\n"|grep -E "UP" -A1 -m1|tail -n1)"; [ -z $wlan ] && wlan="$($sudo ifconfig 2>/dev/null|grep -e "wlan" -A1|sed -e 1d -E 's/(packets|errors)//g)'|tr -s "a-z " "\n"|sed -e 1d -e 3,4d)"; [ "$wlan" ] && printf %b "${wlan[*]}" > $HOME/logs/wlan.log || wlan="$(cat $HOME/logs/wlan.log)"; 
+[ $PREFIX ] && wlan="$(getprop|grep -v "gateway"|grep -E "ipv4" -m1|tr -d "[]"|cut -f2 -d" ")"; 
+####
+[ -z $wlan ] && wlan="$(ip -brief -4 a 2>/dev/null|grep -v "127.0.0.1"|sed -E 's/(packets|errors)//g'|tr -s "/\t " "\n"|grep -E "UP" -A1 -m1|tail -n1)"; 
+####
+[ -z $wlan ] && wlan="$($sudo ifconfig 2>/dev/null|grep -e "wlan" -A1|sed -e 1d -E 's/(packets|errors)//g)'|tr -s "a-z " "\n"|sed -e 1d -e 3,4d)"; [ "$wlan" ] && printf %b "${wlan[*]}" > $HOME/logs/wlan.log || wlan="$(cat $HOME/logs/wlan.log)"; ####
 ####
 [ -z $PREFIX ] && ii="$(ip -c -brief -4 a 2>/dev/null|grep -vE "lo |DOWN"|cut -f1 -d"/"|column --table --output-separator "$(printf %b "\e[0;2m") | ")"; 
-[ -z "$ii" ] && ii=($(ifconfig 2>/dev/null|grep -vE "unspec|lo: |127.0.0.1" |cut -f1,10 -d" "|tr -d "\n"|sed -E 's/(packets|errors)//g'|bat -ppf --language Idris)); 
+####
+[ -z $PREFIX ] && [ -z "$ii" ] && ii=($(ifconfig 2>/dev/null|grep -vE "unspec|lo: |127.0.0.1" |cut -f1,10 -d" "|tr -d "\n"|sed -E 's/(packets|errors)//g'|bat -ppf --language Idris)); 
+####
 ####
 wlan="$(cat $HOME/logs/wlan.log)"; idn1="${wlan/*./}"; idn="$(($(printf %b "${idn1}"|tail -c2) + 0))"; 
 . $HOME/zz/i/colors/coala.sh; unset -v idc; declare -a idc; export idc=(${co[idn]}); printf %b "${idc[*]}" > $HOME/logs/idc.log; 
@@ -42,17 +48,7 @@ wlan="$(cat $HOME/logs/wlan.log)"; idn1="${wlan/*./}"; idn="$(($(printf %b "${id
 ####
 if echo $HOME|grep -w "termux" -q; then unalias sudo 2>/dev/null; else sudo=sudo; fi; 
 ####
-# [ -x $HOME/.config/fzf_completions_bash.sh ] || (fzf --bash &> $HOME/.config/fzf_completions_bash.sh; 
-# chmod 775 $HOME/.config/fzf_completions_bash.sh); 
-# if fzf --bash &>/dev/null; then 
-# . $HOME/.config/fzf_completions_bash.sh; fi; 
 ####
-#unset tmuxprefix 2>/dev/null;  
-#if [ "$PREFIX" ]; then tmuxprefix=" --tmux 'center,100%,100%' "; 
-#else alias fzf='fzf-tmux -h 100% -w 100%'; 
-#fi; 
-####
-#export FZF_DEFAULT_OPTS="${tmuxprefix} -i -m --cycle --ansi --bind 'q:abort'"; 
 ####
 [ -x $HOME/.config/openai_api_id.conf ] && . $HOME/.config/openai_api_id.conf 2>/dev/null; 
 [ -x $HOME/.config/gemini_api_id.conf ] && . $HOME/.config/gemini_api_id.conf 2>/dev/null; 
@@ -72,10 +68,13 @@ do cat /sys/devices/virtual/dmi/id/${bb} 2>/dev/null|grep -v "O.E.M."|tr -s "\n"
 moda="$(printf %b "${modo}"|tr -d "[]"|head -c14)"; 
 model="${moda/%\ /}"; printf %b "${modo[*]}" > $HOME/logs/model.log; 
 }; 
+####
 _model; 
 ####
 kk() { 
+####
 IFS=$' \n\t'; 
+####
 . $HOME/zz/f/12calendar.sh; 
 ###################################
 ###################################
@@ -88,22 +87,28 @@ IFS=$' \n\t';
 osa1="$(printf %b "${osx1[*]}"|uniq|tr -s "\n" " "; printf %b "\b"|col -xb)"; 
 osa2="$(printf %b "${osx2[*]}"|uniq|tr -s "\n" " "; printf %b "\b"|col -xb)"; 
 os1="$(printf %b "${osa1}\b"|col -xb|tr -d "\n")"; os2="$(printf %b "${osa2}\b"|col -xb|tr -d "\n")";
-# local IFS=$'\n\t '; 
-## __ CPU __ GET _____ ##########
+###################################
+## __ CPU __ GET _____ ############
 cpu=($(lscpu |grep -E 'Model name'|tr -s "\t" " "|cut -f3- -d" ")); 
 cpus=($(lscpu|grep -e 'CPU(s):' -m1|cut -f2 -d":"|tr -d " ")); 
 [ -z $PREFIX ] && videocard="$(lspci|grep -e 'VGA'|cut -f5- -d" "|sed -e "s/\ (rev.*//g")"; 
-## ____ IP _ GET _____ ##########
 ####
+## ____ IP _ GET _____ ############
 ####
 [ -z "$ssh" ] && ssh=(${SSH_CONNECTION}); 
-####
-# dots() { printf %b "${re}·········${re}"; }; 
-dott() { printf %b "\e[0m"; for i in $(seq ${1-50}); do printf %b "·"; done; printf %b "\e[0m"; }; 
-dott; echo; 
-dott; 
-printf %b "\e[G$((uptime -p|tr "\n" "|"; tty)|bat -ppflgo --theme zenburn) \e[0m\n"; dott; echo; dott; 
 
+####
+###################################
+dott() { printf %b "\e[0m"; for i in $(seq ${1-50}); do printf %b "·"; done; printf %b "\e[0m"; }; 
+###################################
+
+####
+
+dott; echo; dott; 
+###################################
+#### UPTIME #######################
+printf %b "\e[G$((uptime -p|tr "\n" "|"; tty)|bat -ppflgo --theme zenburn) \e[0m\n"; dott; echo; 
+w -hos|bat -ppf --language js --theme Visual\ Studio\ Dark+; dott; echo; 
 ####
 printf %b "\e[G["; printf %b "${cpu[*]} x ${cpus}"|tr -s "\n" " "|bat -ppfljava --theme Dracula; printf %b "] \n"; 
 ####
