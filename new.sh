@@ -181,7 +181,10 @@ for i in $HOME/zz/f/*.sh; do . $i; done;
 . $HOME/.config/tmux/tmuxcompletions.sh; 
 ####
 ####
-[ $PREFIX ] && sshd & disown 2>/dev/null; [ $PREFIX ] && crond & disown 2>/dev/null; [ $PREFIX ] && (sleep 2; termux-api-start &>/dev/null) & disown; [ $PREFIX ] && (sleep 4; termux-wake-lock &>/dev/null) & disown; 
+[ $PREFIX ] && (ps -A|grep -q "sshd"||sshd & disown &>/dev/null); 
+[ $PREFIX ] && (ps -A|grep -q "crond"||crond & disown &>/dev/null); 
+[ $PREFIX ] && (sleep 2; termux-api-start &>/dev/null) & disown; 
+[ $PREFIX ] && (sleep 4; termux-wake-lock &>/dev/null) & disown; 
 ####
 ####
 export IFS=$' \n\t'; 
