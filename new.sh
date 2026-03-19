@@ -177,13 +177,18 @@ printf %b "\x1b]12;#ff44bb"; #### cursor = pink
 export IFS=$' \n\t'; 
 ####
 }; 
+###################
+#### PATH #########
 ####
+printf %b "$PATH"|sed -e "s/\:/\n/g"|sort -u > $HOME/.config/path2.sh; 
+export PATH="$(cat $HOME/.config/path2.sh|tr -s "\n" ":"|sed -e "s/\:$//g")"; 
+###################
 for i in $HOME/zz/f/*.sh; do . $i; done; 
-####
+###################
 . $HOME/zz/alias.sh; 
 . $HOME/.config/tmux/tmuxcompletions.sh; 
-####
-####
+###################
+###################
 [ $PREFIX ] && (ps -A|grep -q "sshd"||sshd & disown &>/dev/null); 
 [ $PREFIX ] && (ps -A|grep -q "crond"||crond & disown &>/dev/null); 
 [ $PREFIX ] && (sleep 2; termux-api-start &>/dev/null) & disown; 
