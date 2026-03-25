@@ -9,7 +9,7 @@ cat "/etc/profile.d/zz.sh" | grep -qe "alias l='"'cd $(lf -print-last-dir)'"'" |
 ####
 [ -d "/etc/lf" ] || sudo mkdir "/etc/lf"; 
 sudo rm /etc/lf/* 2>/dev/null; 
-sudo ln -s /home/${SUDO_USER:-$USER}/zz/c/lf/* -t /etc/lf/; 
+sudo ln /home/${SUDO_USER:-$USER}/zz/c/lf/* -t /etc/lf/; 
 ####
 fi; 
 ####
