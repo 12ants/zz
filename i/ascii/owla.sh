@@ -1,15 +1,15 @@
   /\_/\
  (0 . 0)
    · ·
-newline 2
+newline
   /\_/\
  (0 . 0)
    ' ·
-newline .2
+newline
   /\_/\
  (0 . 0)
    · '
-newline .2
+newline
   /\_/\
  (0 . 0)
    ' .
@@ -37,7 +37,7 @@ newline
   _^ ^_
  (0() 0)
    . .
-newline 4
+newline
   /\_/\
  (0 . 0)
    · ·
@@ -49,5 +49,4 @@ newline
   /\_/\
  (0 o 0)
    ^ ^
-newline
 endline

@@ -47,12 +47,8 @@ alias jacketts='/home/aa/gh/jackett/jackett &'
 #alias uu="tmux split-window -l 44% -e sudo='$sudo' 'hash nala||$sudo apt install nala -y &>/dev/null; $sudo nala update; $sudo nala upgrade -y; '"; 
 alias upup='$sudo apt update; $sudo apt upgrade -y'; 
 # alias u2='tmux split-window -l "44%" -e "sudo=$sudo" -v '$sudo apt update 2>/dev/null|bat -ppflzig --theme=DarkNeon; printf %b "\n\n\n\n\e[96m"; $sudo apt upgrade -y; $sudo apt autoremove -y; printf %b "\n\e[0;46m\n\n\n\n -- done\n\n\n\n\e[0m\n"; read -n1 "kk"; ';'; 
-
-
-alias ffff='[ -z $PREFIX ] && neofetch || [ $PREFIX ] && fastfetch --percent-type 2 --logo-position right --logo-padding 2 --bar-border-right "" --bar-border-left "" --disable-linewrap';
+alias ffff='hash fastfetch 2>/dev/null && fastfetch --percent-type 2 --logo-position right --logo-padding 2 --bar-border-right "" --bar-border-left "" --disable-linewrap || neofetch 2>/dev/null || (uname --kernel-name --kernel-release --operating-system --processor; printf %b "$SHELL($-) $TERM_PROGRAM $TERM\n$LOGNAME $HOSTNAME $HOME\n")|column --table|bat -ppfljs'; 
 alias mm='micro'; 
-#!/bin/bash
-## aaaaaa
 alias upwords='rsync aa@ants.ftp.sh:/home/aa/logs/words/up -avP --mkpath ~/'; 
 # alias yno='nyo'; 
 alias zz='cd $HOME/zz; git status'; 
