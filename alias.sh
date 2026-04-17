@@ -39,8 +39,8 @@ alias fig='figfonts';
 alias start='sudo lightdm'; 
 alias la='lsd -l --icon never --group-directories-first --classify --total-size -a --blocks user,size,date,name --date +%H:%M:%S'
 alias bb='if [ "$PREFIX" ]; then \
-tmux display-popup -E -w 99% -h 98% "htop"; else \
-tmux display-popup -E -w 99% -h 98% "sudo btop"; fi '
+tmux display-popup -E -w 100% -h 100% -b none "htop"; else \
+tmux display-popup -E -w 100% -h 100% -b none "sudo btop"; fi '
 alias qb='ssh aa@ants.ftp.sh "qbittorrent-nox -d" && xdg-open https://qb.aeniks.com'; 
 alias l='lf -last-dir-path $HOME/logs/ll.log; cd $(cat $HOME/logs/ll.log); '
 alias jacketts='/home/aa/gh/jackett/jackett &'
