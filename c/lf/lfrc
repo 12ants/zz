@@ -51,7 +51,7 @@ map ss :search
 map sp :set preview! 
 map s0 :set ratios 1
 map s1 :set ratios 1:1
-map 1
+map y :conv2stl
 map 1 :set ratios 1:1
 map s2 :set ratios 1:2
 map s4 :set ratios 1:4
@@ -113,9 +113,10 @@ map fs :ffzz
 map ff :search 
 map fz :fzf_search 
 map D :set dironly! 
-map R !read -ep ' ' -i '192.168.0.' 'ipa' && read -ep ' port: ' -i '8022' 'pp' && read -ep ' user: ' -i 'aa' 'uu' && read -ep 'folder: ' -i './' ipf; echo; rsync -avPe "ssh -p $pp" $fx $uu@$ipa:$ipf; echo
+map R !read -ep ' ' -i '192.168.0.' 'ipa' && read -ep ' port: ' -i '22' 'pp' && read -ep ' user: ' -i 'aa' 'uu' && read -ep 'folder: ' -i './' ipf; echo; rsync -avPe "ssh -p $pp" $fx $uu@$ipa:$ipf; echo
 map <space> :toggle; down
 map <enter> :open $f 
+map <right> :open $f
 map A visual
 # map b bopen 
 map b $[ $TMUX ] && tmux resize-pane -Z; batcat --paging always --decorations never $f; [ $TMUX ] && tmux resize-pane -Z; 
@@ -134,6 +135,10 @@ case $po in chafa) pp="$po -f symbols $f"; pv="printf %b '\e[4A'$f'\n'; mediainf
 cmd chaff ${{ 
 tmux display-popup -w 100% -h 100% -E -b none -e fo="$f" 'bash -c "mediainfo $fo|grep -E '"'Width|Height|File\ size|Complete|depth'"'|tr -s '"' '"' '"' '"'|column --table --separator :|bat -ppfljava --theme Nord; chafa -f symbols --scale max $fo; read -n1 aa"'; 
 }} 
+# cmd conv2stl ${{ }}
+cmd opop ${{ 
+file -bi $f|grep -qE 'directory' && cd $f && echo $PWD || (file -bi $f|grep -qE 'text|ascii' && $EDITOR $f); 
+}}
 
 # mediainfo oi_heyday.jpg|tr -d " "|grep -E -m4 "Width|Height|size|name"
 
@@ -328,8 +333,8 @@ set ifs "
 set scrolloff 20
 ## cmds
 cmd open &{{
-case $(file --mime-type -Lb $f) in
-text/*) lf -remote "send $id \$micro \$f";;
+case $(file -bi $f) in
+text|ascii) lf -remote "send $id \$micro \$f";;
 *) for f in $f; do ! $OPENER $f > /dev/null 2> /dev/null & done;;
 esac
 }}
