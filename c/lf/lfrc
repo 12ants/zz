@@ -4,14 +4,15 @@
 #[ -e "/data/data/com.termux/files/usr/etc/lf/previewer"]&&PREFIX="/data/data/com.termux/files/usr"; 
 # set previewer $PREFIX/etc/lf/previewer
 # IFS=$""; 
-EDITOR=micro
-set locale sv-SE 
+# EDITOR=micro
+# set locale sv-SE 
 set shellopts '+eu'
-set drawbox false
-set icons false
-set globfilter true
-set globsearch true
-set mouse true
+set drawbox false 
+set icons false 
+# set globfilter true 
+####
+set globsearch 'true' 
+set mouse true 
 map f
 map . set hidden! 
 map <esc> quit
@@ -332,12 +333,14 @@ set ifs "
 "
 set scrolloff 20
 ## cmds
-cmd open &{{
-case $(file -bi $f) in
-text|ascii) lf -remote "send $id \$micro \$f";;
-*) for f in $f; do ! $OPENER $f > /dev/null 2> /dev/null & done;;
-esac
-}}
+cmd open ${{
+case $(file -bi $f|sed "s/\/.*//g") in
+text) $EDITOR $f;  (printf %b "\n\e[7m edited \e[m $f \e[m\e[96m@ \e[m";date;echo)|bat -ppfljava;; 
+image) echo "----"; mediainfo $f|tr -s "\n" "\n"|sed -e /General/d -e /Image/d|sort -u|batcat --line-range 3:22 -ppfljava --theme zenburn; chafa --format symbols $f; read -en1 -p '[anykey]';; 
+inode) cd $f;; 
+esac; }}
+# lf -remote "send $id \$micro \$f";;
+# *) for f in $f; do ! $OPENER $f > /dev/null 2> /dev/null & done;;
 cmd depl ${{
 bash -c 'read -n1 -rp "this you? ${PWD##*/} " "gg"; [ "$gg" ]||npx wrangler pages deploy ./ --project-name ${PWD##*/} --commit-dirty=true; echo gg; '
 }}
@@ -503,18 +506,18 @@ set hiddenfiles ".*"
 # " ]&& 
 # lf_cdir="~/.config/lf"; 
 set cleaner "~/.config/cleaner"
-set opener "~/.config/lf/opener"
+# set opener "~/.config/lf/opener"
 # "$lf_cdir/opener"
 set previewer "~/.config/lf/previewer"
 #set previewer "~/.config/lf/previewer"
 #set previewer "$PREFIX/etc/lf/previewer" 
-set incsearch true
-set incsearch on 
+# set incsearch true
+# set incsearch on 
 set incfilter false
-set incfilter on 
-set lf_user_${USER}
-set globsearch false
-set globsearch on 
+# set incfilter on 
+# set lf_user_${USER}
+# set globsearch false
+# set globsearch on 
 set ratios 1:1 
 #2:2:6 # 2:3:7:7
 #set truncatechar "..."
@@ -547,7 +550,7 @@ set cursorpreviewfmt "\033[1m"
 set cursoractivefmt "\033[4;7m"
 set drawbox false
 set nodrawbox
-set mouse on 
+set mouse false 
 set icons false 
 set noicons
 set shell bash 

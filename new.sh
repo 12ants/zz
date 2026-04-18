@@ -23,6 +23,7 @@ export LESS=''${lessprefix}'-R --tilde --file-size --use-color -DP7.197$ --incse
 ####
 export GREP_COLORS="mt=91:ms=95:fn=32:ln=32:bn=32:se=35:sl=38;5;207:cx=38;5;121:ne"; 
 export FZF_DEFAULT_OPTS='-m -i --cycle --ansi --unicode --bind "q:abort"'; 
+unset LS_COLORS; 
 ####
 gh auth status 2>&1|grep -e "true" -B1 --color=auto|col -xb|cut -f9 -d" "|tr -d "\n" > ~/logs/gh_log.log & disown; 
 #### make som basic folders ######## 

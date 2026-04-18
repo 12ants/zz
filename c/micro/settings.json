@@ -1,8 +1,8 @@
 {
     "autoclose": false,
-    "clipboard": "terminal",
-    "colorscheme": "atom-dark",
+    "colorscheme": "aaaa-tc",
     "fakecursor": true,
+    "keymenu": true,
     "linter": false,
     "mkparents": true,
     "paste": true,
