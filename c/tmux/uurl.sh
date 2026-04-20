@@ -17,7 +17,7 @@ fzf-tmux -w "$((uh + 6))" -h "$((uhl + 4))" --disabled --info inline:" kk " --bi
 printf %b "\n${urla[*]}\n"; 
 
 
-apps=(links wget lynx xdg-open yt-dlp echo termux-open-url); 
+apps=(xdg-open links wget lynx yt-dlp echo termux-open-url); 
 uhl="$(printf %b "${apps[*]}"|wc -l)"; 
 uh=$(printf %b "${apps[*]}"|wc --max-line-length); 
 apen="$(printf %b "${apps[*]}"|fzf-tmux -w "$((uh + 6))" -h "$((uhl + 4))" --disabled --info inline:" kk " --bind 'enter:print-query,q:abort,focus:replace-query')" && ${apen} ${urla}; 
