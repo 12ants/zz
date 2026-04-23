@@ -12,13 +12,12 @@ iploc="$(cat $HOME/logs/wlan.log)";
 # read -ep '> ' -i "${wlan[*]}" "iploc"; 
 printf %b "\e[?25l\n$c5 checking ips\e[2m ...\e[0m \t\t [q]uit $c6\n\n\n\n\e[4A\n\n"; 
 # ip -4 n
-for ip in {0..66}; do printf %b "\e[K"; 
-if (ping -c 2 ${iploc%.*}.${ip} &>/dev/null); 
-then \
-ipp="${iploc%.*}.${ip}"; 
-printf %b "\e[K\n\n$ipp\e[K\e[A\[K"; 
+for ip in {0..266}; do printf %b "\e[K"; 
+if ping -c2 ${iploc%.*}.${ip} &>/dev/null; 
+then ipp="${iploc%.*}.${ip}"; 
+printf %b "\e[K\n\n$ipp\e[K\e[A\e[K"; 
 touch $HOME/logs/iplocal/$ipp; 
-(nmap ${ipp} --system-dns --open -p 22,8022 2>/dev/null|grep -e "open"|cut -f1 -d"/"|tr -s "\n" " ") > $HOME/logs/iplocal/${ipp} 
+(nmap ${ipp} --open -p 22,8022 2>/dev/null|grep -e "open"|cut -f1 -d"/"|tr -s "\n" " ") > $HOME/logs/iplocal/${ipp} 
 fi & disown; 
 # printf %b "\e[K\n${iploc%.*}.$i" && 
 printf %b "\e[K\e[A\e[K"; 
