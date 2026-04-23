@@ -3,7 +3,7 @@ termux-battery-status > "$HOME/logs/b/battery.log";
 cat ~/logs/b/battery.log|grep -e "percentage"|tr -d 'A-z ,\":' | tee "$HOME/logs/b/bp.log"; 
 ####
 if [ "$(cat $HOME/logs/b/bp.log)" -lt 28 ]; then 
-termux-tts-speak -s SYSTEM "battery at $(cat $HOME/logs/b/bp.log) %"; 
+termux-tts-speak -s SYSTEM "battery at $(cat $HOME/logs/b/bp.log)%"; 
 fi; 
 ####
 ####
