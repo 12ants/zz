@@ -18,6 +18,7 @@ alias zz.gh_release_dl='gh release download "$(gh release list --limit 1|tail -n
 alias zz.alias='$EDITOR ~/88/alias.sh'; 
 alias zz.disk='$sudo fdisk -lL=always|grep -vwE "sectors|Sector|I/O"|cut -f2- -d'; 
 alias env='env|sort|k'; 
+alias gh_release_download='mkdir ./rel; ghrel="$(gh release list|sed -n 2p|tr -s " \t" " "|cut -f1 -d" ")"; gh release download $ghrel --dir ./rel'; 
 alias antsup='ssh aa@ants.ftp.sh "sudo apt update; sudo apt upgrade; sudo reboot"'; 
 alias ssss='ssss.sh -sl4|grep -vE "UNCONN"|tr -s " " " "|cut -f1,2,5 -d" "|column --table --output-separator " : "|bat -ppfld'; 
 alias neew='clear; . crons/hour.sh; printf %b "\e[12B"; new'; 
