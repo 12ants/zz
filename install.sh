@@ -27,15 +27,18 @@ printf %b "\e[1J\e[H\e[9${i}m
                                                                  ░▒▒░  "; 
 sleep .1; done; printf %b "\e[?25l"; 
 printf %b "\n\e[A\e[0m $o dl 12ants/zz git? [\e[2mY\e[0m/\e[2mn\e[0m] "; 
-read -n1 -sr "ny"; 
-if [ -z "$ny" ]; then 
+read -n1 -sr "ny"; if [ -z "$ny" ]; then 
 printf %b " $o ok\n $o whereto? "; 
 read -rei "$PWD" "aa"; zz="$aa/zz"; 
 cd $aa; rm zz 2>/dev/null; 
+printf %b "\n $o downloading ."; 
+$sudo apt update &>/dev/null; 
+printf %b "."; sleep .5; printf %b ".\n"; 
 hash sudo 2>/dev/null && sudo="sudo"; 
-hash git || $sudo apt install -y git &>/dev/null; 
-printf %b "\n $o downloading ... \n"; 
-git clone https://github.com/12ants/zz 2>/dev/null; 
+hash git 2>/dev/null || $sudo apt install -y git file gnupg &>/dev/null; 
+printf %b "\n $o ...... done \n"; 
+################
+git clone https://github.com/12ants/zz 2>/dev/null; cd zz; 
 git config remote.origin.url=git@github.com:12ants/zz.git; 
 # cd zz; . menu.sh; menu "./install"; 
 ################

@@ -29,7 +29,7 @@ if [[ $1 ]]; then cd $1; OPTIONS_VALUES=($(ls -p|grep -v "/")); else OPTIONS_VAL
 if [[ $4 ]]; then for i in ${OPTIONS_VALUES[@]}; do
 OPTIONS_LABELS+=("\e[2m $($4 "${i}";) "); done; 
 else for i in ${OPTIONS_VALUES[@]}; 
-do ft=$(file $i --mime-type -b|head -c4); if [[ $ft == "text" ]]; then
+do ft=$(file $i -bi 2>/dev/null|head -c4); if [[ $ft == "text" ]]; then
 OPTIONS_LABELS+=("\e[2m $(sed -n 2p $i|col -xb|tr -s ';()\\' ' '|cut -c-${size[1]}) "); else 
 OPTIONS_LABELS+=("\e[2m $(file -b $i|cut -c-${size[1]}) "); fi; done; echo -e "\e[0J"; fi; 
 for i in "${!OPTIONS_VALUES[@]}"; do 
