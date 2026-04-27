@@ -11,7 +11,7 @@ set drawbox false
 set icons false 
 # set globfilter true 
 ####
-set globsearch 'true' 
+# set globsearch 'true' 
 set mouse true 
 map f
 map . set hidden! 
@@ -513,10 +513,10 @@ set previewer "~/.config/lf/previewer"
 #set previewer "$PREFIX/etc/lf/previewer" 
 # set incsearch true
 # set incsearch on 
-set incfilter false
+set incfilter true
 # set incfilter on 
 # set lf_user_${USER}
-# set globsearch false
+# set globsearch true
 # set globsearch on 
 set ratios 1:1 
 #2:2:6 # 2:3:7:7
@@ -554,6 +554,7 @@ set mouse false
 set icons false 
 set noicons
 set shell bash 
+set incsearch true 
 set info size:time
 set sortby time
 %test $LF_LEVEL -eq 1 || >&2 printf "Warning: You're in a nested lf instance!"
