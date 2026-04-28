@@ -1,0 +1,1 @@
+all ascii braille extra imported narrow solid ugly alnum bad diagonal geometric inverted none space vhalf alpha block digit half latin quad stipple wedge ambiguous border dot hhalf legacy sextant technical wide
