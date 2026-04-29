@@ -4,12 +4,12 @@
 #[ -e "/data/data/com.termux/files/usr/etc/lf/previewer"]&&PREFIX="/data/data/com.termux/files/usr"; 
 # set previewer $PREFIX/etc/lf/previewer
 # IFS=$""; 
-# EDITOR=micro
+EDITOR=micro
 # set locale sv-SE 
-set shellopts '+eu'
+# set shellopts '+eu'
 set drawbox false 
 set icons false 
-# set globfilter true 
+set globfilter true 
 ####
 # set globsearch 'true' 
 set mouse true 
@@ -119,9 +119,11 @@ map R !read -ep ' ' -i '192.168.0.' 'ipa' && read -ep ' port: ' -i '22' 'pp' && 
 map <space> :toggle; down
 map <enter> :open $f 
 map <right> :open $f
+# file $f 2>/dev/null|grep 'directory'&& echo ok&& cd $f && echo ok 
+# case $(bash -c "file -Lib $f"|cut -f1 -d/) in inode) open $f;; text) micro $f;; esac;
 map A 
-# map b bopen 
-map b :bo 
+cmap b :bo
+map b :bo
 map B bboo
 map bb $batcat -pf $f
 map bg $glow -p $f
@@ -130,14 +132,15 @@ map x $printf %b "\e[95m\n--------\n\e[93m$f\e[96m\n--------\n\e[0m"; $f; printf
 # map f :push F<backspace><right><backspace><right><backspace>**<left>
 ####
 cmd bo ${{ 
-case $(file -bi $f|cut -f1 -d"/") in \
-text) tmux display-popup -b none -w 100% -h 100% -e f="$f" -e LESS="$LESS" -E 'bat --paging always --decorations never $f';; 
-image) tmux display-popup -b none -w 100% -h 100% -e f="$f" -E 'w="$(stty size|cut -f2 -d" ")"; for i in $(cat $HOME/zz/c/lf/chafa_symbols.sh|tr " " "\n"); do clear; chafa $f; printf %b "\e[H"; wc="$(mediainfo $f|grep Image -A12 -m1|tail -n+2|tr -s " " "_"|wc --max-line-length)"; mediainfo $f|grep Image -A12 -m1|tail -n+2|tr -s " " "_"|column --table --separator ":" --table-columns-limit 2 --output-separator "" --table-right 2|tr " " "_"|sed -e "s/^/\x1b\[$((w - wc - 12))G/g"|sed -e "s/[_.():]/\x1b[2m&\x1b[m/g"; printf %b "\e[2m\e[?25l\e[H$i"; read kk && [ "$kk" ] && break; done;';; esac; }}
+ft="$(file -bi $f|cut -f1 -d'/')"; case $ft in \
+text) tmux display-popup -b none -w 100% -h 100% -e f="$f" -e LESS="$LESS" -E 'bat -p $f';; 
+image) tmux display-popup -b none -w 100% -h 100% -e f="$f" -e LESS="$LESS" -E 'w="$(stty size|cut -f2 -d" ")"; for i in $(cat $HOME/zz/c/chafa_symbols.sh|shuf); do clear; chafa -f symbols --symbols $i $f; printf %b "\e[H"; wc="$(mediainfo $f|grep Image -A12 -m1|tail -n+2|tr -s " " "_"|wc --max-line-length)"; mediainfo $f|grep Image -A12 -m1|tail -n+2|tr -s " " "_"|column --table --separator ":" --table-columns-limit 2 --output-separator "" --table-right 2|tr " " "_"|sed -e "s/^/\x1b\[$((w - wc - 12))G/g"|sed -e "s/[_.():]/\x1b[2m&\x1b[m/g"; printf %b "\e[2m\e[?25l\e[H$i"; read kk && [ "$kk" ] && break; done;';; esac; 
+}}; 
 
 # $[ $TMUX ] && tmux display-popup -w 100% -h 100% -E 'batcat --paging always --decorations never $fb'; [ $TMUX ]; 
 
 cmd bboo ${{ 
-IFS=$'\n\t '; popo=(chafa bat micro xgd-open); po=($(printf %b "${popo[*]}"|fzf-tmux -h 88% -w 88% --no-preview -i --cycle --bind 'q:abort' --border 'top')); 
+IFS=$'\n\t '; popo=(chafa bat micro xgd-open); po=($(printf %b "${popo[*]}"|fzf --tmux -h 88% -w 88% --no-preview -i --cycle --bind 'q:abort' --border 'top')); 
 case $po in chafa) pp="$po -f symbols $f"; pv="printf %b '\e[4A'$f'\n'; mediainfo $f|tr -d ' '|grep -E -m4 'Width|Height|File'|bat -ppfljava";; bat) pp="$po -p";; *) pp="$po";; esac; [ $TMUX ]&& tmux display-popup -E -w "100%" -h "100%" -b none -e pp="$pp" -e pv="$pv" 'bash -c "${pp} $f; ${pv}; read -n1 kk"'||${po}; 
 }} 
 cmd chaff ${{ tmux display-popup -w 100% -h 100% -E -b none -e fo="$f" 'bash -c "mediainfo $fo|grep -E '"'Width|Height|File\ size|Complete|depth'"'|tr -s '"' '"' '"' '"'|column --table --separator :|bat -ppfljava --theme Nord; chafa -f symbols --scale max $fo; read -n1 aa"'; 
@@ -565,8 +568,8 @@ set info size:time
 set sortby time
 %test $LF_LEVEL -eq 1 || >&2 printf "Warning: You're in a nested lf instance!"
 # source "~/.config/lf/opener"
-#source "~/.config/lf/previewer"
-source "~/.config/lf/lf_m"
+# source "~/.config/lf/previewer"
+# source "~/.config/lf/lf_m"
 
 
 
