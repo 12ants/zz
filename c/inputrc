@@ -30,7 +30,7 @@ C-x: '\ek\nreset -Q; exec bash;\n'
 C-z: undo
 # ^Z: undo
 "\e[z": undo
-"\ez": undo
+"\ez": history-search-backward
 "\eq": insert-comment
 "\e[q": insert-comment
 "\e3": insert-comment
