@@ -17,6 +17,8 @@ printf %b "\e[H\e[J ";
 $sudo apt install -y openssh-server; 
 $sudo apt install -y micro;  
 $sudo apt install -y cron; 
+$sudo apt install -y cronie; 
+$sudo apt install -y gnupg; 
 $sudo apt install -y gh; 
 $sudo apt install -y git; 
 
