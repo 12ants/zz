@@ -11,6 +11,9 @@ export EDITOR="micro"; export email='leonel@ik.me';
 export BAT_THEME="Coldark-Dark"; export logs="$HOME/logs"; 
 export tmp="$HOME/tmp"; [ -z "$TMPDIR" ] && export TMPDIR="$HOME/tmp"; 
 export zz="$HOME/zz"; export start="$HOME/zz"; 
+
+if [ -d "$HOME/gh/appi" ]; then for i in $HOME/gh/appi/*.sh; do . $i; done; fi; 
+
 unset HISTTIMEFORMAT; 
 hash sudo 2>/dev/null && [ "$UID" != 0 ] && export sudo="sudo"; 
 ####
