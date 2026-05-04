@@ -1,7 +1,7 @@
 {
     "autoclose": false,
     "clipboard": "terminal",
-    "colorscheme": "atom-dark",
+    "colorscheme": "cmc-tc",
     "fakecursor": true,
     "linter": false,
     "mkparents": true,
