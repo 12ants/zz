@@ -16,11 +16,11 @@ urla=($(printf %b "${uurl[*]}" | fzf --tmux "center,$((uh + 6)),$((uhl + 4))" --
 printf %b "\n${urla[*]}\n";
 ####
 ####
-xdg-open $urla || termux-open-url $urla
+xdg-open $urla || termux-open-url $urla; 
 }; 
 ##
 echo -e "\n press [q] to continue \n"; 
 ##
 url; 
 ##
-
+xdg-open $urla || termux-open-url $urla; 
