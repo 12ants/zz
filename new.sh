@@ -8,12 +8,15 @@ export IFS=$' \n\t';
 [ $TMUX ] && . $HOME/zz/_ps1.sh || return 0;  
 export HISTCONTROL="ignoreboth"; export PROMPT_COMMAND="history -a; history -n; "; 
 export EDITOR="micro"; export email='leonel@ik.me'; 
-export BAT_THEME="Coldark-Dark"; export logs="$HOME/logs"; 
+export BAT_THEME="Coldark-Dark"; export logs="$HOME/logs"; ####
 export tmp="$HOME/tmp"; [ -z "$TMPDIR" ] && export TMPDIR="$HOME/tmp"; 
 export zz="$HOME/zz"; export start="$HOME/zz"; 
-
+####
 if [ -d "$HOME/gh/appi" ]; then for i in $HOME/gh/appi/*.sh; do . $i; done; fi; 
-
+####
+export HISTFILESIZE=2222
+export HISTSIZE=2222
+###
 unset HISTTIMEFORMAT; 
 hash sudo 2>/dev/null && [ "$UID" != 0 ] && export sudo="sudo"; 
 ####
@@ -54,6 +57,9 @@ wlan="$(cat $HOME/logs/wlan.log)"; idn1="${wlan/*./}"; idn="$(($(printf %b "${id
 if echo $HOME|grep -w "termux" -q; then unalias sudo 2>/dev/null; else sudo=sudo; fi; 
 ####
 ####
+ps ao cmd|grep -qe "ntfy.sh"||curl -s ntfy.sh/oioioioi/raw & 
+####
+
 ####
 [ -x $HOME/.config/openai_api_id.conf ] && . $HOME/.config/openai_api_id.conf 2>/dev/null; 
 [ -x $HOME/.config/gemini_api_id.conf ] && . $HOME/.config/gemini_api_id.conf 2>/dev/null; 
@@ -121,6 +127,8 @@ printf %b "\e[G["; printf %b "${cpu[*]} x ${cpus}"|tr -s "\n" " "|bat -ppfljava 
 ####
 ####
 dott; echo; 
+up="$(($($sudo apt list --upgradable 2>/dev/null|wc -l)-1))"; [ "$up" -gt 0 ] && printf %b "$up\e[0;2m packages\e[0m available \e[95mto\e[0m update\e[1m \n"; $sudo needrestart -qra -mu -lkw 2>/dev/null|grep -ie "Pending"||echo "no updates"; dott; echo; 
+####
 dott; printf %b "\e[G"; 
 printf %b "[${os1} | ${os2}] "|tr -s "\n" " "|bat -ppfljava --theme zenburn; 
 echo; dott; echo; 
