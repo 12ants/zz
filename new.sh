@@ -4,8 +4,8 @@ shopt -s histappend;
 shopt -s histverify; 
 ####
 export IFS=$' \n\t'; 
-[ -z "$TMUX" ] && tmux || tmux source $HOME/.config/tmux/tmux.conf; 
-[ $TMUX ] && . $HOME/zz/_ps1.sh || return 0;  
+[ "$TMUX" ] && tmux source $HOME/.config/tmux/tmux.conf; 
+[ "$TMUX" ] && . $HOME/zz/_ps1.sh || return 0;  
 export HISTCONTROL="ignoreboth"; export PROMPT_COMMAND="history -a; history -n; "; 
 export EDITOR="micro"; export email='leonel@ik.me'; 
 export BAT_THEME="Coldark-Dark"; export logs="$HOME/logs"; ####
