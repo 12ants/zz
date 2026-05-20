@@ -58,7 +58,6 @@ wlan="$(cat $HOME/logs/wlan.log)"; idn1="${wlan/*./}"; idn="$(($(printf %b "${id
 if echo $HOME|grep -w "termux" -q; then unalias sudo 2>/dev/null; else sudo=sudo; fi; 
 ####
 ####
-ps ao cmd|grep -qe "ntfy.sh"||curl -s ntfy.sh/oioioioi/raw & 
 ####
 
 ####
@@ -205,8 +204,9 @@ for i in $HOME/zz/f/*.sh; do . $i; done;
 ###################
 [ $PREFIX ] && (ps -A|grep -q "sshd"||sshd & disown &>/dev/null); 
 [ $PREFIX ] && (ps -A|grep -q "crond"||crond & disown &>/dev/null); 
-[ $PREFIX ] && (sleep 2; termux-api-start &>/dev/null) & disown; 
-[ $PREFIX ] && (sleep 4; termux-wake-lock &>/dev/null) & disown; 
+# [ $PREFIX ] && (ps -A|grep -q "curl"||curl -s "https://ntfy.sh/oioioioi/raw" & disown &>/dev/null); 
+# [ $PREFIX ] && (sleep 2; termux-api-start &>/dev/null) & disown; 
+# [ $PREFIX ] && (sleep 4; termux-wake-lock &>/dev/null) & disown; 
 ####
 ####
 export IFS=$' \n\t'; 
