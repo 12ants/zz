@@ -4,7 +4,7 @@ shopt -s histappend;
 shopt -s histverify; 
 ####
 export IFS=$' \n\t'; 
-[ -z "$TMUX" ] && tmux && exit;  
+[ -z "$TMUX" ] && tmux || read -p 'any key to continue' -t2 -n1 || exit;  
 [ "$TMUX" ] && tmux source $HOME/.config/tmux/tmux.conf; 
 [ "$TMUX" ] && . $HOME/zz/_ps1.sh || return 0;  
 export HISTCONTROL="ignoreboth"; export PROMPT_COMMAND="history -a; history -n; "; 
