@@ -10,7 +10,7 @@ alias zzpp='cd $HOME/zz; git status; pwd; ls --color=always -pugl; git add ./; g
 ####
 ####
 # alias kk='fmt -g 66|col -xb|bat -pfljava --theme DarkNeon'; 
-alias note='gh gist edit 8096c8b7823e461d170339f63b611645'; 
+# alias note='gh gist edit 8096c8b7823e461d170339f63b611645'; 
 alias zztop='ps -aux --sort="%mem"|tail -n12|bat -ppfljs|fzf'; 
 alias zzlan='~/zz/s/zz.localan.sh'; 
 alias kkkk='col -xb|fmt --split-only --width=$((COLUMNS - 2)) --goal=66 --uniform-spacing --tagged-paragraph|bat -pfljava --theme TwoDark'; 
