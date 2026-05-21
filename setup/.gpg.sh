@@ -1,10 +1,14 @@
 #!/bin/bash
 ## gpg aaaa
-OFS=$' \n\t'; 
-mkdir ~/.safe 2>/dev/null; chmod 775 ~/.safe -R 2>/dev/null; 
+IFS=$' \n\t'; 
+mkdir -pm 775 ~/.config/keys 2>/dev/null; 
+# chmod 775 ~/.safe -R 2>/dev/null; 
 ####
 [ -z "$start" ] && start="${HOME}/zz"; 
 [ -z "$zz" ] && zz="${HOME}/zz"; 
+hash sudo 2>/dev/null && sudo=sudo;
+hash gpg 2>/dev/null || $sudo apt install gnupg -y; 
+gpg --passphrase="" --quick-generate-key $(whoami) rsa1024 2>/dev/null; 
 ####
 gpgs=($(command ls --color=never -1 ${zz}/c/.gpg/*|col)); 
 ####
