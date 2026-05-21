@@ -124,7 +124,7 @@ map <right> :open $f
 map A 
 cmap b :bo
 map b :bo
-map B bboo
+map B :pger
 map bb $batcat -pf $f
 map bg $glow -p $f
 map bq $return 0
@@ -273,8 +273,7 @@ read -rei "$HOME/" "kt";
 printf %b "\e[0m\n -- \e[2m[\e[0m\e[1;96my\e[0m/\e[1;91mn\e[0;2m]\e[0m\e[97m --\n\e[45m"; 
 ln --interactive --symbolic --backup --suffix "$(date +%m%d%H%M%S)" ${fx} -t ${kt}; 
 else 
-printf %b "\e[0mfile to link from: \e[92m\n"; 
-read -rei "$fx" "kk"; 
+printf %b "\e[0mfile to link from: \e[92m\n$fx"; 
 printf "\e[0mto file:\e[92m"; 
 read -rei "$HOME/" "kt"; 
 # printf %b "\n\n\e[A -- \e[2m[\e[0m\e[1;96my\e[0m/\e[1;91mn\e[0;2m] \e[0m\e[97m"; 
@@ -288,8 +287,7 @@ ls $kt; echo; sleep 1;
 
 ####
 cmd pger ${{
-bat $f||cacaview $f||exiftool $f; read -r "x";
-}}
+zz="$(ls $PREFIX/bin|fzf --preview "(apropos {} 2>/dev/null|grep '{}(' 2>/dev/null||type '{}' 2>/dev/null)|fmt|bat -ppfld --theme zenburn" --preview-window 'top,4,border-bottom' --preview-label kk --preview-label-pos top --preview-window cycle --wrap word --info inline --input-label-pos center --input-border top --input-label "--" --bind 'focus:transform-input-label:echo '"\ {n}\ "'')"; eval "$zz $f"; read -n1 kk; }}
 
 cmd dial ${{ 
 unset x a c cmds_lf; declare cmds_lf a; declare i c; 
@@ -578,7 +576,7 @@ set cursorpreviewfmt "\033[1m"
 set cursoractivefmt "\033[4;7m"
 set drawbox false
 set nodrawbox
-set mouse false 
+set mouse true 
 set icons false 
 set noicons
 set shell bash 
