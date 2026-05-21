@@ -134,7 +134,26 @@ map x $printf %b "\e[95m\n--------\n\e[93m$f\e[96m\n--------\n\e[0m"; $f; printf
 cmd bo ${{ 
 ft="$(file -bi $f|cut -f1 -d'/')"; case $ft in \
 text) tmux display-popup -b none -w 100% -h 100% -e f="$f" -e LESS="$LESS" -E 'bat -p $f';; 
-image) tmux display-popup -b none -w 100% -h 100% -e f="$f" -e LESS="$LESS" -E 'w="$(stty size|cut -f2 -d" ")"; for i in $(cat $HOME/zz/c/chafa_symbols.sh|shuf); do clear; chafa -f symbols --symbols $i $f; printf %b "\e[H"; wc="$(mediainfo $f|grep Image -A12 -m1|tail -n+2|tr -s " " "_"|wc --max-line-length)"; mediainfo $f|grep Image -A12 -m1|tail -n+2|tr -s " " "_"|column --table --separator ":" --table-columns-limit 2 --output-separator "" --table-right 2|tr " " "_"|sed -e "s/^/\x1b\[$((w - wc - 12))G/g"|sed -e "s/[_.():]/\x1b[2m&\x1b[m/g"; printf %b "\e[2m\e[?25l\e[H$i"; read kk && [ "$kk" ] && break; done;';; esac; 
+image) tmux display-popup -b none -w 100% -h 100% -e f="$f" -e LESS="$LESS" -E '
+w="$(stty size|cut -f2 -d" ")"; 
+jp2a --colors -i --fill --edge-threshold=.02 $f; 
+printf %b "\e[2m\e[?25l\e[H$i"; 
+wc="$(mediainfo $f|grep Image -A12 -m1|tail -n+2|tr -s " " "_"|wc --max-line-length)"; 
+mediainfo $f|grep Image -A12 -m1|tail -n+2|tr -s " " "_"|column --table --separator ":" --table-columns-limit 2 --output-separator "" --table-right 2|tr " " "_"|sed -e "s/^/\x1b\[$((w - wc - 12))G/g"|sed -e "s/[_.():]/\x1b[2m&\x1b[m/g"; 
+
+read kk; 
+if hash chafa 2>/dev/null; then 
+
+for i in $(cat $HOME/zz/c/chafa_symbols.sh|shuf); do clear; 
+chafa -f symbols --symbols $i $f; printf %b "\e[H"; 
+
+wc="$(mediainfo $f|grep Image -A12 -m1|tail -n+2|tr -s " " "_"|wc --max-line-length)"; 
+mediainfo $f|grep Image -A12 -m1|tail -n+2|tr -s " " "_"|column --table --separator ":" --table-columns-limit 2 --output-separator "" --table-right 2|tr " " "_"|sed -e "s/^/\x1b\[$((w - wc - 12))G/g"|sed -e "s/[_.():]/\x1b[2m&\x1b[m/g"; 
+
+printf %b "\e[2m\e[?25l\e[H$i"; 
+
+read kk && [ "$kk" ] && break; 
+done; fi;';; esac; 
 }}; 
 
 # $[ $TMUX ] && tmux display-popup -w 100% -h 100% -E 'batcat --paging always --decorations never $fb'; [ $TMUX ]; 
