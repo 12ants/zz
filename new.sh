@@ -70,6 +70,8 @@ if echo $HOME|grep -w "termux" -q; then unalias sudo 2>/dev/null; else sudo=sudo
 [ -x $HOME/.config/gemini_api_id.conf ] && . $HOME/.config/gemini_api_id.conf 2>/dev/null; 
 [ -x $HOME/.config/cloudflare_id.conf ] && . $HOME/.config/cloudflare_id.conf 2>/dev/null; 
 ####
+[ -d $HOME/.config/api ] && for i in $HOME/.config/api/*.sh; do . $i 2>/dev/null; done; 
+####
 [ -s $HOME/.config/lesskey ] || ln -s $HOME/zz/c/lesskey $HOME/.config/lesskey; 
 [ -s $HOME/.config/path.sh ] && export PATH=$(cat $HOME/.config/path.sh); 
 ####
