@@ -15,7 +15,7 @@ export BAT_THEME="Coldark-Dark"; export logs="$HOME/logs"; ####
 export tmp="$HOME/tmp"; [ -z "$TMPDIR" ] && export TMPDIR="$HOME/tmp"; 
 export zz="$HOME/zz"; export start="$HOME/zz"; 
 ####
-if [ -d "$HOME/gh/appi" ]; then for i in $HOME/gh/appi/*.sh; do . $i; done; fi; 
+if [ -d "$HOME/gh/appi" ]; then for i in $HOME/gh/appi/api_*.sh; do . $i; done; fi; 
 ####
 export HISTFILESIZE=2222
 export HISTSIZE=2222
