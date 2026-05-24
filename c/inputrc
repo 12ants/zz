@@ -16,6 +16,7 @@ $if mode=emacs
 "\e[1;5C": forward-word
 "\e[1;5D": backward-word
 # shell-backward-word # shell-expand-line # 
+"ö": insert-comment
 "C-1": shell-forward-word
 "\e[5C": forward-word
 "\e[5D": backward-word
@@ -64,6 +65,7 @@ C-y: yank
 "\x1b[1;5A": '\e[q\hihi\n'
 #"\x1b[A": '\e[q\hihi\n'
 "C-ö": forward-word
+####
 
 $endif
 

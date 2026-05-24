@@ -14,17 +14,19 @@ printf %b "\e[H\e[J ";
 
 # unset IFS; 
 # unset appa apap; declare -a appa=($(command ls -p1 $start/install/ap|grep -v "*/")); declare -a apap; 
-$sudo apt install -y openssh-server; 
-$sudo apt install -y micro;  
-$sudo apt install -y cron; 
-$sudo apt install -y cronie; 
-$sudo apt install -y gnupg; 
-$sudo apt install -y gh; 
-$sudo apt install -y git; 
-
-
+# $sudo apt install -y openssh-server; 
+# $sudo apt install -y micro;  
+# $sudo apt install -y cron; 
+# $sudo apt install -y cronie; 
+# $sudo apt install -y gnupg; 
+# $sudo apt install -y gh; 
+# $sudo apt install -y git; 
 ##
-unset appa done; appa=($(ls -1p $HOME/zz/setup/ap|grep -v '/')); for i in ${appa[*]}; do rr="\e[38;5;$((RANDOM%222+22))m"; hash $i && printf %b "\n$i -- installed \n" || $sudo apt install -y $i && done+=("$rr$i"); printf %b "\ec\e[0m\e[96m --\e[0m installed: ${done[*]} \n\n"; done; printf %b "\ec\n\n\e[0m\e[96m --\e[0m installed: \n\e[7m${done[*]}\e[0m\n\n";
+# unset appa done; appa=($(ls -1p $HOME/zz/setup/ap|grep -v '/'|fzf -m -i --cycle --bind 'q:abort' --preview '$sudo apt show {} 2>/dev/null' --preview-window 'right,60%,noborder')); 
+####
+unset appa done; appa=($(ls -1p $HOME/zz/setup/ap|grep -v '/'|fzf -m -i --cycle --preview 'printf %b "\e[1;90m"; $sudo apt show {} 2>/dev/null | sed -e "s/Installed-Size.*/\x1b[4;95m&\x1b[0;190m/" -e "s/Depends/\x1b[4;94m&\x1b[0;1;90m/"' --preview-window "right,$((COLUMNS-28)),noborder" --border 'none' --bind 'q:abort,a:toggle-all' --info 'inline' --header 'kk' --color 'preview-bg:7' --wrap word)); 
+####
+for i in ${appa[*]}; do rr="\e[38;5;$((RANDOM%222+22))m"; hash $i && printf %b "\n$i -- installed \n" || $sudo apt install -y $i && done+=("$rr$i"); printf %b "\ec\e[0m\e[96m --\e[0m installed: ${done[*]} \n\n"; done; printf %b "\ec\n\n\e[0m\e[96m --\e[0m installed: \n\e[7m${done[*]}\e[0m\n\n";
 #$
 
 # printf %b "\ec\e[H${apap[*]}\e[0m -- Installing \n\e[J"; 
