@@ -1,7 +1,7 @@
 #!/bin/bash
 # alaaaaais
-[ -z "$PREFIX" ] && sudo=sudo; 
-c2='\e[96m --\e[0m'; re='\e[0m'; gt=""; 
+# [ -z "$PREFIX" ] && sudo=sudo; 
+# c2='\e[96m --\e[0m'; re='\e[0m'; gt=""; 
 ####
 ####
 alias untar='tar -xvf'; 
@@ -95,13 +95,13 @@ alias kat='bat -pfld|less';
 alias iiii='$EDITOR $HOME/.inputrc; echo gg; exec bash; '
 # alias speed='speedtest --bytes --no-upload 2>/dev/null || speedtest-go --unit=decimal-bits --no-upload || speedtest-cli 2>/dev/null; '
 ########
-alias zz.setup_nvm='. $start/config/nvm.sh'
-alias zz.nvm_init='export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" \
-|| printf %s "${XDG_CONFIG_HOME}/nvm")"; [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"; ';
-alias logs='cd $HOME/logs'; 
-alias zz.nvm_init2='[ -s "$NVM_DIR/nvm.sh" ]&& . "$NVM_DIR/nvm.sh";
-[ -s "$NVM_DIR/bash_completion" ]&& . "$NVM_DIR/bash_completion"'
-NVM_DIR="$HOME/.nvm"; 
+# alias zz.setup_nvm='. $start/config/nvm.sh'
+# alias zz.nvm_init='export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" \
+# || printf %s "${XDG_CONFIG_HOME}/nvm")"; [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"; ';
+# alias logs='cd $HOME/logs'; 
+# alias zz.nvm_init2='[ -s "$NVM_DIR/nvm.sh" ]&& . "$NVM_DIR/nvm.sh";
+# [ -s "$NVM_DIR/bash_completion" ]&& . "$NVM_DIR/bash_completion"'
+# NVM_DIR="$HOME/.nvm"; 
 #######
 
 # alias dfree2='printf %b "\e[0;2m$(df -h|head -n1|tr -s " " "\t"|batcat --theme=Nord -ppflc++; )\e[0;1m\n"; df="/dev"; [ $PREFIX ]&& df="/dev/fuse"; df -h|tr -s " " "\t"|grep -v "100%"|grep -v "tmpfs"|grep -v "none"|grep -v "run"|grep -v "efivars"|grep -v "boot"|grep -v loop|grep -e "$df"|batcat --theme=Dracula -ppflc++';
