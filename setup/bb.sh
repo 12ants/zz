@@ -4,6 +4,7 @@ IFS=$' \n\t';
 hash sudo 2>/dev/null && sudo=sudo && export sudo="sudo"; 
 ####
 esapps=(\
+"fzf" \
 "git" \
 "gh" \
 "gnupg" \
