@@ -2,10 +2,11 @@
 #### appa apt getter better 
 unalias appa 2>/dev/null; 
 ####
+appa.get() { $sudo apt update &>/dev/null; $sudo apt list --verbose 2>/dev/null|tail -n+2|tr -s "\t " " "|sed -e "s/\/.*\[installed\]/\ \x1b[2m\ [\x1b[0m\x1b[1m\x1b[92mi\x1b[0m\x1b[2m]\ \x1b[92m/g" -e "s/.*\[i\]/\x1b[2m&\ /g" -e "1~3s/\/.*/ \x1b[96m>\x1b[0m\x1b[37m/" -e "s/^$/____/g"|tr -d "\n\t"|sed -e "s/____/\x1b[0m\n/g" -e "/^lib*/d"|sort > $HOME/logs/appa.log; apha="$(($(($(date +%s) - $(stat -tc %Z $HOME/logs/appa.log)))/3600))"; }; 
+####
 appa() { IFS=$' \n\t'; c2='\x1b[0m\x1b[96m --\x1b[0m'; 
 ####
 ####
-appa.get() { $sudo apt update &>/dev/null; $sudo apt list --verbose 2>/dev/null|tail -n+2|tr -s "\t " " "|sed -e "s/\/.*\[installed\]/\ \x1b[2m\ [\x1b[0m\x1b[1m\x1b[92mi\x1b[0m\x1b[2m]\ \x1b[92m/g" -e "s/.*\[i\]/\x1b[2m&\ /g" -e "1~3s/\/.*/ \x1b[96m>\x1b[0m\x1b[37m/" -e "s/^$/____/g"|tr -d "\n\t"|sed -e "s/____/\x1b[0m\n/g" -e "/^lib*/d"|sort > $HOME/logs/appa.log; apha="$(($(($(date +%s) - $(stat -tc %Z $HOME/logs/appa.log)))/3600))"; }; 
 ####
 ####
 [ -e $HOME/logs/appa.log ] || (printf %b "\n\n\x1b[A$c2 getting list \x1b[2m...\x1b[0m \n"; appa.get); 
@@ -61,7 +62,13 @@ for op in ${!appa[*]}; do printf %b "\x1b[0;2m--\x1b[0m\x1b[38;5;${cc[op]}m ${ap
 printf %b "\x1b[2m --\x1b[0m\n";
 printf %b "\x1b[96m-\x1b[222b\x1b[0m\n\n\n\n\n\x1b[4A"; 
 printf %b "\n \x1b[96m::\x1b[0m \x1b[2m[\x1b[0mI\x1b[2m]\x1b[0mnstall\x1b[96m :: \x1b[0;2m[\x1b[0mR\x1b[2m]\x1b[0memove \x1b[96m:: \x1b[0;2m[\x1b[0mQ\x1b[2m]\x1b[0muit \x1b[96m:: \x1b[92m" && read -rsn1 "nn" || \
-printf %b "ok\n\n"; 
+printf %b "ok\n"; 
+printf %b "ok\n"; 
+printf %b "ok\n"; 
+printf %b "ok\n"; 
+printf %b "ok\n"; 
+printf %b "ok\n"; 
+printf %b "ok\n"; 
 ####
 ####
 case $nn in \
@@ -73,16 +80,19 @@ Q|q) history -s "$(printf %b "${appa[*]}")"; printf %b "\n${appa[*]}\n"; return 
 esac; 
 ####
 ####
-history -s "$(printf %b "$sudo apt $instrem -y ${appa[*]}")"; 
-history -a; history -n; 
+history -s "$(printf %b "$sudo apt $instrem -y ${appa[*]}")"; history -a; history -n; 
 ####
-$sudo apt $instrem -y ${appa[*]}; 
+$sudo apt upgrade -y 2>/dev/null; 
+####
+$sudo apt $instrem ${appa[*]}; 
 ####
 ####
 printf %b "\n $c2 update & autoremove? [Y/n]? "; 
 read -sn1 "nasd"; [ -z "$nasd" ] && \
-$sudo apt update 2>/dev/null; 
+appa.get; 
+# $sudo apt update 2>/dev/null; 
 $sudo apt -y autoremove; 
+####
 printf %b "\n\n $c2 ${instrem}ed ${appa[*]} \n\n"; 
 ################################################
 }; 
