@@ -186,7 +186,10 @@ dott; echo;
 dott; echo; 
 ####
 #### GIT ZZ
-cd $HOME/zz; git status --short|grep -q "" && (dott; printf %b "\e[G\e[91mzz\e[0;2m -\e[0m"; git status --short|tr -s "\n " "| "|sed -e "s/|\ /|/g" -e "s/|/\ &\ /g" -e "s/...$/\ \n/g"|bat -ppflzig --theme DarkNeon; dott; echo; ); cd $OLDPWD;
+cd $HOME/zz; git status --short|grep -q "" && (dott; printf %b "\e[G\e[91mzz\e[0;2m -\e[0m"; git status --short|tr -s "\n " "| "|sed -e "s/|\ /|/g" -e "s/|/\ &\ /g" -e "s/...$/\ \n/g"|bat -ppflzig --theme DarkNeon; dott; echo; ); cd $OLDPWD; 
+####
+ps -Ao comm,%mem,%cpu --sort %mem|tail -n5|column  --table --output-separator " | "|bat -ppfljs --theme Solarized\ \(dark\); 
+dott; echo;
 ####
 ####
 ####
