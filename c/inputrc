@@ -67,6 +67,20 @@ C-y: yank
 "C-ö": forward-word
 ####
 
+# Source - https://superuser.com/a/1504199
+# Posted by Zbyněk Winkler
+# Retrieved 2026-05-25, License - CC BY-SA 4.0
+
+set show-all-if-ambiguous on
+set menu-complete-display-prefix on
+TAB: menu-complete
+set colored-completion-prefix on
+set colored-stats on
+
+####
+
+
+
 $endif
 
 # C-3: insert-comment
