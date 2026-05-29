@@ -192,12 +192,13 @@ ps -Ao comm,%mem,%cpu --sort %mem|tail -n5|column  --table --output-separator " 
 dott; echo;
 ####
 ####
+if [ -d "$HOME/gh/appi" ]; then for i in $HOME/gh/appi/api_*.sh; do . $i; done; fi; 
 ####
 ####
 printf %b "\x1b[1 q"; ########### cursor = block
 printf %b "\x1b]12;#ff44bb"; #### cursor = pink
 ####
-export IFS=$' \n\t'; 
+export IFS=$'\n\t '; 
 ####
 }; 
 ###################
@@ -212,14 +213,14 @@ for i in $HOME/zz/f/*.sh; do . $i; done;
 . $HOME/.config/tmux/tmuxcompletions.sh; 
 ###################
 ###################
-[ $PREFIX ] && (ps -A|grep -q "sshd"||sshd & disown &>/dev/null); 
-[ $PREFIX ] && (ps -A|grep -q "crond"||crond & disown &>/dev/null); 
+[ "$PREFIX" ] && (ps -A|grep -q "sshd"||sshd & disown &>/dev/null); 
+[ "$PREFIX" ] && (ps -A|grep -q "crond"||crond & disown &>/dev/null); 
 # [ $PREFIX ] && (ps -A|grep -q "curl"||curl -s "https://ntfy.sh/oioioioi/raw" & disown &>/dev/null); 
 # [ $PREFIX ] && (sleep 2; termux-api-start &>/dev/null) & disown; 
 # [ $PREFIX ] && (sleep 4; termux-wake-lock &>/dev/null) & disown; 
 ####
 ####
-export IFS=$' \n\t'; 
+export IFS=$'\n\t '; 
 ####
 ####
 
