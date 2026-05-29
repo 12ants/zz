@@ -14,6 +14,7 @@ alias zzpp='cd $HOME/zz; git status; pwd; ls --color=always -pugl; git add ./; g
 alias zztop='ps -aux --sort="%mem"|tail -n12|bat -ppfljs|fzf'; 
 alias zzlan='~/zz/s/zz.localan.sh'; 
 alias kkkk='col -xb|fmt --split-only --width=$((COLUMNS - 2)) --goal=66 --uniform-spacing --tagged-paragraph|bat -pfljava --theme TwoDark'; 
+alias dev='npm run dev'; 
 alias rep="reset -Q; IFS=$'\n\t '; . $PREFIX/share/bash-completion/bash_completion"; 
 alias cccc='crontab -e'; 
 alias zz.find.phone='ssh -p 8022 aa@192.168.0.19 "mpv $HOME/zz/m/money.mp3"'
@@ -182,3 +183,4 @@ nam() { kk=$(for i in $(seq $(stty size|cut -f2 -d" ")); do printf %b "-"; done)
 
 
 alias tmux_new_server='$sudo rm -rf $sudo $PREFIX/tmp/tmux.* 2>/dev/new || $sudo rm rf $PREFIX/var/run/tmux.* 2>/dev/null; tmux'; 
+alias deply="npm run deploy" 
