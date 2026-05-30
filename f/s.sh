@@ -1,5 +1,5 @@
 s() { 
-local IFS=$'\n\t '; u="aa"; s=($u@ants.ftp.sh $u@192.168.0.14 $u@192.168.0.34 $u@192.168.0.19 $u@192.168.0.20); 
+local IFS=$'\n\t '; u="aa"; s=($u@192.168.0.14 $u@ants.ftp.sh $u@192.168.0.34 $u@192.168.0.19 $u@192.168.0.20); 
 p=(22 8022); 
 
 sl="$(printf %b "${s[*]}" | wc -l)"; sh="$(printf %b "${s[*]}" | wc --max-line-length)";
