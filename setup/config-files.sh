@@ -6,11 +6,11 @@ c2='\e[0m\e[36m --\e[0m'; qq="160"; mkdir ~/.config 2>/dev/null;
 ####
 p1() { p2=" ${@}"; for i in $(seq ${#p2}); do sleep ${sl-.05}; printf %b "${p2:${i}:1}"; done; }; 
 ####
-printf %b "\n$c2 "; . $start/setup/.gpg.sh; 
-printf %b "\n$c2 "; 
-p1 "installing config files ..."; echo; 
+printf %b "\n$c2 "; p1 "installing config files ..."; echo; 
+printf %b "\n$c2 "; . $start/setup/.gpg.sh;  
 ##
-hash bat &>/dev/null || $sudo apt install -y bat &>/dev/null; hash batcat &>/dev/null || $sudo apt install -y batcat &>/dev/null; 
+hash bat &>/dev/null || $sudo apt install -y bat &>/dev/null; 
+hash batcat &>/dev/null || $sudo apt install -y batcat &>/dev/null; 
 ##
 $sudo ln -s ${PREFIX}/bin/bat ${PREFIX}/bin/batcat &>/dev/null; 
 $sudo ln -s ${PREFIX}/bin/batcat ${PREFIX}/bin/bat &>/dev/null; 
@@ -22,8 +22,9 @@ confolders=($(command ls -1p $start/c|grep "/"));
 for q in ${confolders[*]}; do 
 mkdir -p $HOME/.config/$q 2>/dev/null; 
 mv $HOME/.config/$q/* -t $HOME/tmp -b --suffix="_bu__$(date +%y%m%d_%H%M%S)" 2>/dev/null; 
-ln -s $start/c/$q/* -t $HOME/.config/$q/ --backup --suffix="_bu__$(date +%y%m%d_%H%M%S)"; 
-sleep .05; printf %b "\n\e[0m"; echo "updated"; printf %b "\e[38;5;$((qq++))m $q"; 
+cp $start/c/$q/* -t $HOME/.config/$q/ -r --backup --suffix="_bu__$(date +%y%m%d_%H%M%S)"; 
+# sleep .05; 
+printf %b "\n\e[0m"; echo "updated"; printf %b "\e[38;5;$((qq++))m $q"; 
 done; 
 [ $PREFIX ] && linksf="$HOME/.links" || linksf="$HOME/.links2"; 
 mkdir $linksf 2>/dev/null; 
