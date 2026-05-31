@@ -17,7 +17,7 @@ printf %b "\e[34G getting cal ";
 [ -s "$HOME/logs/calendar.json" ]||12getcal; 
 ####
 calcomp; dots; printf %b "\e[G\e[2m${epmin} mins ago \e[0m"; 
-[[ "$epmin" -gt "88" ]] && 12getcal; 
+[[ "$epmin" -gt "888" ]] && 12getcal; 
 for i in {1..28}; do printf %b "·"; done; 
 printf %b "\e[24G"; printf %b " $(date +%a\ %b\ %d\ %Y\ \|\ %T) "|bat -ppfljava --theme DarkNeon; echo; calcomp; 
 ####
