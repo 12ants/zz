@@ -3,7 +3,7 @@ suma() {
 [ -z "$GEMINI_API_KEY" ] && printf %b "\nget GEMINI_API_KEY\n" && return 0; 
 mkdir -p ${HOME}/logs/ai 2>/dev/null; 
 local IFS=$' \n\t'; 
-inp="$*"; [ -z "$in" ]&& inp="$(ls -1|fzf --preview-window 'right,50%' --preview 'ls -sh {}; echo --; bat -ppf {}' --header=' [ choose text to summarize ] ')" || return 0;  
+inp="$*"; [ -z "$inp" ]&& inp="$(ls -1|fzf --preview-window 'right,50%' --preview 'ls -sh {}; echo --; bat -ppf {}' --header=' [ choose text to summarize ] ')" || return 0;  
 time="$(date +%y%m%d_%H%M%S)"; 
 out="${HOME}/logs/ai/ai_answer_${time}.md"; 
 touch "${out}"; 
