@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #!/bin/bash
 #### getg g
 calcomp() { printf -v "epoch" %b "$(($(date +%s) / 60))"; printf -v "epcal" %b "$(($(tail -c10 $HOME/logs/calendar.json) / 60))" 2>/dev/null; printf -v "epmin" %b "$((epoch - epcal))"; }; 
@@ -17,3 +18,8 @@ cat $HOME/logs/calendar.json|grep -e "EPOCH" --quiet || 12getcal;
 
 
 for i in {1..28}; do printf %b "·"; done; 
+=======
+#!/usr/bin/env bash
+## get calendar
+(curl -sL "https://script.google.com/macros/s/AKfycbye8O0u3we9g5Xt3HilbKzLdjlC94OwSj7QPprmzc0pWI5dZ_ORE5YSaFmlyCJ-JqBQ/exec" && printf %b "\nEPOCH_$(date +%s)") > $HOME/logs/calendar.json; 
+>>>>>>> 00cf249 (_Google_Mon Jun  1 04:19:07 CEST 2026)
