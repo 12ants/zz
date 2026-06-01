@@ -220,7 +220,7 @@ for i in $HOME/zz/f/*.sh; do . $i; done;
 # [ $PREFIX ] && (sleep 4; termux-wake-lock &>/dev/null) & disown; 
 ####
 ####
-export IFS=$'\n\t '; 
+export IFS=$' \n\t'; 
 ####
 ####
 
