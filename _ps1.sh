@@ -47,8 +47,10 @@ printf %b "\e[38;5;$((hh + 22))m${hh:1:2}$re:\e[38;5;$((mm + 22))m${mm:1:2}$re:\
 # _etime() { printf %b "\e[38;5;${EPOCHSECONDS:8:2}m${EPOCHSECONDS:6:4}\e[0m";  }; 
 ################
 _gits() { [ -e $PWD/.git ] && ggii="$(git status --short 2>/dev/null|grep "" --quiet && printf %b "41"||printf %b "44"; )" && printf %b "\e[0m\e[${ggii}m git \e[0;2m"; }; 
+####
+####
 ee() { [ $? = 130 ] && echo gg; }; 
-
+####
 _gitsu() { [ -s "$HOME/logs/gh_log.log" ] && printf %b "[\e[92m$(cat $HOME/logs/gh_log.log)\e[0;2m]"; }; 
 wip() { [ -s "$HOME/logs/idc.log" ] && printf %b "[\e[96m$(cat $HOME/logs/idc.log|cut -f1 -d" ")$\e[0;2m]"; }; 
 cc1="$(cat $HOME/logs/idc.log|cut -f1 -d" ")"; 
@@ -67,9 +69,13 @@ cc2="$(cat $HOME/logs/idc.log|cut -f3 -d" ")";
 # ['$re'$(_etime)'$re']\
 # ['$re${w[${wlan/*./}]}'\e[3${c[idn]:13:1}m\e[48;5;${c[idn]:0:4}${model:0:12}'$re']\
 # ['$re'\e[38;5;${cc1}m${wlan}'$re']\
+####
+####
+# $(_gits||printf "")\
+####
+####
 ((UID == 0)) && id='\e[1;101;97;5mROOT\e[0m'||id='\e[96m\u\e[0m'
 PS1='\e[0m\e[2m[\e[0;1;38;5;$((2 + $?))m$?'$re']\
-$(_gits||printf "")\
 ['$re'$(_dtime 2>/dev/null)'$re']\
 '$re'$(_bat)\
 '$re'$(_gitsu)\
