@@ -49,7 +49,7 @@ alias bb='if [ "$PREFIX" ]; then \
 tmux display-popup -E -w 100% -h 100% -b none "htop"; else \
 tmux display-popup -E -w 100% -h 100% -b none "sudo btop"; fi '
 alias qb='ssh aa@ants.ftp.sh "qbittorrent-nox -d" && xdg-open https://qb.aeniks.com'; 
-alias l='lf -last-dir-path $HOME/logs/ll.log; cd $(cat $HOME/logs/ll.log); '
+alias l='lf -last-dir-path $HOME/logs/ll.log; cd $(cat $HOME/logs/ll.log) '
 alias jacketts='/home/aa/gh/jackett/jackett &'
 #alias uu="tmux split-window -l 44% -e sudo='$sudo' 'hash nala||$sudo apt install nala -y &>/dev/null; $sudo nala update; $sudo nala upgrade -y; '"; 
 alias upup='$sudo apt update; $sudo apt upgrade -y'; 
