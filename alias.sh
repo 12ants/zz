@@ -6,6 +6,7 @@
 ####
 alias untar='tar -xvf'; 
 alias zz='cd $HOME/zz; pwd; ls --color=always -pugl'; 
+alias appi='cd $HOME/gh/appi; pwd; ls --color=always -pugl'; 
 alias zzpp='cd $HOME/zz; git status; pwd; ls --color=always -pugl; git add ./; git commit -a -m "${USER}_${modo//\ /}_$(date)" -v; git pull --verbose; git push --verbose; ls --color=always -trAp --group-directories-first; cd $OLDPWD'; 
 ####
 ####
