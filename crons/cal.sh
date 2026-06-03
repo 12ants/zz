@@ -2,7 +2,7 @@
 #### getg g
 calcomp() { printf -v "epoch" %b "$(($(date +%s) / 60))"; printf -v "epcal" %b "$(($(tail -c10 $HOME/logs/calendar.json) / 60))" 2>/dev/null; printf -v "epmin" %b "$((epoch - epcal))"; }; 
 ####
-getcal() { (curl -sL "https://script.google.com/macros/s/AKfycbwSft4XmNq-lCW38uuBjihWM8pKMGrm-1uDmwusW7uksz0uN3WIEobzOt-0NQUgDOASqQ/exec" && printf %b "\nEPOCH_"; date +%s|tr -d "\n") > $HOME/logs/calendar.json &&echo oo; };
+getcal() { (curl -sL "https://script.google.com/macros/s/AKfycbwSft4XmNq-lCW38uuBjihWM8pKMGrm-1uDmwusW7uksz0uN3WIEobzOt-0NQUgDOASqQ/exec" && printf %b "\nEPOCH_"; date +%s|tr -d "\n") > $HOME/logs/calendar.json; }; 
 ####
 ####
 calstyle() { 
@@ -14,9 +14,9 @@ calstyle() {
 ####
 ####
 [ -s "$HOME/logs/calendar.json" ] || getcal; 
-cat $HOME/logs/calendar.json|grep -e "EPOCH" --quiet || getcal; 
+cat $HOME/logs/calendar.json | grep -qe "EPOCH" || getcal; 
 ####
-calcomp; [[ "$epmin" -gt "88" ]] && getcal; calcomp; 
+calcomp; [[ "$epmin" -gt "28" ]] && getcal; calcomp; 
 ####
 #### get calendar
 ####
