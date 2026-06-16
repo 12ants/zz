@@ -22,7 +22,7 @@ confolders=($(command ls -1p $start/c|grep "/"));
 for q in ${confolders[*]}; do 
 mkdir -p $HOME/.config/$q 2>/dev/null; 
 mv $HOME/.config/$q/* -t $HOME/tmp -b --suffix="_bu__$(date +%y%m%d_%H%M%S)" 2>/dev/null; 
-cp $start/c/$q/* -t $HOME/.config/$q/ -r --backup --suffix="_bu__$(date +%y%m%d_%H%M%S)"; 
+ln -s $start/c/$q/* -t $HOME/.config/$q/ -r --backup --suffix="_bu__$(date +%y%m%d_%H%M%S)"; 
 # sleep .05; 
 printf %b "\n\e[0m"; echo "updated"; printf %b "\e[38;5;$((qq++))m $q"; 
 done; 

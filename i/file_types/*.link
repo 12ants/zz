@@ -26,3 +26,9 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 printf "\n\n  system starting... [\e[2menter\e[0m] to start on any other key for shell"; read -n1 -t4 -rep " " "qq"; if [ "$qq" = "" ]; then echo OK; fi; startx; 
+*.link
+
+## gg 
+
+20770
+
