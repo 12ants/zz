@@ -4,11 +4,9 @@ shopt -s histappend;
 shopt -s histverify; 
 ####
 export IFS=$' \n\t'; 
-[ -z "$TMUX" ] && tmux; 
-# [ -z "$TMUX" ] || read -p 'any key to continue' -t2 -n1 || exit 0;  
-# [ "$TMUX" ] || read -p 'any key to continue' -t2 -n1 || exit 0; 
-[ "$TMUX" ] && tmux source $HOME/.config/tmux/tmux.conf; 
-[ "$TMUX" ] && . $HOME/zz/_ps1.sh || return 0;  
+[ -z "$TMUX" ] && command -v tmux >/dev/null 2>&1 && tmux 2>/dev/null; 
+[ "$TMUX" ] && tmux source $HOME/.config/tmux/tmux.conf 2>/dev/null; 
+[ "$TMUX" ] && . $HOME/zz/_ps1.sh; 
 export HISTCONTROL="ignoreboth"; export PROMPT_COMMAND="history -a; history -n; "; 
 export EDITOR="micro"; export email='leonel@ik.me'; 
 export BAT_THEME="Coldark-Dark"; export logs="$HOME/logs"; ####
