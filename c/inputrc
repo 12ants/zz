@@ -62,7 +62,7 @@ C-y: yank
 "⁰": '\e[6~'
 "\eq": '\e[q'
 "⁹": '\e[612_inputrc\n'
-"\x1b[1;5A": '\e[q\hihi\n'
+"\x1b[1;5A": '\e[qtmux copy-mode\n\x1b\x1b\x1b\e[5~'
 #"\x1b[A": '\e[q\hihi\n'
 "C-ö": forward-word
 ####
