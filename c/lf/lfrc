@@ -111,9 +111,9 @@ map <+> drawbox!
 map T hora
 map t tag-toggle
 map <c-s> sese
-map fs :ffzz 
-map ff :search 
-map fz :fzf_search 
+# map fs :ffzz 
+map f :search 
+# map fz :fzf_search 
 map D :set dironly! 
 map R !read -ep ' ' -i '192.168.0.' 'ipa' && read -ep ' port: ' -i '22' 'pp' && read -ep ' user: ' -i 'aa' 'uu' && read -ep 'folder: ' -i './' ipf; echo; rsync -avPe "ssh -p $pp" $fx $uu@$ipa:$ipf; echo
 map <space> :toggle; down
@@ -154,14 +154,34 @@ esac;
 ####
 ####
 cmd bo ${{ 
-ft="$(file -b $f|cut -f1 -d'/')"; 
-#case $ft in \
+##
+ft="$(file -b $f)"; 
+####
+# case in "${ft}"; do 
+# text) ;; 
+# img) ;;
+# audio) ;; 
+# *) tmux display-popup -b none -w 22% -h 22% -e f="$f" printf %b "";; 
+# esac; 
+##
+## TEXT-FILE 
 if printf %b "$ft"|grep -qe "text"; then tmux display-popup -b none -w 100% -h 100% -e f="$f" -e LESS="$LESS" -E 'bash -c "bat --paging always -p $f"; ';
-else
-tmux display-popup -b none -w 100% -h 100% -e f="$f" -e LESS="$LESS" -E 'jp2a -c -z --fill --color-depth=24 ${f}; w="$(stty size|cut -f2 -d" ")"; printf %b "\e[2m\e[?25l\e[H$i"; wc="$(mediainfo $f|grep Image -A12 -m1|tail -n+2|tr -s " " "_"|wc --max-line-length)"; mediainfo $f|grep Image -A12 -m1|tail -n+2|tr -s " " "_"|column --table --separator ":" --table-columns-limit 2 --output-separator "" --table-right 2|tr " " "_"|sed -e "s/^/\x1b\[$((w - wc - 12))G/g"|sed -e "s/[_.():]/\x1b[2m&\x1b[m/g"; read kk; if hash chafa 2>/dev/null; then for i in $(cat $HOME/zz/c/chafa_symbols.sh|shuf); do clear; chafa -f symbols --symbols $i $f; printf %b "\e[H"; wc="$(mediainfo $f|grep Image -A12 -m1|tail -n+2|tr -s " " "_"|wc --max-line-length)"; 
-mediainfo $f|grep Image -A12 -m1|tail -n+2|tr -s " " "_"|column --table --separator ":" --table-columns-limit 2 --output-separator "" --table-right 2|tr " " "_"|sed -e "s/^/\x1b\[$((w - wc - 12))G/g"|sed -e "s/[_.():]/\x1b[2m&\x1b[m/g"; printf %b "\e[2m\e[?25l\e[H$i"; bash -c "read -en1 -p __q q; if [ ${q} = q ]; then echo qqqq read -en1 -p o__o q; else exit && return 1 && exit 0; fi; "||return 2; 
-done||return 6; fi;'; fi; 
+##
+elif printf %b "$ft"|grep -qe "image"; then 
+tmux display-popup -b none -w 100% -h 100% -e f="$f" -e LESS="$LESS" -E 'jp2a -c -z --fill --color-depth=24 ${f}; w="$(stty size|cut -f2 -d" ")"; printf %b "\e[2m\e[?25l\e[H$i"; wc="$(mediainfo $f|grep Image -A12 -m1|tail -n+2|tr -s " " "_"|wc --max-line-length)"; mediainfo $f|grep Image -A12 -m1|tail -n+2|tr -s " " "_"|column --table --separator ":" --table-columns-limit 2 --output-separator "" --table-right 2|tr " " "_"|sed -e "s/^/\x1b\[$((w - wc - 12))G/g"|sed -e "s/[_.():]/\x1b[2m&\x1b[m/g"; 
+
+read -en 1 kk; [ "${kk}" = q ] && exit; 
+
+if hash chafa 2>/dev/null; then for i in $(cat $HOME/zz/c/chafa_symbols.sh|shuf); do clear; chafa -f symbols --symbols $i $f; printf %b "\e[H"; wc="$(mediainfo $f|grep Image -A12 -m1|tail -n+2|tr -s " " "_"|wc --max-line-length)"; 
+mediainfo $f|grep Image -A12 -m1|tail -n+2|tr -s " " "_"|column --table --separator ":" --table-columns-limit 2 --output-separator "" --table-right 2|tr " " "_"|sed -e "s/^/\x1b\[$((w - wc - 12))G/g"|sed -e "s/[_.():]/\x1b[2m&\x1b[m/g"; 
+
+printf %b "\e[2m\e[?25l\e[H$i"; 
+read -en 1 kk; [ "${kk}" = q ] && exit; 
+
+# bash -c "read -en1 -p __q q; [ ${q} = q ] && exit"; 
+done||exit; fi;'; fi; 
 }}; 
+## IMG
 
 # $[ $TMUX ] && tmux display-popup -w 100% -h 100% -E 'batcat --paging always --decorations never $fb'; [ $TMUX ]; 
 
@@ -169,6 +189,10 @@ cmd bboo ${{
 IFS=$'\n\t '; popo=(chafa bat micro xgd-open); po=($(printf %b "${popo[*]}"|fzf --tmux -h 88% -w 88% --no-preview -i --cycle --bind 'q:abort' --border 'top')); 
 case $po in chafa) pp="$po -f symbols $f"; pv="printf %b '\e[4A'$f'\n'; mediainfo $f|tr -d ' '|grep -E -m4 'Width|Height|File'|bat -ppfljava";; bat) pp="$po -p";; *) pp="$po";; esac; [ $TMUX ]&& tmux display-popup -E -w "100%" -h "100%" -b none -e pp="$pp" -e pv="$pv" 'bash -c "${pp} $f; ${pv}; read -n1 kk"'||${po}; 
 }} 
+
+
+
+
 cmd chaff ${{ tmux display-popup -w 100% -h 100% -E -b none -e fo="$f" 'bash -c "mediainfo $fo|grep -E '"'Width|Height|File\ size|Complete|depth'"'|tr -s '"' '"' '"' '"'|column --table --separator :|bat -ppfljava --theme Nord; chafa -f symbols --scale max $fo; read -n1 aa"'; 
 }} 
 # cmd conv2stl ${{ }}
