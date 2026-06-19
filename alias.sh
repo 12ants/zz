@@ -15,7 +15,8 @@ alias zzpp='cd $HOME/zz; git status; pwd; ls --color=always -pugl; git add ./; g
 alias zztop='ps -aux --sort="%mem"|tail -n12|bat -ppfljs|fzf'; 
 alias zzlan='~/zz/s/zz.localan.sh'; 
 alias kkkk='col -xb|fmt --split-only --width=$((COLUMNS - 2)) --goal=66 --uniform-spacing --tagged-paragraph|bat -pfljava --theme TwoDark'; 
-alias dev='npm run dev'; 
+alias dev='npx vite --host --port 7777'; 
+# alias dev='npm run dev'; 
 alias rep="reset -Q; IFS=$'\n\t '; . $PREFIX/share/bash-completion/bash_completion"; 
 alias cccc='crontab -e'; 
 alias zz.find.phone='ssh -p 8022 aa@192.168.0.19 "mpv $HOME/zz/m/money.mp3"'
