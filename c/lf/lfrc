@@ -295,25 +295,37 @@ printf "\e[35;5m\e[$((lf_width/2-2))G >_<\n\e[25m\e[0m";
 
 
 cmd lenk ${{ 
-echo; 
-unset kk kt 2>/dev/null; 
-printf %b "\e[0m__\n\n\n\n\n\n\e[6A"; 
-if [ $(echo $fx|wc -w) -gt 1 ]; then 
-printf %b "\e[0mto folder: \e[92m\n"; 
-read -rei "$HOME/" "kt"; 
-printf %b "\e[0m\n -- \e[2m[\e[0m\e[1;96my\e[0m/\e[1;91mn\e[0;2m]\e[0m\e[97m --\n\e[45m"; 
-ln --interactive --symbolic --backup --suffix "$(date +%m%d%H%M%S)" ${fx} -t ${kt}; 
-else 
-printf %b "\e[0mfile to link from: \e[92m\n$fx"; 
-printf "\e[0mto file:\e[92m"; 
-read -rei "$HOME/" "kt"; 
-# printf %b "\n\n\e[A -- \e[2m[\e[0m\e[1;96my\e[0m/\e[1;91mn\e[0;2m] \e[0m\e[97m"; 
-ln --interactive --symbolic --backup --suffix "$(date +%m%d%H%M%S)" "${kk}" "${kt}"; 
-fi; 
-printf %b "\e[0m__\n\n\n\n\n\n\e[5A"; 
-ls $kt; echo; sleep 1; 
+printf %b "\n\e[96m-----\e[0m\nfrom\e[2m:\e[0m "; 
+ffxx="$(printf %b "${fx} "|tr -s "\n" " ")"; 
+printf %b "${ffxx} \n\e[96m----\e[0m\n\n\n\n\n\e[4Ato\e[2m:\e[0m "; 
+######
+folder=$(dirname "$f"); 
+####
+read -rei "$folder/" "fxto"; 
+###
+IFS=$' '; 
+ln -s ${ffxx} ${fxto}; 
+####
+read -n1 -p "${ffxx} - ${fxto}" kk; 
 }} 
 
+# echo; 
+# unset kk kt 2>/dev/null; 
+# printf %b "\e[0m__\n\n\n\n\n\n\e[6A"; 
+# if [ $(echo $fx|wc -w) -gt 1 ]; then 
+# printf %b "\e[0mto folder: \e[92m\n"; 
+# read -rei "$HOME/" "kt"; 
+# printf %b "\e[0m\n -- \e[2m[\e[0m\e[1;96my\e[0m/\e[1;91mn\e[0;2m]\e[0m\e[97m --\n\e[45m"; 
+# ln --interactive --symbolic --backup --suffix "$(date +%m%d%H%M%S)" ${fx} -t ${kt}; 
+# else 
+# printf %b "\e[0mfile to link from: \e[92m\n$fx"; 
+# printf "\e[0mto file:\e[92m"; 
+# read -rei "$HOME/" "kt"; 
+# # printf %b "\n\n\e[A -- \e[2m[\e[0m\e[1;96my\e[0m/\e[1;91mn\e[0;2m] \e[0m\e[97m"; 
+# ln --interactive --symbolic --backup --suffix "$(date +%m%d%H%M%S)" "${kk}" "${kt}"; 
+# fi; 
+# printf %b "\e[0m__\n\n\n\n\n\n\e[5A"; 
+# ls $kt; echo; sleep 1; 
 
 
 ####
