@@ -3,7 +3,7 @@
 ################### 12ants.github.io
 ################### 
 ################### 
-mount_all { 
+mount_all () { 
 ################### 
 IFS=$'\n\t\ '; 
 ################### 
@@ -24,4 +24,6 @@ printf %b "${d_all[*]}"|grep --color=always "${d_mnt[*]}" -C9 || printf %b "${d_
 printf %b "\n\n\n\n\e[4Amount all unmounted? [\e[1mY\e[m/n] "; 
 read -sn1 "y"; [ -z $y ] && y=y; 
 if [ "$y" = y ]; then 
-for i in ${d_unm[*]}; do $sudo mount ${i} ${i/*\///media/} 2>/dev/null && printf %b "[$i] mounted @ ${i/*\///media/}\n"; done; printf %b "done"; else printf %b "ok"; fi; echo; }; 
+for i in ${d_unm[*]}; do $sudo mount ${i} ${i/*\///media/} 2>/dev/null && printf %b "[$i] mounted @ ${i/*\///media/}\n"; done; printf %b "done"; else printf %b "ok"; fi; echo; 
+
+}; 
