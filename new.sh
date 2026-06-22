@@ -196,7 +196,7 @@ if [ -d "$HOME/gh/appi" ]; then for i in $HOME/gh/appi/api_*.sh; do . $i; done; 
 printf %b "\x1b[1 q"; ########### cursor = block
 printf %b "\x1b]12;#ff44bb"; #### cursor = pink
 ####
-export IFS=$'\n\t '; 
+export IFS=$' \n\t'; 
 ####
 }; 
 ###################
@@ -218,7 +218,7 @@ for i in $HOME/zz/f/*.sh; do . $i; done;
 # [ $PREFIX ] && (sleep 4; termux-wake-lock &>/dev/null) & disown; 
 ####
 ####
-export IFS=$'\n\t '; 
+export IFS=$' \n\t'; 
 ####
 ####
 
