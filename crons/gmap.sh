@@ -22,4 +22,4 @@ for map in ${ll[*]}; do echo; curl -s "https://maps.googleapis.com/maps/api/geoc
 ##
 ##
 gmap; 
-tail ${logf}/g$(date +%m).json | termux-notification; 
+# tail ${logf}/g$(date +%m).json | termux-notification; 
