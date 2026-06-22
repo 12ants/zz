@@ -10,7 +10,7 @@ export IFS=$' \n\t';
 export HISTCONTROL="ignoreboth"; export PROMPT_COMMAND="history -a; history -n; "; 
 export EDITOR="micro"; export email='leonel@ik.me'; 
 export BAT_THEME="Coldark-Dark"; export logs="$HOME/logs"; ####
-export tmp="$HOME/tmp"; [ -z "$TMPDIR" ] && export TMPDIR="$HOME/tmp"; 
+# export tmp="$HOME/tmp"; [ -z "$TMPDIR" ] && export TMPDIR="$HOME/tmp"; 
 export zz="$HOME/zz"; export start="$HOME/zz"; 
 ####
 if [ -d "$HOME/gh/appi" ]; then for i in $HOME/gh/appi/api_*.sh; do . $i; done; fi; 
