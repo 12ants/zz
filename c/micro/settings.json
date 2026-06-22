@@ -3,7 +3,6 @@
     "clipboard": "terminal",
     "colorscheme": "atom-dark",
     "fakecursor": true,
-    "linter": false,
     "mkparents": true,
     "paste": true,
     "ruler": false,
