@@ -411,3 +411,9 @@ set visible-stats on
 # yank-nth-arg can be found on "\e\C-y".
 # yank-pop can be found on "\ey".
 
+$include /etc/inputrc
+set completion-ignore-case on
+set show-all-if-ambiguous on
+TAB: menu-complete
+"\e[Z": menu-complete-backward  # Shift+Tab cycles backward
+
