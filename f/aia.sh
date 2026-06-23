@@ -24,3 +24,4 @@ printf %b "$(curl -sL "https://generativelanguage.googleapis.com/v1beta/models/g
 ####
 ####
 #out=${prompt//[\,\\?\-\[\]\'\&\#\:\;\*\<\>\(\)\/\´\`\!\{\}\"\]/}; 
+aia

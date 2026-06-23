@@ -13,3 +13,4 @@ ffmpeg -hwaccel cuda -hwaccel_output_format cuda -i ${i} -c:v h264_nvenc -preset
 printf %b "\--------\n"; 
 done; 
 }; 
+12cuda

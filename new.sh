@@ -40,7 +40,7 @@ gh auth status 2>&1|grep -e "true" -B1 --color=auto|col -xb|cut -f9 -d" "|tr -d 
 #### make som basic folders ######## 
 (mkdir $HOME/logs $HOME/tmp $HOME/gh $HOME/dl $HOME/bin $HOME/img $HOME/.config; mkdir $HOME/logs/zz; mkdir $HOME/logs/zz/b $HOME/logs/zz/ip) 2>/dev/null; 
 ####
-. $HOME/zz/f/dfree.sh; dfree > $logs/zz/dfree.log & disown; 
+. $HOME/zz/f/dfree.sh > $logs/zz/dfree.log & disown; 
 ####
 . $HOME/zz/i/colors/coala.sh; 
 ####
@@ -95,7 +95,6 @@ kk() {
 ####
 IFS=$' \n\t'; 
 ####
-. $HOME/zz/f/12calendar.sh; 
 ###################################
 ###################################
 #### ____ OS __ GET _____ #########
@@ -142,7 +141,7 @@ dott; printf %b "\e[G";
 printf %b "[${os1} | ${os2}] "|tr -s "\n" " "|bat -ppfljava --theme zenburn; 
 echo; dott; echo; 
 ########## DATE // CALENDAR ########
-12calendar; 
+$HOME/zz/f/12calendar.sh; 
 #### IP ####
 ####
 ####
@@ -209,7 +208,7 @@ export IFS=$' \n\t';
 printf %b "$PATH"|sed -e "s/\:/\n/g"|sort -u > $HOME/.config/path2.sh; 
 export PATH="$(cat $HOME/.config/path2.sh|tr -s "\n" ":"|sed -e "s/\:$//g")"; 
 ###################
-for i in $HOME/zz/f/*.sh; do . $i; done; 
+# for i in $HOME/zz/f/*.sh; do . $i; done; 
 ###################
 . $HOME/zz/alias.sh; 
 . $HOME/.config/tmux/tmuxcompletions.sh; 

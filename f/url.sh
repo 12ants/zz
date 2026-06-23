@@ -19,3 +19,4 @@ printf %b "\n${urla[*]}\n";
 xdg-open $urla || termux-open-url $urla; 
 
 }; 
+url

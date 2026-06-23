@@ -25,3 +25,4 @@ printf %b "\n  ok  \n ";
 ####
 }; 
 # $sudo nala upgrade -y && 
+apa_ubuntu

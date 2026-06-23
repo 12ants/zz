@@ -77,7 +77,6 @@ cc2="$(cat $HOME/logs/idc.log|cut -f3 -d" ")";
 ((UID == 0)) && id='\e[1;101;97;5mROOT\e[0m'||id='\e[96m\u\e[0m'
 PS1='\e[0m\e[2m[\e[0;1;38;5;$((2 + $?))m$?'$re']\
 ['$re'$(_dtime 2>/dev/null)'$re']\
-'$re'$(_bat)\
-'$re'$(_gitsu)\
+'$re'$(_gits)\
 ['$re'\e[0;48;5;${cc1};38;5;${cc2}m${model:0:12}'$re']\
 ['$id']'$re''${_host}'['$re$yellow'\w'${re}]'\e[?25h\e[0m \n'; 

@@ -28,3 +28,4 @@ chafa --format symbols $HOME/tmp/${webcl}_wide_${date}.jpg;
 cd $OLDPWD; 
 
 }; 
+screenshot_web

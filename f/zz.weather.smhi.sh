@@ -38,3 +38,4 @@ alias wettr='zz.weather.smhi';
 
 
 # cat $HOME/logs/wc.json |tr -s "[]{}," "\n\"\n"|tail -n+10|grep -vE "inter|data"|sed -e "s/\:00\:00Z//g"|cut -f2- -d":"|sed -e "s/T/Twt[/g"|cut -f2 -d"T"|tr "\n\"" " _"|sed -e "s/_\ /]=(/g" -e "s/\.00 /);\n/g"; 
+zz.weather.smhi

@@ -30,3 +30,4 @@ printf -v sel "${ops[$cur]}"; printf  "\e[?25h\n \e[7m $sel \e[0m\n\n"; };
 
 
 for i in ${!mark[*]}; do [ "${mark[$i]}" = 0 ] && printf %b "${ops[$i]} ok\n"; done
+qmenu

@@ -27,3 +27,4 @@ gg() { if [ $1 ]; then qq="$@"; else printf %b "\n\n\e[A -- duck: "; read -re "q
 # ggoogler "$@"; 
 # }; 
 # 
+gg

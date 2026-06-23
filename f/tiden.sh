@@ -16,3 +16,4 @@ gum style --border normal --border-foreground "$((RANDOM%222))" --margin "1 4" \
 bat -ppfljava ~/.ff|fmt -w $((COLUMNS - 25)) -g $((COLUMNS-28))|tr -s "\t " " "; )")"; 
 read -st 45 -n1 "kk"; [ "$kk" ] && break; done; 
 }; 
+tiden

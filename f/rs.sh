@@ -24,3 +24,4 @@ ssh "$rsuser"@"$rsto" 'printf "\e[35m$HOME'"${rsfold/\~/}"'\n\e[0m"; ls -ptcr '"
 
 
 #fzf --margin 0,12,0,12 --height ~12% --preview "cat {}" --border rounded
+rs

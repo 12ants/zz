@@ -90,3 +90,4 @@ lomenu " open lan ip:s ";
 history -a; history -n; 
 history -s "ssh ${sshlatest}"; 
 }; 
+12localan

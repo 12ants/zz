@@ -10,3 +10,4 @@ function fzf-man(){
 		return $?
 	fi
 }
+fman

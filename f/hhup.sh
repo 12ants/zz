@@ -7,3 +7,4 @@ history -w;
 read -rei "$(tail -n1 $HISTFILE)" ssss; 
 eval "$ssss"; 
 }; 
+hhup

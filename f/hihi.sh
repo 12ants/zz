@@ -82,3 +82,4 @@ else rm ~/logs/h/${date}.log; fi;
 # ####
 # };
 # 
+hihi

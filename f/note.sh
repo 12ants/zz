@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
 note() { if [ "$1" ]; then tmgh="$TMPDIR/$EPOCHSECONDS"; printf %b "downloading note to $tmgh ... "; gh gist clone 8096c8b7823e461d170339f63b611645 $tmgh 2>/dev/null; cd $tmgh; printf %b "\n$*\n" >> $tmgh/notes.sh; printf %b "\nadded text [ $* ] to note ..."; git add . 2>/dev/null; printf %b "."; git commit -am "$EPOCHSECONDS" -q; printf %b "."; git push -q; echo -ne "\nedit note? [Y/n] "; read -sn1 kk; [ -z "$kk" ] && gh gist edit "8096c8b7823e461d170339f63b611645"; cd $OLDPWD; else gh gist edit "8096c8b7823e461d170339f63b611645"; fi; printf %b "done gist id: [8096c8b7823e461d170339f63b611645]\n"; }; 
+note

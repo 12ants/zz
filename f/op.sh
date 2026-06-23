@@ -9,3 +9,4 @@ cut -c 20-;')";
         cd "$op" && op;
     fi
 }
+op

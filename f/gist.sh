@@ -13,3 +13,4 @@ elif [ $g = "u" ]; then ls|fzf|gh gist create;
 elif [ $g = "q" ]; then printf %b "\nok\n\n"; return 0;
 fi; echo; }; 
 alias 12gist='gist'
+gist

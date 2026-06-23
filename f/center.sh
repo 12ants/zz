@@ -22,3 +22,4 @@ local right_pad=$((target_width - text_len - left_pad))
 printf '%*s%s%*s\n' "$left_pad" '' "$line" "$right_pad" ''
 done; 
 }; 
+center

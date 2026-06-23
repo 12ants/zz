@@ -38,3 +38,4 @@ printf "\e[$((COLUMNS/2-16))G  \e[7m   ok   \e[0m \n\n\n\n\n\n"
 
 
 
+halo

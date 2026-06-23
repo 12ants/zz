@@ -4,3 +4,4 @@ tmuxbg() {
 tmux source-file ~/.config/tmux/tmux.conf; 
 tmux set-option -g status-style bg=colour$(printf %b "$((RANDOM%222))";); 
 } 
+tmuxbg

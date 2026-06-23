@@ -12,3 +12,4 @@ read -sn1 lk; [ -z "$lk" ] && git config core.sshCommand "ssh -i ~/.ssh/$gggg"; 
 sed -i$(date +%m%d%H%M%S) -e 's/url\ \=\ https\:\/\/github.com\//url\ \=\ git\@github.com:/' .git/config; 
 echo; 
 }; 
+git_ssh

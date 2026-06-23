@@ -17,3 +17,4 @@ ssh -p $pc $sc;
 printf %b "-\e[${COLUMNS}b\n"; 
 
 };
+s

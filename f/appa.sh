@@ -97,3 +97,4 @@ $sudo apt -y autoremove;
 printf %b "\n\n $c2 ${instrem}ed ${appa[*]} \n\n"; 
 ################################################
 }; 
+appa

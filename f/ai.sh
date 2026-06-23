@@ -6,3 +6,4 @@ local IFS=$' \n\t'; unset -v msg tmpai to; mkdir -p "$HOME"/logs/ai 2>/dev/null;
 
 
 }; 
+ai
