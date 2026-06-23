@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 ## groo
 grope() { 
 [ -z "$1" ] && printf %b "\n\n\e[A\e[96m --\e[0m msg\e[2m:\e[0m" && read -rp ' ' "mm" || mm="$*"; echo; 

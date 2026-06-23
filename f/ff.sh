@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # ripgrep->fzf->vim [QUERY]
 # unalias ff; 
 ff() { 

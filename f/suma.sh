@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Encode the local file to base64 
 suma() { 
 [ -z "$GEMINI_API_KEY" ] && printf %b "\nget GEMINI_API_KEY\n" && return 0; 

@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 ## test connection
 unalias speed 2>/dev/null; unset speed 2>/dev/null; 
 ####

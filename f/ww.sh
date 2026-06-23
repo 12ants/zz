@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 ww() { 
 wf="$HOME/logs/ww"; mkdir -p $wf 2>/dev/null; w="$@";
 [ -z $w ] && printf %b "\n\n\e[Aword:" && read -rep ' ' "w"; echo;

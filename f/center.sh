@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 center_text() { local target_width
 # Detect width from first argument if numeric, otherwise default to terminal width
 if [[ $1 =~ ^[0-9]+$ ]]; then target_width=$1; shift; 

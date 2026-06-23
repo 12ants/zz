@@ -1,6 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 ## free ai
-ai() { 
+aia () { 
 folder="${HOME}/logs/ai"; mkdir -p ${folder} 2>/dev/null; 
 ####
 printf %b "\e[0;2m https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent

@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 ai_goo () { 
 ####
@@ -7,7 +8,7 @@ while :; do
 
 
 
-input="$*"; [ -z "$input" ] && printf %b "____ input $((in++)): \n\n\e[A"; read -re "input"; 
+input="$*"; [ -z "$input" ] && printf %b "_ input $((in++)): \n\n\e[A"; read -re "input"; 
 ####
 ####
 if [ -z "${idv1}" ]; then 
@@ -27,7 +28,7 @@ idv1="$(printf %b "${resp//\"\,\"/\\n__\"}"|grep '"id"'|cut -f4 -d '"'|head -n1)
 ####
 
 else 
-printf %b "____ input $((in++)): \n\n\e[A"; read -re "input"; 
+printf %b "_ input $((in++)): \n\n\e[A"; read -re "input"; 
 resp=$(curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \

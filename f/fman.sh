@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Man without options will use fzf to select a page
 function fzf-man(){
 	MAN="/usr/bin/man"

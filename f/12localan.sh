@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 12localan() { 
 ## discover lan w ping & ssh 
 #ipt=$(mktemp; ); 

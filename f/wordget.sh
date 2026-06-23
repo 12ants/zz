@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 ## get any word in short definition 
 wordget() { word="$@"; [ -z "$1" ] && printf %b "\n\n\e[A-- word:" && read -ep " " "word"; wf="$HOME/logs/words/wf"; mkdir -p -m 775 "$wf" 2>/dev/null; printf %b "\n----\n"; (printf %b "$word\n"; lynx -trim_input_fields -nonumbers -nomargins -trim_blank_lines -width 800 -dump "https://www.dictionary.com/browse/$word"|grep -e 'View synonyms for ' -m1 -A18|grep -ve '(BUTTON)'|sed -e 's/_//g' -e '/( ) /d' -e 1,2d|grep -vE '2. |3. |4. |5. |6. |7. '|grep -E '\[|noun|verb|adjectiv|adverb|1. '|sed -e 's/\ 1.\ //g') > $wf/$word.log1; 
 ##

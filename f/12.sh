@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 function 12 () { 
 local IFS=$'\n\t '; 
 local FZF_DEFAULT_OPTS=; 

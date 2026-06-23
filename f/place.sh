@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 place() { 
 local IFS=$'\n\t '; 

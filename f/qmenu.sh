@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 ## selection menu 
 qmenu() { 
 local IFS=$'\n\t '; unset mark; 
