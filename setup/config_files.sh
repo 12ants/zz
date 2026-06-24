@@ -1,7 +1,13 @@
 #!/bin/bash
 ## install config-files 
 [ -z "$start" ] && start="$HOME/zz"; 
+####
+mkdir $HOME/tmp 2>/dev/null; 
+mkdir $HOME/tmp/zz_old 2>/dev/null; 
+mkdir $HOME/.config 2>/dev/null; 
+####
 hash sudo 2>/dev/null && [ "$UID" != "0" ] && sudo="sudo"; 
+####
 c2='\e[0m\e[36m --\e[0m'; qq="160"; mkdir ~/.config 2>/dev/null; 
 ####
 p1() { p2=" ${@}"; for i in $(seq ${#p2}); do sleep ${sl-.05}; printf %b "${p2:${i}:1}"; done; }; 
@@ -20,8 +26,8 @@ ln -s $start/c/lesskey $start/c/*.conf -t $HOME/.config --backup --suffix="_bu__
 ##
 confolders=($(command ls -1p $start/c|grep "/")); 
 for q in ${confolders[*]}; do 
-mkdir -p $HOME/.config/$q 2>/dev/null; 
-mv $HOME/.config/$q/* -t $HOME/tmp -b --suffix="_bu__$(date +%y%m%d_%H%M%S)" 2>/dev/null; 
+mkdir $HOME/.config/$q 2>/dev/null; 
+mv $HOME/.config/$q/* -t $HOME/tmp/zz -b --suffix="_bu__$(date +%y%m%d_%H%M%S)" 2>/dev/null; 
 ln -s $start/c/$q/* -t $HOME/.config/$q/ -r --backup --suffix="_bu__$(date +%y%m%d_%H%M%S)"; 
 # sleep .05; 
 printf %b "\n\e[0m"; echo "updated"; printf %b "\e[38;5;$((qq++))m $q"; 
