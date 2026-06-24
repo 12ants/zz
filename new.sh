@@ -8,19 +8,23 @@ export IFS=$' \n\t';
 [ -z "$TMUX" ] && command -v tmux >/dev/null 2>&1 && tmux 2>/dev/null; 
 [ "$TMUX" ] && tmux source $HOME/.config/tmux/tmux.conf 2>/dev/null; 
 [ "$TMUX" ] && . $HOME/zz/_ps1.sh; 
-export HISTCONTROL="ignoreboth"; export PROMPT_COMMAND="history -a; history -n; "; 
+export PROMPT_COMMAND="history -a; history -n; ";
+export HISTCONTROL="ignoreboth"; 
 export EDITOR="micro"; 
 export BAT_THEME="Coldark-Dark"; 
 export VERSION_CONTROL="numbered"; 
 export HISTSIZE="12222"; 
 export email='leonel@ik.me'; 
-export logs="$HOME/logs"; ####
+export logs="$HOME/logs"; 
 export zz="$HOME/zz"; export start="$HOME/zz"; 
 unset HISTTIMEFORMAT; 
 ## export HISTFILESIZE="12222"
 ## export tmp="$HOME/tmp"; [ -z "$TMPDIR" ] && export TMPDIR="$HOME/tmp"; 
 ###################
 if [ -d "$HOME/gh/appi" ]; then for i in $HOME/gh/appi/api_*.sh; do . $i; done; fi; 
+###################
+###################
+for i in ${zz:-${HOME}/zz}/f/*.sh; do . $i; done; 
 ###################
 ###################
 hash sudo 2>/dev/null && [ "$UID" != 0 ] && export sudo="sudo"; 
@@ -38,7 +42,9 @@ export FZF_DEFAULT_OPTS='-m -i --cycle --ansi --unicode --bind "q:abort"';
 gh auth status 2>&1|grep -e "true" -B1 --color=auto|col -xb|cut -f9 -d" "|tr -d "\n" > $logs/zz/gh_log.log & disown; 
 ####################
 #### make som basic folders ######## 
-(mkdir $HOME/logs $HOME/tmp $HOME/gh $HOME/dl $HOME/bin $HOME/img $HOME/.config; mkdir $HOME/logs/zz; mkdir $HOME/logs/zz/b $HOME/logs/zz/ip) 2>/dev/null; 
+mkdir $HOME/logs $HOME/tmp $HOME/gh $HOME/dl $HOME/bin $HOME/img $HOME/.config 2>/dev/null; 
+mkdir $HOME/logs/zz 2>/dev/null; 
+mkdir $HOME/logs/zz/b $HOME/logs/zz/ip 2>/dev/null; 
 ####
 . $HOME/zz/f/dfree.sh > $logs/zz/dfree.log & disown; 
 ####

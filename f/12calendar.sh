@@ -32,4 +32,3 @@ cat $HOME/logs/calendar.json|grep -e "EPOCH" --quiet || 12getcal;
 cat $HOME/logs/cal.log; dots; echo;
 ####
 }; 
-12calendar

@@ -4,4 +4,3 @@ getcal() {
 }
 
 
-getcal

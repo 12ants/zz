@@ -13,7 +13,7 @@ c2='\e[0m\e[36m --\e[0m'; qq="160"; mkdir ~/.config 2>/dev/null;
 p1() { p2=" ${@}"; for i in $(seq ${#p2}); do sleep ${sl-.05}; printf %b "${p2:${i}:1}"; done; }; 
 ####
 printf %b "\n$c2 "; p1 "installing config files ..."; echo; 
-printf %b "\n$c2 "; . $start/setup/.gpg.sh;  
+printf %b "\n$c2 "; . $start/setup/gpg.sh;  
 ##
 hash bat &>/dev/null || $sudo apt install -y bat &>/dev/null; 
 hash batcat &>/dev/null || $sudo apt install -y batcat &>/dev/null; 

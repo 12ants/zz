@@ -9,4 +9,3 @@ cd $folder; printf %b "\n\t $cyan$bold> $pink$PWD$cyan <$re\n\t * * * *\n";
 ls -caklhuptr --group-directories-first; 
 }; 
 
-mkd

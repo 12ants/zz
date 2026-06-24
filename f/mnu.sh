@@ -13,4 +13,3 @@ declare -a mm=($(printf %b "${mnu[*]}"|command fzf-tmux -w "$((uhw + 6))" -h "$(
 printf %b "${mm[*]} \n"; 
 ####
 }; 
-mnu

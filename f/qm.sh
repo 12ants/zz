@@ -39,4 +39,3 @@ printf %b "\n\n\e[?25h\e[7m$(for i in ${mark[*]}; do printf %b " ${ops[i]} \n"; 
 # printf -v sel "${ops[$cur]}"; printf  "\e[?25h\n \e[7m $sel \e[0m\n\n"; 
 
 # mark=("${mark[@]/${ops[cur]}/}")
-qm

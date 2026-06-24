@@ -17,4 +17,3 @@ for i in {1..22}; do grope:read "$*"; printf %b "\n\e[9A"; read -sr -n1 -t 0.05 
 ##
 alias tajm='grope "$(date +\ \ %a\ \ \ %H\ :\ %M)"'; 
 ##
-grope

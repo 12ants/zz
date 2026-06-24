@@ -90,4 +90,3 @@ mv "$wordlog/$word.htm" "$wordlog/$word.jpg" -t $wordfolder/tmp;
 ####
 # iw="$(mediainfo pp.jpg | grep 'Width'|tr -d "A-z:\n\t ")"; ih="$(mediainfo pp.jpg | grep 'Height'|tr -d "A-z:\n\t ")"; 
 
-wordget

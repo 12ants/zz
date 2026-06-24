@@ -22,4 +22,3 @@ $selcon $sp $selpo ${selus}@${selip};
 _
 printf %b "\n-------- $selcon exit --------\n"; 
 printf %b "$selcon $sp $selpo  ${selus}@${selip}\n"; echo; }||return 0; ssh2menu; }; 
-sshmenu

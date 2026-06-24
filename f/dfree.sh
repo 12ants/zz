@@ -23,4 +23,3 @@ fi | sed -e "1s/^/\x1b[0;2m/g" -e "s/$/\x1b[m/g" -e "s/\//\x1b[34m&\x1b[0m/g" -e
 ####
 ####
 }; 
-dfree

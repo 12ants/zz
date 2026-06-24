@@ -10,4 +10,3 @@ curl -sL "https://api.geoapify.com/v1/geocode/reverse?lat=${ll}&lon=${ll[1]}&lan
 printf %b "--------\n\n"; ) | tee -a $HOME/logs/place.log || \
 printf %b "\n------\n$(date +%c; ) -- nope\n------\n\n" | tee -a $HOME/logs/place.log; }; 
 alias 12place='place'; 
-place

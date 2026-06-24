@@ -18,4 +18,3 @@ cat ${pos}/google_${sub}_${time}_.xml | sed -e "s/<*>/&\n/g" | sed -n "/<pubDate
 lynx -dump -nolist -nonumbers -width="444" ${pos}/google_${sub}_${time}_.html |head -n2|tee ${pos}/latest.log; 
 }; 
 
-new-google

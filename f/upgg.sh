@@ -6,4 +6,3 @@ echo;
 printf %b "$upimg"; 
 echo; 
 }; 
-upgg

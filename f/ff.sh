@@ -43,4 +43,3 @@ echo;       # --query "$*"
       # --bind "enter:become:$OPENER" \
 
       # --bind "start:$RELOAD" 
-ff

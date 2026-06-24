@@ -28,4 +28,3 @@ if [ "$y" = y ]; then
 for i in ${d_unm[*]}; do $sudo mount ${i} ${i/*\///media/} 2>/dev/null && printf %b "[$i] mounted @ ${i/*\///media/}\n"; done; printf %b "done"; else printf %b "ok"; fi; echo; 
 
 }; 
-mount_all_

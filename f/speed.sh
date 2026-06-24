@@ -17,4 +17,3 @@ echo aa;
 rm "speed"; 
 echo bb; 
 }; 
-speed

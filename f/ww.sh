@@ -18,4 +18,3 @@ echo|ansifilter -s 58 -M;
 convert -gravity center -background "#f5f5f5" -bordercolor "#f5f5f5" -border "588" pango:"$(cat $wf/$ww.xml)" $wf/${ww}.jpg; 
 tmux display-popup -e ff="$wf/$w" -w 100% -h 100% -b none -E 'bash -c "chafa -f symbol $ff.jpg; printf %b '"'\e[?25l\e[2A'"'; read -n1"'; 
 } 
-ww

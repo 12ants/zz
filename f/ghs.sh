@@ -18,4 +18,3 @@ cd ~/gh;
 for a in ${ghss[*]}; do gh repo clone ${a/@//}; done; printf %b "\e[96m${ghss[*]/@//}\e[0m\n"; ls --color=always --classify -shG ${ghss[*]/*@/}; }; 
 ####
 alias 12githubsearch='ghs'; 
-ghs

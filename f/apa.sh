@@ -89,4 +89,3 @@ echo; echo; return 0;
 
 # echo; for i in {1..6}; do printf %b "\e[95;4${i}m\e[\u258${i}\e[${COLUMNS}b\n"; sleep .5; done; printf %b "\e[4A\e[?25l\e[4;8;9m\t\t\e[0;96m[ok]"; read -t5 -n1 xx; 
 
-apa

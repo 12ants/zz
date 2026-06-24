@@ -22,4 +22,3 @@ fifi "${*-ok}"; read -sn1 -t .1;
 done; printf %b "\e[?25h"; 
 ####
 }; 
-ok

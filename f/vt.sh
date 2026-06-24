@@ -7,4 +7,3 @@ export LS_COLORS;
 reset -Q;
 exec bash; 
 }; 
-vt

@@ -13,4 +13,3 @@ ioio=($(ls -1p $way|grep -v '/'|fzf -m -i --ansi --cycle --bind "0:change-previe
 [ "$ioio" ] && bat -pfljava ${way}/${ioio}; }; 
 # alias 12info='info12'; 
 #-tmux -w 100% -h 100%
-12

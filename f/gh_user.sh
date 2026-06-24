@@ -23,4 +23,3 @@ git config --global core.sshCommand "ssh -i ~/.ssh/gh_$ghuser1";
 git config --list --global|bat -ppflc; 
 ####
 }; 
-gh_user
