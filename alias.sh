@@ -54,7 +54,7 @@ alias l='cd $(lf -print-last-dir)';
 # alias l='lf -last-dir-path $HOME/logs/ll.log; cd $(cat $HOME/logs/ll.log) '
 alias jacketts='/home/aa/gh/jackett/jackett &'
 #alias uu="tmux split-window -l 44% -e sudo='$sudo' 'hash nala||$sudo apt install nala -y &>/dev/null; $sudo nala update; $sudo nala upgrade -y; '"; 
-alias upup='$sudo apt update; $sudo apt upgrade -y'; 
+alias upup='$sudo apt update; $sudo apt upgrade -y; zz.update_zz'; 
 # alias u2='tmux split-window -l "44%" -e "sudo=$sudo" -v '$sudo apt update 2>/dev/null|bat -ppflzig --theme=DarkNeon; printf %b "\n\n\n\n\e[96m"; $sudo apt upgrade -y; $sudo apt autoremove -y; printf %b "\n\e[0;46m\n\n\n\n -- done\n\n\n\n\e[0m\n"; read -n1 "kk"; ';'; 
 alias terminow='printf %b "\e[2m" && $zz/i/ascii/2a.sh |sed -e "s/[/\()_.·\=\^\x27O~-]/\x1b[2m&\x1b[m/g"'; 
 ##########

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#!/usr/bin/env bash
 ################### list and mount drives
 ################### 12ants.github.io
 ################### 
@@ -16,7 +17,7 @@ d_all=($($sudo fdisk -lo Device,Size,Type,Attrs,Name | grep --color=auto -v "loo
 d_mnt=($(df|grep -vE 'tmpfs|none|loop.*|Filesystem'|cut -f1 -d' ')); 
 d_unm=($(printf %b "${d_all[*]}"|grep --color=always "${disks_mounted[*]}")); 
 ####
-# printf %b "disks_mounted\n--\n${disks_mounted[*]} \n____\n${disks[*]}\n"; 
+# printf %b "disks_mounted\n--\n${disks_mounted[*]} \n_\n${disks[*]}\n"; 
 ####
 printf %b "--------\ndisks in color are mounted\n"; 
 printf %b "${d_all[*]}"|grep --color=always "${d_mnt[*]}" -C9 || printf %b "${d_all[*]} "; 

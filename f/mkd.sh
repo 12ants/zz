@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 mkd() {
 printf %b "\n\n\n\n\e[4A\n $c2 new folder?$re  "; 

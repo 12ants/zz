@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 lstheme() { 
 vt="$(vivid themes|fzf)"; 
 export vt; 

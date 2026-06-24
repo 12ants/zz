@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # qqmenu() { local 
 qqmenu() { IFS=$'\n\t' ops=($*);[ "$2" ]||IFS=$'\n\t' ops=(*); 
 unset mark sela; 

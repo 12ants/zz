@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+ai_debug_project () { opencode run "run tests, analyze and debug and write results to small log file. make safe improvements where possible or write suggustions to a file"; }; 
+ai_debug_project

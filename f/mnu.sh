@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 function mnu () { 
 IFS=$'\n\t '; unset -v uhl uhw mm; 
 mnu=(${@}); [ -z "$1" ] && \

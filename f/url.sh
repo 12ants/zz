@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 function url () { 
 
 unset -v uhl; 

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#!/usr/bin/env bash
 apa() { 
 local IFS=$'\n\t '; 
 hash sudo 2>/dev/null && sudo=sudo; [ $PREFIX ] && unset sudo; [ $UID = 0 ] && unset sudo; 

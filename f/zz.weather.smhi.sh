@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 ## weather codes
 zz.weather.smhi() { 
 # local IFS=$'\n\t '; 

@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 hihi () { 
 local IFS=; 
 unset -v HISTTIMEFORMAT 2>/dev/null; 

@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 function gh_user () { 
 ####
 IFS=$'\n\t '; 

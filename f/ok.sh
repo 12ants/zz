@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 ok() { 
 ####
 wd="$((COLUMNS - 1))" 

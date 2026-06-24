@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 gist() { printf %b "\n\n\n\n\e[4A
  $c2 ${dim}[${re}c${dim}]${re}reate \

@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 ## github searcher
 ghs() { 
 local IFS=$'\n'; 

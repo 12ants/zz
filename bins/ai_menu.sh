@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+ai_menu () { aimenu=(agy kilo opencode $(find $zz -type f,d|grep -oe "$zz/f/.*ai.*") ); printf %b "${aimenu[*]}"|fzf --preview='type {}|bat -ppfljs; [ -e {} ] && bat {}; echo -e "########"; hash {} 2>/dev/null && {} help|col -xb|bat -ppflsh || {} --help; echo "########"; man {} |col -xb|bat -pfljs 2>/dev/null' --preview-window='top,80%,wrap,border-bottom' --wrap; printf %b "$aimen1"; }
+ai_menu

@@ -1,42 +1,52 @@
 #!/usr/bin/env bash
 # very good bash enviorment 
+###################
 shopt -s histappend; 
 shopt -s histverify; 
-####
+###################
 export IFS=$' \n\t'; 
 [ -z "$TMUX" ] && command -v tmux >/dev/null 2>&1 && tmux 2>/dev/null; 
 [ "$TMUX" ] && tmux source $HOME/.config/tmux/tmux.conf 2>/dev/null; 
 [ "$TMUX" ] && . $HOME/zz/_ps1.sh; 
-export HISTCONTROL="ignoreboth"; export PROMPT_COMMAND="history -a; history -n; "; 
-export EDITOR="micro"; export email='leonel@ik.me'; 
-export BAT_THEME="Coldark-Dark"; export logs="$HOME/logs"; ####
-# export tmp="$HOME/tmp"; [ -z "$TMPDIR" ] && export TMPDIR="$HOME/tmp"; 
+export PROMPT_COMMAND="history -a; history -n; ";
+export HISTCONTROL="ignoreboth"; 
+export EDITOR="micro"; 
+export BAT_THEME="Coldark-Dark"; 
+export VERSION_CONTROL="numbered"; 
+export HISTSIZE="12222"; 
+export email='leonel@ik.me'; 
+export logs="$HOME/logs"; 
 export zz="$HOME/zz"; export start="$HOME/zz"; 
-####
-if [ -d "$HOME/gh/appi" ]; then for i in $HOME/gh/appi/api_*.sh; do . $i; done; fi; 
-####
-export HISTFILESIZE=2222
-export HISTSIZE=2222
-###
 unset HISTTIMEFORMAT; 
+## export HISTFILESIZE="12222"
+## export tmp="$HOME/tmp"; [ -z "$TMPDIR" ] && export TMPDIR="$HOME/tmp"; 
+###################
+if [ -d "$HOME/gh/appi" ]; then for i in $HOME/gh/appi/api_*.sh; do . $i; done; fi; 
+###################
+###################
+for i in ${zz:-${HOME}/zz}/f/*.sh; do . $i; done; 
+###################
+###################
 hash sudo 2>/dev/null && [ "$UID" != 0 ] && export sudo="sudo"; 
-####
-re='\e[0m'; cyan='\e[96m'; logs="$HOME/logs"; c2="\e[96m -- \e[0m"; 
+###################
+## re='\e[0m'; cyan='\e[96m'; logs="$HOME/logs"; c2="\e[96m -- \e[0m"; 
 ssh=(${SSH_CONNECTION}); [ -z $ssh ] && ssh=($SSH_CLIENT); 
-####
+###################
 unset lessprefix; [ "$PREFIX" ] && lessprefix='--redraw-on-quit '; 
 export LESSKEYIN=$HOME/.config/lesskey
 export LESS=''${lessprefix}'-R --tilde --file-size --use-color -DP7.197$ --incsearch --mouse --prompt=%F [/]/[n]/[p]/[m] ?n?m(%T %i of %m) ..?lt %lt-%lb?L/%L. :byte %bB?s/%s.  .?e(END)  ?x-  Next\:   %x.:?pB  %pB\%..%t '; 
-####
+###################
 ## export GREP_COLORS="mt=91:ms=95:fn=32:ln=32:bn=32:se=35:sl=38;5;207:cx=38;5;121:ne"; 
 export FZF_DEFAULT_OPTS='-m -i --cycle --ansi --unicode --bind "q:abort"'; 
-## unset LS_COLORS; 
-####
-gh auth status 2>&1|grep -e "true" -B1 --color=auto|col -xb|cut -f9 -d" "|tr -d "\n" > ~/logs/gh_log.log & disown; 
+###################
+gh auth status 2>&1|grep -e "true" -B1 --color=auto|col -xb|cut -f9 -d" "|tr -d "\n" > $logs/zz/gh_log.log & disown; 
+####################
 #### make som basic folders ######## 
-mkdir $HOME/logs/b $HOME/tmp $HOME/gh $HOME/dl $HOME/bin $HOME/img $HOME/.config -m 775 -p 2>/dev/null; 
+mkdir $HOME/logs $HOME/tmp $HOME/gh $HOME/dl $HOME/bin $HOME/img $HOME/.config 2>/dev/null; 
+mkdir $HOME/logs/zz 2>/dev/null; 
+mkdir $HOME/logs/zz/b $HOME/logs/zz/ip 2>/dev/null; 
 ####
-. $HOME/zz/f/dfree.sh; dfree > $logs/dfree.log & disown; 
+. $HOME/zz/f/dfree.sh > $logs/zz/dfree.log & disown; 
 ####
 . $HOME/zz/i/colors/coala.sh; 
 ####
@@ -47,15 +57,15 @@ mkdir $HOME/logs/b $HOME/tmp $HOME/gh $HOME/dl $HOME/bin $HOME/img $HOME/.config
 [ -z $wlan ] && \
 wlan="$(ifconfig 2>/dev/null|grep -e "wlan" -A1|sed -e "1d" -e "s/netmask.*//"|tr -d " a-z")"; 
 
-[ "$wlan" ] && printf %b "${wlan[*]}" > $HOME/logs/wlan.log || wlan="$(cat $HOME/logs/wlan.log)"; ####
+[ "$wlan" ] && printf %b "${wlan[*]}" > $HOME/logs/zz/wlan.log || wlan="$(cat $HOME/logs/zz/wlan.log)"; ####
 ####
 [ -z $PREFIX ] && ii="$(ip -c -brief -4 a 2>/dev/null|grep -vE "lo |DOWN"|cut -f1 -d"/"|column --table --output-separator "$(printf %b "\e[0;2m") | ")"; 
 ####
 [ -z $PREFIX ] && [ -z "$ii" ] && ii=($(ifconfig 2>/dev/null|grep -vE "unspec|lo: |127.0.0.1" |cut -f1,10 -d" "|tr -d "\n"|bat -ppf --language Idris)); 
 ####
 ####
-wlan="$(cat $HOME/logs/wlan.log)"; idn1="${wlan/*./}"; idn="$(($(printf %b "${idn1}"|tail -c2) + 0))"; 
-. $HOME/zz/i/colors/coala.sh; unset -v idc; declare -a idc; export idc=(${co[idn]}); printf %b "${idc[*]}" > $HOME/logs/idc.log; 
+wlan="$(cat $HOME/logs/zz/wlan.log)"; idn1="${wlan/*./}"; idn="$(($(printf %b "${idn1}"|tail -c2) + 0))"; 
+. $HOME/zz/i/colors/coala.sh; unset -v idc; declare -a idc; export idc=(${co[idn]}); printf %b "${idc[*]}" > $HOME/logs/zz/idc.log; 
 ####
 ####
 if echo $HOME|grep -w "termux" -q; then unalias sudo 2>/dev/null; else sudo=sudo; fi; 
@@ -82,7 +92,7 @@ modo=($(for bb in product_family board_vendor board_name bios_vendor sys_vendor;
 do cat /sys/devices/virtual/dmi/id/${bb} 2>/dev/null|grep -v "O.E.M."|tr -s "\n" " "; done)); 
 ####
 moda="$(printf %b "${modo}"|tr -d "[]"|head -c14)"; 
-model="${moda/%\ /}"; printf %b "${modo[*]}" > $HOME/logs/model.log; 
+model="${moda/%\ /}"; printf %b "${modo[*]}" > $HOME/logs/zz/model.log; 
 }; 
 ####
 _model; 
@@ -91,7 +101,6 @@ kk() {
 ####
 IFS=$' \n\t'; 
 ####
-. $HOME/zz/f/12calendar.sh; 
 ###################################
 ###################################
 #### ____ OS __ GET _____ #########
@@ -138,7 +147,7 @@ dott; printf %b "\e[G";
 printf %b "[${os1} | ${os2}] "|tr -s "\n" " "|bat -ppfljava --theme zenburn; 
 echo; dott; echo; 
 ########## DATE // CALENDAR ########
-12calendar; 
+$HOME/zz/f/12calendar.sh; 
 #### IP ####
 ####
 ####
@@ -180,7 +189,7 @@ dott; echo;
 ####
 ####
 #### DISK
-[ "$(cat ${logs}/dfree.log|wc -c)" -gt 4 ] && cat "${logs}/dfree.log" || dfree; 
+[ "$(cat ${logs}/zz/dfree.log|wc -c)" -gt 4 ] && cat "${logs}/zz/dfree.log" || dfree; 
 dott; echo; 
 ####
 #### GIT ZZ
@@ -196,7 +205,7 @@ if [ -d "$HOME/gh/appi" ]; then for i in $HOME/gh/appi/api_*.sh; do . $i; done; 
 printf %b "\x1b[1 q"; ########### cursor = block
 printf %b "\x1b]12;#ff44bb"; #### cursor = pink
 ####
-export IFS=$'\n\t '; 
+export IFS=$' \n\t'; 
 ####
 }; 
 ###################
@@ -205,7 +214,7 @@ export IFS=$'\n\t ';
 printf %b "$PATH"|sed -e "s/\:/\n/g"|sort -u > $HOME/.config/path2.sh; 
 export PATH="$(cat $HOME/.config/path2.sh|tr -s "\n" ":"|sed -e "s/\:$//g")"; 
 ###################
-for i in $HOME/zz/f/*.sh; do . $i; done; 
+# for i in $HOME/zz/f/*.sh; do . $i; done; 
 ###################
 . $HOME/zz/alias.sh; 
 . $HOME/.config/tmux/tmuxcompletions.sh; 
@@ -218,7 +227,7 @@ for i in $HOME/zz/f/*.sh; do . $i; done;
 # [ $PREFIX ] && (sleep 4; termux-wake-lock &>/dev/null) & disown; 
 ####
 ####
-export IFS=$'\n\t '; 
+export IFS=$' \n\t'; 
 ####
 ####
 

@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 ####
 word() { local IFS=$' \n\t'; fold="$HOME/logs/words/wordlog"; mkdir -p "$fold" 2>/dev/null; 
 # sh $HOME/88/i/words/wpre.sh 2>/dev/null; 

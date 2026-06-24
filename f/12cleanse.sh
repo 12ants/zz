@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 ## clean filenames 
 12cleanse() { 
 local IFS=$'\n' red='\e[91m' green='\e[92m' re='\e[0m' \

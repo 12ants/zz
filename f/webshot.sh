@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 webshot() {
 ####
 site="$1"; echo $site|grep -qv 'https' && https='https://'||https=''; 

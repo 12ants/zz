@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 ## zz.commands
 alias zz.='cd $HOME/zz; pwd; ls -p --color=always'; 
 alias zz.ssh.ants='ssh aa@ants.ftp.sh'; 

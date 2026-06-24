@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 qw() { [ -z $1 ] && (printf %b "\n\n\n\n\e[4A\n"; 
 read -rep ' -- search: ' 'qe'; )||qe="$@"; 
 printf %b "\n${qe[*]}"; type $qe &>/dev/null && \

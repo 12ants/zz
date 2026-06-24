@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 tiden() { 
 printf %b "\ec"; 
 while true; do printf %b "\ec\e[48;5;$((RANDOM%222))m"; 

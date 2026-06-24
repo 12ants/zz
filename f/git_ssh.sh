@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 git_ssh() { local FZF_DEFAULT_OPTS=; gggg="$(ls ~/.ssh|grep -vE '.pub|known_hosts|authorized_keys'|fzf --preview '(cat ~/.ssh/{}.pub|tr " " "\n"; echo; echo; cat ~/.ssh/{})|bat -ppfld' --cycle -i --preview-window 'wrap' --bind 'q:abort')"; 
 
 printf %b "\n\n\e[A -- change git ssh-key to: $gggg ? [Y/n] "; 

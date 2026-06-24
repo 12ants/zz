@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 ## list figlet fonts
 figfonts() { 
 local IFS=$'\n\t '; figall=($(basename -a ${PREFIX-/usr}/share/figlet/*.flf ${PREFIX-/usr}/share/figlet/*.tlf|sed -e 's/\..*//g')); 

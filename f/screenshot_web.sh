@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 screenshot_web() { 
 hash chromium || $sudo apt -y install chromium-browser; 
 hash chafa || $sudo apt -y install chafa; 

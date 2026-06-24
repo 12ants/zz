@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 #history but better
 #fzf$fzt --height ~88% --tac --inline-info --expect "q" -m -i
 unalias hh 2>/dev/null; 

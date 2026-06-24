@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+builtins() { builtin=(bg caller complete dirs eval false hash kill mapfile pwd return source trap ulimit wait bind cd compopt disown exec fc help let popd read set suspend true umask break command continue echo exit fg history local printf readarray shift test type unalias alias builtin compgen declare enable export getopts jobs logout pushd readonly shopt times typeset unset); nu="$(for i in ${builtin[*]}; do echo $i; done|fzf --preview '({} --help)|tr "\`\´'"'''"'" "'"_"'" |bat -ppflzig; ' --preview-window "right,$((COLUMNS - 22)),wrap,border-left" --color 'preview-bg:235')"; eval "$nu"; }; 
+builtins

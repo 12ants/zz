@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 gg() { if [ $1 ]; then qq="$@"; else printf %b "\n\n\e[A -- duck: "; read -re "qq"; fi; links "https://lite.duckduckgo.com/lite?q=${qq// /+}"; }; 
 # 
 # gg() { 
