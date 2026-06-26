@@ -57,13 +57,15 @@ C-y: yank
 "\e[6~": kill-whole-line
 "\e[6": kill-whole-line
 "\e[5~": '\e[6~\hihi\n'
+"\e[5~": '\e[qtmux copy-mode\n'
 "\e[1;2A": '\e[6~\ hh\n'
 "°": '\e4\l\n'
 "⁰": '\e[6~'
 "\eq": '\e[q'
 "⁹": '\e[612_inputrc\n'
-"\x1b[1;5A": '\e[qtmux copy-mode\n\x1b\x1b\x1b\e[5~'
-#"\x1b[A": '\e[q\hihi\n'
+"\x1b[1;5A": '\e[qhahas\n'
+# \x1b\x1b\x1b\e[5~
+# "\x1b[A": '\e[q\hihi\n'
 "C-ö": forward-word
 ####
 
