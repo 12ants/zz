@@ -3,7 +3,7 @@
 IFS=$' \n\t'; 
 hash sudo 2>/dev/null && sudo=sudo && export sudo="sudo"; 
 ####
-apts=( "fzf" "lf" "bat" "batcat" "git" "gh" "gnupg" "cronie" "micro" "openssh-server" ); 
+apts=( "fzf" "lf" "bat" "batcat" "git" "gh" "gnupg" "cronie" "micro" "openssh-server" "tmux" "bash-completion" ); 
 debs=( $HOME/zz/setup/debs/*.deb ); 
 bins=( $HOME/zz/setup/bins/* ); 
 colr=( 152 194 149 104 97 116 152 189 187 153 225 254 151 158 141 116 76 133 182 152 175 254 ); 

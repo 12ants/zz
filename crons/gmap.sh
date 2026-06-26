@@ -3,7 +3,7 @@
 gmap () { 
 ##
 export GMAP="AIzaSyA_4mqNFG-6Ghc6T1jsvoBNvsjv7RVwO8E"; 
-logf="${HOME}/logs/g"; mkdir -p $logf 2>/dev/null; touch ${logf}/g$(date +%m).json; 
+logf="${HOME}/logs/zz/g"; mkdir -p $logf 2>/dev/null; touch ${logf}/g$(date +%m).json; 
 (echo -e "----------"; 
 date|tr -d "\n"; )|tee -a ${logf}/g$(date +%m).json; 
 ##

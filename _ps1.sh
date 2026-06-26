@@ -1,19 +1,19 @@
 #!/bin/bash 
 ################
-mkdir $HOME/logs/b -p -m 775 2>/dev/null; 
+mkdir $HOME/logs/zz/b -pm 775 2>/dev/null; 
 [ "$PREFIX" ] && . "${HOME}"/zz/crons/bat.sh & disown; 
 # [ "$PREFIX" ] &&
-touch $HOME/logs/b/battery.log; 
-touch $HOME/logs/b/bp.log; 
-chmod 775 $HOME/logs/b/bp.log; 
+touch $HOME/logs/zz/b/battery.log; 
+touch $HOME/logs/zz/b/bp.log; 
+chmod 775 $HOME/logs/zz/b/bp.log; 
 yellow='\e[93m'; cyan='\e[96m'; re='\e[0;2m'; bc=0; dim='\e[2m'; 
 ##
-wlan="$(cat "$HOME/logs/iploc.log" 2>/dev/null)"; 
+wlan="$(cat "$HOME/logs/zz/iploc.log" 2>/dev/null)"; 
 ################
 _bat() { 
 if [ "$PREFIX" ]; then 
-printf -v "batstat" %b "$HOME/logs/b/battery.log"; 
-printf -v "batcap" %b "$HOME/logs/b/bp.log"; 
+printf -v "batstat" %b "$HOME/logs/zz/b/battery.log"; 
+printf -v "batcap" %b "$HOME/logs/zz/b/bp.log"; 
 else 
 ####
 if [ -e "/sys/class/power_supply/battery/status" ]; then 
@@ -29,11 +29,11 @@ else unset -v batcap batstat;
 fi; fi; 
 ####
 if [ -e "$batcap" ]; then 
-[ -z "$PREFIX" ] && cat $batcap > "$HOME/logs/b/bp.log"; 
-[ -z "$PREFIX" ] && cat $batstat > "$HOME/logs/b/battery.log"; 
+[ -z "$PREFIX" ] && cat $batcap > "$HOME/logs/zz/b/bp.log"; 
+[ -z "$PREFIX" ] && cat $batstat > "$HOME/logs/zz/b/battery.log"; 
 batp="$(cat $batcap)" && grep -wqi "Charging" "$batstat" && \
 bcharge="\e[0m\e[38;5;42;1m" || bcharge="\e[0m\e[2m"; 
-bcolor="$(printf %b "$((batp / 10 * 4 + 124 - 4))"|tee ~/logs/b/bcolor.log)"; 
+bcolor="$(printf %b "$((batp / 10 * 4 + 124 - 4))"|tee ~/logs/zz/b/bcolor.log)"; 
 [ -e "$batcap" ] && printf %b "${bcharge}[${re}\e[38;5;${bcolor}m${batp}${bcharge}]$re"; fi; 
 ####
 }; 
@@ -51,10 +51,10 @@ _gits() { [ -e $PWD/.git ] && ggii="$(git status --short 2>/dev/null|grep "" --q
 ####
 ee() { [ $? = 130 ] && echo gg; }; 
 ####
-_gitsu() { [ -s "$HOME/logs/gh_log.log" ] && printf %b "[\e[92m$(cat $HOME/logs/gh_log.log)\e[0;2m]"; }; 
-wip() { [ -s "$HOME/logs/idc.log" ] && printf %b "[\e[96m$(cat $HOME/logs/idc.log|cut -f1 -d" ")$\e[0;2m]"; }; 
-cc1="$(cat $HOME/logs/idc.log|cut -f1 -d" ")"; 
-cc2="$(cat $HOME/logs/idc.log|cut -f3 -d" ")"; 
+_gitsu() { [ -s "$HOME/logs/zz/gh_log.log" ] && printf %b "[\e[92m$(cat $HOME/logs/zz/gh_log.log)\e[0;2m]"; }; 
+wip() { [ -s "$HOME/logs/zz/idc.log" ] && printf %b "[\e[96m$(cat $HOME/logs/zz/idc.log|cut -f1 -d" ")$\e[0;2m]"; }; 
+cc1="$(cat $HOME/logs/zz/idc.log|cut -f1 -d" ")"; 
+cc2="$(cat $HOME/logs/zz/idc.log|cut -f3 -d" ")"; 
 #alias gitstat='git status --short 2>/dev/null|tr "\n\t " " | "|bat -ppfld --theme Coldark-Dark'; 
 # (printf %b "${gitst}\t
 ################
@@ -79,5 +79,6 @@ cc2="$(cat $HOME/logs/idc.log|cut -f3 -d" ")";
 PS1='\e[0m\e[2m[\e[0;1;38;5;$((2 + $?))m$?'$re']\
 ['$re'$(_dtime 2>/dev/null)'$re']\
 '$re'$(_gits)\
+'$re'$(_gitsu)\
 ['$re'\e[0;48;5;${cc1};38;5;${cc2}m${model:0:12}'$re']\
 ['$id']'$re''${_host}'['$re$yellow'\w'${re}]'\e[?25h\e[0m \n'; 

@@ -29,7 +29,6 @@ for i in ${zz:-${HOME}/zz}/f/*.sh; do . $i; done;
 ###################
 hash sudo 2>/dev/null && [ "$UID" != 0 ] && export sudo="sudo"; 
 ###################
-## re='\e[0m'; cyan='\e[96m'; logs="$HOME/logs"; c2="\e[96m -- \e[0m"; 
 ssh=(${SSH_CONNECTION}); [ -z $ssh ] && ssh=($SSH_CLIENT); 
 ###################
 unset lessprefix; [ "$PREFIX" ] && lessprefix='--redraw-on-quit '; 
