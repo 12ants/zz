@@ -16,6 +16,7 @@ alias zztop='ps -aux --sort="%mem"|tail -n12|bat -ppfljs|fzf';
 alias zzlan='~/zz/s/zz.localan.sh'; 
 alias kkkk='col -xb|fmt --split-only --width=$((COLUMNS - 2)) --goal=66 --uniform-spacing --tagged-paragraph|bat -pfljava --theme TwoDark'; 
 alias dev='npx vite --host --port 7777'; 
+alias psps='ps ao %mem,%cpu,etime,s,tty,user,stat,comm,exe --sort %mem|tail -n5|column --table --table-columns-limit 8 --table-columns %mem,%cpu,etime,s,tty,user,stat,comm|bat -ppflc#'; 
 # alias dev='npm run dev'; 
 # alias rep="reset -Q; IFS=$'\n\t '; . $PREFIX/share/bash-completion/bash_completion"; 
 alias cccc='crontab -e'; 
