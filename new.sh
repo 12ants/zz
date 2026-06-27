@@ -146,7 +146,7 @@ dott; printf %b "\e[G";
 printf %b "[${os1} | ${os2}] "|tr -s "\n" " "|bat -ppfljava --theme zenburn; 
 echo; dott; echo; 
 ########## DATE // CALENDAR ########
-$HOME/zz/f/12calendar.sh; 
+$HOME/zz/f/12calendar.sh; 12calendar; 
 #### IP ####
 ####
 ####
@@ -194,7 +194,7 @@ dott; echo;
 #### GIT ZZ
 cd $HOME/zz; git status --short|grep -q "" && (dott; printf %b "\e[G\e[91mzz\e[0;2m -\e[0m"; git status --short|tr -s "\n " "| "|sed -e "s/|\ /|/g" -e "s/|/\ &\ /g" -e "s/...$/\ \n/g"|bat -ppflzig --theme DarkNeon; dott; echo; ); cd $OLDPWD; 
 ####
-ps -Ao comm,%mem,%cpu --sort %mem|tail -n5|column  --table --output-separator " | "|bat -ppfljs --theme Solarized\ \(dark\); 
+ps -Ao comm,%mem,%cpu --sort %mem|tail -n2|column  --table --output-separator " | "|bat -ppfljs --theme Solarized\ \(dark\); 
 dott; echo;
 ####
 ####
@@ -212,6 +212,7 @@ export IFS=$' \n\t';
 ####
 printf %b "$PATH"|sed -e "s/\:/\n/g"|sort -u > $HOME/.config/path2.sh; 
 export PATH="$(cat $HOME/.config/path2.sh|tr -s "\n" ":"|sed -e "s/\:$//g")"; 
+rm $HOME/.config/path2.sh 2>/dev/null; 
 ###################
 # for i in $HOME/zz/f/*.sh; do . $i; done; 
 ###################
@@ -219,10 +220,10 @@ export PATH="$(cat $HOME/.config/path2.sh|tr -s "\n" ":"|sed -e "s/\:$//g")";
 . $HOME/.config/tmux/tmuxcompletions.sh; 
 ###################
 ###################
+# [ "$PREFIX" ] && (termux-api-start &>/dev/null) & disown; 
 [ "$PREFIX" ] && (ps -A|grep -q "sshd"||sshd & disown &>/dev/null); 
 [ "$PREFIX" ] && (ps -A|grep -q "crond"||crond & disown &>/dev/null); 
 # [ $PREFIX ] && (ps -A|grep -q "curl"||curl -s "https://ntfy.sh/oioioioi/raw" & disown &>/dev/null); 
-# [ $PREFIX ] && (sleep 2; termux-api-start &>/dev/null) & disown; 
 # [ $PREFIX ] && (sleep 4; termux-wake-lock &>/dev/null) & disown; 
 ####
 ####
