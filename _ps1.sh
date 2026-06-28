@@ -3,8 +3,8 @@
 mkdir $HOME/logs/zz/b -pm 775 2>/dev/null; 
 [ "$PREFIX" ] && . "${HOME}"/zz/crons/bat.sh & disown; 
 # [ "$PREFIX" ] &&
-touch $HOME/logs/zz/b/battery.log; 
-touch $HOME/logs/zz/b/bp.log; 
+[ -e "$HOME/logs/zz/b/battery.log" ] || touch $HOME/logs/zz/b/battery.log; 
+[ -e "$HOME/logs/zz/b/bp.log" ] || touch $HOME/logs/zz/b/bp.log; 
 chmod 775 $HOME/logs/zz/b/bp.log; 
 yellow='\e[93m'; cyan='\e[96m'; re='\e[0;2m'; bc=0; dim='\e[2m'; 
 ##

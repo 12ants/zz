@@ -1,9 +1,11 @@
 #!/bin/bash
-termux-battery-status > "$HOME/logs/zz/b/battery.log"; 
-cat ~/logs/zz/b/battery.log|grep -e "percentage"|tr -d 'A-z ,\":' > "$HOME/logs/zz/b/bp.log"; 
+[ -n "$PREFIX" ] && termux-battery-status > "$HOME/logs/zz/b/battery.log"; 
 ####
-if [ "$(cat $HOME/logs/zz/b/bp.log)" -lt 12 ]; then 
-termux-tts-speak -s SYSTEM "battery at $(cat $HOME/logs/zz/b/bp.log)%"; 
+cat ~/logs/zz/b/battery.log|grep -e "percentage"|tr -d 'A-z ,\":' > "$HOME/logs/zz/b/bp.log"; 
+cat ~/logs/zz/b/battery.log|grep -e "CAPACITY"|tr -d '=A-z ,\":' >> "$HOME/logs/zz/b/bp.log"; 
+####
+if [ 0"$(cat $HOME/logs/zz/b/bp.log)" -lt 12 ]; then 
+[ "$PREFIX" ] && termux-tts-speak -s SYSTEM "battery at $(cat $HOME/logs/zz/b/bp.log)%"; 
 fi; 
 ####
 ####
