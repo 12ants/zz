@@ -3,8 +3,8 @@
 mkdir $HOME/logs/zz/b -pm 775 2>/dev/null; 
 [ "$PREFIX" ] && . "${HOME}"/zz/crons/bat.sh & disown; 
 # [ "$PREFIX" ] &&
-touch $HOME/logs/zz/b/battery.log; 
-touch $HOME/logs/zz/b/bp.log; 
+[ -e "$HOME/logs/zz/b/battery.log" ] || touch $HOME/logs/zz/b/battery.log; 
+[ -e "$HOME/logs/zz/b/bp.log" ] || touch $HOME/logs/zz/b/bp.log; 
 chmod 775 $HOME/logs/zz/b/bp.log; 
 yellow='\e[93m'; cyan='\e[96m'; re='\e[0;2m'; bc=0; dim='\e[2m'; 
 ##
@@ -29,8 +29,8 @@ else unset -v batcap batstat;
 fi; fi; 
 ####
 if [ -e "$batcap" ]; then 
-[ -z "$PREFIX" ] && cat $batcap > "$HOME/logs/zz/b/bp.log"; 
-[ -z "$PREFIX" ] && cat $batstat > "$HOME/logs/zz/b/battery.log"; 
+[ -z "$PREFIX" ] && cat $batcap > "$HOME/logs/zz/b/bp.log" &>/dev/null; 
+[ -z "$PREFIX" ] && cat $batstat > "$HOME/logs/zz/b/battery.log" &>/dev/null; 
 batp="$(cat $batcap)" && grep -wqi "Charging" "$batstat" && \
 bcharge="\e[0m\e[38;5;42;1m" || bcharge="\e[0m\e[2m"; 
 bcolor="$(printf %b "$((batp / 10 * 4 + 124 - 4))"|tee ~/logs/zz/b/bcolor.log)"; 
