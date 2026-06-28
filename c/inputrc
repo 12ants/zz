@@ -57,7 +57,7 @@ C-y: yank
 "\e[6~": kill-whole-line
 "\e[6": kill-whole-line
 "\e[5~": '\e[6~\hihi\n'
-"\e[5~": '\e[qtmux copy-mode\n'
+"\e[5~": '\e[qhihi\n'
 "\e[1;2A": '\e[6~\ hh\n'
 "°": '\e4\l\n'
 "⁰": '\e[6~'
@@ -72,6 +72,7 @@ C-y: yank
 # Source - https://superuser.com/a/1504199
 # Posted by Zbyněk Winkler
 # Retrieved 2026-05-25, License - CC BY-SA 4.0
+# tmux copy-mode\n'
 # 
 # set show-all-if-ambiguous on
 # set menu-complete-display-prefix on
