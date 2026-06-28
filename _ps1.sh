@@ -29,8 +29,8 @@ else unset -v batcap batstat;
 fi; fi; 
 ####
 if [ -e "$batcap" ]; then 
-[ -z "$PREFIX" ] && cat $batcap > "$HOME/logs/zz/b/bp.log" 2>/dev/null; 
-[ -z "$PREFIX" ] && cat $batstat > "$HOME/logs/zz/b/battery.log" 2>/dev/null; 
+[ -z "$PREFIX" ] && cat $batcap > "$HOME/logs/zz/b/bp.log" &>/dev/null; 
+[ -z "$PREFIX" ] && cat $batstat > "$HOME/logs/zz/b/battery.log" &>/dev/null; 
 batp="$(cat $batcap)" && grep -wqi "Charging" "$batstat" && \
 bcharge="\e[0m\e[38;5;42;1m" || bcharge="\e[0m\e[2m"; 
 bcolor="$(printf %b "$((batp / 10 * 4 + 124 - 4))"|tee ~/logs/zz/b/bcolor.log)"; 
