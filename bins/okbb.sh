@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-okbb() { printf %b "\x1b[m\x1b[?25h\n\r\n\r\n\n\x1b[4A\x1b[s\n \x1b[2m[\e[mok\e[2m]\e[m: "; [ "$1" ] && okbb="$*" || read -re "okbb"; printf %b "\x1b[?25l"; for i in {0..22}; do printf %b "\x1b[u"; figlet -f smbraille "$okbb"|sed -e "s/⡧/\x1b[9$((RANDOM%7))m&\x1b[m/g" -e "s/⠜/\x1b[9$((RANDOM%7))m&\x1b[m/g" -e "s/⠄/\x1b[3$((RANDOM%7))m&\x1b[m/g"  -e "s/⡀/\x1b[1;3$((RANDOM%7))m&\x1b[m/g"  -e "s/⠼/\x1b[3$((RANDOM%7))m&\x1b[m/g"  -e "s/⣑/\x1b[9$((RANDOM%7))m&\x1b[m/g"  -e "s/⠇/\x1b[2;1;9$((RANDOM%7))m&\x1b[m/g" ; read -sn1 -t .1 && printf %b "\x1b[?25h\x1b[m" && break; done; echo; };
-okbb

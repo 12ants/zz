@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-batlang() { [ $1 ] && lorem="cat ${1}"||lorem="fortune"; IFS=$'\n' cat $HOME/zz/c/bat/batl.sh|fzf --preview-window 'right,70%,noborder,wrap' --color 'bg:234,bg+:242,preview-bg:232' --info inline --no-border --wrap --wrap-sign="" --preview "$lorem|fmt -suw $((COLUMNS/10*6))|bat -ppf --language={}" --wrap; };
-#s
-batthemes() { [ $1 ] && lorem="cat ${1}"||lorem="fortune"; IFS=$'\n' cat $HOME/zz/c/bat/batt.sh|fzf --preview-window 'right,70%,noborder,wrap' --color 'bg:234,bg+:242,preview-bg:232' --info inline --no-border --wrap --wrap-sign="" --preview "$lorem|fmt -suw $((COLUMNS/10*6))|bat -ppfljs --theme={}" --wrap; };
-batlang
