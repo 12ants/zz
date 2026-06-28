@@ -1,6 +1,6 @@
 #!/bin/bash
 termux-battery-status > "$HOME/logs/zz/b/battery.log"; 
-cat ~/logs/zz/b/battery.log|grep -e "percentage"|tr -d 'A-z ,\":' | tee "$HOME/logs/zz/b/bp.log"; 
+cat ~/logs/zz/b/battery.log|grep -e "percentage"|tr -d 'A-z ,\":' > "$HOME/logs/zz/b/bp.log"; 
 ####
 if [ "$(cat $HOME/logs/zz/b/bp.log)" -lt 12 ]; then 
 termux-tts-speak -s SYSTEM "battery at $(cat $HOME/logs/zz/b/bp.log)%"; 
