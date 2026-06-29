@@ -7,17 +7,17 @@
 alias untar='tar -xvf'; 
 alias zz='cd $HOME/zz; pwd; ls --color=always -pugl'; 
 alias appi='cd $HOME/gh/appi; pwd; ls --color=always -pugl'; 
-alias zzpp='printf %b "updating $zz .";	
+alias zzpp='printf %b "updating [$zz] .";	
 cd $HOME/zz; 
-git add ./; 
+git add ./ -q; 
 printf %b ".";	
-git pull
+git pull -q; 
 printf %b ".";	
-git commit -a -m "${USER}_${modo//\ /}_$(date)"; 
+git commit -a -m "${USER}_${modo//\ /}_$(date)" -q; 
 printf %b ".";	
-git pull; 
-printf %b ".";	
-git push; 
+git pull -q; 
+printf %b "." -q;	
+git push -q; 
 printf %b ".";	
 cd $OLDPWD; 
 printf %b " done\n";	
