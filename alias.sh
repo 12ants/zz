@@ -9,7 +9,7 @@ alias zz='cd $HOME/zz; pwd; ls --color=always -pugl';
 alias appi='cd $HOME/gh/appi; pwd; ls --color=always -pugl'; 
 alias zzpp='printf %b "updating [$zz] .";	
 cd $HOME/zz; 
-git add ./ -q; 
+git add ./ &>/dev/null; 
 printf %b ".";	
 git pull -q; 
 printf %b ".";	
