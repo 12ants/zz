@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+zzzz() {
 # very good bash enviorment 
 ###################
 shopt -s histappend; 
@@ -38,8 +39,11 @@ export LESS=''${lessprefix}'-R --tilde --file-size --use-color -DP7.197$ --incse
 ## export GREP_COLORS="mt=91:ms=95:fn=32:ln=32:bn=32:se=35:sl=38;5;207:cx=38;5;121:ne"; 
 export FZF_DEFAULT_OPTS='-m -i --cycle --ansi --unicode --bind "q:abort"'; 
 ###################
-gh auth status 2>&1|grep -e "true" -B1 --color=auto|col -xb|cut -f9 -d" "|tr -d "\n" > $logs/zz/gh_log.log & disown; 
 ####################
+
+
+
+
 #### make som basic folders ######## 
 mkdir $HOME/logs $HOME/tmp $HOME/gh $HOME/dl $HOME/bin $HOME/img $HOME/.config 2>/dev/null; 
 mkdir $HOME/logs/zz 2>/dev/null; 
@@ -146,7 +150,7 @@ dott; printf %b "\e[G";
 printf %b "[${os1} | ${os2}] "|tr -s "\n" " "|bat -ppfljava --theme zenburn; 
 echo; dott; echo; 
 ########## DATE // CALENDAR ########
-$HOME/zz/f/12calendar.sh; 12calendar; 
+. $HOME/zz/f/12calendar.sh; 12calendar; 
 #### IP ####
 ####
 ####
@@ -215,6 +219,7 @@ export PATH="$(cat $HOME/.config/path2.sh|tr -s "\n" ":"|sed -e "s/\:$//g")";
 rm $HOME/.config/path2.sh 2>/dev/null; 
 ###################
 # for i in $HOME/zz/f/*.sh; do . $i; done; 
+# gh auth status 2>&1|grep -e "true" -B1 --color=auto|col -xb|cut -f9 -d" "|tr -d "\n" > $logs/zz/gh_log.log & disown; 
 ###################
 . $HOME/zz/alias.sh; 
 . $HOME/.config/tmux/tmuxcompletions.sh; 
@@ -230,4 +235,4 @@ rm $HOME/.config/path2.sh 2>/dev/null;
 export IFS=$' \n\t'; 
 ####
 ####
-
+}; 
