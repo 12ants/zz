@@ -23,4 +23,5 @@ echo -e "\n press [q] to continue \n";
 ##
 url; 
 ##
-xdg-open $urla || termux-open-url $urla; 
+# xdg-open $urla
+ # || termux-open-url $urla; 
