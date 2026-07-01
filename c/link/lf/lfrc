@@ -165,19 +165,25 @@ ft="$(file -b $f)";
 # esac; 
 ##
 ## TEXT-FILE 
-if printf %b "$ft"|grep -qe "text"; then tmux display-popup -b none -w 100% -h 100% -e f="$f" -e LESS="$LESS" -E 'bash -c "bat --paging always -p $f"; ';
-##
+if printf %b "$ft"|grep -qe "text"; then 
+####
+if pgrep -o tmux &>/dev/null; then 
+tmux display-popup -b none -w 100% -h 100% -e f="$f" -e LESS="$LESS" -E 'bash -c "bat --paging always -p $f"; ';
+else bash -c "bat --paging always -p $f";
+fi; 
+####
 elif printf %b "$ft"|grep -qe "image"; then 
+####
 tmux display-popup -b none -w 100% -h 100% -e f="$f" -e LESS="$LESS" -E 'jp2a -c -z --fill --color-depth=24 ${f}; w="$(stty size|cut -f2 -d" ")"; printf %b "\e[2m\e[?25l\e[H$i"; wc="$(mediainfo $f|grep Image -A12 -m1|tail -n+2|tr -s " " "_"|wc --max-line-length)"; mediainfo $f|grep Image -A12 -m1|tail -n+2|tr -s " " "_"|column --table --separator ":" --table-columns-limit 2 --output-separator "" --table-right 2|tr " " "_"|sed -e "s/^/\x1b\[$((w - wc - 12))G/g"|sed -e "s/[_.():]/\x1b[2m&\x1b[m/g"; 
-
+####
 read -en 1 kk; [ "${kk}" = q ] && exit; 
-
+####
 if hash chafa 2>/dev/null; then for i in $(cat $HOME/zz/c/chafa_symbols.sh|shuf); do clear; chafa -f symbols --symbols $i $f; printf %b "\e[H"; wc="$(mediainfo $f|grep Image -A12 -m1|tail -n+2|tr -s " " "_"|wc --max-line-length)"; 
 mediainfo $f|grep Image -A12 -m1|tail -n+2|tr -s " " "_"|column --table --separator ":" --table-columns-limit 2 --output-separator "" --table-right 2|tr " " "_"|sed -e "s/^/\x1b\[$((w - wc - 12))G/g"|sed -e "s/[_.():]/\x1b[2m&\x1b[m/g"; 
-
+####
 printf %b "\e[2m\e[?25l\e[H$i"; 
 read -en 1 kk; [ "${kk}" = q ] && exit; 
-
+####
 # bash -c "read -en1 -p __q q; [ ${q} = q ] && exit"; 
 done||exit; fi;'; fi; 
 }}; 

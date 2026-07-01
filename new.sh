@@ -1,11 +1,21 @@
 #!/usr/bin/env bash
 # very good bash enviorment 
+<<<<<<< HEAD
+=======
+# date +%H:%M:%S.%N; 
+###################
+>>>>>>> 2d7c6d1b4a2c79305d58990635e7a10095899d58
 case $- in *i*) ;; *) return;; esac; 
 [ -z "${TMUX}" ] && exec tmux; 
 # date +%H:%M:%S.%N; 
 ###################
+<<<<<<< HEAD
 ###################
 # pgrep -o "tmux" &>/dev/null || exec tmux; 
+=======
+pgrep -o "tmux" &>/dev/null || exec tmux; 
+[ -z "${TMUX}" ] && tmux; 
+>>>>>>> 2d7c6d1b4a2c79305d58990635e7a10095899d58
 ###################
 shopt -s histappend; shopt -s histverify; 
 ###################
