@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # very good bash enviorment 
-date +%H:%M:%S.%N; 
+# date +%H:%M:%S.%N; 
 ###################
 case $- in *i*) ;; *) return;; esac; 
 ###################
@@ -41,5 +41,5 @@ _model() { [ $PREFIX ] && modo=($(getprop|grep -E 'vendor.manufacturer|product.m
 ####
 _model; 
 ####
-date +%H:%M:%S.%N; 
+# date +%H:%M:%S.%N; 
 ####
