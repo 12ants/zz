@@ -3,8 +3,7 @@
 date +%M:%S.%N; 
 ###################
 ###################
-pgrep -o "tmux" &>/dev/null || exec tmux; 
-# [ -z "${TMUX}" ] && exec tmux; 
+pgrep -o "tmux" &>/dev/null || exec tmux; [ -z "${TMUX}" ] && tmux attach; 
 date +%M:%S.%N; 
 shopt -s histappend; shopt -s histverify; 
 ###################
