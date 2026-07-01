@@ -1,21 +1,13 @@
 #!/usr/bin/env bash
 # very good bash enviorment 
-<<<<<<< HEAD
-=======
-# date +%H:%M:%S.%N; 
 ###################
->>>>>>> 2d7c6d1b4a2c79305d58990635e7a10095899d58
 case $- in *i*) ;; *) return;; esac; 
 [ -z "${TMUX}" ] && exec tmux; 
-# date +%H:%M:%S.%N; 
 ###################
-<<<<<<< HEAD
 ###################
 # pgrep -o "tmux" &>/dev/null || exec tmux; 
-=======
 pgrep -o "tmux" &>/dev/null || exec tmux; 
 [ -z "${TMUX}" ] && tmux; 
->>>>>>> 2d7c6d1b4a2c79305d58990635e7a10095899d58
 ###################
 shopt -s histappend; shopt -s histverify; 
 ###################
@@ -51,6 +43,4 @@ wlan="$(cat $HOME/logs/zz/wlan.log)"; idn1="${wlan/*./}"; idn="$(($(printf %b "$
 _model() { [ $PREFIX ] && modo=($(getprop|grep -E 'vendor.manufacturer|product.manufacturer' -m1 -A1 --group-separator=''|cut -f2- -d' '|tr -s "\n[]" " "; )); [ -z $PREFIX ] && [ -e /sys/devices/virtual/dmi/id/product_family ] && modo=($(for bb in product_family board_vendor board_name bios_vendor sys_vendor; do cat /sys/devices/virtual/dmi/id/${bb} 2>/dev/null|grep -v "O.E.M."|tr -s "\n" " "; done)); moda="$(printf %b "${modo}"|tr -d "[]"|head -c14)"; model="${moda/%\ /}"; printf %b "${modo[*]}" > $HOME/logs/zz/model.log; }; 
 ####
 _model; 
-####
-# date +%H:%M:%S.%N; 
 ####
