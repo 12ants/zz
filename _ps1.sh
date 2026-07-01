@@ -1,6 +1,6 @@
 #!/bin/bash 
 ################
-mkdir $HOME/logs/zz/b -pm 775 2>/dev/null; 
+[ -d "$HOME/logs/zz/b" ] || mkdir "$HOME/logs/zz/b" -pm 775 2>/dev/null; 
 [ "$PREFIX" ] && . "${HOME}"/zz/crons/bat.sh & disown; 
 # [ "$PREFIX" ] &&
 [ -e "$HOME/logs/zz/b/battery.log" ] || touch $HOME/logs/zz/b/battery.log; 

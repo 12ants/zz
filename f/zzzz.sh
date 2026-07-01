@@ -202,7 +202,7 @@ ps -Ao comm,%mem,%cpu --sort %mem|tail -n2|column  --table --output-separator " 
 dott; echo;
 ####
 ####
-if [ -d "$HOME/gh/appi" ]; then for i in $HOME/gh/appi/api_*.sh; do . $i; done; fi; 
+[ -d "$HOME/gh/appi" ] &&. "$HOME/gh/appi/appi.sh"; fi; 
 ####
 ####
 printf %b "\x1b[1 q"; ########### cursor = block

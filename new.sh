@@ -1,31 +1,24 @@
 #!/usr/bin/env bash
 # very good bash enviorment 
+date +%M:%S.%N; 
+###################
 ###################
 pgrep -o "tmux" &>/dev/null || exec tmux; 
+# [ -z "${TMUX}" ] && exec tmux; 
+date +%M:%S.%N; 
+shopt -s histappend; shopt -s histverify; 
 ###################
-shopt -s histappend; 
-shopt -s histverify; 
-###################
-export IFS=$' \n\t'; 
-[ -z "$TMUX" ] && command -v tmux >/dev/null 2>&1 && tmux 2>/dev/null; 
-[ "$TMUX" ] && tmux source $HOME/.config/tmux/tmux.conf 2>/dev/null; 
-[ "$TMUX" ] && . $HOME/zz/_ps1.sh; 
-export PROMPT_COMMAND="history -a; history -n; ";
-export HISTCONTROL="ignoreboth"; 
-export EDITOR="micro"; 
-export BAT_THEME="Coldark-Dark"; 
-export VERSION_CONTROL="numbered"; 
-export HISTSIZE="12222"; 
-export email='leonel@ik.me'; 
-export logs="$HOME/logs"; 
-export zz="$HOME/zz"; export start="$HOME/zz"; 
-unset HISTTIMEFORMAT; 
+# 2>&1 && tmux 2>/dev/null; 
+# [ "$TMUX" ] && tmux source $HOME/.config/tmux/tmux.conf 2>/dev/null; 
+# [ "$TMUX" ] && . $HOME/zz/_ps1.sh; 
+export IFS=$' \n\t' PROMPT_COMMAND="history -a; history -n; " HISTCONTROL="ignoreboth" EDITOR="micro" BAT_THEME="Coldark-Dark" VERSION_CONTROL="numbered" HISTSIZE="12222" email='leonel@ik.me' logs="$HOME/logs" zz="$HOME/zz" start="$HOME/zz"; 
+HISTTIMEFORMAT=; 
 ## export HISTFILESIZE="12222"
 ###################
+[ -e "$HOME/gh/appi/appi.sh" ] && . "$HOME/gh/appi/appi.sh"; 
 ###################
 ###################
 ###################
-if [ -d "$HOME"/gh/appi ]; then for i in "$HOME"/gh/appi/api_*.sh; do . $i; done; fi; 
 ###################
 for i in ${zz:-${HOME}/zz}/f/*.sh; do . $i; done; 
 ###################
@@ -39,10 +32,8 @@ ssh=(${SSH_CONNECTION});
 [ -z $ssh ] && ssh=($SSH_CLIENT); 
 ###################
 unset lessprefix; [ "$PREFIX" ] && lessprefix='--redraw-on-quit '; 
-export LESSKEYIN=$HOME/.config/lesskey
-export LESS=''${lessprefix}'-R --tilde --file-size --use-color -DP7.197$ --incsearch --mouse --prompt=%F [/]/[n]/[p]/[m] ?n?m(%T %i of %m) ..?lt %lt-%lb?L/%L. :byte %bB?s/%s.  .?e(END)  ?x-  Next\:   %x.:?pB  %pB\%..%t '; 
+export LESSKEYIN="$HOME/.config/lesskey" LESS=''${lessprefix}'-R --tilde --file-size --use-color -DP7.197$ --incsearch --mouse --prompt=%F [/]/[n]/[p]/[m] ?n?m(%T %i of %m) ..?lt %lt-%lb?L/%L. :byte %bB?s/%s.  .?e(END)  ?x-  Next\:   %x.:?pB  %pB\%..%t ' GREP_COLORS="mt=91:ms=95:fn=32:ln=32:bn=32:se=35:sl=38;5;207:cx=38;5;121:ne" FZF_DEFAULT_OPTS='-m -i --cycle --ansi --unicode --bind "q:abort"'; 
 ###################
-export GREP_COLORS="mt=91:ms=95:fn=32:ln=32:bn=32:se=35:sl=38;5;207:cx=38;5;121:ne"; 
-export FZF_DEFAULT_OPTS='-m -i --cycle --ansi --unicode --bind "q:abort"'; 
 ###################
-####################
+###################
+date +%M:%S.%N; 
