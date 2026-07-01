@@ -4,7 +4,8 @@
 ###################
 case $- in *i*) ;; *) return;; esac; 
 ###################
-pgrep -o "tmux" &>/dev/null || exec tmux; [ -z "${TMUX}" ] && tmux attach; 
+pgrep -o "tmux" &>/dev/null || exec tmux; 
+[ -z "${TMUX}" ] && tmux; 
 ###################
 shopt -s histappend; shopt -s histverify; 
 ###################

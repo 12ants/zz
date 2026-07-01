@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-zzzz() {
+kk() {
 # very good bash enviorment 
 ###################
 shopt -s histappend; 
@@ -51,7 +51,10 @@ mkdir $HOME/logs/zz/b $HOME/logs/zz/ip 2>/dev/null;
 . $HOME/zz/f/dfree.sh > $logs/zz/dfree.log & disown; 
 . $HOME/zz/i/colors/coala.sh; 
 ####
-if echo $HOME|grep -w "termux" -q; then unalias sudo 2>/dev/null; else sudo=sudo; fi; 
+if echo $HOME|grep -w "termux" -q; 
+then unalias sudo 2>/dev/null; 
+else sudo=sudo; 
+fi; 
 ####
 [ $PREFIX ] && wlan="$(getprop|grep -v "gateway"|grep -E "ipv4" -m1|tr -d "[]"|cut -f2 -d" ")"; 
 ####
@@ -85,7 +88,9 @@ model="${moda/%\ /}"; printf %b "${modo[*]}" > $HOME/logs/zz/model.log;
 ####
 _model; 
 ####
-kk() { 
+###################################
+################################### kk 
+# kk() { 
 ####
 IFS=$' \n\t'; 
 ####
@@ -121,7 +126,7 @@ dott; echo; dott;
 ###################################
 #### UPTIME #######################
 printf %b "\e[G$((uptime -p|tr "\n" "|"; tty)|bat -ppflgo --theme zenburn) \e[0m\n"; dott; echo; 
-[ -z PREFIX ] && w -hos|bat -ppf --language js --theme Visual\ Studio\ Dark+ && dott && echo; 
+[ -z "$PREFIX" ] && w -hos|bat -ppf --language js --theme Visual\ Studio\ Dark+ && dott && echo; 
 ####
 printf %b "\e[G["; printf %b "${cpu[*]} x ${cpus}"|tr -s "\n" " "|bat -ppfljava --theme Dracula; printf %b "] \n"; 
 ####
@@ -129,7 +134,8 @@ printf %b "\e[G["; printf %b "${cpu[*]} x ${cpus}"|tr -s "\n" " "|bat -ppfljava 
 ####
 ####
 dott; echo; 
-up="$(($($sudo apt list --upgradable 2>/dev/null|wc -l)-1))"; [ "$up" -gt 0 ] && printf %b "$up\e[0;2m packages\e[0m available \e[95mto\e[0m update\e[1m \n"; $sudo needrestart -qra -mu -lkw 2>/dev/null|grep -ie "Pending"||echo "no updates"; dott; echo; 
+# up="$(($($sudo apt list --upgradable 2>/dev/null|wc -l)-1))"; [ "$up" -gt 0 ] && printf %b "$up\e[0;2m packages\e[0m available \e[95mto\e[0m update\e[1m \n"; 
+# $sudo needrestart -qra -mu -lkw 2>/dev/null|grep -ie "Pending"||echo "no updates"; dott; echo; 
 ####
 dott; printf %b "\e[G"; 
 printf %b "[${os1} | ${os2}] "|tr -s "\n" " "|bat -ppfljava --theme zenburn; 
@@ -182,7 +188,7 @@ dott; echo;
 ####
 #### GIT ZZ
 cd $HOME/zz; git status --short|grep -q "" && (dott; printf %b "\e[G\e[91mzz\e[0;2m -\e[0m"; git status --short|tr -s "\n " "| "|sed -e "s/|\ /|/g" -e "s/|/\ &\ /g" -e "s/...$/\ \n/g"|bat -ppflzig --theme DarkNeon; dott; echo; ); cd $OLDPWD; 
-####
+####qqq
 ps -Ao comm,%mem,%cpu --sort %mem|tail -n2|column  --table --output-separator " | "|bat -ppfljs --theme Solarized\ \(dark\); 
 dott; echo;
 ####
@@ -195,7 +201,7 @@ printf %b "\x1b]12;#ff44bb"; #### cursor = pink
 ####
 export IFS=$' \n\t'; 
 ####
-}; 
+# }; 
 ###################
 #### PATH #########
 ####
