@@ -6,9 +6,9 @@ shopt -s histappend;
 shopt -s histverify; 
 ###################
 export IFS=$' \n\t'; 
-[ -z "$TMUX" ] && command -v tmux >/dev/null 2>&1 && tmux 2>/dev/null; 
-[ "$TMUX" ] && tmux source $HOME/.config/tmux/tmux.conf 2>/dev/null; 
-[ "$TMUX" ] && . $HOME/zz/_ps1.sh; 
+# [ -z "$TMUX" ] && command -v tmux >/dev/null 2>&1 && tmux 2>/dev/null; 
+# [ "$TMUX" ] && tmux source $HOME/.config/tmux/tmux.conf 2>/dev/null; 
+# [ "$TMUX" ] && . $HOME/zz/_ps1.sh; 
 export PROMPT_COMMAND="history -a; history -n; ";
 export HISTCONTROL="ignoreboth"; 
 export EDITOR="micro"; 

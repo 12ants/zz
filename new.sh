@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
 # very good bash enviorment 
-date +%H:%M:%S.%N; 
-###################
 case $- in *i*) ;; *) return;; esac; 
+[ -z "${TMUX}" ] && exec tmux; 
+# date +%H:%M:%S.%N; 
 ###################
-pgrep -o "tmux" &>/dev/null || exec tmux; [ -z "${TMUX}" ] && tmux attach; 
+###################
+# pgrep -o "tmux" &>/dev/null || exec tmux; 
 ###################
 shopt -s histappend; shopt -s histverify; 
 ###################
-export IFS=$' \n\t' PROMPT_COMMAND="history -a; history -n; " HISTCONTROL="ignoreboth" EDITOR="micro" BAT_THEME="Coldark-Dark" VERSION_CONTROL="numbered" HISTSIZE="12222" email='leonel@ik.me' logs="$HOME/logs" zz="$HOME/zz" start="$HOME/zz" HISTTIMEFORMAT=; 
+export IFS=$' \n\t' PROMPT_COMMAND="" HISTCONTROL="ignoreboth" EDITOR="micro" BAT_THEME="Coldark-Dark" VERSION_CONTROL="numbered" HISTSIZE="12222" email='leonel@ik.me' logs="$HOME/logs" zz="$HOME/zz" start="$HOME/zz" HISTTIMEFORMAT=; 
 ###################
 [ -e "$HOME/gh/appi/appi.sh" ] && . "$HOME/gh/appi/appi.sh"; 
 ###################
@@ -17,10 +18,10 @@ for i in ${zz:-${HOME}/zz}/f/*.sh; do . $i; done;
 . ~/zz/alias.sh; 
 . ~/zz/_ps1.sh; 
 ###################
-hash sudo 2>/dev/null && [ "$UID" != 0 ] && export sudo="sudo"; 
+# hash sudo 2>/dev/null && 
+[ -z "${PREFIX}" ] && [ "${UID}" != 0 ] && export sudo="sudo"; 
 ###################
-ssh=(${SSH_CONNECTION}); 
-[ -z $ssh ] && ssh=($SSH_CLIENT); 
+ssh=(${SSH_CONNECTION}); [ -z $ssh ] && ssh=($SSH_CLIENT); 
 ###################
 unset lessprefix; [ "$PREFIX" ] && lessprefix='--redraw-on-quit '; 
 export LESSKEYIN="$HOME/.config/lesskey" LESS=''${lessprefix}'-R --tilde --file-size --use-color -DP7.197$ --incsearch --mouse --prompt=%F [/]/[n]/[p]/[m] ?n?m(%T %i of %m) ..?lt %lt-%lb?L/%L. :byte %bB?s/%s.  .?e(END)  ?x-  Next\:   %x.:?pB  %pB\%..%t ' GREP_COLORS="mt=91:ms=95:fn=32:ln=32:bn=32:se=35:sl=38;5;207:cx=38;5;121:ne" FZF_DEFAULT_OPTS='-m -i --cycle --ansi --unicode --bind "q:abort"'; 
@@ -41,5 +42,5 @@ _model() { [ $PREFIX ] && modo=($(getprop|grep -E 'vendor.manufacturer|product.m
 ####
 _model; 
 ####
-date +%H:%M:%S.%N; 
+# date +%H:%M:%S.%N; 
 ####
