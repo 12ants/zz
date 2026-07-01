@@ -22,7 +22,6 @@ unset HISTTIMEFORMAT;
 ## export HISTFILESIZE="12222"
 ## export tmp="$HOME/tmp"; [ -z "$TMPDIR" ] && export TMPDIR="$HOME/tmp"; 
 ###################
-if [ -d "$HOME/gh/appi" ]; then for i in $HOME/gh/appi/api_*.sh; do . $i; done; fi; 
 ###################
 ###################
 for i in ${zz:-${HOME}/zz}/f/*.sh; do . $i; done; 
@@ -50,8 +49,9 @@ mkdir $HOME/logs/zz 2>/dev/null;
 mkdir $HOME/logs/zz/b $HOME/logs/zz/ip 2>/dev/null; 
 ####
 . $HOME/zz/f/dfree.sh > $logs/zz/dfree.log & disown; 
-####
 . $HOME/zz/i/colors/coala.sh; 
+####
+if echo $HOME|grep -w "termux" -q; then unalias sudo 2>/dev/null; else sudo=sudo; fi; 
 ####
 [ $PREFIX ] && wlan="$(getprop|grep -v "gateway"|grep -E "ipv4" -m1|tr -d "[]"|cut -f2 -d" ")"; 
 ####
@@ -70,21 +70,6 @@ wlan="$(ifconfig 2>/dev/null|grep -e "wlan" -A1|sed -e "1d" -e "s/netmask.*//"|t
 wlan="$(cat $HOME/logs/zz/wlan.log)"; idn1="${wlan/*./}"; idn="$(($(printf %b "${idn1}"|tail -c2) + 0))"; 
 . $HOME/zz/i/colors/coala.sh; unset -v idc; declare -a idc; export idc=(${co[idn]}); printf %b "${idc[*]}" > $HOME/logs/zz/idc.log; 
 ####
-####
-if echo $HOME|grep -w "termux" -q; then unalias sudo 2>/dev/null; else sudo=sudo; fi; 
-####
-####
-####
-
-####
-[ -x $HOME/.config/openai_api_id.conf ] && . $HOME/.config/openai_api_id.conf 2>/dev/null; 
-[ -x $HOME/.config/gemini_api_id.conf ] && . $HOME/.config/gemini_api_id.conf 2>/dev/null; 
-[ -x $HOME/.config/cloudflare_id.conf ] && . $HOME/.config/cloudflare_id.conf 2>/dev/null; 
-####
-[ -d $HOME/.config/api ] && for i in $HOME/.config/api/*.sh; do . $i 2>/dev/null; done; 
-####
-[ -s $HOME/.config/lesskey ] || ln -s $HOME/zz/c/lesskey $HOME/.config/lesskey; 
-[ -s $HOME/.config/path.sh ] && export PATH=$(cat $HOME/.config/path.sh); 
 ####
 _model() { 
 #### ____ MODEL _ GET ____ ####
@@ -235,4 +220,13 @@ rm $HOME/.config/path2.sh 2>/dev/null;
 export IFS=$' \n\t'; 
 ####
 ####
+[ -x $HOME/.config/openai_api_id.conf ] && . $HOME/.config/openai_api_id.conf 2>/dev/null; 
+[ -x $HOME/.config/gemini_api_id.conf ] && . $HOME/.config/gemini_api_id.conf 2>/dev/null; 
+[ -x $HOME/.config/cloudflare_id.conf ] && . $HOME/.config/cloudflare_id.conf 2>/dev/null; 
+[ -d $HOME/.config/api ] && for i in $HOME/.config/api/*.sh; do . $i 2>/dev/null; done; 
+[ -s $HOME/.config/lesskey ] || ln -s $HOME/zz/c/lesskey $HOME/.config/lesskey; 
+[ -s $HOME/.config/path.sh ] && export PATH=$(cat $HOME/.config/path.sh); 
+####
 }; 
+
+
