@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # very good bash enviorment 
 ###################
-pgrep -o "tmux" 2>/dev/null || exec tmux; 
+pgrep -o "tmux" &>/dev/null || exec tmux; 
 ###################
 shopt -s histappend; 
 shopt -s histverify; 
